@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "233006533644",
+    "project_id": "sensifull",
+    "storage_bucket": "sensifull.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:233006533644:android:c9457e0ab569798da4f229",
+        "android_client_info": {
+          "package_name": "com.codment.sensifull"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYTU5Z7A8W1UUBiM33Mgg5bozz7bM2wJY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

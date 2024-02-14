@@ -1,4 +1,4 @@
-package com.sensifull
+package com.codment.sensifull
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
