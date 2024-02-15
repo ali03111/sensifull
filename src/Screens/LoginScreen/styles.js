@@ -6,6 +6,11 @@ export const styles = StyleSheet.create({
   logInMain: {
     // paddingHorizontal: wp('3.5'),
     flexGrow: 1,
+    backgroundColor: 'red',
+  },
+  bgStyle: {
+    paddingBottom: hp('10.9'),
+    backgroundColor: 'red',
   },
   loginTop: {
     alignItems: 'center',

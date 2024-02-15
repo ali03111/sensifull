@@ -16,7 +16,7 @@ const passwordSchema = {
     .oneOf([yup.ref('password'), null], 'Password must match.'),
 };
 const number = yup.object().shape({
-  number: yup.string().required('Please Enter your number.'),
+  number: yup.string().required('Please enter your number.'),
   // .typeError('Please Enter your number'),
 });
 
@@ -101,7 +101,7 @@ const logInUpschema = yup.object().shape({
   //   .email('Please enter valid email.')
   //   .min(3, 'Please enter valid email.')
   //   .max(50, 'Please enter valid email.'),
-  password: yup.string().required('Please Enter your password.'),
+  password: yup.string().required('Please enter your password.'),
   // .min(6, 'Password must be greater then 6 digit.')
   // .max(16, 'Password must be less then 16 digit.')
   // .matches(

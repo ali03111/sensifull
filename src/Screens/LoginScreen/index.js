@@ -22,6 +22,7 @@ import {InputComponent} from '../../Components/InputComponent';
 import {Controller} from 'react-hook-form';
 import useLogin from './useLoginScreen';
 import {Touchable} from '../../Components/Touchable';
+import KeyBoardWrapper from '../../Components/KeyBoardWrapper';
 
 const LoginScreen = ({navigation}) => {
   const {
@@ -39,8 +40,10 @@ const LoginScreen = ({navigation}) => {
     remember,
   } = useLogin(navigation);
   return (
-    <ImageBackground source={loginBg} style={styles.logInMain}>
-      <ScrollView style={styles.logInMain}>
+    <KeyBoardWrapper
+      styles={styles.logInMain}
+      showsVerticalScrollIndicator={false}>
+      <ImageBackground source={loginBg} style={styles.bgStyle}>
         <View style={styles.loginTop}>
           <View style={styles.dontHave}>
             <TextComponent
@@ -129,8 +132,8 @@ const LoginScreen = ({navigation}) => {
             />
           </Touchable>
         </View>
-      </ScrollView>
-    </ImageBackground>
+      </ImageBackground>
+    </KeyBoardWrapper>
   );
 };
 export default memo(LoginScreen);

@@ -18,6 +18,7 @@ import {InputComponent} from '../../Components/InputComponent';
 import {Controller} from 'react-hook-form';
 import {Touchable} from '../../Components/Touchable';
 import useRegister from './useRegisterScreen';
+import KeyBoardWrapper from '../../Components/KeyBoardWrapper';
 
 const RegisterScreen = ({navigation}) => {
   const {
@@ -33,128 +34,136 @@ const RegisterScreen = ({navigation}) => {
     policy,
   } = useRegister(navigation);
   return (
-    <ImageBackground source={loginBg} style={styles.logInMain}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.loginTop}>
-          <View style={styles.dontHave}>
-            <TextComponent
-              text={'Log In'}
-              onPress={loginNav}
-              styles={styles.signUpText}
-            />
-            {/* <Touchable onPress={loginNav}>
+    <KeyBoardWrapper
+      styles={styles.logInMain}
+      showsVerticalScrollIndicator={false}>
+      <ImageBackground source={loginBg}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.loginTop}>
+            <View style={styles.dontHave}>
+              <TextComponent
+                text={'Log In'}
+                onPress={loginNav}
+                styles={styles.signUpText}
+              />
+              {/* <Touchable onPress={loginNav}>
             <Text style={styles.signUpText}>Log In</Text>
           </Touchable> */}
+            </View>
+            <Image
+              source={smallLogo}
+              style={styles.logo}
+              resizeMode="contain"
+            />
           </View>
-          <Image source={smallLogo} style={styles.logo} resizeMode="contain" />
-        </View>
-        <TextComponent text={'Sign Up'} styles={styles.signUp} />
-        <View style={styles.inputParent}>
-          <InputComponent
-            {...{
-              name: 'name',
-              handleSubmit,
-              errors,
-              reset,
-              control,
-              getValues,
-              placeholder: 'First Name',
-              isImage: username,
-              defaultValue: '',
-            }}
-          />
-          <InputComponent
-            {...{
-              name: 'last',
-              handleSubmit,
-              errors,
-              reset,
-              control,
-              getValues,
-              placeholder: 'Last Name',
-              isImage: username,
-              defaultValue: '',
-            }}
-          />
-          <InputComponent
-            {...{
-              name: 'email',
-              handleSubmit,
-              errors,
-              reset,
-              control,
-              getValues,
-              placeholder: 'Email',
-              isImage: emailIcon,
-              defaultValue: '',
-            }}
-          />
-          <InputComponent
-            {...{
-              name: 'password',
-              handleSubmit,
-              errors,
-              reset,
-              control,
-              getValues,
-              placeholder: 'Password*',
-              isImage: passwordIcon,
-              defaultValue: '',
-              isSecure: true,
-              inputIconStyle: styles.lockstyle,
-            }}
-          />
-          <InputComponent
-            {...{
-              name: 'confirm_password',
-              handleSubmit,
-              errors,
-              reset,
-              control,
-              getValues,
-              placeholder: 'Confirm Password*',
-              isImage: passwordIcon,
-              defaultValue: '',
-              isSecure: true,
-              inputIconStyle: styles.lockstyle,
-            }}
-          />
-          <ThemeButton
-            title={'Register'}
-            onPress={handleSubmit(signUpButton)}
-            style={styles.buttonStyle}
-          />
-        </View>
-        <View style={styles.barMain}>
-          <View style={styles.barLine}></View>
-          <TextComponent text={'Or Sign Up with'} styles={styles.barText} />
-          <View style={styles.barLine}></View>
-        </View>
-        <View style={styles.social}>
-          <Touchable style={styles.socialIcons}>
-            <Image
-              source={google}
-              style={styles.socialImage}
-              resizeMode="contain"
+          <TextComponent text={'Sign Up'} styles={styles.signUp} />
+          <View style={styles.inputParent}>
+            <InputComponent
+              {...{
+                name: 'name',
+                handleSubmit,
+                errors,
+                reset,
+                control,
+                getValues,
+                placeholder: 'First Name',
+                isImage: username,
+                defaultValue: '',
+              }}
             />
-          </Touchable>
-          <Touchable style={styles.socialIcons}>
-            <Image
-              source={apple}
-              style={styles.socialImage}
-              resizeMode="contain"
+            <InputComponent
+              {...{
+                name: 'last',
+                handleSubmit,
+                errors,
+                reset,
+                control,
+                getValues,
+                placeholder: 'Last Name',
+                isImage: username,
+                defaultValue: '',
+              }}
             />
-          </Touchable>
-          <Touchable style={styles.socialIcons}>
-            <Image
-              source={facebook}
-              style={styles.socialImage}
-              resizeMode="contain"
+            <InputComponent
+              {...{
+                name: 'email',
+                handleSubmit,
+                errors,
+                reset,
+                control,
+                getValues,
+                placeholder: 'Email',
+                isImage: emailIcon,
+                defaultValue: '',
+              }}
             />
-          </Touchable>
-        </View>
-      </ScrollView>
-    </ImageBackground>
+            <InputComponent
+              {...{
+                name: 'password',
+                handleSubmit,
+                errors,
+                reset,
+                control,
+                getValues,
+                placeholder: 'Password*',
+                isImage: passwordIcon,
+                defaultValue: '',
+                isSecure: true,
+                inputIconStyle: styles.lockstyle,
+              }}
+            />
+            <InputComponent
+              {...{
+                name: 'confirm_password',
+                handleSubmit,
+                errors,
+                reset,
+                control,
+                getValues,
+                placeholder: 'Confirm Password*',
+                isImage: passwordIcon,
+                defaultValue: '',
+                isSecure: true,
+                inputIconStyle: styles.lockstyle,
+              }}
+            />
+            <ThemeButton
+              title={'Register'}
+              onPress={handleSubmit(signUpButton)}
+              style={styles.buttonStyle}
+            />
+          </View>
+          <View style={styles.barMain}>
+            <View style={styles.barLine}></View>
+            <TextComponent text={'Or Sign Up with'} styles={styles.barText} />
+            <View style={styles.barLine}></View>
+          </View>
+          <View style={styles.social}>
+            <Touchable style={styles.socialIcons}>
+              <Image
+                source={google}
+                style={styles.socialImage}
+                resizeMode="contain"
+              />
+            </Touchable>
+            <Touchable style={styles.socialIcons}>
+              <Image
+                source={apple}
+                style={styles.socialImage}
+                resizeMode="contain"
+              />
+            </Touchable>
+            <Touchable style={styles.socialIcons}>
+              <Image
+                source={facebook}
+                style={styles.socialImage}
+                resizeMode="contain"
+              />
+            </Touchable>
+          </View>
+        </ScrollView>
+      </ImageBackground>
+    </KeyBoardWrapper>
   );
 };
 export default memo(RegisterScreen);
