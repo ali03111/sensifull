@@ -18,3 +18,6 @@ export {default as username} from './Icons/username.png';
 export {default as arrow} from './Icons/arrow-right.png';
 export {default as arrowRight} from './Icons/arr-right.png';
 export {default as smallLogo} from './Icons/logo.png';
+export {default as google} from './Icons/google.png';
+export {default as apple} from './Icons/apple.png';
+export {default as facebook} from './Icons/facebook.png';

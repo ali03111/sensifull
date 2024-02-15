@@ -5,7 +5,7 @@ import {Colors} from '../../Theme/Variables';
 export const styles = StyleSheet.create({
   loginTop: {
     alignItems: 'center',
-    paddingTop: hp('4'),
+    paddingTop: hp('3.5'),
     marginBottom: hp('1.5'),
   },
   logo: {
@@ -14,12 +14,12 @@ export const styles = StyleSheet.create({
   },
   logInMain: {
     flexGrow: 1,
-    paddingHorizontal: wp('4'),
+    // paddingHorizontal: wp('4'),
     // paddingTop: hp('3'),
     // paddingBottom: hp('6'),
   },
   buttonStyle: {
-    marginTop: hp('3'),
+    marginTop: hp('1'),
   },
   lockstyle: {
     flex: 0.5,
@@ -38,14 +38,59 @@ export const styles = StyleSheet.create({
   inputParent: {
     backgroundColor: 'white',
     paddingHorizontal: wp('4'),
-    paddingTop: hp('2.5'),
-    paddingBottom: hp('3'),
+    marginHorizontal: wp('4'),
+    paddingTop: hp('1.2'),
+    paddingBottom: hp('2.2'),
     borderRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 0.7,
+    shadowRadius: 2,
+    elevation: 5,
   },
   signUp: {
     color: Colors.white,
     fontSize: hp('3.5'),
     fontWeight: '700',
     paddingBottom: hp('2'),
+    paddingHorizontal: wp('4'),
+  },
+  barMain: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: hp('2'),
+  },
+  barLine: {
+    width: wp('28'),
+    borderBottomWidth: 1,
+    height: hp('.5'),
+  },
+  barText: {
+    paddingHorizontal: wp('4'),
+  },
+  social: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: wp('75'),
+    alignSelf: 'center',
+    paddingBottom: hp('2'),
+  },
+  socialIcons: {
+    width: wp('15'),
+    height: hp('7.5'),
+    backgroundColor: 'white',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
+  },
+  socialImage: {
+    width: wp('7'),
+    height: hp('3.5'),
   },
 });

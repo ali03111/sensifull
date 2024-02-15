@@ -31,7 +31,7 @@ const useLogin = ({navigate, goBack}) => {
     setRemember(!remember);
   };
 
-  const onPress = () => navigate('RegisterScreen');
+  const RegisterNav = () => navigate('RegisterScreen');
 
   const loginUserFun = ({email, password}) => {
     dispatch(registerUser({datas: {email, password}}));
@@ -60,7 +60,7 @@ const useLogin = ({navigate, goBack}) => {
     remember,
     setRemember,
     rememberValue,
-    onPress,
+    RegisterNav,
     loginUser: loginUserFun,
     // appleIdlogin,
   };

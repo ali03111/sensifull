@@ -3,20 +3,16 @@ import {View, Text, Image, ScrollView, ImageBackground} from 'react-native';
 import {TextComponent} from '../../Components/TextComponent';
 import {styles} from './styles';
 import ThemeButton from '../../Components/ThemeButton';
+
 import {
-  email,
-  lock,
-  userIcon,
-  phone,
-  logo,
-  rememberImg,
-  rememberEmpty,
   username,
   emailIcon,
   passwordIcon,
-  company,
   smallLogo,
   loginBg,
+  google,
+  apple,
+  facebook,
 } from '../../Assets';
 import {InputComponent} from '../../Components/InputComponent';
 import {Controller} from 'react-hook-form';
@@ -128,6 +124,34 @@ const RegisterScreen = ({navigation}) => {
             onPress={handleSubmit(signUpButton)}
             style={styles.buttonStyle}
           />
+        </View>
+        <View style={styles.barMain}>
+          <View style={styles.barLine}></View>
+          <TextComponent text={'Or Sign Up with'} styles={styles.barText} />
+          <View style={styles.barLine}></View>
+        </View>
+        <View style={styles.social}>
+          <Touchable style={styles.socialIcons}>
+            <Image
+              source={google}
+              style={styles.socialImage}
+              resizeMode="contain"
+            />
+          </Touchable>
+          <Touchable style={styles.socialIcons}>
+            <Image
+              source={apple}
+              style={styles.socialImage}
+              resizeMode="contain"
+            />
+          </Touchable>
+          <Touchable style={styles.socialIcons}>
+            <Image
+              source={facebook}
+              style={styles.socialImage}
+              resizeMode="contain"
+            />
+          </Touchable>
         </View>
       </ScrollView>
     </ImageBackground>
