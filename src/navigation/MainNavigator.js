@@ -32,6 +32,7 @@ function MainNavigator() {
         )}
         {!isLogin && (
           <>
+            <Stack.Screen name="StepScreen" component={Screens.StepScreen} />
             <Stack.Screen name="LoginScreen" component={Screens.LoginScreen} />
             <Stack.Screen
               name="RegisterScreen"

@@ -5,6 +5,7 @@ export {default as logo} from './Images/logonew.png';
 export {default as mainImage} from './Images/main-image.png';
 export {default as splashOne} from './Images/splashOne.png';
 export {default as loginBg} from './Images/loginBg.png';
+export {default as stepBg} from './Images/stepBg.png';
 
 //  Icons
 
