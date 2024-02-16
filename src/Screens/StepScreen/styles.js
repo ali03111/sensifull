@@ -6,12 +6,15 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    paddingTop: hp('3'),
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: wp('100'),
     paddingHorizontal: wp('4'),
+    position: 'absolute',
+    bottom: 30,
   },
   button: {
     paddingVertical: hp('.6'),
