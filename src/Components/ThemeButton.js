@@ -4,13 +4,22 @@ import {Colors, FontFamily} from '../Theme/Variables';
 import {Touchable} from './Touchable';
 import {hp, wp} from '../Config/responsive';
 
-const ThemeButton = ({title, onPress, image, style, textStyle, btnStyle}) => {
+const ThemeButton = ({
+  title,
+  onPress,
+  image,
+  style,
+  textStyle,
+  btnStyle,
+  BgColor,
+  TextColor,
+}) => {
   return (
     <Touchable
       Opacity={0.7}
       onPress={onPress}
-      style={[styles.button, {justifyContent: 'center', ...style}]}>
-      <Text style={[styles.text, {...textStyle}]}>{title}</Text>
+      style={[styles.button, {justifyContent: 'center', ...style, ...BgColor}]}>
+      <Text style={[styles.text, {...textStyle, ...TextColor}]}>{title}</Text>
     </Touchable>
   );
 };
