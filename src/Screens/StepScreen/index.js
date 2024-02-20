@@ -1,4 +1,4 @@
-import React, {memo, useState} from 'react';
+import React, {memo, useCallback, useState} from 'react';
 import {
   View,
   Text,
@@ -8,15 +8,37 @@ import {
   TouchableWithoutFeedback,
   Pressable,
   TextInput,
+  FlatList,
 } from 'react-native';
 import useStepScreen from './useStepScreen';
-import {arrowRight, search, stepBg} from '../../Assets';
+import {
+  arrowRight,
+  check,
+  facebook,
+  instagram,
+  linkedin,
+  other,
+  search,
+  stepBg,
+  thread,
+  twitter,
+  uncheck,
+} from '../../Assets';
 import {TextComponent} from '../../Components/TextComponent';
-import {step1, step3btns, step4btns, step5} from '../../Utils/localDB';
+import {
+  socialData,
+  step1,
+  step3btns,
+  step4btns,
+  step5,
+} from '../../Utils/localDB';
 import {styles} from './styles';
 import {InputComponent} from '../../Components/InputComponent';
 import ThemeButton from '../../Components/ThemeButton';
 import MultiSelectButton from '../../Components/MultiSelectButton';
+import {Picker} from '@react-native-picker/picker';
+import {hp, wp} from '../../Config/responsive';
+import {SocialBtn} from '../../Components/SocialBtn';
 
 const StepScreen = ({navigation}) => {
   const {} = useStepScreen(navigation);
@@ -67,13 +89,25 @@ const StepScreen = ({navigation}) => {
 
     // -------- step 2 and 3 -------
     const {selectedItems, handlePress} = MultiSelectButton();
-
+    // --------step 4 -----------
+    const [selectedAge, setSelectedAge] = useState();
     // --------- step 5 ------------
     const [selectedGender, setSelectedGender] = useState(null);
 
     const handleGenderPress = itemId => {
       setSelectedGender(itemId);
     };
+
+    const renderItem = useCallback(({item, index}) => {
+      console.log(index);
+      return (
+        <SocialBtn
+          icon={item?.image}
+          text={item?.title}
+          noBorder={index == 5 ? styles.hideBorder : null}
+        />
+      );
+    });
 
     switch (step) {
       case 1:
@@ -204,7 +238,46 @@ const StepScreen = ({navigation}) => {
       case 4:
         return (
           <View>
-            <Text>4</Text>
+            <TextComponent
+              text={
+                'Complete your profile to establish your personal dietary needs.'
+              }
+              styles={styles.tagline}
+            />
+            <TextComponent text={'Age Range'} styles={styles.titleStep4} />
+            <View style={styles.agePicker}>
+              <Picker
+                style={{
+                  width: wp('90'),
+                  height: hp('6.2'),
+                  alignItems: 'center',
+                  alignSelf: 'center',
+                  verticalAlign: 'middle',
+                  justifyContent: 'center',
+                  // fontSize: hp('1'),
+                  color: 'transparent',
+                }}
+                itemStyle={{
+                  fontSize: 40,
+                }}
+                selectedValue={selectedAge}
+                onValueChange={(itemValue, itemIndex) =>
+                  setSelectedAge(itemValue)
+                }>
+                <Picker.Item label="Select your age" value="" />
+                <Picker.Item label="8 - 13" value="8 - 13" />
+                <Picker.Item label="13 - 15" value="13 - 15" />
+                <Picker.Item label="15 - 18" value="15 - 18" />
+                <Picker.Item label="18 - 21" value="18 - 21" />
+                <Picker.Item label="21 - 24" value="21 - 24" />
+                <Picker.Item label="24 - 27" value="24 - 27" />
+              </Picker>
+
+              <TextComponent
+                text={selectedAge ? selectedAge : 'Select your age'}
+                styles={styles.pickerText(selectedAge)}
+              />
+            </View>
           </View>
         );
       case 5:
@@ -250,6 +323,28 @@ const StepScreen = ({navigation}) => {
             <TextComponent
               text={'Where did you hear about us?'}
               styles={styles.titleLastStep}
+            />
+            {/* <Pressable onPress={toggleCheck} style={styles.socialMain}>
+              <Image source={facebook} style={styles.socialIcon} />
+              <View style={styles.socialInner}>
+                <TextComponent text={'Facebook'} styles={styles.socialText} />
+                <Image
+                  source={isChecked ? check : uncheck}
+                  style={styles.socialCheck}
+                />
+              </View>
+            </Pressable> */}
+            {/* <SocialBtn icon={facebook} />
+            <SocialBtn icon={instagram} />
+            <SocialBtn icon={twitter} />
+            <SocialBtn icon={linkedin} />
+            <SocialBtn icon={thread} />
+            <SocialBtn icon={other} /> */}
+            <FlatList
+              data={socialData} // Use the same data for the dots
+              renderItem={renderItem}
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.dotList}
             />
           </View>
         );

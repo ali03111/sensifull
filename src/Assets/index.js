@@ -22,6 +22,14 @@ export {default as smallLogo} from './Icons/logo.png';
 export {default as google} from './Icons/google.png';
 export {default as apple} from './Icons/apple.png';
 export {default as facebook} from './Icons/facebook.png';
+export {default as instagram} from './Icons/instagram.png';
+export {default as twitter} from './Icons/twitter.png';
+export {default as linkedin} from './Icons/linkedin.png';
+export {default as thread} from './Icons/thread.png';
+export {default as other} from './Icons/other.png';
+export {default as check} from './Icons/check.png';
+export {default as uncheck} from './Icons/uncheck.png';
+
 export {default as loseWeight} from './Icons/loseWeight.png';
 export {default as eatHealthy} from './Icons/eatHealthy.png';
 export {default as maintainHealth} from './Icons/maintainHealth.png';

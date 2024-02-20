@@ -1,11 +1,15 @@
 // import {splashTwo} from '../Assets';
 import {
   eatHealthy,
+  facebook,
   female,
   gainWeight,
+  instagram,
+  linkedin,
   loseWeight,
   maintainHealth,
   male,
+  other,
   others,
   splashIndustrial,
   splashLand,
@@ -13,6 +17,8 @@ import {
   splashOne,
   splashThree,
   splashTwo,
+  thread,
+  twitter,
 } from '../Assets';
 
 export const onBoardingData = [
@@ -141,16 +147,49 @@ export const step5 = [
   {
     id: 1,
     image: male,
-    title: 'Lose Weight',
+    title: 'Male',
   },
   {
     id: 2,
     image: female,
-    title: 'Gain Weight',
+    title: 'Female',
   },
   {
     id: 3,
     image: others,
-    title: 'Eat Healthy',
+    title: 'Other',
+  },
+];
+
+export const socialData = [
+  {
+    id: 1,
+    image: facebook,
+    title: 'Facebook',
+  },
+  {
+    id: 2,
+    image: instagram,
+    title: 'Instagram',
+  },
+  {
+    id: 3,
+    image: twitter,
+    title: 'Twitter',
+  },
+  {
+    id: 4,
+    image: linkedin,
+    title: 'Linkedin',
+  },
+  {
+    id: 5,
+    image: thread,
+    title: 'Thread',
+  },
+  {
+    id: 6,
+    image: other,
+    title: 'Other',
   },
 ];

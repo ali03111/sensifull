@@ -223,4 +223,32 @@ export const styles = StyleSheet.create({
     marginBottom: hp('3'),
     paddingHorizontal: wp('8'),
   },
+  agePicker: {
+    borderWidth: 1,
+    borderColor: '#525252',
+    borderRadius: 30,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+  titleStep4: {
+    fontSize: hp('3.5'),
+    fontWeight: '700',
+    color: Colors.primaryColor,
+    textAlign: 'center',
+    marginBottom: hp('5'),
+  },
+
+  pickerText: pickerText => ({
+    color: pickerText ? 'black' : '#525252',
+    paddingHorizontal: wp('5'),
+    paddingVertical: hp('.5'),
+    position: 'absolute',
+    width: wp('40'),
+    fontSize: hp('1.8'),
+    opacity: 0.9,
+  }),
+  hideBorder: {
+    borderWidth: 0,
+    borderColor: 'transparent',
+  },
 });
