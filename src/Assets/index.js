@@ -29,7 +29,6 @@ export {default as thread} from './Icons/thread.png';
 export {default as other} from './Icons/other.png';
 export {default as check} from './Icons/check.png';
 export {default as uncheck} from './Icons/uncheck.png';
-
 export {default as loseWeight} from './Icons/loseWeight.png';
 export {default as eatHealthy} from './Icons/eatHealthy.png';
 export {default as maintainHealth} from './Icons/maintainHealth.png';
@@ -38,3 +37,14 @@ export {default as search} from './Icons/search.png';
 export {default as male} from './Icons/male.png';
 export {default as female} from './Icons/female.png';
 export {default as others} from './Icons/others.png';
+
+export {default as barcode} from './Icons/barcode.png';
+export {default as barcode1} from './Icons/barcode1.png';
+export {default as home} from './Icons/home.png';
+export {default as home1} from './Icons/home1.png';
+export {default as home2} from './Icons/home2.png';
+export {default as recipe} from './Icons/recipe.png';
+export {default as setting} from './Icons/setting.png';
+export {default as setting1} from './Icons/setting1.png';
+export {default as tasklist} from './Icons/tasklist.png';
+export {default as tasklist1} from './Icons/tasklist1.png';

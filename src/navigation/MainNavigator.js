@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import useReduxStore from '../Hooks/UseReduxStore';
 import NavigationService from '../Services/NavigationService';
 import * as Screens from '../Screens/index';
+import MybottomTabs from './bottomNavigation';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ function MainNavigator() {
         )}
         {!isLogin && (
           <>
+            <Stack.Screen name="MybottomTabs" component={MybottomTabs} />
             <Stack.Screen name="StepScreen" component={Screens.StepScreen} />
             <Stack.Screen name="LoginScreen" component={Screens.LoginScreen} />
             <Stack.Screen

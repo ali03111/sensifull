@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useState} from 'react';
+import React, {memo, useCallback, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
   Pressable,
   TextInput,
   FlatList,
+  Keyboard,
 } from 'react-native';
 import useStepScreen from './useStepScreen';
 import {
@@ -67,6 +68,29 @@ const StepScreen = ({navigation}) => {
       [key]: value,
     }));
   };
+
+  // -----------buttons ---------
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardVisible(true);
+      },
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardVisible(false);
+      },
+    );
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
   const renderStepContent = () => {
     const [selectedCategory, setSelectedCategory] = useState(null);
@@ -375,24 +399,26 @@ const StepScreen = ({navigation}) => {
     <ImageBackground source={stepBg} style={styles.container}>
       <View style={styles.stepCirclesContainer}>{renderStepCircles()}</View>
       <View style={styles.mainContent}>{renderStepContent()}</View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={[styles.button, styles.previousButton]}
-          onPress={handlePreviousStep}>
-          <Text style={styles.buttonText}>Previous</Text>
-        </TouchableOpacity>
+      {!isKeyboardVisible && (
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={[styles.button, styles.previousButton]}
+            onPress={handlePreviousStep}>
+            <Text style={styles.buttonText}>Previous</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={[styles.button, styles.nextButton]}
-          onPress={handleNextStep}>
-          <Text style={styles.buttonText}>
-            {step === 6 ? 'Submit' : 'Next'}
-          </Text>
-          {step === 6 ? null : (
-            <Image source={arrowRight} style={styles.arrRight} />
-          )}
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity
+            style={[styles.button, styles.nextButton]}
+            onPress={handleNextStep}>
+            <Text style={styles.buttonText}>
+              {step === 6 ? 'Submit' : 'Next'}
+            </Text>
+            {step === 6 ? null : (
+              <Image source={arrowRight} style={styles.arrRight} />
+            )}
+          </TouchableOpacity>
+        </View>
+      )}
     </ImageBackground>
   );
 };

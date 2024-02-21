@@ -3,6 +3,9 @@ import {hp, wp} from '../../Config/responsive';
 import {Colors} from '../../Theme/Variables';
 
 export const styles = StyleSheet.create({
+  StepsMain: {
+    flexGrow: 1,
+  },
   container: {
     flex: 1,
     alignItems: 'center',
