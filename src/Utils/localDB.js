@@ -9,6 +9,8 @@ import {
   loseWeight,
   maintainHealth,
   male,
+  meal1,
+  meal2,
   other,
   others,
   splashIndustrial,
@@ -191,5 +193,28 @@ export const socialData = [
     id: 6,
     image: other,
     title: 'Other',
+  },
+];
+
+export const mealData = [
+  {
+    id: 1,
+    image: meal1,
+    title: 'Italian cuisine pasta',
+  },
+  {
+    id: 2,
+    image: meal2,
+    title: 'Fried Rice, Vegetarian',
+  },
+  {
+    id: 3,
+    image: meal1,
+    title: 'Italian cuisine pasta',
+  },
+  {
+    id: 4,
+    image: meal2,
+    title: 'Fried Rice, Vegetarian',
   },
 ];

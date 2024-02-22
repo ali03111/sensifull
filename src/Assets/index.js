@@ -6,6 +6,9 @@ export {default as mainImage} from './Images/main-image.png';
 export {default as splashOne} from './Images/splashOne.png';
 export {default as loginBg} from './Images/loginBg.png';
 export {default as stepBg} from './Images/stepBg.png';
+export {default as meal1} from './Images/meal1.png';
+export {default as meal2} from './Images/meal2.png';
+export {default as popular} from './Images/popularImage.png';
 
 //  Icons
 
@@ -37,7 +40,6 @@ export {default as search} from './Icons/search.png';
 export {default as male} from './Icons/male.png';
 export {default as female} from './Icons/female.png';
 export {default as others} from './Icons/others.png';
-
 export {default as barcode} from './Icons/barcode.png';
 export {default as barcode1} from './Icons/barcode1.png';
 export {default as home} from './Icons/home.png';
@@ -48,3 +50,11 @@ export {default as setting} from './Icons/setting.png';
 export {default as setting1} from './Icons/setting1.png';
 export {default as tasklist} from './Icons/tasklist.png';
 export {default as tasklist1} from './Icons/tasklist1.png';
+export {default as star} from './Icons/star.png';
+export {default as notify} from './Icons/notification.png';
+export {default as filter} from './Icons/filter.png';
+export {default as filter1} from './Icons/filter1.png';
+export {default as ingredientIcon} from './Icons/ingredients.png';
+export {default as allergiesIcon} from './Icons/allergies.png';
+export {default as greenArrow} from './Icons/greenArrow.png';
+export {default as redArrow} from './Icons/redArrow.png';
