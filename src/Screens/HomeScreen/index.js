@@ -17,8 +17,10 @@ import {
   greenArrow,
   ingredientIcon,
   meal1,
+  mealPlan,
   notify,
   popular,
+  recomMeal1,
   redArrow,
   search,
   star,
@@ -26,7 +28,7 @@ import {
 } from '../../Assets';
 import {styles} from './styles';
 import useHomeScreen from './useHomeScreen';
-import {mealData} from '../../Utils/localDB';
+import {mealData, popularData, recomData} from '../../Utils/localDB';
 import {hp, wp} from '../../Config/responsive';
 
 const HomeScreen = ({navigation}) => {
@@ -35,15 +37,37 @@ const HomeScreen = ({navigation}) => {
   const renderItem = useCallback(({item, index}) => {
     console.log(index);
     return (
-      <View style={styles.mealItem}>
+      <Touchable style={styles.mealItem}>
         <Image source={item?.image} style={styles.mealImage} />
         <TextComponent text={item?.title} styles={styles.mealTitle} />
+      </Touchable>
+    );
+  });
+
+  const renderTodayPopular = useCallback(({item, index}) => {
+    return (
+      <ImageBackground source={item?.image} style={styles.popularMain}>
+        <TextComponent text={item?.title} styles={styles.popularTitle} />
+        <Touchable style={styles.popularBtn}>
+          <TextComponent text={'View Recipe'} styles={styles.popularBtnText} />
+        </Touchable>
+      </ImageBackground>
+    );
+  });
+
+  const renderRecomMeal = useCallback(({item, index}) => {
+    return (
+      <View style={styles.recomMain}>
+        <Touchable style={styles.recom}>
+          <Image source={item?.image} style={styles.recomImage} />
+          <TextComponent text={item?.title} styles={styles.recomTitle} />
+        </Touchable>
       </View>
     );
   });
 
   return (
-    <ScrollView contentContainerStyle={{flex: 1}}>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <ImageBackground source={stepBg} style={styles.container}>
         <View style={styles.Header}>
           <View style={styles.topBar}>
@@ -103,12 +127,12 @@ const HomeScreen = ({navigation}) => {
               <Image source={redArrow} style={styles.ingredArrow} />
             </Touchable>
           </View>
-          <View style={styles.topRatedMain}>
-            <TextComponent text={'Top Rated Meals'} styles={styles.topRated} />
-            <Touchable>
-              <TextComponent text={'View All'} styles={styles.viewAll} />
-            </Touchable>
-          </View>
+        </View>
+        <View style={styles.topRatedMain}>
+          <TextComponent text={'Top Rated Meals'} styles={styles.topRated} />
+          <Touchable>
+            <TextComponent text={'View All'} styles={styles.viewAll} />
+          </Touchable>
         </View>
         <View>
           <FlatList
@@ -125,15 +149,47 @@ const HomeScreen = ({navigation}) => {
           <TextComponent text={'Today’s Popular'} styles={styles.topRated} />
         </View>
         <View style={styles.popularTop}>
-          <ImageBackground source={popular} style={styles.popularMain}>
+          <FlatList
+            data={popularData} // Use the same data for the dots
+            renderItem={renderTodayPopular}
+            showsHorizontalScrollIndicator={false}
+            horizontal={true}
+            style={{
+              paddingLeft: wp('2'),
+            }}
+          />
+        </View>
+        <View style={styles.topRatedMain}>
+          <TextComponent text={'Recommended Meals'} styles={styles.topRated} />
+          <Touchable>
+            <TextComponent text={'View All'} styles={styles.viewAll} />
+          </Touchable>
+        </View>
+        <View style={styles.recomMain}>
+          <FlatList
+            data={recomData} // Use the same data for the dots
+            renderItem={renderRecomMeal}
+            showsHorizontalScrollIndicator={false}
+            horizontal={true}
+            style={{
+              paddingLeft: wp('2'),
+            }}
+          />
+        </View>
+        <View>
+          <ImageBackground source={mealPlan} style={styles.MealPlan}>
             <TextComponent
-              text={'Vietnamese Style Warm Salad'}
-              styles={styles.popularTitle}
+              text={'Create Meal Plan'}
+              styles={styles.MealPlanTitle}
             />
-            <Touchable style={styles.popularBtn}>
+            <TextComponent
+              text={'Create your Meal Plan once here...'}
+              styles={styles.mealPlanPara}
+            />
+            <Touchable style={styles.mealPlanBtn}>
               <TextComponent
-                text={'View Recipe'}
-                styles={styles.popularBtnText}
+                text={'Create Plan'}
+                styles={styles.mealPlanBtnText}
               />
             </Touchable>
           </ImageBackground>

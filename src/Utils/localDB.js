@@ -13,6 +13,10 @@ import {
   meal2,
   other,
   others,
+  popular,
+  recomMeal1,
+  recomMeal2,
+  recomMeal3,
   splashIndustrial,
   splashLand,
   splashMarine,
@@ -216,5 +220,51 @@ export const mealData = [
     id: 4,
     image: meal2,
     title: 'Fried Rice, Vegetarian',
+  },
+];
+
+export const popularData = [
+  {
+    id: 1,
+    image: popular,
+    title: 'Vietnamese Style Warm Salad',
+  },
+  {
+    id: 2,
+    image: popular,
+    title: 'Vietnamese Style Warm Salad',
+  },
+  {
+    id: 3,
+    image: popular,
+    title: 'Vietnamese Style Warm Salad',
+  },
+  {
+    id: 4,
+    image: popular,
+    title: 'Vietnamese Style Warm Salad',
+  },
+];
+
+export const recomData = [
+  {
+    id: 1,
+    image: recomMeal1,
+    title: 'Vegan Cake',
+  },
+  {
+    id: 2,
+    image: recomMeal2,
+    title: 'Butter Herb',
+  },
+  {
+    id: 3,
+    image: recomMeal3,
+    title: 'Filipino Barbe',
+  },
+  {
+    id: 4,
+    image: recomMeal1,
+    title: 'Vegan Cake',
   },
 ];

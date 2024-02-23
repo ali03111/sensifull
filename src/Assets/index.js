@@ -9,6 +9,10 @@ export {default as stepBg} from './Images/stepBg.png';
 export {default as meal1} from './Images/meal1.png';
 export {default as meal2} from './Images/meal2.png';
 export {default as popular} from './Images/popularImage.png';
+export {default as recomMeal1} from './Images/recomMeal1.png';
+export {default as recomMeal2} from './Images/recomMeal2.png';
+export {default as recomMeal3} from './Images/recomMeal3.png';
+export {default as mealPlan} from './Images/mealPlan.png';
 
 //  Icons
 
