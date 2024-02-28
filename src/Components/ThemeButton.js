@@ -13,11 +13,13 @@ const ThemeButton = ({
   btnStyle,
   BgColor,
   TextColor,
+  disabled,
 }) => {
   return (
     <Touchable
       Opacity={0.7}
       onPress={onPress}
+      disabled={disabled}
       style={[styles.button, {justifyContent: 'center', ...style, ...BgColor}]}>
       <Text style={[styles.text, {...textStyle, ...TextColor}]}>{title}</Text>
     </Touchable>

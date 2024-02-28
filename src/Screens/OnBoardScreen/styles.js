@@ -64,7 +64,7 @@ export const styles = StyleSheet.create({
     flex: 0.5,
     alignItems: 'center',
     justifyContent: 'center',
-    height: hp('97'),
+    height: hp('100'),
     // width: wp('100'),
   },
   btnArrow: {

@@ -17,12 +17,7 @@ import {
   recomMeal1,
   recomMeal2,
   recomMeal3,
-  splashIndustrial,
-  splashLand,
-  splashMarine,
   splashOne,
-  splashThree,
-  splashTwo,
   thread,
   twitter,
 } from '../Assets';
@@ -266,5 +261,51 @@ export const recomData = [
     id: 4,
     image: recomMeal1,
     title: 'Vegan Cake',
+  },
+];
+
+export const filterCat1 = [
+  {
+    id: 1,
+    name: 'Breakfast',
+  },
+  {
+    id: 2,
+    name: 'Lunch',
+  },
+  {
+    id: 3,
+    name: 'Dinner',
+  },
+  {
+    id: 4,
+    name: 'Snacks',
+  },
+];
+
+export const filterCat2 = [
+  {
+    id: 1,
+    name: 'Gluten free',
+  },
+  {
+    id: 2,
+    name: 'Dairy free',
+  },
+  {
+    id: 3,
+    name: 'Vegetarian',
+  },
+  {
+    id: 4,
+    name: 'Paleo',
+  },
+  {
+    id: 5,
+    name: 'FODMAP',
+  },
+  {
+    id: 6,
+    name: 'Ketogenic diet',
   },
 ];

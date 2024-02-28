@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   unlockHeading: {
     fontSize: hp('1.8'),
     color: 'white',
-    width: wp('60'),
+    width: wp('50'),
   },
   premiumBtn: {
     flexDirection: 'row',
@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
     fontSize: hp('2.5'),
     color: 'white',
     fontWeight: '600',
-    width: wp('50'),
+    width: wp('60'),
     lineHeight: 22,
   },
   notifyBtn: {
@@ -117,10 +117,10 @@ export const styles = StyleSheet.create({
     paddingVertical: hp('1.5'),
   },
   ingredBtnRed: {
-    backgroundColor: 'rgba(255, 77, 74, 0.2)',
+    backgroundColor: '#FF4D4A',
   },
   ingredBtnGreen: {
-    backgroundColor: 'rgba(149, 187, 91, 0.2)',
+    backgroundColor: '#95BB5B',
   },
   ingredIcon: {
     width: wp('6'),
@@ -131,13 +131,9 @@ export const styles = StyleSheet.create({
     fontSize: hp('2'),
     marginLeft: wp('2'),
     fontWeight: '600',
+    color: 'white',
   },
-  textGreen: {
-    color: '#95BB5B',
-  },
-  textRed: {
-    color: '#FF4D4A',
-  },
+
   ingredArrow: {
     width: wp('5'),
     resizeMode: 'contain',
@@ -247,7 +243,6 @@ export const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginHorizontal: wp('4'),
     paddingHorizontal: wp('4'),
-    // paddingVertical: hp('2'),
     borderRadius: 20,
     overflow: 'hidden',
     marginVertical: hp('3'),
@@ -279,5 +274,30 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: hp('1.8'),
     color: Colors.secondaryColor,
+  },
+  shoppingBtn: {
+    backgroundColor: '#FFF4A3',
+    marginHorizontal: wp('4'),
+    paddingHorizontal: wp('4'),
+    paddingVertical: hp('.5'),
+    marginBottom: hp('3'),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderRadius: 15,
+  },
+  shoppingText: {
+    width: wp('68'),
+    fontSize: hp('2'),
+    fontWeight: '600',
+    color: '#703383',
+  },
+  shoppingIcon: {
+    width: wp('7'),
+    resizeMode: 'contain',
+  },
+  RightPurpleIcon: {
+    width: wp('5'),
+    resizeMode: 'contain',
   },
 });

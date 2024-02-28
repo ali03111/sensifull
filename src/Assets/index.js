@@ -62,3 +62,6 @@ export {default as ingredientIcon} from './Icons/ingredients.png';
 export {default as allergiesIcon} from './Icons/allergies.png';
 export {default as greenArrow} from './Icons/greenArrow.png';
 export {default as redArrow} from './Icons/redArrow.png';
+export {default as shoplist} from './Icons/shoplist.png';
+export {default as arrRightPurple} from './Icons/arrowRightPurple.png';
+export {default as closeIcon} from './Icons/close.png';

@@ -3,6 +3,7 @@ const {width, height} = Dimensions.get('window');
 
 const Colors = {
   primaryColor: '#703383',
+  themeYellow: '#FFE100',
   secondaryColor: '#FDED75',
   themeGreen: '#95BB5B',
   themeRed: 'red',

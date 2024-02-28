@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useMemo, useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -7,11 +7,15 @@ import {
   TextInput,
   ImageBackground,
   FlatList,
+  Button,
 } from 'react-native';
+// import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {TextComponent} from '../../Components/TextComponent';
 import {Touchable} from '../../Components/Touchable';
 import {
   allergiesIcon,
+  arrRightPurple,
+  arrowRight,
   filter,
   filter1,
   greenArrow,
@@ -23,6 +27,7 @@ import {
   recomMeal1,
   redArrow,
   search,
+  shoplist,
   star,
   stepBg,
 } from '../../Assets';
@@ -30,9 +35,14 @@ import {styles} from './styles';
 import useHomeScreen from './useHomeScreen';
 import {mealData, popularData, recomData} from '../../Utils/localDB';
 import {hp, wp} from '../../Config/responsive';
+import {FilterPopUp} from './FilterPopUp';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {FilterModal} from './FilterModal';
 
 const HomeScreen = ({navigation}) => {
-  const {} = useHomeScreen(navigation);
+  const {toggleModal, modalVisible, setModalVisible} =
+    useHomeScreen(navigation);
 
   const renderItem = useCallback(({item, index}) => {
     console.log(index);
@@ -66,136 +76,218 @@ const HomeScreen = ({navigation}) => {
     );
   });
 
+  // ------ popup ------
+  // const [popUpState, setPopUpState] = useState(false);
+
+  // const bottomSheetModalRef = useRef(null);
+
+  // // variables
+  // const snapPoints = useMemo(() => ['25%', '50%'], []);
+
+  // // callbacks
+  // const handlePresentModalPress = useCallback(() => {
+  //   bottomSheetModalRef.current?.present();
+  //   setPopUpState(true);
+  //   console.log('first', popUpState);
+  // }, []);
+
+  // const handleSheetChanges = useCallback(index => {
+  //   console.log('handleSheetChanges', index);
+  //   if (index == -1) {
+  //     setPopUpState(false);
+  //   }
+  // }, []);
+
+  // const handleCloseModal = useCallback(() => {
+  //   bottomSheetModalRef.current?.close();
+  // }, []);
+
+  // const BackdropComponent = ({onPress}) => {
+  //   return (
+  //     <View
+  //       style={{
+  //         flex: 1,
+  //         backgroundColor: 'rgba(0,0,0,0.5)',
+  //       }}
+  //       onTouchEnd={onPress}
+  //     />
+  //   );
+  // };
+
+  // const BottomSheetView = ({children}) => {
+  //   return <View style={styles.contentContainer}>{children}</View>;
+  // };
+
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <ImageBackground source={stepBg} style={styles.container}>
-        <View style={styles.Header}>
-          <View style={styles.topBar}>
-            <TextComponent
-              text={'Unlock everything now!'}
-              styles={styles.unlockHeading}
-            />
-            <Touchable style={styles.premiumBtn}>
-              <Image source={star} style={styles.starImage} />
-              <TextComponent text={'GO PREMIUM'} styles={styles.premiumText} />
-            </Touchable>
-          </View>
-          <View style={styles.notifyMain}>
-            <View style={styles.notifyinner}>
-              <TextComponent text={'What do you'} styles={styles.notifyText} />
+    <>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <ImageBackground source={stepBg} style={styles.container}>
+          <View style={styles.Header}>
+            <View style={styles.topBar}>
               <TextComponent
-                text={'want to cook today?'}
-                styles={styles.notifyText}
+                text={'Unlock everything now!'}
+                styles={styles.unlockHeading}
               />
+              <Touchable style={styles.premiumBtn}>
+                <Image source={star} style={styles.starImage} />
+                <TextComponent
+                  text={'GO PREMIUM'}
+                  styles={styles.premiumText}
+                />
+              </Touchable>
             </View>
-            <Touchable style={styles.notifyBtn}>
-              <Image source={notify} style={styles.notifyImage} />
-            </Touchable>
-          </View>
-          <View style={styles.inputMain}>
-            <Image source={search} style={styles.inputImage} />
-            <TextInput
-              style={styles.inputStyle}
-              placeholderTextColor="white"
-              placeholder={'Search Allergies'}
-            />
-            <Touchable style={styles.filterMain}>
-              <Image source={filter1} style={styles.filterImage} />
-            </Touchable>
-          </View>
-        </View>
-        <View style={styles.homeMain}>
-          <View style={styles.ingredArea}>
-            <Touchable style={{...styles.ingredBtnGreen, ...styles.ingredBtn}}>
-              <View style={styles.ingredTop}>
-                <Image source={ingredientIcon} style={styles.ingredIcon} />
+            <View style={styles.notifyMain}>
+              <View style={styles.notifyinner}>
                 <TextComponent
-                  text={'Ingredients'}
-                  styles={{...styles.ingredientText, ...styles.textGreen}}
+                  text={'What do you'}
+                  styles={styles.notifyText}
+                />
+                <TextComponent
+                  text={'want to cook today?'}
+                  styles={styles.notifyText}
                 />
               </View>
-              <Image source={greenArrow} style={styles.ingredArrow} />
-            </Touchable>
-            <Touchable style={{...styles.ingredBtnRed, ...styles.ingredBtn}}>
-              <View style={styles.ingredTop}>
-                <Image source={allergiesIcon} style={styles.ingredIcon} />
-                <TextComponent
-                  text={'Allergies'}
-                  styles={{...styles.ingredientText, ...styles.textRed}}
-                />
-              </View>
-              <Image source={redArrow} style={styles.ingredArrow} />
-            </Touchable>
-          </View>
-        </View>
-        <View style={styles.topRatedMain}>
-          <TextComponent text={'Top Rated Meals'} styles={styles.topRated} />
-          <Touchable>
-            <TextComponent text={'View All'} styles={styles.viewAll} />
-          </Touchable>
-        </View>
-        <View>
-          <FlatList
-            data={mealData} // Use the same data for the dots
-            renderItem={renderItem}
-            showsHorizontalScrollIndicator={false}
-            horizontal={true}
-            style={{
-              paddingLeft: wp('2'),
-            }}
-          />
-        </View>
-        <View style={styles.popular}>
-          <TextComponent text={'Today’s Popular'} styles={styles.topRated} />
-        </View>
-        <View style={styles.popularTop}>
-          <FlatList
-            data={popularData} // Use the same data for the dots
-            renderItem={renderTodayPopular}
-            showsHorizontalScrollIndicator={false}
-            horizontal={true}
-            style={{
-              paddingLeft: wp('2'),
-            }}
-          />
-        </View>
-        <View style={styles.topRatedMain}>
-          <TextComponent text={'Recommended Meals'} styles={styles.topRated} />
-          <Touchable>
-            <TextComponent text={'View All'} styles={styles.viewAll} />
-          </Touchable>
-        </View>
-        <View style={styles.recomMain}>
-          <FlatList
-            data={recomData} // Use the same data for the dots
-            renderItem={renderRecomMeal}
-            showsHorizontalScrollIndicator={false}
-            horizontal={true}
-            style={{
-              paddingLeft: wp('2'),
-            }}
-          />
-        </View>
-        <View>
-          <ImageBackground source={mealPlan} style={styles.MealPlan}>
-            <TextComponent
-              text={'Create Meal Plan'}
-              styles={styles.MealPlanTitle}
-            />
-            <TextComponent
-              text={'Create your Meal Plan once here...'}
-              styles={styles.mealPlanPara}
-            />
-            <Touchable style={styles.mealPlanBtn}>
-              <TextComponent
-                text={'Create Plan'}
-                styles={styles.mealPlanBtnText}
+              <Touchable style={styles.notifyBtn}>
+                <Image source={notify} style={styles.notifyImage} />
+              </Touchable>
+            </View>
+            <View style={styles.inputMain}>
+              <Image source={search} style={styles.inputImage} />
+              <TextInput
+                style={styles.inputStyle}
+                placeholderTextColor="white"
+                placeholder={'Search Allergies'}
               />
+              <Touchable style={styles.filterMain} onPress={toggleModal}>
+                <Image source={filter1} style={styles.filterImage} />
+              </Touchable>
+            </View>
+          </View>
+          <View style={styles.homeMain}>
+            <View style={styles.ingredArea}>
+              <Touchable
+                style={{...styles.ingredBtnGreen, ...styles.ingredBtn}}>
+                <View style={styles.ingredTop}>
+                  <Image source={ingredientIcon} style={styles.ingredIcon} />
+                  <TextComponent
+                    text={'Ingredients'}
+                    styles={styles.ingredientText}
+                  />
+                </View>
+                <Image source={arrowRight} style={styles.ingredArrow} />
+              </Touchable>
+              <Touchable style={{...styles.ingredBtnRed, ...styles.ingredBtn}}>
+                <View style={styles.ingredTop}>
+                  <Image source={allergiesIcon} style={styles.ingredIcon} />
+                  <TextComponent
+                    text={'Allergies'}
+                    styles={styles.ingredientText}
+                  />
+                </View>
+                <Image source={arrowRight} style={styles.ingredArrow} />
+              </Touchable>
+            </View>
+          </View>
+          <View>
+            <Touchable style={styles.shoppingBtn}>
+              <Image source={shoplist} style={styles.shoppingIcon} />
+              <TextComponent
+                text={'Shopping list'}
+                styles={styles.shoppingText}
+              />
+              <Image source={arrRightPurple} style={styles.RightPurpleIcon} />
             </Touchable>
-          </ImageBackground>
-        </View>
-      </ImageBackground>
-    </ScrollView>
+          </View>
+          <View style={styles.topRatedMain}>
+            <TextComponent text={'Top Rated Meals'} styles={styles.topRated} />
+            <Touchable>
+              <TextComponent text={'View All'} styles={styles.viewAll} />
+            </Touchable>
+          </View>
+          <View>
+            <FlatList
+              data={mealData} // Use the same data for the dots
+              renderItem={renderItem}
+              showsHorizontalScrollIndicator={false}
+              horizontal={true}
+              style={{
+                paddingLeft: wp('2'),
+              }}
+            />
+          </View>
+          <View style={styles.popular}>
+            <TextComponent text={'Today’s Popular'} styles={styles.topRated} />
+          </View>
+          <View style={styles.popularTop}>
+            <FlatList
+              data={popularData} // Use the same data for the dots
+              renderItem={renderTodayPopular}
+              showsHorizontalScrollIndicator={false}
+              horizontal={true}
+              style={{
+                paddingLeft: wp('2'),
+              }}
+            />
+          </View>
+          <View style={styles.topRatedMain}>
+            <TextComponent
+              text={'Recommended Meals'}
+              styles={styles.topRated}
+            />
+            <Touchable>
+              <TextComponent text={'View All'} styles={styles.viewAll} />
+            </Touchable>
+          </View>
+          <View style={styles.recomMain}>
+            <FlatList
+              data={recomData} // Use the same data for the dots
+              renderItem={renderRecomMeal}
+              showsHorizontalScrollIndicator={false}
+              horizontal={true}
+              style={{
+                paddingLeft: wp('2'),
+              }}
+            />
+          </View>
+          <View>
+            <ImageBackground source={mealPlan} style={styles.MealPlan}>
+              <TextComponent
+                text={'Create Meal Plan'}
+                styles={styles.MealPlanTitle}
+              />
+              <TextComponent
+                text={'Create your Meal Plan once here...'}
+                styles={styles.mealPlanPara}
+              />
+              <Touchable style={styles.mealPlanBtn}>
+                <TextComponent
+                  text={'Create Plan'}
+                  styles={styles.mealPlanBtnText}
+                />
+              </Touchable>
+            </ImageBackground>
+          </View>
+          {/* --------filter modal----------- */}
+        </ImageBackground>
+      </ScrollView>
+      {/* <GestureHandlerRootView style={{zIndex: 99999}}>
+        <BottomSheetModalProvider>
+          <View style={styles.containerNew(popUpState)}>
+            <BottomSheetModal
+              ref={bottomSheetModalRef}
+              index={1}
+              snapPoints={snapPoints}
+              onChange={handleSheetChanges}
+              backdropComponent={BackdropComponent}>
+              <BottomSheetView style={styles.contentContainer}>
+                <Text>Awesome 🎉</Text>
+              </BottomSheetView>
+            </BottomSheetModal>
+          </View>
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView> */}
+      <FilterModal ToggleFunction={toggleModal} isVisible={modalVisible} />
+    </>
   );
 };
 
