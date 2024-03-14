@@ -37,7 +37,7 @@ const RegisterScreen = ({navigation}) => {
     <KeyBoardWrapper
       styles={styles.logInMain}
       showsVerticalScrollIndicator={false}>
-      <ImageBackground source={loginBg}>
+      <ImageBackground source={loginBg} style={styles.bgStyle}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.loginTop}>
             <View style={styles.dontHave}>

@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: hp('3.5'),
     marginBottom: hp('1.5'),
+    marginBottom: hp('1.5'),
   },
   logo: {
     width: wp('60'),
@@ -17,6 +18,9 @@ export const styles = StyleSheet.create({
     // paddingHorizontal: wp('4'),
     // paddingTop: hp('3'),
     // paddingBottom: hp('6'),
+  },
+  bgStyle: {
+    paddingBottom: hp('2.5'),
   },
   buttonStyle: {
     marginTop: hp('1'),

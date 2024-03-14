@@ -167,28 +167,28 @@ const HomeScreen = ({navigation}) => {
             <View style={styles.ingredArea}>
               <Touchable
                 style={{...styles.ingredBtnGreen, ...styles.ingredBtn}}>
+                <Image source={ingredientIcon} style={styles.ingredArrow} />
                 <View style={styles.ingredTop}>
-                  <Image source={ingredientIcon} style={styles.ingredIcon} />
                   <TextComponent
-                    text={'Ingredients'}
-                    styles={styles.ingredientText}
+                    text={'Ingredient Restrictions'}
+                    styles={{...styles.ingredientText, ...{color: 'white'}}}
                   />
+                  <Image source={arrowRight} style={styles.ingredIcon} />
                 </View>
-                <Image source={arrowRight} style={styles.ingredArrow} />
               </Touchable>
               <Touchable style={{...styles.ingredBtnRed, ...styles.ingredBtn}}>
+                <Image source={shoplist} style={styles.ingredArrow} />
                 <View style={styles.ingredTop}>
-                  <Image source={allergiesIcon} style={styles.ingredIcon} />
                   <TextComponent
-                    text={'Allergies'}
+                    text={'Shopping list'}
                     styles={styles.ingredientText}
                   />
+                  <Image source={arrRightPurple} style={styles.ingredIcon} />
                 </View>
-                <Image source={arrowRight} style={styles.ingredArrow} />
               </Touchable>
             </View>
           </View>
-          <View>
+          {/* <View>
             <Touchable style={styles.shoppingBtn}>
               <Image source={shoplist} style={styles.shoppingIcon} />
               <TextComponent
@@ -197,7 +197,7 @@ const HomeScreen = ({navigation}) => {
               />
               <Image source={arrRightPurple} style={styles.RightPurpleIcon} />
             </Touchable>
-          </View>
+          </View> */}
           <View style={styles.topRatedMain}>
             <TextComponent text={'Top Rated Meals'} styles={styles.topRated} />
             <Touchable>

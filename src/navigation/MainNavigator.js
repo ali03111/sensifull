@@ -34,7 +34,18 @@ function MainNavigator() {
         {!isLogin && (
           <>
             <Stack.Screen name="MybottomTabs" component={MybottomTabs} />
+
             <Stack.Screen name="StepScreen" component={Screens.StepScreen} />
+            <Stack.Screen
+              name="Restrictions"
+              component={Screens.Restrictions}
+            />
+            <Stack.Screen
+              name="AllergiesList"
+              component={Screens.AllergiesList}
+            />
+
+            {/* <Stack.Screen name="MybottomTabs" component={MybottomTabs} /> */}
             <Stack.Screen name="LoginScreen" component={Screens.LoginScreen} />
             <Stack.Screen
               name="RegisterScreen"

@@ -1,8 +1,8 @@
 //  Images
 
 export {default as logoScreen} from './Images/logo-screen.png';
-export {default as logo} from './Images/logonew.png';
-export {default as mainImage} from './Images/main-image.png';
+// export {default as logo} from './Images/logonew.png';
+// export {default as mainImage} from './Images/main-image.png';
 export {default as splashOne} from './Images/splashOne.png';
 export {default as loginBg} from './Images/loginBg.png';
 export {default as stepBg} from './Images/stepBg.png';
@@ -65,3 +65,10 @@ export {default as redArrow} from './Icons/redArrow.png';
 export {default as shoplist} from './Icons/shoplist.png';
 export {default as arrRightPurple} from './Icons/arrowRightPurple.png';
 export {default as closeIcon} from './Icons/close.png';
+export {default as ingred} from './Icons/ingred.png';
+export {default as arrowBack} from './Icons/arrowBack.png';
+export {default as chevUp} from './Icons/chevUp.png';
+export {default as chevDown} from './Icons/chevDown.png';
+export {default as info} from './Icons/info.png';
+export {default as allergiesPurple} from './Icons/allergiesPurple.png';
+export {default as favShadow} from './Icons/favShadow.png';

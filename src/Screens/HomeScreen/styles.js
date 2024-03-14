@@ -32,13 +32,16 @@ export const styles = StyleSheet.create({
     borderColor: '#FFE100',
     borderRadius: 30,
     paddingHorizontal: wp('3'),
+    paddingVertical: hp('.8'),
   },
   starImage: {
     resizeMode: 'contain',
     width: wp('4'),
+    height: hp('2'),
     marginRight: wp('1.5'),
     position: 'relative',
     bottom: 1,
+    resizeMode: 'contain',
   },
   premiumText: {
     color: '#FFE100',
@@ -108,7 +111,8 @@ export const styles = StyleSheet.create({
   },
   ingredTop: {
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
   },
   ingredBtn: {
     width: wp('44'),
@@ -117,29 +121,29 @@ export const styles = StyleSheet.create({
     paddingVertical: hp('1.5'),
   },
   ingredBtnRed: {
-    backgroundColor: '#FF4D4A',
+    backgroundColor: '#FFF4A3',
   },
   ingredBtnGreen: {
     backgroundColor: '#95BB5B',
   },
   ingredIcon: {
-    width: wp('6'),
+    width: wp('5'),
     height: hp('3'),
     resizeMode: 'contain',
   },
   ingredientText: {
     fontSize: hp('2'),
-    marginLeft: wp('2'),
+    // marginLeft: wp('2'),
     fontWeight: '600',
-    color: 'white',
+    color: '#703383',
+    width: wp('23'),
   },
 
   ingredArrow: {
-    width: wp('5'),
+    width: wp('6'),
     resizeMode: 'contain',
-    alignSelf: 'flex-end',
-    height: hp('2'),
-    marginTop: hp('1'),
+    height: hp('3'),
+    marginBottom: hp('.6'),
   },
   topRatedMain: {
     paddingHorizontal: wp('4'),
@@ -273,7 +277,7 @@ export const styles = StyleSheet.create({
   mealPlanBtnText: {
     textAlign: 'center',
     fontSize: hp('1.8'),
-    color: Colors.secondaryColor,
+    color: Colors.white,
   },
   shoppingBtn: {
     backgroundColor: '#FFF4A3',

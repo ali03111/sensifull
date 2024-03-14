@@ -9,8 +9,9 @@ export const styles = StyleSheet.create({
     backgroundColor: 'red',
   },
   bgStyle: {
-    paddingBottom: hp('10.9'),
+    paddingBottom: hp('13'),
     backgroundColor: 'red',
+    // flex: 1,
   },
   loginTop: {
     alignItems: 'center',
