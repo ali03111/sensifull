@@ -35,6 +35,26 @@ function MainNavigator() {
           <>
             <Stack.Screen name="MybottomTabs" component={MybottomTabs} />
 
+            <Stack.Screen
+              name="SettingGoalsScreen"
+              component={Screens.SettingGoalsScreen}
+            />
+            <Stack.Screen
+              name="SettingAllergiesScreen"
+              component={Screens.SettingAllergiesScreen}
+            />
+            <Stack.Screen
+              name="SettingDietaryScreen"
+              component={Screens.SettingDietaryScreen}
+            />
+            <Stack.Screen
+              name="ChangePasswordScreen"
+              component={Screens.ChangePasswordScreen}
+            />
+            {/* <Stack.Screen
+              name="SettingDietaryScreen"
+              component={Screens.SettingDietaryScreen}
+            /> */}
             <Stack.Screen name="StepScreen" component={Screens.StepScreen} />
             <Stack.Screen
               name="Restrictions"

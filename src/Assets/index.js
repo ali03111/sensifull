@@ -13,6 +13,7 @@ export {default as recomMeal1} from './Images/recomMeal1.png';
 export {default as recomMeal2} from './Images/recomMeal2.png';
 export {default as recomMeal3} from './Images/recomMeal3.png';
 export {default as mealPlan} from './Images/mealPlan.png';
+export {default as profile} from './Images/profile.png';
 
 //  Icons
 
@@ -72,3 +73,14 @@ export {default as chevDown} from './Icons/chevDown.png';
 export {default as info} from './Icons/info.png';
 export {default as allergiesPurple} from './Icons/allergiesPurple.png';
 export {default as favShadow} from './Icons/favShadow.png';
+export {default as arrLeft} from './Icons/arrow-left.png';
+export {default as goalGreen} from './Icons/goalGreen.png';
+export {default as AllergiesGreen} from './Icons/AllergiesGreen.png';
+export {default as DietaryGreen} from './Icons/DietaryGreen.png';
+export {default as informationGreen} from './Icons/informationGreen.png';
+export {default as policyGreen} from './Icons/policyGreen.png';
+export {default as termsGreen} from './Icons/termsGreen.png';
+export {default as starGreen} from './Icons/starGreen.png';
+export {default as passGreen} from './Icons/passGreen.png';
+export {default as logoutGreen} from './Icons/logoutGreen.png';
+export {default as trash} from './Icons/trash.png';

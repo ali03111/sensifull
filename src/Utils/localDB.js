@@ -1,9 +1,14 @@
 // import {splashTwo} from '../Assets';
+import {Linking} from 'react-native';
 import {
+  AllergiesGreen,
+  DietaryGreen,
   eatHealthy,
   facebook,
   female,
   gainWeight,
+  goalGreen,
+  informationGreen,
   instagram,
   linkedin,
   loseWeight,
@@ -13,11 +18,14 @@ import {
   meal2,
   other,
   others,
+  policyGreen,
   popular,
   recomMeal1,
   recomMeal2,
   recomMeal3,
   splashOne,
+  starGreen,
+  termsGreen,
   thread,
   twitter,
 } from '../Assets';
@@ -467,4 +475,47 @@ export const AllergiesData = [
       'Camel milk',
     ],
   },
+];
+
+export const settingData = [
+  {
+    icon: goalGreen,
+    name: 'Goals / Purpose',
+    onpress: (navigate, route) => navigate(route),
+    screenName: 'SettingGoalsScreen',
+  },
+  {
+    icon: AllergiesGreen,
+    name: 'Allergies',
+    onpress: (navigate, route) => navigate(route),
+    screenName: 'SettingAllergiesScreen',
+  },
+  {
+    icon: DietaryGreen,
+    name: 'Dietary restrictions',
+    onpress: (navigate, route) => navigate(route),
+    screenName: 'SettingDietaryScreen',
+  },
+];
+
+export const profileData = [
+  {
+    icon: informationGreen,
+    name: 'About Sensifull',
+    onpress: (navigate, route) => Linking.openURL('https://www.google.com/'),
+  },
+  {
+    icon: policyGreen,
+    name: 'Privacy Policy',
+    onpress: (navigate, route) => Linking.openURL('https://www.google.com/'),
+  },
+  {
+    icon: termsGreen,
+    name: 'Terms and Conditions',
+    onpress: (navigate, route) => Linking.openURL('https://www.google.com/'),
+  },
+  // {
+  //   icon: starGreen,
+  //   name: 'Rate Us',
+  // },
 ];

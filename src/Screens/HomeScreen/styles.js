@@ -133,17 +133,16 @@ export const styles = StyleSheet.create({
   },
   ingredientText: {
     fontSize: hp('2'),
-    // marginLeft: wp('2'),
     fontWeight: '600',
     color: '#703383',
-    width: wp('23'),
+    width: wp('25'),
+    lineHeight: 18,
   },
-
   ingredArrow: {
     width: wp('6'),
     resizeMode: 'contain',
     height: hp('3'),
-    marginBottom: hp('.6'),
+    marginBottom: hp('1'),
   },
   topRatedMain: {
     paddingHorizontal: wp('4'),

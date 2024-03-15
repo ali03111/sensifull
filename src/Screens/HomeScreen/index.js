@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useRef, useState} from 'react';
+import React, {memo, useCallback, useMemo, useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -39,6 +39,9 @@ import {FilterPopUp} from './FilterPopUp';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {FilterModal} from './FilterModal';
+import HomeBtn from './HomeBtn1';
+import HomeBtn1 from './HomeBtn1';
+import HomeBtn2 from './HomeBtn2';
 
 const HomeScreen = ({navigation}) => {
   const {toggleModal, modalVisible, setModalVisible} =
@@ -165,27 +168,8 @@ const HomeScreen = ({navigation}) => {
           </View>
           <View style={styles.homeMain}>
             <View style={styles.ingredArea}>
-              <Touchable
-                style={{...styles.ingredBtnGreen, ...styles.ingredBtn}}>
-                <Image source={ingredientIcon} style={styles.ingredArrow} />
-                <View style={styles.ingredTop}>
-                  <TextComponent
-                    text={'Ingredient Restrictions'}
-                    styles={{...styles.ingredientText, ...{color: 'white'}}}
-                  />
-                  <Image source={arrowRight} style={styles.ingredIcon} />
-                </View>
-              </Touchable>
-              <Touchable style={{...styles.ingredBtnRed, ...styles.ingredBtn}}>
-                <Image source={shoplist} style={styles.ingredArrow} />
-                <View style={styles.ingredTop}>
-                  <TextComponent
-                    text={'Shopping list'}
-                    styles={styles.ingredientText}
-                  />
-                  <Image source={arrRightPurple} style={styles.ingredIcon} />
-                </View>
-              </Touchable>
+              <HomeBtn1 text1={'Ingredient'} text2={'Restrictions'} />
+              <HomeBtn2 text1={'Shopping'} text2={'list'} />
             </View>
           </View>
           {/* <View>
@@ -291,4 +275,4 @@ const HomeScreen = ({navigation}) => {
   );
 };
 
-export default HomeScreen;
+export default memo(HomeScreen);

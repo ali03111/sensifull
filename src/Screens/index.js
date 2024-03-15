@@ -5,3 +5,8 @@ export {default as StepScreen} from './StepScreen';
 export {default as HomeScreen} from './HomeScreen';
 export {default as Restrictions} from './StepScreen/Restrictions';
 export {default as AllergiesList} from './StepScreen/AllergiesList';
+export {default as SettingScreen} from './SettingScreen';
+export {default as SettingGoalsScreen} from './SettingGoalsScreen';
+export {default as SettingAllergiesScreen} from './SettingAllergiesScreen';
+export {default as SettingDietaryScreen} from './SettingDietaryScreen';
+export {default as ChangePasswordScreen} from './ChangePasswordScreen';
