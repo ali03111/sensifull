@@ -184,7 +184,8 @@ const HomeScreen = ({navigation}) => {
           </View> */}
           <View style={styles.topRatedMain}>
             <TextComponent text={'Top Rated Meals'} styles={styles.topRated} />
-            <Touchable>
+            <Touchable
+              onPress={() => navigation.navigate('TopRatedMealScreen')}>
               <TextComponent text={'View All'} styles={styles.viewAll} />
             </Touchable>
           </View>
@@ -199,8 +200,17 @@ const HomeScreen = ({navigation}) => {
               }}
             />
           </View>
-          <View style={styles.popular}>
+          {/* <View style={styles.popular}>
             <TextComponent text={'Today’s Popular'} styles={styles.topRated} />
+          </View> */}
+          <View style={styles.topRatedMain}>
+            <TextComponent text={'Today’s Popular'} styles={styles.topRated} />
+
+            <TextComponent
+              text={'View All'}
+              styles={styles.viewAll}
+              onPress={() => navigation.navigate('TodayPopularScreen')}
+            />
           </View>
           <View style={styles.popularTop}>
             <FlatList

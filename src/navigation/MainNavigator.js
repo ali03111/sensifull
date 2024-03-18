@@ -51,6 +51,15 @@ function MainNavigator() {
               name="ChangePasswordScreen"
               component={Screens.ChangePasswordScreen}
             />
+            <Stack.Screen
+              name="TodayPopularScreen"
+              component={Screens.TodayPopularScreen}
+            />
+            <Stack.Screen
+              name="TopRatedMealScreen"
+              component={Screens.TopRatedMealScreen}
+            />
+
             {/* <Stack.Screen
               name="SettingDietaryScreen"
               component={Screens.SettingDietaryScreen}

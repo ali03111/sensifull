@@ -141,10 +141,10 @@ const resetPasswordScheme = yup.object().shape({
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
       'Your password does not match.',
     ),
-  // confirm_password: yup
-  //   .string()
-  //   .required('Confirm password is required.')
-  //   .oneOf([yup.ref('new_password'), null], 'Passwords must match.'),
+  confirm_password: yup
+    .string()
+    .required('Confirm password is required.')
+    .oneOf([yup.ref('new_password'), null], 'Passwords must match.'),
 });
 
 const addUsernameScheme = yup.object().shape({

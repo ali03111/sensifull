@@ -247,6 +247,16 @@ export const popularData = [
     image: popular,
     title: 'Vietnamese Style Warm Salad',
   },
+  {
+    id: 5,
+    image: popular,
+    title: 'Vietnamese Style Warm Salad',
+  },
+  {
+    id: 6,
+    image: popular,
+    title: 'Vietnamese Style Warm Salad',
+  },
 ];
 
 export const recomData = [

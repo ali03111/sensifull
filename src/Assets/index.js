@@ -84,3 +84,5 @@ export {default as starGreen} from './Icons/starGreen.png';
 export {default as passGreen} from './Icons/passGreen.png';
 export {default as logoutGreen} from './Icons/logoutGreen.png';
 export {default as trash} from './Icons/trash.png';
+export {default as trashRed} from './Icons/trashRed.png';
+export {default as logOut} from './Icons/logOut.png';

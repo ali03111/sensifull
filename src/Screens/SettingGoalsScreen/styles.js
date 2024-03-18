@@ -10,4 +10,7 @@ export const styles = StyleSheet.create({
     width: wp('100'),
     paddingHorizontal: wp('4'),
   },
+  goalComp: {
+    paddingTop: hp('7'),
+  },
 });

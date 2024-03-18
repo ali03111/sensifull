@@ -4,7 +4,7 @@ import {TextComponent} from './TextComponent';
 import {hp, wp} from '../Config/responsive';
 import {Colors} from '../Theme/Variables';
 
-export default function GoalsAndPurpose({title, data}) {
+export default function GoalsAndPurpose({title, subtitle, data}) {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const handleCategoryPress = itemId => {
@@ -13,6 +13,8 @@ export default function GoalsAndPurpose({title, data}) {
   return (
     <View>
       <TextComponent text={title} styles={styles.title} />
+      <TextComponent text={subtitle} styles={styles.subTitle} />
+
       <View style={styles.content}>
         {data.map((item, index) => (
           <Pressable
@@ -40,7 +42,12 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: Colors.primaryColor,
     textAlign: 'center',
+  },
+  subTitle: {
+    textAlign: 'center',
+    paddingHorizontal: wp('4'),
     marginBottom: hp('3'),
+    marginTop: hp('1'),
   },
   content: {
     flexDirection: 'row',

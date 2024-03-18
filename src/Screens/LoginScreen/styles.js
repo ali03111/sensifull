@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
   logInMain: {
     // paddingHorizontal: wp('3.5'),
     flexGrow: 1,
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
   },
   bgStyle: {
     paddingBottom: hp('13'),

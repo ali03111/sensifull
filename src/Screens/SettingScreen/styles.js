@@ -96,4 +96,7 @@ export const styles = StyleSheet.create({
   lastItem: {
     borderBottomWidth: 0,
   },
+  bottomSpace: {
+    marginBottom: hp('3'),
+  },
 });

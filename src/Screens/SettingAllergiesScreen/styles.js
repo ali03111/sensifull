@@ -6,4 +6,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  headerStyle: {
+    paddingHorizontal: wp('4'),
+  },
 });

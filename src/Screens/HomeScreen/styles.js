@@ -149,6 +149,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: hp('.5'),
   },
   topRated: {
     fontSize: hp('2.5'),
@@ -191,7 +192,7 @@ export const styles = StyleSheet.create({
     marginTop: hp('1'),
   },
   popularTop: {
-    paddingBottom: hp('1'),
+    // paddingBottom: hp('1'),
   },
   popularMain: {
     resizeMode: 'contain',
