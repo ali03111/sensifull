@@ -13,9 +13,11 @@ const Colors = {
   gray: 'rgba(45, 45, 45, 0.5)',
   grayBorder: '#D9D9D9',
   textGrayColor: 'rgba(82, 82, 82, 1)',
+  lightTextGray: 'rgba(82, 82, 82, 0.5)',
   lightBorder: 'rgba(32, 32, 32, 0.5)',
   red: 'rgba(235, 4, 0, 1)',
   lightRed: 'rgba(235, 4, 0, 0.1)',
+  transparent: 'transparent',
 };
 
 /** FontSize **/

@@ -79,48 +79,6 @@ const HomeScreen = ({navigation}) => {
     );
   });
 
-  // ------ popup ------
-  // const [popUpState, setPopUpState] = useState(false);
-
-  // const bottomSheetModalRef = useRef(null);
-
-  // // variables
-  // const snapPoints = useMemo(() => ['25%', '50%'], []);
-
-  // // callbacks
-  // const handlePresentModalPress = useCallback(() => {
-  //   bottomSheetModalRef.current?.present();
-  //   setPopUpState(true);
-  //   console.log('first', popUpState);
-  // }, []);
-
-  // const handleSheetChanges = useCallback(index => {
-  //   console.log('handleSheetChanges', index);
-  //   if (index == -1) {
-  //     setPopUpState(false);
-  //   }
-  // }, []);
-
-  // const handleCloseModal = useCallback(() => {
-  //   bottomSheetModalRef.current?.close();
-  // }, []);
-
-  // const BackdropComponent = ({onPress}) => {
-  //   return (
-  //     <View
-  //       style={{
-  //         flex: 1,
-  //         backgroundColor: 'rgba(0,0,0,0.5)',
-  //       }}
-  //       onTouchEnd={onPress}
-  //     />
-  //   );
-  // };
-
-  // const BottomSheetView = ({children}) => {
-  //   return <View style={styles.contentContainer}>{children}</View>;
-  // };
-
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -172,22 +130,14 @@ const HomeScreen = ({navigation}) => {
               <HomeBtn2 text1={'Shopping'} text2={'list'} />
             </View>
           </View>
-          {/* <View>
-            <Touchable style={styles.shoppingBtn}>
-              <Image source={shoplist} style={styles.shoppingIcon} />
-              <TextComponent
-                text={'Shopping list'}
-                styles={styles.shoppingText}
-              />
-              <Image source={arrRightPurple} style={styles.RightPurpleIcon} />
-            </Touchable>
-          </View> */}
+
           <View style={styles.topRatedMain}>
             <TextComponent text={'Top Rated Meals'} styles={styles.topRated} />
-            <Touchable
-              onPress={() => navigation.navigate('TopRatedMealScreen')}>
-              <TextComponent text={'View All'} styles={styles.viewAll} />
-            </Touchable>
+            <TextComponent
+              text={'View All'}
+              styles={styles.viewAll}
+              onPress={() => navigation.navigate('TopRatedMealScreen')}
+            />
           </View>
           <View>
             <FlatList
@@ -200,9 +150,7 @@ const HomeScreen = ({navigation}) => {
               }}
             />
           </View>
-          {/* <View style={styles.popular}>
-            <TextComponent text={'Today’s Popular'} styles={styles.topRated} />
-          </View> */}
+
           <View style={styles.topRatedMain}>
             <TextComponent text={'Today’s Popular'} styles={styles.topRated} />
 
@@ -264,22 +212,7 @@ const HomeScreen = ({navigation}) => {
           {/* --------filter modal----------- */}
         </ImageBackground>
       </ScrollView>
-      {/* <GestureHandlerRootView style={{zIndex: 99999}}>
-        <BottomSheetModalProvider>
-          <View style={styles.containerNew(popUpState)}>
-            <BottomSheetModal
-              ref={bottomSheetModalRef}
-              index={1}
-              snapPoints={snapPoints}
-              onChange={handleSheetChanges}
-              backdropComponent={BackdropComponent}>
-              <BottomSheetView style={styles.contentContainer}>
-                <Text>Awesome 🎉</Text>
-              </BottomSheetView>
-            </BottomSheetModal>
-          </View>
-        </BottomSheetModalProvider>
-      </GestureHandlerRootView> */}
+
       <FilterModal ToggleFunction={toggleModal} isVisible={modalVisible} />
     </>
   );

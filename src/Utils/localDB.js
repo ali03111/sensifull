@@ -27,6 +27,9 @@ import {
   starGreen,
   termsGreen,
   thread,
+  topRated,
+  topRated1,
+  topRated2,
   twitter,
 } from '../Assets';
 
@@ -524,8 +527,37 @@ export const profileData = [
     name: 'Terms and Conditions',
     onpress: (navigate, route) => Linking.openURL('https://www.google.com/'),
   },
-  // {
-  //   icon: starGreen,
-  //   name: 'Rate Us',
-  // },
+];
+
+export const topRatedData = [
+  {
+    id: 1,
+    image: topRated,
+    title: 'Zucchini fritters ',
+  },
+  {
+    id: 2,
+    image: topRated1,
+    title: 'Zucchini fritters',
+  },
+  {
+    id: 3,
+    image: topRated2,
+    title: 'Zucchini fritters',
+  },
+  {
+    id: 4,
+    image: topRated,
+    title: 'Zucchini fritters',
+  },
+  {
+    id: 5,
+    image: topRated1,
+    title: 'Zucchini fritters',
+  },
+  {
+    id: 6,
+    image: topRated2,
+    title: 'Zucchini fritters',
+  },
 ];

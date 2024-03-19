@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
     paddingVertical: hp('1'),
     marginVertical: hp('1.5'),
     borderRadius: 15,
-    shadowColor: 'rgba(0, 0, 0, 0.3)',
+    shadowColor: 'rgba(0, 0, 0, 1)',
     shadowOffset: {
       width: 0,
       height: 4,

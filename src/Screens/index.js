@@ -12,3 +12,4 @@ export {default as SettingDietaryScreen} from './SettingDietaryScreen';
 export {default as ChangePasswordScreen} from './ChangePasswordScreen';
 export {default as TodayPopularScreen} from './TodayPopularScreen';
 export {default as TopRatedMealScreen} from './TopRatedMealScreen';
+export {default as TopRatedInnerScreen} from './TopRatedInnerScreen';

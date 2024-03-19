@@ -1,8 +1,6 @@
 //  Images
 
 export {default as logoScreen} from './Images/logo-screen.png';
-// export {default as logo} from './Images/logonew.png';
-// export {default as mainImage} from './Images/main-image.png';
 export {default as splashOne} from './Images/splashOne.png';
 export {default as loginBg} from './Images/loginBg.png';
 export {default as stepBg} from './Images/stepBg.png';
@@ -14,6 +12,10 @@ export {default as recomMeal2} from './Images/recomMeal2.png';
 export {default as recomMeal3} from './Images/recomMeal3.png';
 export {default as mealPlan} from './Images/mealPlan.png';
 export {default as profile} from './Images/profile.png';
+export {default as topRated} from './Images/topRated.png';
+export {default as topRated1} from './Images/topRated1.png';
+export {default as topRated2} from './Images/topRated2.png';
+export {default as tabsBg} from './Images/tabsBg.png';
 
 //  Icons
 
@@ -86,3 +88,4 @@ export {default as logoutGreen} from './Icons/logoutGreen.png';
 export {default as trash} from './Icons/trash.png';
 export {default as trashRed} from './Icons/trashRed.png';
 export {default as logOut} from './Icons/logOut.png';
+export {default as fav} from './Icons/fav.png';

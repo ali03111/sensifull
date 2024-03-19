@@ -13,9 +13,11 @@ export const HeaderWithFilterAndBack = ({
   Text,
   filterIcon,
   goBack,
+  mainStyle,
+  favStyle,
 }) => {
   return (
-    <View style={styles.topRatedMain}>
+    <View style={{...styles.topRatedMain, ...mainStyle}}>
       <Touchable onPress={goBack}>
         <Image
           source={arrowBack}
@@ -24,7 +26,7 @@ export const HeaderWithFilterAndBack = ({
       </Touchable>
       <TextComponent text={Text} styles={{...styles.viewAll, ...textStyle}} />
       <Touchable onPress={onpress}>
-        <Image source={filterIcon} style={styles.arrBack} />
+        <Image source={filterIcon} style={{...styles.arrBack, ...favStyle}} />
       </Touchable>
     </View>
   );
