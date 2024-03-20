@@ -176,9 +176,12 @@ const HomeScreen = ({navigation}) => {
               text={'Recommended Meals'}
               styles={styles.topRated}
             />
-            <Touchable>
-              <TextComponent text={'View All'} styles={styles.viewAll} />
-            </Touchable>
+
+            <TextComponent
+              text={'View All'}
+              styles={styles.viewAll}
+              onPress={() => navigation.navigate('RecommendedMealScreen')}
+            />
           </View>
           <View style={styles.recomMain}>
             <FlatList

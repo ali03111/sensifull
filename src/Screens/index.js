@@ -13,3 +13,5 @@ export {default as ChangePasswordScreen} from './ChangePasswordScreen';
 export {default as TodayPopularScreen} from './TodayPopularScreen';
 export {default as TopRatedMealScreen} from './TopRatedMealScreen';
 export {default as TopRatedInnerScreen} from './TopRatedInnerScreen';
+export {default as TopRatedFavScreen} from './TopRatedFavScreen';
+export {default as RecommendedMealScreen} from './RecommendedMealScreen';

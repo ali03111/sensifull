@@ -16,6 +16,12 @@ export {default as topRated} from './Images/topRated.png';
 export {default as topRated1} from './Images/topRated1.png';
 export {default as topRated2} from './Images/topRated2.png';
 export {default as tabsBg} from './Images/tabsBg.png';
+export {default as recom1} from './Images/recom1.png';
+export {default as recom2} from './Images/recom2.png';
+export {default as recom3} from './Images/recom3.png';
+export {default as recom4} from './Images/recom4.png';
+export {default as recom5} from './Images/recom5.png';
+export {default as recom6} from './Images/recom6.png';
 
 //  Icons
 
@@ -89,3 +95,7 @@ export {default as trash} from './Icons/trash.png';
 export {default as trashRed} from './Icons/trashRed.png';
 export {default as logOut} from './Icons/logOut.png';
 export {default as fav} from './Icons/fav.png';
+export {default as allergyRed} from './Icons/allergyRed.png';
+export {default as allergyDot} from './Icons/allergyDot.png';
+export {default as favGreen} from './Icons/favGreen.png';
+export {default as favFilled} from './Icons/favFilled.png';

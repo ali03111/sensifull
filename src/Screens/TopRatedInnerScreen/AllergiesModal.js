@@ -9,20 +9,14 @@ import {
   Image,
   Button,
 } from 'react-native';
-import useHomeScreen from './useHomeScreen';
-import {closeIcon, star} from '../../Assets';
+import {closeIcon} from '../../Assets';
 import {hp, wp} from '../../Config/responsive';
 import {TextComponent} from '../../Components/TextComponent';
-import {filterCat1, filterCat2} from '../../Utils/localDB';
-import ThemeButton from '../../Components/ThemeButton';
+import {AlternateIngred, filterCat1} from '../../Utils/localDB';
 import {MultiSelectButton} from '../../Components/MultiSelectButton';
-import {Touchable} from '../../Components/Touchable';
 import {Colors} from '../../Theme/Variables';
 
-export const FilterModal = ({ToggleFunction, isVisible}) => {
-  //   const [modalVisible, setModalVisible] = useState(false);
-  //   const {selectedItems, handlePress} = MultiSelectButton();
-
+export const AllergiesModal = ({ToggleFunction, isVisible}) => {
   return (
     <View>
       <Modal
@@ -40,51 +34,12 @@ export const FilterModal = ({ToggleFunction, isVisible}) => {
                 <Image source={closeIcon} style={styles.closeIcon} />
               </Pressable>
             </View>
-            <TextComponent text={'Filter Search'} styles={styles.modalTitle} />
-            <TextComponent text={'By Category'} styles={styles.catName} />
-            <View style={styles.btnStepMain}>
-              <MultiSelectButton items={filterCat1} />
-            </View>
             <TextComponent
-              text={'By Dietery Prefrences'}
-              styles={styles.catName}
+              text={'Alternate Ingredients'}
+              styles={styles.modalTitle}
             />
             <View style={styles.btnStepMain}>
-              <MultiSelectButton items={filterCat2} />
-            </View>
-            <TextComponent text={'By Ingredients'} styles={styles.catName} />
-            <View style={styles.premiumMain}>
-              <Touchable style={styles.premiumBtn}>
-                <Image source={star} style={styles.starImage} />
-                <TextComponent
-                  text={'GO PREMIUM'}
-                  styles={styles.premiumText}
-                />
-              </Touchable>
-              <TextComponent
-                text={'to unlock ingredients'}
-                styles={styles.ingredText}
-              />
-            </View>
-            <View style={styles.disabledBtns}>
-              <ThemeButton
-                disabled={true}
-                title={'Oregano leaves'}
-                style={styles.btnMain}
-                textStyle={styles.btnText}
-              />
-              <ThemeButton
-                disabled={true}
-                title={'Egg, whisked'}
-                style={styles.btnMain}
-                textStyle={styles.btnText}
-              />
-              <ThemeButton
-                disabled={true}
-                title={'Parsley, chopped'}
-                style={styles.btnMain}
-                textStyle={styles.btnText}
-              />
+              <MultiSelectButton items={AlternateIngred} />
             </View>
           </View>
         </View>
@@ -101,6 +56,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: '100%',
+    height: hp('50'),
     margin: 0,
     backgroundColor: 'white',
     borderTopRightRadius: 30,
@@ -131,6 +87,7 @@ const styles = StyleSheet.create({
     fontSize: hp('2.7'),
     fontWeight: '600',
     alignSelf: 'center',
+    marginBottom: hp('3'),
   },
   catName: {
     fontSize: hp('2'),

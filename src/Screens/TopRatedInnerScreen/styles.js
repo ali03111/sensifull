@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   bgTabs: {
     flex: 1,
     resizeMode: 'contain',
-    paddingHorizontal: wp('4'),
+    // paddingHorizontal: wp('4'),
     paddingTop: hp('3'),
   },
   mealImage: {
@@ -89,5 +89,89 @@ export const styles = StyleSheet.create({
   ingredMain: {
     backgroundColor: 'transparent',
     flex: 1,
+  },
+  dataMain: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: hp('1'),
+  },
+  NameStyle: {
+    fontSize: hp('1.6'),
+    color: Colors.textGrayColor,
+  },
+  gramsStyle: {
+    fontSize: hp('1.6'),
+    color: Colors.textGrayColor,
+  },
+  separatorStyle: {
+    borderBottomWidth: 0.4,
+    borderBottomColor: Colors.textGrayColor,
+  },
+  directionDataMain: {
+    flexDirection: 'row',
+    paddingVertical: hp('1'),
+  },
+  numberStyle: {
+    flex: 0.1,
+    fontSize: hp('1.6'),
+    color: Colors.textGrayColor,
+  },
+  textStyle: {
+    flex: 2,
+    fontSize: hp('1.8'),
+    color: Colors.textGrayColor,
+  },
+  ingredMainRed: {
+    backgroundColor: '#f5e1c8',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: hp('.5'),
+    paddingVertical: hp('.8'),
+    paddingHorizontal: wp('4'),
+  },
+  ingredMainGreen: {
+    backgroundColor: '#e6f0cf',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: hp('.5'),
+    paddingVertical: hp('.8'),
+    paddingHorizontal: wp('4'),
+  },
+  allergiesInner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: wp('65'),
+  },
+  allergiesIcon: {
+    resizeMode: 'contain',
+    width: wp('6'),
+    height: hp('3'),
+  },
+  ingredTextStyle: {
+    fontSize: hp('1.8'),
+    color: Colors.textGrayColor,
+    marginLeft: wp('2'),
+  },
+  allergiesIconGreen: {
+    resizeMode: 'contain',
+    width: wp('6'),
+    height: hp('1.2'),
+  },
+  popUpTitle: {
+    fontSize: hp('1.8'),
+    color: Colors.textGrayColor,
+    textDecorationLine: 'underline',
+  },
+  nutritionTabs: {
+    flex: 1,
+    resizeMode: 'contain',
+    paddingHorizontal: wp('4'),
+    paddingTop: hp('3'),
+  },
+  directionTabs: {
+    flex: 1,
+    resizeMode: 'contain',
+    paddingHorizontal: wp('4'),
+    paddingTop: hp('3'),
   },
 });

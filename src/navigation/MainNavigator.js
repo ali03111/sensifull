@@ -63,6 +63,14 @@ function MainNavigator() {
               name="TopRatedInnerScreen"
               component={Screens.TopRatedInnerScreen}
             />
+            <Stack.Screen
+              name="TopRatedFavScreen"
+              component={Screens.TopRatedFavScreen}
+            />
+            <Stack.Screen
+              name="RecommendedMealScreen"
+              component={Screens.RecommendedMealScreen}
+            />
 
             {/* <Stack.Screen
               name="SettingDietaryScreen"

@@ -5,6 +5,7 @@ import {
   DietaryGreen,
   eatHealthy,
   facebook,
+  favGreen,
   female,
   gainWeight,
   goalGreen,
@@ -20,6 +21,12 @@ import {
   others,
   policyGreen,
   popular,
+  recom1,
+  recom2,
+  recom3,
+  recom4,
+  recom5,
+  recom6,
   recomMeal1,
   recomMeal2,
   recomMeal3,
@@ -509,6 +516,12 @@ export const settingData = [
     onpress: (navigate, route) => navigate(route),
     screenName: 'SettingDietaryScreen',
   },
+  {
+    icon: favGreen,
+    name: 'Favorites',
+    onpress: (navigate, route) => navigate(route),
+    screenName: 'TopRatedFavScreen',
+  },
 ];
 
 export const profileData = [
@@ -559,5 +572,165 @@ export const topRatedData = [
     id: 6,
     image: topRated2,
     title: 'Zucchini fritters',
+  },
+];
+
+export const NutritionData = [
+  {
+    itemName: 'Calories:',
+    itemGrams: '90',
+  },
+  {
+    itemName: 'Total Fat:',
+    itemGrams: '2.5 g',
+  },
+  {
+    itemName: 'Saturated Fat:',
+    itemGrams: '1 g',
+  },
+  {
+    itemName: 'Sodium:',
+    itemGrams: '150 mg',
+  },
+  {
+    itemName: 'Total Carbohydrate:',
+    itemGrams: '12 g',
+  },
+  {
+    itemName: 'Dietary Fiber:',
+    itemGrams: '2 g',
+  },
+  {
+    itemName: 'Protein:',
+    itemGrams: '6 g',
+  },
+];
+
+export const DirectionData = [
+  {
+    itemNumber: '1. ',
+    itemName:
+      'Place the zucchini and onion in a colander (strainer) and toss with salt. Place the colander inside a bowl.',
+  },
+  {
+    itemNumber: '2. ',
+    itemName:
+      'Place a clean plate or bowl on top of the zucchini-onion mixture, then weigh it down with something heavy such as cans of food. Let drain for 10-15 minutes, then discard the liquid in the bowl.',
+  },
+  {
+    itemNumber: '3. ',
+    itemName:
+      'Pat the zucchini-onion mixture dry with paper towels to remove any remaining excess liquid.',
+  },
+  {
+    itemNumber: '4. ',
+    itemName:
+      'Wipe out the empty bowl to dry it, then add the  zucchini-onion mixture, flour, eggs, black pepper, cayenne, and garlic powder. Stir until just combined and there isn’t any dry flour left. ',
+  },
+  {
+    itemNumber: '5. ',
+    itemName:
+      'Heat a large nonstick skillet over medium heat and coat the inside of the pan with nonstick spray.  ',
+  },
+];
+
+export const ingredData = [
+  {
+    allergies: 'true',
+    allergiesName: '3 (400g) zucchini',
+  },
+  {
+    allergies: 'false',
+    allergiesName: '75g (1/2 cup) self-raising flour',
+  },
+  {
+    allergies: 'false',
+    allergiesName: '40g (1/2 cup) parmesan',
+  },
+  {
+    allergies: 'true',
+    allergiesName: '3 shallots',
+  },
+  {
+    allergies: 'false',
+    allergiesName: '1 egg, whisked',
+  },
+  {
+    allergies: 'true',
+    allergiesName: '1/4 cup continental parsley',
+  },
+  {
+    allergies: 'false',
+    allergiesName: '2 tsp dried oregano leaves',
+  },
+];
+
+export const AlternateIngred = [
+  {
+    id: 1,
+    name: 'Pumpkin',
+  },
+  {
+    id: 2,
+    name: 'Yellow Squash',
+  },
+  {
+    id: 3,
+    name: 'Eggplant',
+  },
+  {
+    id: 4,
+    name: 'Cucumber',
+  },
+  {
+    id: 4,
+    name: 'Patty Pan Squash',
+  },
+  {
+    id: 4,
+    name: 'Yellow Squash Patty',
+  },
+];
+
+export const recommendedData = [
+  {
+    id: 1,
+    image: recom1,
+    title: 'Italian cuisine pasta ',
+  },
+  {
+    id: 2,
+    image: recom2,
+    title: 'Italian cuisine pasta',
+  },
+  {
+    id: 3,
+    image: recom3,
+    title: 'Seafood Noodles',
+  },
+  {
+    id: 4,
+    image: recom4,
+    title: 'Chicken Meat Pasta',
+  },
+  {
+    id: 5,
+    image: recom5,
+    title: 'Salmon vegetables sa..',
+  },
+  {
+    id: 6,
+    image: recom6,
+    title: 'Italian cuisine pasta',
+  },
+  {
+    id: 8,
+    image: recom1,
+    title: 'Italian cuisine pasta ',
+  },
+  {
+    id: 9,
+    image: recom2,
+    title: 'Italian cuisine pasta',
   },
 ];
