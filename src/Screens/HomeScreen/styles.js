@@ -267,17 +267,17 @@ export const styles = StyleSheet.create({
     paddingBottom: hp('2.8'),
   },
   mealPlanBtn: {
-    borderWidth: 0.5,
-    width: wp('27'),
-    textAlign: 'center',
-    paddingVertical: hp('1'),
-    borderRadius: 30,
-    backgroundColor: Colors.primaryColor,
+    // borderWidth: 0.5,
   },
   mealPlanBtnText: {
     textAlign: 'center',
     fontSize: hp('1.8'),
     color: Colors.white,
+    width: wp('27'),
+    textAlign: 'center',
+    paddingVertical: hp('1'),
+    borderRadius: 30,
+    backgroundColor: Colors.primaryColor,
   },
   shoppingBtn: {
     backgroundColor: '#FFF4A3',

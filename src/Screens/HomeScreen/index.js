@@ -204,12 +204,11 @@ const HomeScreen = ({navigation}) => {
                 text={'Create your Meal Plan once here...'}
                 styles={styles.mealPlanPara}
               />
-              <Touchable style={styles.mealPlanBtn}>
-                <TextComponent
-                  text={'Create Plan'}
-                  styles={styles.mealPlanBtnText}
-                />
-              </Touchable>
+              <TextComponent
+                onPress={() => navigation.navigate('MealPlanScreen')}
+                text={'Create Plan'}
+                styles={styles.mealPlanBtnText}
+              />
             </ImageBackground>
           </View>
           {/* --------filter modal----------- */}

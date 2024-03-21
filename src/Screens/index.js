@@ -15,3 +15,4 @@ export {default as TopRatedMealScreen} from './TopRatedMealScreen';
 export {default as TopRatedInnerScreen} from './TopRatedInnerScreen';
 export {default as TopRatedFavScreen} from './TopRatedFavScreen';
 export {default as RecommendedMealScreen} from './RecommendedMealScreen';
+export {default as MealPlanScreen} from './MealPlanScreen';

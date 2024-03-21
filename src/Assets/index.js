@@ -99,3 +99,4 @@ export {default as allergyRed} from './Icons/allergyRed.png';
 export {default as allergyDot} from './Icons/allergyDot.png';
 export {default as favGreen} from './Icons/favGreen.png';
 export {default as favFilled} from './Icons/favFilled.png';
+export {default as noData} from './Icons/noData.png';
