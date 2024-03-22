@@ -5,49 +5,18 @@ import {
   ImageBackground,
   TouchableOpacity,
   Image,
-  TouchableWithoutFeedback,
   Pressable,
-  TextInput,
   FlatList,
   Keyboard,
-  Modal,
 } from 'react-native';
 import useStepScreen from './useStepScreen';
-import {
-  allergiesPurple,
-  arrRightPurple,
-  arrowRight,
-  check,
-  closeIcon,
-  facebook,
-  info,
-  ingred,
-  instagram,
-  linkedin,
-  other,
-  search,
-  stepBg,
-  thread,
-  twitter,
-  uncheck,
-} from '../../Assets';
+import {arrowRight, stepBg} from '../../Assets';
 import {TextComponent} from '../../Components/TextComponent';
-import {
-  socialData,
-  step1,
-  step3btns,
-  step4btns,
-  step5,
-} from '../../Utils/localDB';
+import {socialData, step1, step5} from '../../Utils/localDB';
 import {styles} from './styles';
-import {InputComponent} from '../../Components/InputComponent';
-import ThemeButton from '../../Components/ThemeButton';
-import {MultiSelectButton} from '../../Components/MultiSelectButton';
 import {Picker} from '@react-native-picker/picker';
 import {hp, wp} from '../../Config/responsive';
 import {SocialBtn} from '../../Components/SocialBtn';
-import {Touchable} from '../../Components/Touchable';
-import {InfoModal} from './InfoModal';
 import GoalsAndPurpose from '../../Components/GoalsAndPurpose';
 import DietaryRestrictions from '../../Components/DietaryRestrictions';
 import Allergies from '../../Components/Allergies';

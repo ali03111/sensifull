@@ -16,3 +16,5 @@ export {default as TopRatedInnerScreen} from './TopRatedInnerScreen';
 export {default as TopRatedFavScreen} from './TopRatedFavScreen';
 export {default as RecommendedMealScreen} from './RecommendedMealScreen';
 export {default as MealPlanScreen} from './MealPlanScreen';
+export {default as CreateMealPlanScreen} from './CreateMealPlanScreen';
+export {default as SelectYourMealScreen} from './SelectYourMealScreen';

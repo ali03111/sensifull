@@ -6,6 +6,9 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  scroll: {
+    flex: 1,
+  },
   noDataImage: {
     width: wp('35'),
     height: hp('17.5'),

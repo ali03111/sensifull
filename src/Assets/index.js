@@ -100,3 +100,8 @@ export {default as allergyDot} from './Icons/allergyDot.png';
 export {default as favGreen} from './Icons/favGreen.png';
 export {default as favFilled} from './Icons/favFilled.png';
 export {default as noData} from './Icons/noData.png';
+export {default as arrDown} from './Icons/arrDown.png';
+export {default as arrRightGray} from './Icons/arrRightGray.png';
+export {default as addCirlce} from './Icons/add-circle.png';
+export {default as chevLeft} from './Icons/chev-left.png';
+export {default as chevRight} from './Icons/chev-right.png';

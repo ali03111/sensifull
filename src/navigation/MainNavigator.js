@@ -75,6 +75,14 @@ function MainNavigator() {
               name="MealPlanScreen"
               component={Screens.MealPlanScreen}
             />
+            <Stack.Screen
+              name="CreateMealPlanScreen"
+              component={Screens.CreateMealPlanScreen}
+            />
+            <Stack.Screen
+              name="SelectYourMealScreen"
+              component={Screens.SelectYourMealScreen}
+            />
 
             {/* <Stack.Screen
               name="SettingDietaryScreen"

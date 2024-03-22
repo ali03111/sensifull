@@ -1,12 +1,24 @@
-import React, {memo, useCallback} from 'react';
-import {View, ScrollView, ImageBackground, FlatList, Image} from 'react-native';
-import {noData, stepBg} from '../../Assets';
+import React, {memo, useCallback, useState} from 'react';
+import {
+  View,
+  ScrollView,
+  ImageBackground,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
+import {arrDown, arrRightGray, noData, stepBg} from '../../Assets';
 import {styles} from './styles';
 
 import useMealPlanScreen from './useMealPlanScreen';
 import {HeaderWithFilterAndBack} from '../../Components/HeaderWithFilterAndBack';
 import {TextComponent} from '../../Components/TextComponent';
 import ThemeButton from '../../Components/ThemeButton';
+import {DataNotFound} from '../../Components/DataNotFound';
+import Collapsible from 'react-native-collapsible';
+import {Touchable} from '../../Components/Touchable';
+import {SelectableBtn} from '../../Components/SelectableBtn';
 
 const MealPlanScreen = ({navigation}) => {
   const {} = useMealPlanScreen(navigation);
@@ -14,19 +26,20 @@ const MealPlanScreen = ({navigation}) => {
   return (
     <>
       <ImageBackground source={stepBg} style={styles.container}>
-        <HeaderWithFilterAndBack
-          goBack={() => navigation.goBack()}
-          Text={'Meals Plan'}
-        />
-        <View style={styles.mealInner}>
-          <Image source={noData} style={styles.noDataImage} />
-          <TextComponent text={'No Plans Yet!'} styles={styles.noDataTitle} />
-          <TextComponent
-            text={'Create Meal plans.'}
-            styles={styles.noDataSubTitle}
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scroll}>
+          <HeaderWithFilterAndBack
+            goBack={() => navigation.goBack()}
+            Text={'Meals Plan'}
           />
-          <ThemeButton title={'Create Plan'} style={styles.saveBtn} />
-        </View>
+          <DataNotFound
+            title={'No Plans Yet!'}
+            subTitle={'Create Meal plans.'}
+            btnTitle={'Create Plan'}
+            onpress={() => navigation.navigate('CreateMealPlanScreen')}
+          />
+        </ScrollView>
       </ImageBackground>
     </>
   );
