@@ -72,8 +72,13 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     width: wp('14'),
     height: hp('7'),
-    backgroundColor: '#703383',
-    borderRadius: 50,
+    backgroundColor: Colors.primaryColor,
+    borderRadius: Math.round(
+      Dimensions.get('window').width + Dimensions.get('window').height,
+    ),
+    width: Dimensions.get('window').width * 0.13,
+    height: Dimensions.get('window').width * 0.13,
+    // borderRadius: 50,
   },
   nextBtn: {
     position: 'absolute',

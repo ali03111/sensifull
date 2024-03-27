@@ -38,6 +38,7 @@ const LoginScreen = ({navigation}) => {
     facebookLoginFunc,
     rememberValue,
     remember,
+    socialLoginFun,
   } = useLogin(navigation);
   return (
     <KeyBoardWrapper
@@ -79,7 +80,7 @@ const LoginScreen = ({navigation}) => {
               getValues,
               placeholder: 'Password*',
               isImage: lock,
-              defaultValue: '',
+              defaultValue: __DEV__ ? 'Test@123' : '',
               isSecure: true,
               isImage: passwordIcon,
               inputIconStyle: styles.lockstyle,
@@ -91,13 +92,6 @@ const LoginScreen = ({navigation}) => {
             style={styles.logBtn}
           />
           <View style={styles.rememberSec}>
-            <Touchable style={styles.rememberInner} onPress={rememberValue}>
-              <Image
-                source={remember ? rememberEmpty : rememberImg}
-                style={styles.tickIcon}
-              />
-              <Text style={styles.tickText}>Remember me</Text>
-            </Touchable>
             <TextComponent
               text={'Forgot Password?'}
               styles={styles.forgetText}
@@ -110,21 +104,30 @@ const LoginScreen = ({navigation}) => {
           <View style={styles.barLine}></View>
         </View>
         <View style={styles.social}>
-          <Touchable style={styles.socialIcons}>
+          <Touchable
+            style={styles.socialIcons}
+            // onPress={() => socialLoginFun('Google')}
+          >
             <Image
               source={google}
               style={styles.socialImage}
               resizeMode="contain"
             />
           </Touchable>
-          <Touchable style={styles.socialIcons}>
+          <Touchable
+            style={styles.socialIcons}
+            // onPress={() => socialLoginFun('Google')}
+          >
             <Image
               source={apple}
               style={styles.socialImage}
               resizeMode="contain"
             />
           </Touchable>
-          <Touchable style={styles.socialIcons}>
+          <Touchable
+            style={styles.socialIcons}
+            // onPress={() => socialLoginFun('Google')}
+          >
             <Image
               source={facebook}
               style={styles.socialImage}

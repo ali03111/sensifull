@@ -1,16 +1,17 @@
-import {Dimensions, StyleSheet} from 'react-native';
+import {Dimensions, Platform, StyleSheet} from 'react-native';
 import {hp, wp} from '../../Config/responsive';
 import {Colors} from '../../Theme/Variables';
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
   },
   header: {
     backgroundColor: Colors.primaryColor,
     paddingBottom: hp('12'),
     borderBottomRightRadius: 35,
     borderBottomLeftRadius: 35,
+    paddingTop: Platform.OS == 'ios' ? hp('5') : 0,
   },
   topHd: {
     fontSize: hp('2.3'),
@@ -20,18 +21,18 @@ export const styles = StyleSheet.create({
     paddingVertical: hp('2'),
   },
   ProfileImage: {
-    aspectRatio: 2,
+    // aspectRatio: 2,
     alignSelf: 'center',
     position: 'relative',
-    resizeMode: 'contain',
+    // resizeMode: 'contain',
     borderRadius: Math.round(
       Dimensions.get('window').width + Dimensions.get('window').height,
     ),
-    width: Dimensions.get('window').width * 0.8,
+    width: Dimensions.get('window').width * 0.3,
     height: Dimensions.get('window').width * 0.3,
   },
   blurMain: {
-    marginTop: hp('-16'),
+    marginTop: hp('-10'),
   },
   name: {
     fontSize: hp('2.5'),

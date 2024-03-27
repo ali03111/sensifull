@@ -81,49 +81,43 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <ImageBackground source={stepBg} style={styles.container}>
-          <View style={styles.Header}>
-            <View style={styles.topBar}>
-              <TextComponent
-                text={'Unlock everything now!'}
-                styles={styles.unlockHeading}
-              />
-              <Touchable style={styles.premiumBtn}>
-                <Image source={star} style={styles.starImage} />
-                <TextComponent
-                  text={'GO PREMIUM'}
-                  styles={styles.premiumText}
-                />
-              </Touchable>
-            </View>
-            <View style={styles.notifyMain}>
-              <View style={styles.notifyinner}>
-                <TextComponent
-                  text={'What do you'}
-                  styles={styles.notifyText}
-                />
-                <TextComponent
-                  text={'want to cook today?'}
-                  styles={styles.notifyText}
-                />
-              </View>
-              <Touchable style={styles.notifyBtn}>
-                <Image source={notify} style={styles.notifyImage} />
-              </Touchable>
-            </View>
-            <View style={styles.inputMain}>
-              <Image source={search} style={styles.inputImage} />
-              <TextInput
-                style={styles.inputStyle}
-                placeholderTextColor="white"
-                placeholder={'Search Allergies'}
-              />
-              <Touchable style={styles.filterMain} onPress={toggleModal}>
-                <Image source={filter1} style={styles.filterImage} />
-              </Touchable>
-            </View>
+      <View style={styles.Header}>
+        <View style={styles.topBar}>
+          <TextComponent
+            text={'Unlock everything now!'}
+            styles={styles.unlockHeading}
+          />
+          <Touchable style={styles.premiumBtn}>
+            <Image source={star} style={styles.starImage} />
+            <TextComponent text={'GO PREMIUM'} styles={styles.premiumText} />
+          </Touchable>
+        </View>
+        <View style={styles.notifyMain}>
+          <View style={styles.notifyinner}>
+            <TextComponent text={'What do you'} styles={styles.notifyText} />
+            <TextComponent
+              text={'want to cook today?'}
+              styles={styles.notifyText}
+            />
           </View>
+          <Touchable style={styles.notifyBtn}>
+            <Image source={notify} style={styles.notifyImage} />
+          </Touchable>
+        </View>
+        <View style={styles.inputMain}>
+          <Image source={search} style={styles.inputImage} />
+          <TextInput
+            style={styles.inputStyle}
+            placeholderTextColor="white"
+            placeholder={'Search Allergies'}
+          />
+          <Touchable style={styles.filterMain} onPress={toggleModal}>
+            <Image source={filter1} style={styles.filterImage} />
+          </Touchable>
+        </View>
+      </View>
+      <ImageBackground source={stepBg} style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.homeMain}>
             <View style={styles.ingredArea}>
               <HomeBtn1 text1={'Ingredient'} text2={'Restrictions'} />
@@ -212,8 +206,8 @@ const HomeScreen = ({navigation}) => {
             </ImageBackground>
           </View>
           {/* --------filter modal----------- */}
-        </ImageBackground>
-      </ScrollView>
+        </ScrollView>
+      </ImageBackground>
 
       <FilterModal ToggleFunction={toggleModal} isVisible={modalVisible} />
     </>

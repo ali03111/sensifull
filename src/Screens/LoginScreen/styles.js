@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, Platform, StyleSheet} from 'react-native';
 import {hp, wp} from '../../Config/responsive';
 import {Colors} from '../../Theme/Variables';
 
@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
   },
   bgStyle: {
     paddingBottom: hp('13'),
-    backgroundColor: 'red',
+    paddingTop: Platform.OS == 'ios' ? hp('3') : 0,
     // flex: 1,
   },
   loginTop: {
@@ -64,7 +64,7 @@ export const styles = StyleSheet.create({
     color: Colors.primaryColor,
   },
   lockstyle: {
-    flex: 0.5,
+    flex: 0.3,
   },
   dontHave: {
     flexDirection: 'row',
@@ -139,7 +139,11 @@ export const styles = StyleSheet.create({
     width: wp('15'),
     height: hp('7.5'),
     backgroundColor: 'white',
-    borderRadius: 50,
+    borderRadius: Math.round(
+      Dimensions.get('window').width + Dimensions.get('window').height,
+    ),
+    width: Dimensions.get('window').width * 0.17,
+    height: Dimensions.get('window').width * 0.17,
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',

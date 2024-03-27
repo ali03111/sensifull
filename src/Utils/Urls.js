@@ -1,13 +1,13 @@
 const getCredentials = () => {
   if (__DEV__)
     return {
-      baseURL: 'https://virtualrealitycreators.com/green-boom/api',
+      baseURL: 'https://virtualrealitycreators.com/sensifull-backend/api/',
       imageURL: 'https://virtualrealitycreators.com/green-boom/public',
     };
   else {
     console.log = () => {};
     return {
-      baseURL: 'https://virtualrealitycreators.com/green-boom/api',
+      baseURL: 'https://virtualrealitycreators.com/sensifull-backend/api/',
       imageURL: 'https://virtualrealitycreators.com/green-boom/public/',
     };
   }
@@ -24,7 +24,7 @@ export const imageUrl = url => {
   // : 'https://res.cloudinary.com/dd6tdswt5/image/upload/v1684830799/UserImages/mhysa2zj0sbmvnw69b35.jpg';
 };
 
-export const registerUrl = '/register';
-export const loginUrl = '/login-user';
-export const logoutUrl = 'auth/logout';
+export const registerUrl = '/signup';
+export const loginUrl = '/login';
+export const logoutUrl = 'logout';
 export const getAgoraTokenUrl = 'getAccessToken/';

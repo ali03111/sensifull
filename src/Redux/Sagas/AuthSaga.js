@@ -14,6 +14,7 @@ import {
   getFbResult,
   logOutFirebase,
   loginService,
+  logoutService,
   registerService,
   updateProfileServices,
 } from '../../Services/AuthServices';
@@ -33,10 +34,12 @@ properties, and then performs a series of asynchronous operations using the `yie
 const loginSaga = function* ({payload: {datas, type}}) {
   yield put(loadingTrue());
   console.log('asd');
-  const {getUniqueId} = DeviceInfo;
-  const deviceToken = yield call(getUniqueId);
   try {
     const getLoginData = loginObject[type];
+    console.log(
+      'resultDataresultDataresultDataresultDataresultDataresultData',
+      yield call(getLoginData, datas),
+    );
     const resultData = yield call(getLoginData, datas);
     const {socialData, ok} = {socialData: resultData, ok: true};
     if (ok) {
@@ -44,15 +47,10 @@ const loginSaga = function* ({payload: {datas, type}}) {
       const jwtToken = idTokenResult.token;
       if (jwtToken) {
         console.log('jwtToken', jwtToken);
-        // if (socialData.isNewUser || type == 'email') {
-        //   var {result} = yield call(createTelematicUser, {
-        //     token: deviceToken,
-        //     data: datas.name ? datas : socialData,
-        //   });
-        // }
         const {data, ok} = yield call(registerService, {
           token: jwtToken,
-          name: datas?.name,
+          first_name: datas?.name,
+          last_name: datas?.last,
           email: datas?.email,
           password: datas?.password,
           phone: datas?.number,
@@ -62,6 +60,8 @@ const loginSaga = function* ({payload: {datas, type}}) {
         if (ok) {
           yield put(loadingTrue());
           yield put(updateAuth(data));
+        } else {
+          errorMessage(data?.message);
         }
       }
     }
@@ -93,12 +93,24 @@ function* registerSaga({payload: {datas}}) {
         if (ok) {
           yield put(loadingTrue());
           yield put(updateAuth(data));
+        } else {
+          errorMessage(data?.message);
         }
       }
     }
   } catch (error) {
-    errorMessage(error.message.split(' ').slice(1).join(' ') ?? error);
-    console.log('slbklsdbbsdfkgbsdklbgs', error);
+    const newError = error;
+    const errorValidation = Boolean(
+      newError.toString() ==
+        'Error: [auth/internal-error] An internal error has occurred, please try again.' ||
+        'Error: [auth/internal-error] The supplied auth credential is incorrect, malformed or has expired.',
+    );
+    errorMessage(
+      errorValidation
+        ? 'Credentials are wrong'
+        : error.message.split(' ').slice(1).join(' ') ?? error,
+    );
+    console.log('err', newError.toString());
   } finally {
     // delay(4000);
     yield put(loadingFalse());
@@ -110,7 +122,7 @@ action object as an argument, but it is not used in the function. The function p
 asynchronous operations using the `yield` keyword. */
 function* logOutSaga(action) {
   try {
-    // yield call(logoutService);
+    yield call(logoutService);
     yield put({type: types.LogoutType});
     yield call(logOutFirebase);
     console.log('okokok');

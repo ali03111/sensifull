@@ -12,7 +12,20 @@
           "package_name": "com.codment.sensifull"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "233006533644-2op0sn0khja6rorjpq7gpn98t6gr88g7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codment.sensifull",
+            "certificate_hash": "11fc56ce47c7206219df61650acfdfd597e3d8ac"
+          }
+        },
+        {
+          "client_id": "233006533644-2mj93r05n7iu0turqh3ber27otobdkbp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBYTU5Z7A8W1UUBiM33Mgg5bozz7bM2wJY"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "233006533644-2mj93r05n7iu0turqh3ber27otobdkbp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "233006533644-jtpn0bejqv0uol3nq4gi24mkuio8tikc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.codment.sensifull"
+              }
+            }
+          ]
         }
       }
     }

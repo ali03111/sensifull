@@ -36,6 +36,7 @@ const RegisterScreen = ({navigation}) => {
   return (
     <KeyBoardWrapper
       styles={styles.logInMain}
+      bounces={false}
       showsVerticalScrollIndicator={false}>
       <ImageBackground source={loginBg} style={styles.bgStyle}>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -68,7 +69,7 @@ const RegisterScreen = ({navigation}) => {
                 getValues,
                 placeholder: 'First Name',
                 isImage: username,
-                defaultValue: '',
+                defaultValue: __DEV__ ? 'user' : '',
               }}
             />
             <InputComponent
@@ -79,9 +80,9 @@ const RegisterScreen = ({navigation}) => {
                 reset,
                 control,
                 getValues,
-                placeholder: 'Last Name',
+                placeholder: 'First Name',
                 isImage: username,
-                defaultValue: '',
+                defaultValue: __DEV__ ? 'user' : '',
               }}
             />
             <InputComponent
@@ -110,6 +111,7 @@ const RegisterScreen = ({navigation}) => {
                 defaultValue: '',
                 isSecure: true,
                 inputIconStyle: styles.lockstyle,
+                defaultValue: __DEV__ ? 'Test@123' : '',
               }}
             />
             <InputComponent
@@ -125,6 +127,7 @@ const RegisterScreen = ({navigation}) => {
                 defaultValue: '',
                 isSecure: true,
                 inputIconStyle: styles.lockstyle,
+                defaultValue: __DEV__ ? 'Test@123' : '',
               }}
             />
             <ThemeButton

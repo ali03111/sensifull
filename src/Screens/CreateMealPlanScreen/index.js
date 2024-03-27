@@ -43,13 +43,13 @@ const CreateMealPlanScreen = ({navigation}) => {
   return (
     <>
       <ImageBackground source={stepBg} style={styles.container}>
+        <HeaderWithFilterAndBack
+          goBack={() => navigation.goBack()}
+          Text={'Create your Meal'}
+        />
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scroll}>
-          <HeaderWithFilterAndBack
-            goBack={() => navigation.goBack()}
-            Text={'Create your Meal'}
-          />
           <View style={styles.calenderMain}>
             <UseCalendar />
           </View>
