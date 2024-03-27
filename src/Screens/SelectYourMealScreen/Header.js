@@ -1,4 +1,4 @@
-import {Image, StyleSheet, TextInput, View} from 'react-native';
+import {Image, Platform, StyleSheet, TextInput, View} from 'react-native';
 import {goBack} from '../Utils';
 import {Touchable} from '../../Components/Touchable';
 import {TextComponent} from '../../Components/TextComponent';
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     paddingBottom: hp('2.5'),
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
+    paddingTop: Platform.OS == 'ios' ? hp('4') : 0,
   },
   topRatedMain: {
     flexDirection: 'row',

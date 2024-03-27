@@ -1,4 +1,4 @@
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, Platform, StyleSheet, View} from 'react-native';
 import {Touchable} from './Touchable';
 import {arrowBack} from '../Assets';
 import {TextComponent} from './TextComponent';
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   headerMain: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: hp('2'),
+    marginTop: Platform.OS == 'ios' ? hp('6') : hp('2'),
     marginBottom: hp('5'),
   },
   arrBack: {

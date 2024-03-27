@@ -9,6 +9,8 @@ import {popularData, recommendedData} from '../../Utils/localDB';
 import useSelectYourMealScreen from './useSelectYourMealScreen';
 import {HeaderWithFilterAndBack} from '../../Components/HeaderWithFilterAndBack';
 import {Header} from './Header';
+import {keyExtractor} from '../../Utils';
+import {hp} from '../../Config/responsive';
 
 const SelectYourMealScreen = ({navigation}) => {
   const {} = useSelectYourMealScreen(navigation);
@@ -27,27 +29,23 @@ const SelectYourMealScreen = ({navigation}) => {
   });
 
   return (
-    <>
-      <ImageBackground source={stepBg} style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <Header
-            goBack={() => navigation.goBack()}
-            Text={'Select Meal Plan'}
-          />
-          <View style={styles.popularTop}>
-            <FlatList
-              data={recommendedData}
-              renderItem={renderTodayPopular}
-              showsHorizontalScrollIndicator={false}
-              numColumns={2}
-              contentContainerStyle={{
-                alignItems: 'center',
-              }}
-            />
-          </View>
-        </ScrollView>
-      </ImageBackground>
-    </>
+    <ImageBackground source={stepBg} style={styles.container}>
+      <Header goBack={() => navigation.goBack()} Text={'Select Meal Plan'} />
+      <View style={styles.popularTop}>
+        <FlatList
+          data={recommendedData}
+          renderItem={renderTodayPopular}
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+          keyExtractor={keyExtractor}
+          scrollEnabled
+          contentContainerStyle={{
+            alignItems: 'center',
+            paddingBottom: hp('50'),
+          }}
+        />
+      </View>
+    </ImageBackground>
   );
 };
 

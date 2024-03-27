@@ -1,4 +1,4 @@
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, Platform, StyleSheet, View} from 'react-native';
 import {Touchable} from './Touchable';
 import {arrowBack} from '../Assets';
 import {TextComponent} from './TextComponent';
@@ -18,12 +18,14 @@ export const HeaderWithFilterAndBack = ({
 }) => {
   return (
     <View style={{...styles.topRatedMain, ...mainStyle}}>
-      <Touchable onPress={goBack}>
-        <Image
-          source={arrowBack}
-          style={{...styles.arrBack, ...backIconStyle}}
-        />
-      </Touchable>
+      {goBack && (
+        <Touchable onPress={goBack}>
+          <Image
+            source={arrowBack}
+            style={{...styles.arrBack, ...backIconStyle}}
+          />
+        </Touchable>
+      )}
       <TextComponent text={Text} styles={{...styles.viewAll, ...textStyle}} />
       <Touchable onPress={onpress}>
         <Image source={filterIcon} style={{...styles.arrBack, ...favStyle}} />
@@ -39,8 +41,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: Colors.primaryColor,
-    paddingVertical: hp('3'),
-    paddingBottom: hp('1.5'),
+    paddingBottom: Platform.OS == 'ios' ? hp('2') : hp('1.5'),
+    paddingTop: Platform.OS == 'ios' ? hp('7') : hp('3'),
   },
   arrBack: {
     tintColor: Colors.white,

@@ -15,10 +15,11 @@ export const styles = StyleSheet.create({
   },
   mealImage: {
     width: wp('30'),
-    height: hp('15'),
+    height: hp('13.7'),
     zIndex: 9,
     resizeMode: 'contain',
     alignSelf: 'flex-end',
+    overflow: 'hidden',
   },
   mealTitle: {
     fontSize: hp('2.2'),

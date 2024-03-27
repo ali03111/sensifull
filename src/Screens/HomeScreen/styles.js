@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {hp, wp} from '../../Config/responsive';
 import {Colors} from '../../Theme/Variables';
 
@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.primaryColor,
     paddingHorizontal: wp('4'),
     paddingVertical: hp('2'),
-    paddingTop: hp('3.5'),
+    paddingTop: Platform.OS == 'ios' ? hp('6') : hp('3.5'),
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
   },
@@ -276,8 +276,9 @@ export const styles = StyleSheet.create({
     width: wp('27'),
     textAlign: 'center',
     paddingVertical: hp('1'),
-    borderRadius: 30,
+    borderRadius: 8,
     backgroundColor: Colors.primaryColor,
+    overflow: 'hidden',
   },
   shoppingBtn: {
     backgroundColor: '#FFF4A3',

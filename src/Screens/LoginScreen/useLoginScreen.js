@@ -36,6 +36,10 @@ const useLogin = ({navigate, goBack}) => {
   const loginUserFun = ({email, password}) => {
     dispatch(registerUser({datas: {email, password}}));
   };
+
+  const socialLoginFun = type => {
+    dispatch(loginUser({type, datas: {}}));
+  };
   // const loginUser = () => navigate('MybottomTabs');
 
   // const googleLoginFunc = async () => {
@@ -62,6 +66,7 @@ const useLogin = ({navigate, goBack}) => {
     rememberValue,
     RegisterNav,
     loginUser: loginUserFun,
+    socialLoginFun,
     // appleIdlogin,
   };
 };

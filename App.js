@@ -2,8 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, ImageBackground, LogBox} from 'react-native';
 import MainNavigator from './src/navigation/MainNavigator';
 import {logoScreen} from './src/Assets';
+import useReduxStore from './src/Hooks/UseReduxStore';
+import {useIsFetching} from '@tanstack/react-query';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import Overlay from './src/Components/Overlay';
 
 const App = () => {
+  const {getState, dispatch} = useReduxStore();
+  const {isloading} = getState('isloading');
+  const isFetching = useIsFetching();
   const [isVisible, setIsVisible] = useState(true);
   const Hide_Splash_Screen = () => {
     setIsVisible(false);
@@ -15,6 +22,11 @@ const App = () => {
   };
 
   useEffect(async () => {
+    GoogleSignin.configure({
+      webClientId:
+        '233006533644-2mj93r05n7iu0turqh3ber27otobdkbp.apps.googleusercontent.com',
+    });
+
     (async () => {
       LogBox.ignoreLogs([
         'VirtualizedLists should never be nested',
@@ -41,6 +53,8 @@ const App = () => {
 
   return (
     <>
+      {(isloading || isFetching >= 1) && <Overlay />}
+
       {isVisible === true ? Splash_Screen : <MainNavigator />}
       {/* <StackNavigatior />; */}
     </>

@@ -53,7 +53,7 @@ function MybottomTabs() {
           width: 'auto',
         },
         tabBarStyle: {
-          height: hp('9'),
+          height: Platform.OS == 'ios' ? hp('10') : hp('9'),
           width: wp('100'),
           alignSelf: 'center',
           backgroundColor: 'white',
@@ -63,7 +63,7 @@ function MybottomTabs() {
           shadowOpacity: 0,
           borderTopRightRadius: 20,
           borderTopLeftRadius: 20,
-          paddingBottom: Platform.OS == 'ios' ? hp('3') : 0,
+          paddingBottom: Platform.OS == 'ios' ? hp('4') : 0,
         },
       })}>
       <Tab.Screen

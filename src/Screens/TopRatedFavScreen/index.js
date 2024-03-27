@@ -9,6 +9,7 @@ import {popularData, topRatedData} from '../../Utils/localDB';
 import useTopRatedFavScreen from './useTopRatedFavScreen';
 import {goBack} from '../../Utils';
 import {HeaderWithFilterAndBack} from '../../Components/HeaderWithFilterAndBack';
+import {hp} from '../../Config/responsive';
 
 const TopRatedFavScreen = ({navigation}) => {
   const {} = useTopRatedFavScreen(navigation);
@@ -40,20 +41,19 @@ const TopRatedFavScreen = ({navigation}) => {
   return (
     <>
       <ImageBackground source={stepBg} style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <HeaderWithFilterAndBack
-            goBack={() => navigation.goBack()}
-            Text={'Favorites'}
-          />
+        <HeaderWithFilterAndBack
+          goBack={() => navigation.goBack()}
+          Text={'Favorites'}
+        />
 
-          <View style={styles.popularTop}>
-            <FlatList
-              data={topRatedData}
-              renderItem={renderTodayPopular}
-              showsHorizontalScrollIndicator={false}
-            />
-          </View>
-        </ScrollView>
+        <View style={styles.popularTop}>
+          <FlatList
+            data={topRatedData}
+            renderItem={renderTodayPopular}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{paddingBottom: hp('13')}}
+          />
+        </View>
       </ImageBackground>
     </>
   );

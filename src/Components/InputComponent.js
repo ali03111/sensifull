@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, TextInput, StyleSheet, Image} from 'react-native';
 import {Controller} from 'react-hook-form';
-import {Colors} from '../Theme/Variables';
+import {Colors, Sizes} from '../Theme/Variables';
 import {Touchable} from './Touchable';
 import {hp, wp} from '../Config/responsive';
 import {eye, eyeOff} from '../Assets';
@@ -27,6 +27,8 @@ export const InputComponent = ({
   inputIconStyle,
   inputLines,
   multiline,
+  tintColor,
+  errorTextStyle,
 }) => {
   const [show, setShow] = useState(!isSecure);
   const handleClick = () => setShow(!show);
@@ -43,6 +45,7 @@ export const InputComponent = ({
                 source={isImage}
                 style={{
                   resizeMode: 'contain',
+                  tintColor,
                   ...styles.inputIcon,
                   ...inputIconStyle,
                 }}
@@ -64,7 +67,7 @@ export const InputComponent = ({
                 secureTextEntry: !show,
                 onChangeText: onChange,
                 placeholderTextColor: Colors.gray,
-                fontSize: hp('1.9'),
+                fontSize: hp('2'),
                 autoCapitalize,
                 autoCorrect: false,
                 spellCheck: false,
@@ -78,6 +81,7 @@ export const InputComponent = ({
                   style={{
                     resizeMode: 'contain',
                     tintColor: Colors.gray,
+                    marginRight: wp('3'),
                   }}
                 />
               </Touchable>
@@ -92,13 +96,7 @@ export const InputComponent = ({
         }}
       />
       {errors[name]?.message && (
-        <View
-          style={
-            {
-              // width: Platform.OS == 'ios' ? width * 0.875 : Sizes.width * 0.9,
-              // width: Sizes.width * 0.9,
-            }
-          }>
+        <View style={errorTextStyle}>
           <Text style={[styles.error]}>{errors[name]?.message}</Text>
         </View>
       )}
@@ -109,31 +107,31 @@ export const InputComponent = ({
 const styles = StyleSheet.create({
   textfield: {
     width: '100%',
-    borderWidth: 0.5,
-    borderRadius: 7,
-    height: hp('7'),
+    borderWidth: 1,
+    height: hp('6'),
     // borderRadius: 15,
     marginVertical: hp('1'),
     alignItems: 'center',
     flexDirection: 'row',
-    borderColor: '#181818',
-    marginTop: hp('1'),
+    borderColor: 'rgb(118, 118, 118)',
+    marginTop: hp('2.5'),
     backgroundColor: 'transparent',
-    paddingHorizontal: wp('4'),
+    borderRadius: 10,
+    paddingHorizontal: wp('2'),
   },
   input: isSecure => ({
     height: '100%',
-    width: isSecure ? '85%' : '90%',
+    width: isSecure ? '75%' : '86%',
     color: Colors.black,
     paddingHorizontal: wp('2'),
     paddingLeft: wp('3'),
-    fontWeight: '400',
+    fontWeight: '500',
   }),
   eyeContainer: {
     width: 24,
     height: 24,
     // top: '30%',
-    right: '5%',
+    right: '0%',
     // marginRight: 10,
     position: 'absolute',
     alignItems: 'center',
@@ -144,7 +142,6 @@ const styles = StyleSheet.create({
   },
   inputIcon: {
     // marginLeft: hp('2'),
-    // width: wp('7'),
-    flex: 0.7,
+    flex: 0.5,
   },
 });

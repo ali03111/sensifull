@@ -26,15 +26,54 @@ function MainNavigator() {
           headerShown: false,
         }}>
         {!onboarding && (
-          <Stack.Screen
-            name="OnBoardScreen"
-            component={Screens.OnBoardScreen}
-          />
+          <>
+            <Stack.Screen
+              name="OnBoardScreen"
+              component={Screens.OnBoardScreen}
+            />
+          </>
         )}
         {!isLogin && (
           <>
-            <Stack.Screen name="MybottomTabs" component={MybottomTabs} />
+            <Stack.Screen name="LoginScreen" component={Screens.LoginScreen} />
+            <Stack.Screen
+              name="RegisterScreen"
+              component={Screens.RegisterScreen}
+            />
 
+            {/* <Stack.Screen name="MybottomTabs" component={MybottomTabs} /> */}
+          </>
+        )}
+        {isLogin && (
+          <>
+            <Stack.Screen name="MybottomTabs" component={MybottomTabs} />
+            <Stack.Screen name="HomeScreen" component={Screens.HomeScreen} />
+            <Stack.Screen
+              name="MealPlanScreen"
+              component={Screens.MealPlanScreen}
+            />
+            <Stack.Screen
+              name="CreateMealPlanScreen"
+              component={Screens.CreateMealPlanScreen}
+            />
+            <Stack.Screen
+              name="SelectYourMealScreen"
+              component={Screens.SelectYourMealScreen}
+            />
+
+            {/* <Stack.Screen
+            name="SettingDietaryScreen"
+            component={Screens.SettingDietaryScreen}
+          /> */}
+            <Stack.Screen name="StepScreen" component={Screens.StepScreen} />
+            <Stack.Screen
+              name="Restrictions"
+              component={Screens.Restrictions}
+            />
+            <Stack.Screen
+              name="AllergiesList"
+              component={Screens.AllergiesList}
+            />
             <Stack.Screen
               name="SettingGoalsScreen"
               component={Screens.SettingGoalsScreen}
@@ -71,44 +110,6 @@ function MainNavigator() {
               name="RecommendedMealScreen"
               component={Screens.RecommendedMealScreen}
             />
-            <Stack.Screen
-              name="MealPlanScreen"
-              component={Screens.MealPlanScreen}
-            />
-            <Stack.Screen
-              name="CreateMealPlanScreen"
-              component={Screens.CreateMealPlanScreen}
-            />
-            <Stack.Screen
-              name="SelectYourMealScreen"
-              component={Screens.SelectYourMealScreen}
-            />
-
-            {/* <Stack.Screen
-              name="SettingDietaryScreen"
-              component={Screens.SettingDietaryScreen}
-            /> */}
-            <Stack.Screen name="StepScreen" component={Screens.StepScreen} />
-            <Stack.Screen
-              name="Restrictions"
-              component={Screens.Restrictions}
-            />
-            <Stack.Screen
-              name="AllergiesList"
-              component={Screens.AllergiesList}
-            />
-
-            {/* <Stack.Screen name="MybottomTabs" component={MybottomTabs} /> */}
-            <Stack.Screen name="LoginScreen" component={Screens.LoginScreen} />
-            <Stack.Screen
-              name="RegisterScreen"
-              component={Screens.RegisterScreen}
-            />
-          </>
-        )}
-        {isLogin && (
-          <>
-            <Stack.Screen name="HomeScreen" component={Screens.HomeScreen} />
           </>
         )}
       </Stack.Navigator>

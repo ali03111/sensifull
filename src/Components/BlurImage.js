@@ -1,10 +1,9 @@
-import React, {memo, useState} from 'react';
+import React, {useState} from 'react';
 import {View} from 'react-native';
 import {Blurhash} from 'react-native-blurhash';
 import FastImage from 'react-native-fast-image';
-import {wp} from '../Config/responsive';
 
-export const BlurImage = ({
+const BlurImage = ({
   styles,
   uri,
   blurhash,
@@ -20,28 +19,21 @@ export const BlurImage = ({
   //   : background;
   return (
     <View
-      style={[
-        {
-          position: 'relative',
-          overflow: 'hidden',
-          borderRadius: radius || 10,
-          // backgroundColor: 'red',
-          width: wp('30'),
-          alignSelf: 'center',
-          // top: -10,
-        },
-        blurStyle,
-      ]}>
+      style={{
+        position: 'relative',
+        overflow: 'hidden',
+        borderRadius: radius || 10,
+        ...blurStyle,
+      }}>
       <FastImage
         style={[styles, {zIndex: -1, position: 'relative'}]}
         source={isURI ? imageSource : uri}
         onLoad={() => setLoad(false)}
-        resizeMode="contain"
       />
       {load && (
         <Blurhash
           shouldRasterizeIOS
-          blurhash={blurhash || 'LZQ@#QjZQ7oft7j[j[ayQ7j[V@ae'}
+          blurhash={blurhash || 'LKK1wP_3yYIU4.jsWrt7_NRjMdt7'}
           style={[styles, {zIndex: 1, position: 'absolute'}]}
         />
       )}
@@ -49,3 +41,5 @@ export const BlurImage = ({
     </View>
   );
 };
+
+export default React.memo(BlurImage);

@@ -21,13 +21,26 @@ import {
 import {styles} from './styles';
 import {TextComponent} from '../../Components/TextComponent';
 import {CircleImage} from '../../Components/CircleImage';
-import {BlurImage} from '../../Components/BlurImage';
+import BlurImage from '../../Components/BlurImage';
 import {Touchable} from '../../Components/Touchable';
 import {profileData, settingData} from '../../Utils/localDB';
 import {IconBtn} from './IconBtn';
 import {SettingModal} from './SettingModal';
+import {keyExtractor} from '../../Utils';
+import {hp} from '../../Config/responsive';
+import useSettingScreen from './useSettingScreen';
 
 const SettingScreen = ({navigation}) => {
+  const {
+    toggleAlert,
+    onConfirm,
+    dynamicRoute,
+    deleteAlert,
+    logoutAlert,
+    isloading,
+    userData,
+  } = useSettingScreen(navigation);
+
   const [modal1Visible, setModal1Visible] = useState(false);
   const [modal2Visible, setModal2Visible] = useState(false);
   const renderItem = useCallback(({item, index, data}) => {
@@ -50,14 +63,14 @@ const SettingScreen = ({navigation}) => {
 
   return (
     <ImageBackground source={stepBg} style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <View showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <TextComponent text={'Settings'} styles={styles.topHd} />
         </View>
-        <CircleImage />
+        {/* <CircleImage /> */}
         <BlurImage
           blurhash={'LKK1wP_3yYIU4.jsWrt7_NRjMdt7'}
-          radius={75}
+          // radius={75}
           // isURI={true}
           styles={styles.ProfileImage}
           blurStyle={styles.blurMain}
@@ -65,56 +78,79 @@ const SettingScreen = ({navigation}) => {
         />
         <TextComponent text={'John Doe'} styles={styles.name} />
         <TextComponent text={'john@sensifull.com'} styles={styles.email} />
-        <View style={styles.mainBtn}>
-          <FlatList
-            data={settingData}
-            renderItem={props => renderItem({...props, data: settingData})}
-          />
-        </View>
-        <View style={styles.mainBtn}>
-          <IconBtn
-            icon={passGreen}
-            btnText={'Change Password'}
-            changeText={'Change'}
-            onpress={() => navigation.navigate('ChangePasswordScreen')}
-          />
-          <FlatList
-            data={profileData}
-            renderItem={props => renderItem({...props, data: profileData})}
-          />
-        </View>
-        <View style={{...styles.mainBtn, ...styles.bottomSpace}}>
-          <IconBtn
-            icon={logoutGreen}
-            btnText={'Log Out'}
-            onpress={() => setModal1Visible(true)}
-          />
-          <IconBtn
-            icon={trash}
-            btnText={'Deactivate Account'}
-            extraStyle={styles.lastItem}
-            onpress={() => setModal2Visible(true)}
-          />
-        </View>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          scrollEnabled
+          contentContainerStyle={{paddingBottom: hp('70')}}>
+          <View style={styles.mainBtn}>
+            <FlatList
+              data={settingData}
+              scrollEnabled={false}
+              keyExtractor={keyExtractor}
+              renderItem={props => renderItem({...props, data: settingData})}
+            />
+          </View>
+          <View style={styles.mainBtn}>
+            <IconBtn
+              icon={passGreen}
+              btnText={'Change Password'}
+              changeText={'Change'}
+              onpress={() => navigation.navigate('ChangePasswordScreen')}
+            />
+            <FlatList
+              data={profileData}
+              keyExtractor={keyExtractor}
+              scrollEnabled={false}
+              renderItem={props => renderItem({...props, data: profileData})}
+            />
+          </View>
+          <View style={{...styles.mainBtn, ...styles.bottomSpace}}>
+            <IconBtn
+              icon={logoutGreen}
+              btnText={'Log Out'}
+              onpress={() => toggleAlert('logoutAlert')}
+            />
+            <IconBtn
+              icon={trash}
+              btnText={'Deactivate Account'}
+              extraStyle={styles.lastItem}
+              onpress={() => toggleAlert('deleteAlert')}
+            />
+          </View>
+        </ScrollView>
         <SettingModal
           icon={logOut}
-          isVisible={modal1Visible}
-          onClose={() => setModal1Visible(false)}
+          isVisible={
+            (deleteAlert == true && deleteAlert) ||
+            (logoutAlert == true && logoutAlert)
+          }
+          onClose={() =>
+            toggleAlert(
+              (logoutAlert && 'logoutAlert') || (deleteAlert && 'deleteAlert'),
+            )
+          }
           title="Oh no! you are leaving..."
           content="Are you sure ?"
-          FirstBtnText={'No! Not this time'}
-          SecondBtnText={'Yes! log me out'}
+          FirstBtnText={
+            (logoutAlert && 'No! Not this time') ||
+            (deleteAlert && 'Don’t Deactivate')
+          }
+          SecondBtnText={
+            (logoutAlert && 'Yes! log me out') ||
+            (deleteAlert && 'Deactivate Account')
+          }
+          FirstBtnOnpress={() =>
+            toggleAlert(
+              (logoutAlert && 'logoutAlert') || (deleteAlert && 'deleteAlert'),
+            )
+          }
+          SecondBtnOnpress={() => {
+            onConfirm(
+              (logoutAlert && 'logoutAlert') || (deleteAlert && 'deleteAlert'),
+            );
+          }}
         />
-        <SettingModal
-          icon={trashRed}
-          isVisible={modal2Visible}
-          onClose={() => setModal2Visible(false)}
-          title="Oh no! you are leaving..."
-          content="Are you sure ?"
-          FirstBtnText={'Don’t Deactivate'}
-          SecondBtnText={'Deactivate Account'}
-        />
-      </ScrollView>
+      </View>
     </ImageBackground>
   );
 };

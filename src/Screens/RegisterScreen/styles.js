@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import {hp, wp} from '../../Config/responsive';
 import {Colors} from '../../Theme/Variables';
 
@@ -20,13 +20,15 @@ export const styles = StyleSheet.create({
     // paddingBottom: hp('6'),
   },
   bgStyle: {
+    height: Dimensions.get('window').height,
     paddingBottom: hp('2.5'),
+    paddingTop: Platform.OS == 'ios' ? hp('3') : 0,
   },
   buttonStyle: {
     marginTop: hp('1'),
   },
   lockstyle: {
-    flex: 0.5,
+    flex: 0.3,
   },
   dontHave: {
     flexDirection: 'row',
