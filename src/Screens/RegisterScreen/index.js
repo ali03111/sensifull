@@ -80,7 +80,7 @@ const RegisterScreen = ({navigation}) => {
                 reset,
                 control,
                 getValues,
-                placeholder: 'First Name',
+                placeholder: 'Last Name',
                 isImage: username,
                 defaultValue: __DEV__ ? 'user' : '',
               }}

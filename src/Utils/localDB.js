@@ -734,3 +734,41 @@ export const recommendedData = [
     title: 'Italian cuisine pasta',
   },
 ];
+
+export const shoppingListData = [
+  {
+    id: 1,
+    name: 'Caviar',
+    quantity: '50 gm',
+  },
+  {
+    id: 2,
+    name: 'Chicken',
+    quantity: '1.5 kg',
+  },
+  {
+    id: 3,
+    name: 'Duck Egg',
+    quantity: '22',
+  },
+  {
+    id: 4,
+    name: 'Buttermilk',
+    quantity: '150 mg',
+  },
+  {
+    id: 5,
+    name: 'Quinoa',
+    quantity: '12 g',
+  },
+  {
+    id: 6,
+    name: 'White bean',
+    quantity: '45 g',
+  },
+  {
+    id: 7,
+    name: 'White beanGooseberry',
+    quantity: '2 kg',
+  },
+];
