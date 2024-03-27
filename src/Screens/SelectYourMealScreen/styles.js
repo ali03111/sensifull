@@ -29,4 +29,7 @@ export const styles = StyleSheet.create({
     textAlign: 'left',
     alignItems: 'flex-start',
   },
+  popularTop: {
+    marginVertical: hp('1.5'),
+  },
 });
