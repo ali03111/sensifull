@@ -34,9 +34,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: wp('4'),
   },
-  swipelist: {
-    paddingVertical: hp('2'),
-  },
+
   swipeMain: {
     flexDirection: 'row',
     backgroundColor: '#fcf8e9',
@@ -116,5 +114,59 @@ export const styles = StyleSheet.create({
   },
   listMain: {
     // paddingHorizontal: wp('3.5'),
+  },
+
+  dateMain: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: wp('4'),
+    alignItems: 'center',
+    paddingVertical: hp('2'),
+  },
+  date: {
+    fontSize: hp('2.4'),
+    fontWeight: 500,
+  },
+  circleStyle: {
+    width: wp('8'),
+    height: hp('4'),
+    resizeMode: 'contain',
+  },
+  dateBtn: {
+    paddingHorizontal: wp('1'),
+    alignItems: 'center',
+    marginHorizontal: wp('1'),
+    paddingVertical: hp('.5'),
+  },
+  dateNumber: {
+    fontSize: hp('3'),
+    fontWeight: 600,
+    borderRadius: 50,
+    paddingHorizontal: wp('1.9'),
+    paddingVertical: hp('.6'),
+  },
+  dateDay: {
+    fontSize: hp('1.9'),
+    marginBottom: hp('.7'),
+    marginTop: hp('.5'),
+  },
+  activeDateBtn: {
+    backgroundColor: Colors.themeGreen,
+    borderRadius: 30,
+  },
+  activeDateNumber: {
+    backgroundColor: 'white',
+    borderRadius: 50,
+    paddingHorizontal: wp('1.9'),
+    paddingVertical: hp('.6'),
+    color: Colors.primaryColor,
+  },
+  activeDateDay: {
+    color: 'white',
+    marginBottom: hp('.7'),
+    marginTop: hp('.5'),
+  },
+  datList: {
+    paddingHorizontal: wp('2'),
   },
 });

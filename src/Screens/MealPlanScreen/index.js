@@ -10,9 +10,11 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import {
+  addCirlce,
   arrDown,
   arrRightGray,
   editWhite,
+  filter1,
   noData,
   stepBg,
   swipe1,
@@ -29,9 +31,12 @@ import Collapsible from 'react-native-collapsible';
 import {Touchable} from '../../Components/Touchable';
 import {SelectableBtn} from '../../Components/SelectableBtn';
 import {SwipeListView} from 'react-native-swipe-list-view';
+import {dateData} from '../../Utils/localDB';
+import {hp, wp} from '../../Config/responsive';
+import {FilterModal} from './FilterModal';
 
 const MealPlanScreen = ({navigation}) => {
-  const {} = useMealPlanScreen(navigation);
+  const {toggleModal, modalVisible} = useMealPlanScreen(navigation);
 
   const [listData, setListData] = useState(
     Array(5)
@@ -39,7 +44,7 @@ const MealPlanScreen = ({navigation}) => {
       .map((_, i) => ({
         title: `title${i + 1}`,
         data: [
-          ...Array(5)
+          ...Array(1)
             .fill('')
             .map((_, j) => ({
               key: `${i}.${j}`,
@@ -99,6 +104,38 @@ const MealPlanScreen = ({navigation}) => {
     </View>
   );
 
+  const [activeButton, setActiveButton] = useState(0);
+
+  const handleButtonClick = index => {
+    setActiveButton(index);
+  };
+
+  const renderDate = useCallback(({item, index}) => {
+    return (
+      <Touchable
+        style={[
+          styles.dateBtn,
+          index === activeButton ? styles.activeDateBtn : null,
+        ]}
+        onPress={() => handleButtonClick(index)}>
+        <TextComponent
+          text={item?.date}
+          styles={{
+            ...styles.dateNumber,
+            ...(index === activeButton && styles.activeDateNumber),
+          }}
+        />
+        <TextComponent
+          text={item?.day}
+          styles={{
+            ...styles.dateDay,
+            ...(index === activeButton && styles.activeDateDay),
+          }}
+        />
+      </Touchable>
+    );
+  });
+
   return (
     <>
       <ImageBackground source={stepBg} style={styles.container}>
@@ -108,6 +145,8 @@ const MealPlanScreen = ({navigation}) => {
           <HeaderWithFilterAndBack
             goBack={() => navigation.goBack()}
             Text={'Meals Plan'}
+            filterIcon={filter1}
+            onpress={toggleModal}
           />
           {/* <DataNotFound
             title={'No Plans Yet!'}
@@ -115,7 +154,25 @@ const MealPlanScreen = ({navigation}) => {
             btnTitle={'Create Plan'}
             onpress={() => navigation.navigate('CreateMealPlanScreen')}
           /> */}
-          {/* <View style={styles.swipelist}> */}
+          <View style={styles.datList}>
+            <FlatList
+              data={dateData} // Use the same data for the dots
+              renderItem={renderDate}
+              showsHorizontalScrollIndicator={false}
+              horizontal={true}
+              style={{
+                paddingHorizontal: wp('0'),
+                marginTop: hp('2'),
+              }}
+            />
+          </View>
+          <View style={styles.dateMain}>
+            <TextComponent text={'Sunday, 25 Feb'} styles={styles.date} />
+            <Touchable
+              onPress={() => navigation.navigate('CreateMealPlanScreen')}>
+              <Image source={addCirlce} style={styles.circleStyle} />
+            </Touchable>
+          </View>
           <SwipeListView
             showsVerticalScrollIndicator={false}
             style={styles.listMain}
@@ -130,8 +187,8 @@ const MealPlanScreen = ({navigation}) => {
             previewOpenDelay={3000}
             onRowDidOpen={onRowDidOpen}
           />
-          {/* </View> */}
         </ScrollView>
+        <FilterModal ToggleFunction={toggleModal} isVisible={modalVisible} />
       </ImageBackground>
     </>
   );
