@@ -120,6 +120,8 @@ function MainNavigator() {
             <Stack.Screen
               name="EditProfileScreen"
               component={Screens.EditProfileScreen}
+              name="ShoppingListScreen"
+              component={Screens.ShoppingListScreen}
             />
           </>
         )}

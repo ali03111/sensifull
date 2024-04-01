@@ -121,7 +121,11 @@ const HomeScreen = ({navigation}) => {
           <View style={styles.homeMain}>
             <View style={styles.ingredArea}>
               <HomeBtn1 text1={'Ingredient'} text2={'Restrictions'} />
-              <HomeBtn2 text1={'Shopping'} text2={'list'} />
+              <HomeBtn2
+                text1={'Shopping'}
+                text2={'list'}
+                onpress={() => navigation.navigate('ShoppingListScreen')}
+              />
             </View>
           </View>
 

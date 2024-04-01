@@ -80,7 +80,7 @@ const LoginScreen = ({navigation}) => {
               getValues,
               placeholder: 'Password*',
               isImage: lock,
-              defaultValue: __DEV__ ? 'Test@123' : '',
+              // defaultValue: __DEV__ ? 'Test@123' : '',
               isSecure: true,
               isImage: passwordIcon,
               inputIconStyle: styles.lockstyle,

@@ -22,6 +22,12 @@ export {default as recom3} from './Images/recom3.png';
 export {default as recom4} from './Images/recom4.png';
 export {default as recom5} from './Images/recom5.png';
 export {default as recom6} from './Images/recom6.png';
+export {default as swipe1} from './Images/swipe1.png';
+export {default as swipe2} from './Images/swipe2.png';
+export {default as swipe3} from './Images/swipe3.png';
+export {default as swipe4} from './Images/swipe4.png';
+export {default as trashWhite} from './Images/trashWhite.png';
+export {default as editWhite} from './Images/editWhite.png';
 
 //  Icons
 
@@ -106,3 +112,5 @@ export {default as addCirlce} from './Icons/add-circle.png';
 export {default as chevLeft} from './Icons/chev-left.png';
 export {default as chevRight} from './Icons/chev-right.png';
 export {default as editPicBtn} from './Icons/editPicBtn.png';
+export {default as tickcirclepurple} from './Icons/tick-circle-purple.png';
+export {default as tickuncirclepurple} from './Icons/tick-uncircle-purple.png';
