@@ -51,7 +51,6 @@ const signUpschema = yup.object().shape({
     .matches(/^[A-Za-z ]*$/, 'Please enter valid name.')
     .min(2, 'Name must be atleast 2 characters.')
     .max(50, 'Name must be of 50 characters.'),
-  company_name: yup.string(),
   last: yup
     .string()
     // .required('Please enter your Last Name.')
@@ -152,7 +151,7 @@ const addUsernameScheme = yup.object().shape({
 });
 
 const editProfileScheme = yup.object().shape({
-  name: yup
+  first_name: yup
     .string()
     .required('Please enter your first name.')
     .max(100, 'Name must be less than 100 characters.')
@@ -160,12 +159,6 @@ const editProfileScheme = yup.object().shape({
     .min(2, 'Name must be atleast 2 characters.')
     .max(50, 'Name must be of 50 characters.'),
   last_name: yup.string().required('Please enter your last name.'),
-  company_name: yup
-    .string()
-    .required('Please enter your Company Name.')
-    .max(100, 'Name must be less than 100 characters.')
-    .min(2, 'Name must be atleast 2 characters.')
-    .max(50, 'Name must be of 50 characters.'),
   email: yup
     .string()
     .email('Email must be valid.')

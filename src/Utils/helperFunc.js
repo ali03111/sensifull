@@ -49,13 +49,8 @@ API.get = async (url, params, axiosConfig) => {
 
 const formDataFunc = (url, body, imageKey, isArray) => {
   const {Auth} = store.getState();
-  console.log(
-    'bjdv dv hj hj dhjs dshj bdh∫√ dhjksbvsdhj',
-    url,
-    body,
-    imageKey,
-    isArray,
-  );
+  store.dispatch(loadingTrue());
+
   var myHeaders = new Headers();
   myHeaders.append('Accept', 'application/json');
   myHeaders.append('Authorization', `Bearer ${Auth.token}`);
@@ -94,6 +89,38 @@ const formDataFunc = (url, body, imageKey, isArray) => {
     });
 };
 
-export {formDataFunc};
+const fetchGetWithToken = async url => {
+  const {Auth} = store.getState('Auth');
+  const fullUrl = baseURL + url;
+  // console.log(Auth.token, Auth.userData, 'Auth Token', fullUrl);
+
+  try {
+    const response = await fetch(fullUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Auth.token}`, // Assuming a Bearer token authentication
+        // Add other headers if needed
+      },
+    });
+    if (!response.ok) {
+      // const data = await response.json();
+      console.log('datadatadatadatadatadatadatadata', response);
+      store.dispatch({type: types.LogoutType});
+      throw new Error('Network response was not ok.');
+    }
+
+    // console.log(data, 'alskdjfklajsdfkljadlsfjaklsdjfl2kds444ajf2lkdjs');
+    const data = await response.json();
+
+    return data; // Return the fetched data
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error; // Rethrow the error to handle it at the caller's level if needed
+  }
+  // store.dispatch({type: types.LogoutType});
+};
+
+export {formDataFunc, fetchGetWithToken};
 
 export default API;

@@ -1,38 +1,72 @@
-import {Image, Pressable, StyleSheet, View} from 'react-native';
+import {FlatList, Image, Pressable, StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
 import {TextComponent} from './TextComponent';
 import {hp, wp} from '../Config/responsive';
 import {Colors} from '../Theme/Variables';
+import BlurImage from './BlurImage';
+import {keyExtractor} from '../Utils';
 
-export default function GoalsAndPurpose({title, subtitle, data}) {
-  const [selectedCategory, setSelectedCategory] = useState(null);
-
-  const handleCategoryPress = itemId => {
-    setSelectedCategory(itemId);
-  };
+export default function GoalsAndPurpose({
+  title,
+  subtitle,
+  data,
+  onSelectValue,
+  selectedValue,
+  flatListStyle,
+}) {
   return (
-    <View>
+    <>
       <TextComponent text={title} styles={styles.title} />
       <TextComponent text={subtitle} styles={styles.subTitle} />
 
-      <View style={styles.content}>
-        {data.map((item, index) => (
+      <FlatList
+        data={data}
+        keyExtractor={keyExtractor}
+        numColumns={2}
+        contentContainerStyle={{
+          justifyContent: 'space-between',
+          paddingBottom: hp('45'),
+          ...flatListStyle,
+        }}
+        nestedScrollEnabled
+        scrollEnabled
+        showsVerticalScrollIndicator={false}
+        renderItem={({item, index}) => {
+          return (
+            <Pressable
+              style={styles.categories(Boolean(selectedValue == item.id))}
+              key={item?.id}
+              onPress={() => onSelectValue(item.id)}>
+              <BlurImage
+                isURI={true}
+                uri={item?.image}
+                styles={styles.purposeImage(Boolean(selectedValue == item.id))}
+              />
+              <TextComponent
+                text={item?.title}
+                styles={styles.catTitle(Boolean(selectedValue == item.id))}
+              />
+            </Pressable>
+          );
+        }}
+      />
+      {/* {data.map((item, index) => (
           <Pressable
-            style={styles.categories(Boolean(selectedCategory == item.id))}
+            style={styles.categories(Boolean(selectedValue == item.id))}
             key={item?.id}
-            onPress={() => handleCategoryPress(item.id)}>
-            <Image
-              source={item?.image}
-              style={styles.purposeImage(Boolean(selectedCategory == item.id))}
+            onPress={() => onSelectValue(item.id)}>
+            <BlurImage
+              isURI={true}
+              uri={item?.image}
+              styles={styles.purposeImage(Boolean(selectedValue == item.id))}
             />
             <TextComponent
               text={item?.title}
-              styles={styles.catTitle(Boolean(selectedCategory == item.id))}
+              styles={styles.catTitle(Boolean(selectedValue == item.id))}
             />
           </Pressable>
-        ))}
-      </View>
-    </View>
+        ))} */}
+    </>
   );
 }
 
@@ -56,7 +90,7 @@ const styles = StyleSheet.create({
   },
   categories: selectedCategory => ({
     borderWidth: 1,
-    borderColor: selectedCategory ? Colors.themeGreen : '#525252',
+    borderColor: selectedCategory ? Colors.themeGreen : Colors.textColor,
     borderRadius: 20,
     width: wp('44'),
     paddingHorizontal: wp('2'),
@@ -64,6 +98,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: hp('2'),
     backgroundColor: selectedCategory ? Colors.themeGreen : 'transparent',
+    marginHorizontal: wp('1'),
   }),
   purposeImage: selectedCategory => ({
     width: wp('17'),
@@ -73,9 +108,10 @@ const styles = StyleSheet.create({
     tintColor: selectedCategory ? 'white' : null,
   }),
   catTitle: selectedCategory => ({
-    fontSize: hp('2.6'),
+    fontSize: hp('2'),
     fontWeight: '700',
     color: selectedCategory ? 'white' : Colors.primaryColor,
     marginTop: hp('2'),
+    textAlign: 'center',
   }),
 });

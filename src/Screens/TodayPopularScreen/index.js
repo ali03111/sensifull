@@ -7,7 +7,7 @@ import {arrowBack, filter1, stepBg} from '../../Assets';
 import {styles} from './styles';
 import {popularData} from '../../Utils/localDB';
 import useTodayPopularScreen from './useTodayPopularScreen';
-import {goBack} from '../../Utils';
+import {goBack, keyExtractor} from '../../Utils';
 import {HeaderWithFilterAndBack} from '../../Components/HeaderWithFilterAndBack';
 
 const TodayPopularScreen = ({navigation}) => {
@@ -27,7 +27,7 @@ const TodayPopularScreen = ({navigation}) => {
   return (
     <>
       <ImageBackground source={stepBg} style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <View showsVerticalScrollIndicator={false}>
           {/* <View style={styles.topRatedMain}>
             <Touchable onPress={() => navigation.goBack()}>
               <Image source={arrowBack} style={styles.arrBack} />
@@ -47,9 +47,10 @@ const TodayPopularScreen = ({navigation}) => {
               data={popularData}
               renderItem={renderTodayPopular}
               showsHorizontalScrollIndicator={false}
+              extraData={keyExtractor}
             />
           </View>
-        </ScrollView>
+        </View>
       </ImageBackground>
     </>
   );

@@ -106,8 +106,7 @@ const LoginScreen = ({navigation}) => {
         <View style={styles.social}>
           <Touchable
             style={styles.socialIcons}
-            // onPress={() => socialLoginFun('Google')}
-          >
+            onPress={() => socialLoginFun('Google')}>
             <Image
               source={google}
               style={styles.socialImage}

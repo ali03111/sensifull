@@ -13,14 +13,21 @@ import {Touchable} from '../../Components/Touchable';
 import {TextComponent} from '../../Components/TextComponent';
 import Collapsible from 'react-native-collapsible';
 import {IngredientsData} from '../../Utils/localDB';
+import {hp} from '../../Config/responsive';
 
-export default function Restrictions({navigation}) {
+export default function Restrictions({navigation, route}) {
+  const {restrictions, onSelectValue, selectedValue} = route?.params;
+  // console.log(
+  //   'restrictionsrestrictionsrestrictionsrestrictionsrestrictions',
+  //   JSON.stringify(restrictions),
+  // );
+
   const [isCollapsed, setIsCollapsed] = useState(
-    Array(IngredientsData.length).fill(true),
+    Array(restrictions.length).fill(true),
   );
   const [chevActive, setChevActive] = useState('true');
 
-  const [selectedItems, setSelectedItems] = useState({});
+  const [selectedItems, setSelectedItems] = useState(selectedValue);
 
   const toggleCollapsed = index => {
     setChevActive(!chevActive);
@@ -36,9 +43,14 @@ export default function Restrictions({navigation}) {
       const sectionKey = `section${sectionIndex}`;
       const newSelectedItems = {...prevState};
 
-      const selectedItem = IngredientsData[sectionIndex].content[itemIndex];
+      const selectedItem =
+        restrictions[sectionIndex]?.ingredients_active[itemIndex];
       if (newSelectedItems[sectionKey]) {
-        if (newSelectedItems[sectionKey].includes(selectedItem)) {
+        if (
+          newSelectedItems[sectionKey].filter(
+            res => res?.id == selectedItem?.id,
+          )[0]
+        ) {
           newSelectedItems[sectionKey] = newSelectedItems[sectionKey].filter(
             item => item !== selectedItem,
           );
@@ -58,21 +70,31 @@ export default function Restrictions({navigation}) {
 
   const isItemSelected = (sectionIndex, itemIndex) => {
     const sectionKey = `section${sectionIndex}`;
-    const selectedItem = IngredientsData[sectionIndex].content[itemIndex];
+    const selectedItem =
+      restrictions[sectionIndex]?.ingredients_active[itemIndex];
     return (
       selectedItems[sectionKey] &&
-      selectedItems[sectionKey].includes(selectedItem)
+      selectedItems[sectionKey].filter(res => res?.id == selectedItem?.id)[0]
     );
   };
 
   return (
     <ImageBackground source={stepBg} style={styles.container}>
-      <ScrollView>
+      <View
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{paddingBottom: hp('10')}}>
         <View style={styles.headerMain}>
           <Touchable onPress={() => navigation.goBack()}>
             <Image source={arrowBack} style={styles.arrBack} />
           </Touchable>
-          <TextComponent text={'Save'} styles={styles.saveText} />
+          <TextComponent
+            onPress={() => {
+              navigation.goBack();
+              onSelectValue(selectedItems);
+            }}
+            text={'Save'}
+            styles={styles.saveText}
+          />
         </View>
         <View style={styles.searchMain}>
           <Image source={search} style={styles.inputImage} />
@@ -81,50 +103,54 @@ export default function Restrictions({navigation}) {
             placeholder={'Search Ingredients'}
           />
         </View>
-        {IngredientsData.map((item, sectionIndex) => (
-          <React.Fragment key={sectionIndex}>
-            <Touchable
-              onPress={() => toggleCollapsed(sectionIndex)}
-              style={styles.titleMain}>
-              <TextComponent text={item.title} styles={styles.titleStyle} />
-              <Image
-                source={isCollapsed[sectionIndex] ? chevDown : chevUp}
-                style={styles.chev}
-              />
-              {/* Corrected from section.title to item.title */}
-            </Touchable>
-            <View style={styles.border}>
-              {!isCollapsed[sectionIndex] && (
-                <Collapsible
-                  collapsed={isCollapsed[sectionIndex]}
-                  style={styles.collapseMain}>
-                  {item.content.map((item, itemIndex) => (
-                    <Touchable
-                      key={itemIndex}
-                      onPress={() =>
-                        toggleItemSelection(sectionIndex, itemIndex)
-                      }
-                      style={[
-                        styles.item,
-                        isItemSelected(sectionIndex, itemIndex) &&
-                          styles.selectedItem,
-                      ]}>
-                      <Text
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{paddingBottom: hp('10')}}>
+          {restrictions.map((item, sectionIndex) => (
+            <React.Fragment key={sectionIndex}>
+              <Touchable
+                onPress={() => toggleCollapsed(sectionIndex)}
+                style={styles.titleMain}>
+                <TextComponent text={item.title} styles={styles.titleStyle} />
+                <Image
+                  source={isCollapsed[sectionIndex] ? chevDown : chevUp}
+                  style={styles.chev}
+                />
+                {/* Corrected from section.title to item.title */}
+              </Touchable>
+              <View style={styles.border}>
+                {!isCollapsed[sectionIndex] && (
+                  <Collapsible
+                    collapsed={isCollapsed[sectionIndex]}
+                    style={styles.collapseMain}>
+                    {item?.ingredients_active?.map((res, itemIndex) => (
+                      <Touchable
+                        key={itemIndex}
+                        onPress={() =>
+                          toggleItemSelection(sectionIndex, itemIndex)
+                        }
                         style={[
-                          styles.itemText,
+                          styles.item,
                           isItemSelected(sectionIndex, itemIndex) &&
-                            styles.activeItemText,
+                            styles.selectedItem,
                         ]}>
-                        {item}
-                      </Text>
-                    </Touchable>
-                  ))}
-                </Collapsible>
-              )}
-            </View>
-          </React.Fragment>
-        ))}
-      </ScrollView>
+                        <Text
+                          style={[
+                            styles.itemText,
+                            isItemSelected(sectionIndex, itemIndex) &&
+                              styles.activeItemText,
+                          ]}>
+                          {res?.title}
+                        </Text>
+                      </Touchable>
+                    ))}
+                  </Collapsible>
+                )}
+              </View>
+            </React.Fragment>
+          ))}
+        </ScrollView>
+      </View>
     </ImageBackground>
   );
 }

@@ -11,7 +11,12 @@ const Stack = createNativeStackNavigator();
 function MainNavigator() {
   const {getState} = useReduxStore();
   const {onboarding} = getState('onboarding');
-  const {isLogin} = getState('Auth');
+  const {isLogin, userData} = getState('Auth');
+
+  console.log(
+    'userDatauserDatauserDatauserDatauserDatauserDatauserDatauserDatauserDatauserDatauserData',
+    userData,
+  );
 
   return (
     <NavigationContainer
@@ -46,6 +51,9 @@ function MainNavigator() {
         )}
         {isLogin && (
           <>
+            {userData?.is_onboard_complete == 0 && (
+              <Stack.Screen name="StepScreen" component={Screens.StepScreen} />
+            )}
             <Stack.Screen name="MybottomTabs" component={MybottomTabs} />
             <Stack.Screen name="HomeScreen" component={Screens.HomeScreen} />
             <Stack.Screen
@@ -65,7 +73,6 @@ function MainNavigator() {
             name="SettingDietaryScreen"
             component={Screens.SettingDietaryScreen}
           /> */}
-            <Stack.Screen name="StepScreen" component={Screens.StepScreen} />
             <Stack.Screen
               name="Restrictions"
               component={Screens.Restrictions}
@@ -109,6 +116,10 @@ function MainNavigator() {
             <Stack.Screen
               name="RecommendedMealScreen"
               component={Screens.RecommendedMealScreen}
+            />
+            <Stack.Screen
+              name="EditProfileScreen"
+              component={Screens.EditProfileScreen}
             />
           </>
         )}

@@ -1,4 +1,4 @@
-import {Platform, StyleSheet} from 'react-native';
+import {Dimensions, Platform, StyleSheet} from 'react-native';
 import {hp, wp} from '../../Config/responsive';
 import {Colors} from '../../Theme/Variables';
 
@@ -38,9 +38,11 @@ export const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginLeft: wp('1.5'),
   },
-  previousButton: {
-    backgroundColor: Colors.primaryColor,
-  },
+  previousButton: isStart => ({
+    backgroundColor: isStart ? 'transparent' : Colors.primaryColor,
+
+    // display: isStart ? 'none' : 'flex',
+  }),
   nextButton: {
     backgroundColor: Colors.primaryColor,
   },
@@ -52,19 +54,25 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: wp('5'),
+    paddingTop: Platform.OS == 'ios' ? hp('5') : 0,
   },
   circleContainer: {
     alignItems: 'center',
     marginHorizontal: wp('2.5'),
   },
   circle: {
-    width: wp('10'),
-    height: hp('5'),
-    borderRadius: 20,
     backgroundColor: '#EBD5F2',
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1,
+    borderRadius: Math.round(
+      Dimensions.get('window').width + Dimensions.get('window').height,
+    ),
+    width: Dimensions.get('window').width * 0.11,
+    height: Dimensions.get('window').width * 0.11,
+    // width: wp('10'),
+    // height: hp('5'),
+    // borderRadius: 2,
   },
   activeCircle: {
     backgroundColor: Colors.primaryColor,
@@ -89,52 +97,15 @@ export const styles = StyleSheet.create({
     zIndex: 0,
   },
   tagline: {
-    color: '#525252',
+    color: Colors.textColor,
     paddingHorizontal: wp('8'),
     textAlign: 'center',
-    marginBottom: hp('8'),
+    marginBottom: hp('3'),
   },
   mainContent: {
     width: wp('100'),
     paddingHorizontal: wp('4'),
   },
-  // content: {
-  //   flexDirection: 'row',
-  //   flexWrap: 'wrap',
-  //   justifyContent: 'space-between',
-  // },
-
-  // categories: selectedCategory => ({
-  //   borderWidth: 1,
-  //   borderColor: selectedCategory ? Colors.themeGreen : '#525252',
-  //   borderRadius: 20,
-  //   width: wp('44'),
-  //   paddingHorizontal: wp('2'),
-  //   paddingVertical: hp('3'),
-  //   alignItems: 'center',
-  //   marginTop: hp('2'),
-  //   backgroundColor: selectedCategory ? Colors.themeGreen : 'transparent',
-  // }),
-  // purposeImage: selectedCategory => ({
-  //   width: wp('17'),
-  //   height: hp('8'),
-  //   resizeMode: 'contain',
-  //   alignSelf: 'center',
-  //   tintColor: selectedCategory ? 'white' : null,
-  // }),
-  // catTitle: selectedCategory => ({
-  //   fontSize: hp('2.6'),
-  //   fontWeight: '700',
-  //   color: selectedCategory ? 'white' : Colors.primaryColor,
-  //   marginTop: hp('2'),
-  // }),
-  // title: {
-  //   fontSize: hp('3.5'),
-  //   fontWeight: '700',
-  //   color: Colors.primaryColor,
-  //   textAlign: 'center',
-  //   marginBottom: hp('3'),
-  // },
   titleStepTwo: {
     fontSize: hp('3.5'),
     fontWeight: '700',
@@ -142,32 +113,6 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: hp('0'),
   },
-  // titleSubText: {
-  //   fontSize: hp('2.6'),
-  //   fontWeight: '700',
-  //   color: Colors.primaryColor,
-  //   marginTop: hp('0'),
-  //   textAlign: 'center',
-  // },
-  // stepTwoStyle: {
-  //   flexDirection: 'row',
-  //   flexWrap: 'wrap',
-  //   justifyContent: 'center',
-  // },
-  // btnTextTwo: {
-  //   width: wp('66'),
-  // },
-  // inputMain: {
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   alignItems: 'center',
-  //   borderWidth: 1,
-  //   borderColor: '#525252',
-  //   borderRadius: 30,
-  //   paddingHorizontal: wp('4'),
-  //   width: wp('92'),
-  //   marginVertical: hp('5'),
-  // },
   inputStyle: {
     width: wp('73'),
   },
@@ -240,7 +185,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#525252',
     borderRadius: 30,
-    alignItems: 'flex-start',
+    // alignItems: 'flex-start',
     justifyContent: 'center',
   },
   titleStep4: {
@@ -401,7 +346,7 @@ export const styles = StyleSheet.create({
   btnsMain: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    width: wp('80'),
+    width: wp('92'),
   },
   allergiesBtns: {
     // backgroundColor: 'rgba(255, 255, 255, 0.3)',
@@ -415,5 +360,21 @@ export const styles = StyleSheet.create({
     paddingHorizontal: wp('3'),
     marginHorizontal: wp('1'),
     marginVertical: hp('.5'),
+  },
+  pickerStyle: {
+    width: wp('90'),
+    height: hp('6.2'),
+    alignItems: 'center',
+    alignSelf: 'center',
+    verticalAlign: 'middle',
+    justifyContent: 'center',
+    color: 'transparent',
+  },
+  pickerStyleIOS: {
+    width: wp('80'),
+    alignSelf: 'center',
+  },
+  content: {
+    marginBottom: hp('2'),
   },
 });

@@ -8,6 +8,7 @@ import {styles} from './styles';
 import {popularData, recommendedData} from '../../Utils/localDB';
 import useRecommendedMealScreen from './useRecommendedMealScreen';
 import {HeaderWithFilterAndBack} from '../../Components/HeaderWithFilterAndBack';
+import {hp} from '../../Config/responsive';
 
 const RecommendedMealScreen = ({navigation}) => {
   const {} = useRecommendedMealScreen(navigation);
@@ -28,24 +29,23 @@ const RecommendedMealScreen = ({navigation}) => {
   return (
     <>
       <ImageBackground source={stepBg} style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <HeaderWithFilterAndBack
-            goBack={() => navigation.goBack()}
-            Text={'Recommended Meals'}
-            filterIcon={filter1}
+        <HeaderWithFilterAndBack
+          goBack={() => navigation.goBack()}
+          Text={'Recommended Meals'}
+          filterIcon={filter1}
+        />
+        <View style={styles.popularTop}>
+          <FlatList
+            data={recommendedData}
+            renderItem={renderTodayPopular}
+            showsHorizontalScrollIndicator={false}
+            numColumns={2}
+            contentContainerStyle={{
+              alignItems: 'center',
+              paddingBottom: hp('20'),
+            }}
           />
-          <View style={styles.popularTop}>
-            <FlatList
-              data={recommendedData}
-              renderItem={renderTodayPopular}
-              showsHorizontalScrollIndicator={false}
-              numColumns={2}
-              contentContainerStyle={{
-                alignItems: 'center',
-              }}
-            />
-          </View>
-        </ScrollView>
+        </View>
       </ImageBackground>
     </>
   );

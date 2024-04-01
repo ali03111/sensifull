@@ -33,6 +33,13 @@ export const styles = StyleSheet.create({
   },
   blurMain: {
     marginTop: hp('-10'),
+    overflow: 'hidden',
+    borderRadius: Math.round(
+      Dimensions.get('window').width + Dimensions.get('window').height,
+    ),
+    width: Dimensions.get('window').width * 0.3,
+    height: Dimensions.get('window').width * 0.3,
+    alignSelf: 'center',
   },
   name: {
     fontSize: hp('2.5'),

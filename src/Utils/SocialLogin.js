@@ -68,39 +68,59 @@ import {
 //   };
 // };
 
+// export const googleLogin = async () => {
+//   // Check if your device supports Google Play
+//   await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+//   // Get the users ID token
+//   console.log('jksdblkblsdkblkbdslkvblkdsbvldsbklsdlkklsdvlksdvk');
+
+//   const {idToken, user} = await GoogleSignin.signIn();
+
+//   console.log('idTokenidTokenidTokenidTokenidTokenidToken', idToken, user);
+
+//   // Create a Google credential with the token
+//   const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+//   console.log(
+//     'googleCredentialgoogleCredentialgoogleCredentialgoogleCredentialgoogleCredentialgoogleCredential',
+//     googleCredential,
+//   );
+
+//   const {additionalUserInfo} = await auth().signInWithCredential(
+//     googleCredential,
+//   );
+
+//   console.log(
+//     'additionalUserInfoadditionalUserInfoadditionalUserInfoadditionalUserInfo',
+//     additionalUserInfo,
+//   );
+
+//   // Sign-in the user with the credential
+//   return {
+//     ...googleCredential,
+//     ...user,
+//     isNewUser: additionalUserInfo.isNewUser,
+//   };
+// };
+
 export const googleLogin = async () => {
-  // Check if your device supports Google Play
-  await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
-  // Get the users ID token
-  console.log('jksdblkblsdkblkbdslkvblkdsbvldsbklsdlkklsdvlksdvk');
-
-  const {idToken, user} = await GoogleSignin.signIn();
-
-  console.log('idTokenidTokenidTokenidTokenidTokenidToken', idToken, user);
-
-  // Create a Google credential with the token
-  const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-  console.log(
-    'googleCredentialgoogleCredentialgoogleCredentialgoogleCredentialgoogleCredentialgoogleCredential',
-    googleCredential,
-  );
-
-  const {additionalUserInfo} = await auth().signInWithCredential(
-    googleCredential,
-  );
-
-  console.log(
-    'additionalUserInfoadditionalUserInfoadditionalUserInfoadditionalUserInfo',
-    additionalUserInfo,
-  );
-
-  // Sign-in the user with the credential
-  return {
-    ...googleCredential,
-    ...user,
-    isNewUser: additionalUserInfo.isNewUser,
+  const logOutWithGoogle = async () => {
+    await GoogleSignin.revokeAccess();
+    await GoogleSignin.signOut();
+    console.log('logOutWithGoogle');
   };
+
+  const hasPlayService = await GoogleSignin.hasPlayServices({
+    showPlayServicesUpdateDialog: true,
+  });
+  if (!hasPlayService) throw new Error('play services not available');
+  const isSignIn = await GoogleSignin.isSignedIn();
+  if (isSignIn) await logOutWithGoogle();
+  const {idToken, user} = await GoogleSignin.signIn();
+  const token = auth.GoogleAuthProvider.credential(idToken);
+  const {additionalUserInfo} = await auth().signInWithCredential(token);
+
+  return {...token, ...user, isNewUser: additionalUserInfo.isNewUser};
 };
 
 export const PhoneNumberLogin = async phoneNumber => {

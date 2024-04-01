@@ -4,18 +4,28 @@ import {TextComponent} from './TextComponent';
 import {check, facebook, uncheck} from '../Assets';
 import {hp, wp} from '../Config/responsive';
 
-export const SocialBtn = ({icon, text, noBorder}) => {
-  const [isChecked, setIsChecked] = useState(false);
-  const toggleCheck = () => {
-    setIsChecked(!isChecked);
-  };
+export const SocialBtn = ({
+  icon,
+  text,
+  noBorder,
+  onSelectedVal,
+  selectedVal,
+}) => {
   return (
-    <Pressable onPress={toggleCheck} style={styles.socialMain}>
+    <Pressable
+      onPress={() => {
+        if (selectedVal.includes(text)) {
+          onSelectedVal(selectedVal.filter(item => item !== text));
+        } else {
+          onSelectedVal([...selectedVal, text]);
+        }
+      }}
+      style={styles.socialMain}>
       <Image source={icon} style={styles.socialIcon} />
       <View style={{...styles.socialInner, ...noBorder}}>
         <TextComponent text={text} styles={styles.socialText} />
         <Image
-          source={isChecked ? check : uncheck}
+          source={selectedVal.includes(text) ? check : uncheck}
           style={styles.socialCheck}
         />
       </View>

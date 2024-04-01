@@ -7,8 +7,9 @@ import {arrowBack, favShadow, filter1, stepBg} from '../../Assets';
 import {styles} from './styles';
 import {popularData, topRatedData} from '../../Utils/localDB';
 import useTopRatedMealScreen from './useTopRatedMealScreen';
-import {goBack} from '../../Utils';
+import {goBack, keyExtractor} from '../../Utils';
 import {HeaderWithFilterAndBack} from '../../Components/HeaderWithFilterAndBack';
+import {hp} from '../../Config/responsive';
 
 const TopRatedMealScreen = ({navigation}) => {
   const {} = useTopRatedMealScreen(navigation);
@@ -40,24 +41,26 @@ const TopRatedMealScreen = ({navigation}) => {
   return (
     <>
       <ImageBackground source={stepBg} style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <HeaderWithFilterAndBack
-            goBack={() => navigation.goBack()}
-            Text={'Top Rated Meals'}
-            filterIcon={filter1}
+        <HeaderWithFilterAndBack
+          goBack={() => navigation.goBack()}
+          Text={'Top Rated Meals'}
+          filterIcon={filter1}
+        />
+        <TextComponent
+          text={'Showing 35 results of Break Fast!'}
+          styles={styles.searchText}
+        />
+        <View style={styles.popularTop}>
+          <FlatList
+            data={topRatedData}
+            renderItem={renderTodayPopular}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={keyExtractor}
+            contentContainerStyle={{
+              paddingBottom: hp('20'),
+            }}
           />
-          <TextComponent
-            text={'Showing 35 results of Break Fast!'}
-            styles={styles.searchText}
-          />
-          <View style={styles.popularTop}>
-            <FlatList
-              data={topRatedData}
-              renderItem={renderTodayPopular}
-              showsHorizontalScrollIndicator={false}
-            />
-          </View>
-        </ScrollView>
+        </View>
       </ImageBackground>
     </>
   );

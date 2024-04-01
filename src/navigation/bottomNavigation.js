@@ -17,6 +17,8 @@ import {
   home2,
 } from '../Assets';
 import useReduxStore from '../Hooks/UseReduxStore';
+import {fetchGetWithToken} from '../Utils/helperFunc';
+import {verifyUserUrl} from '../Utils/Urls';
 globalStyles = {};
 const tabarComponent = (activeImage, unActiveImage, ImageStyle) => {
   return {
@@ -36,6 +38,8 @@ const tabarComponent = (activeImage, unActiveImage, ImageStyle) => {
 const Tab = createBottomTabNavigator();
 
 function MybottomTabs() {
+  fetchGetWithToken(verifyUserUrl);
+
   return (
     <Tab.Navigator
       initialRouteName="HomeScreen"

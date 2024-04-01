@@ -6,15 +6,34 @@ import {TextComponent} from '../../Components/TextComponent';
 import Allergies from '../../Components/Allergies';
 import {Touchable} from '../../Components/Touchable';
 import {SettingHeader} from '../../Components/SettingHeader';
+import useSettingAllergiesScreen from './useSettingAllergiesScreen';
+import {removeKeyAndReturnArry} from '../../Utils/globalFunctions';
 
 const SettingAllergiesScreen = ({navigation}) => {
+  const {allData, apiSelectVal, onSave, selectedVal, setSelectedVal} =
+    useSettingAllergiesScreen(navigation);
   return (
     <ImageBackground source={stepBg} style={styles.container}>
       <SettingHeader
         goBack={() => navigation.goBack()}
         extraStyle={styles.headerStyle}
       />
-      <Allergies onpress={() => navigation.navigate('Restrictions')} />
+      <Allergies
+        onpress={() =>
+          navigation.navigate('AllergiesList', {
+            allergiesList: allData?.allergies,
+            onSelectValue: res => {
+              setSelectedVal(res);
+              setTimeout(() => {
+                onSave();
+              }, 900);
+            },
+            selectedValue: apiSelectVal,
+          })
+        }
+        selectedValue={selectedVal ?? apiSelectVal}
+        arryViewStyle={{alignSelf: 'center'}}
+      />
     </ImageBackground>
   );
 };

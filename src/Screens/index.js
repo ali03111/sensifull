@@ -18,3 +18,4 @@ export {default as RecommendedMealScreen} from './RecommendedMealScreen';
 export {default as MealPlanScreen} from './MealPlanScreen';
 export {default as CreateMealPlanScreen} from './CreateMealPlanScreen';
 export {default as SelectYourMealScreen} from './SelectYourMealScreen';
+export {default as EditProfileScreen} from './EditProfileScreen';

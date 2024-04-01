@@ -8,6 +8,7 @@ import {
   Pressable,
   FlatList,
   Keyboard,
+  Platform,
 } from 'react-native';
 import useStepScreen from './useStepScreen';
 import {arrowRight, stepBg} from '../../Assets';
@@ -20,32 +21,26 @@ import {SocialBtn} from '../../Components/SocialBtn';
 import GoalsAndPurpose from '../../Components/GoalsAndPurpose';
 import DietaryRestrictions from '../../Components/DietaryRestrictions';
 import Allergies from '../../Components/Allergies';
+import {
+  getIdsFromArry,
+  removeKeyAndReturnArry,
+} from '../../Utils/globalFunctions';
 
 const StepScreen = ({navigation}) => {
-  const {} = useStepScreen(navigation);
+  const {
+    onbardData,
+    handleNextStep,
+    handlePreviousStep,
+    onSelectValue,
+    onBoardData,
+    step,
+    dynamicRoute,
+    mutate,
+  } = useStepScreen(navigation);
 
   // for modal
   // const [modal1Visible, setModal1Visible] = useState(false);
   // const [modal2Visible, setModal2Visible] = useState(false);
-
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    address: '',
-  });
-
-  const handleNextStep = () => {
-    if (step < 6) {
-      setStep(step + 1);
-    }
-  };
-
-  const handlePreviousStep = () => {
-    if (step > 1) {
-      setStep(step - 1);
-    }
-  };
 
   const handleChange = (key, value) => {
     setFormData(prevState => ({
@@ -77,29 +72,187 @@ const StepScreen = ({navigation}) => {
     };
   }, []);
 
+  const renderSteps = {
+    1: () => {
+      return (
+        <>
+          <TextComponent
+            text={
+              'Complete your profile to establish your personal dietary needs.'
+            }
+            styles={styles.tagline}
+          />
+          <GoalsAndPurpose
+            onSelectValue={val => onSelectValue('purpose', val)}
+            title={'Purpose'}
+            selectedValue={onBoardData?.purpose}
+            data={onbardData?.purposes ?? []}
+          />
+        </>
+      );
+    },
+    2: () => {
+      return (
+        <View>
+          <TextComponent
+            text={
+              'Complete your profile to establish your personal dietary needs.'
+            }
+            styles={styles.tagline}
+          />
+          <DietaryRestrictions
+            onpress={() =>
+              dynamicRoute('Restrictions', {
+                restrictions: onbardData?.ingredients_for_restrictions,
+                onSelectValue: res =>
+                  onSelectValue('restrictions', removeKeyAndReturnArry(res)),
+                selectedValue: onBoardData?.restrictions,
+              })
+            }
+            selectedValue={onBoardData?.restrictions}
+          />
+        </View>
+      );
+    },
+    3: () => {
+      return (
+        <View>
+          <TextComponent
+            text={
+              'Complete your profile to establish your personal dietary needs.'
+            }
+            styles={styles.tagline}
+          />
+          <Allergies
+            onpress={() =>
+              dynamicRoute('AllergiesList', {
+                allergiesList: onbardData?.ingredients_for_allergies,
+                onSelectValue: res => onSelectValue('allergies', res),
+                selectedValue: onBoardData?.allergies,
+              })
+            }
+            selectedValue={onBoardData?.allergies}
+          />
+        </View>
+      );
+    },
+    4: ({ageData: {setSelectedAge, selectedAge}}) => {
+      return (
+        <View>
+          <TextComponent
+            text={
+              'Complete your profile to establish your personal dietary needs.'
+            }
+            styles={styles.tagline}
+          />
+          <TextComponent text={'Age Range'} styles={styles.titleStep4} />
+          <View style={styles.agePicker}>
+            <Picker
+              style={
+                Platform.OS == 'ios'
+                  ? styles.pickerStyleIO0S
+                  : styles.pickerStyle
+              }
+              itemStyle={{
+                fontSize: hp('2'),
+              }}
+              selectedValue={onBoardData?.ageRange}
+              onValueChange={(itemValue, itemIndex) =>
+                onSelectValue('ageRange', itemValue)
+              }>
+              <Picker.Item label="Select your age" value={null} />
+              <Picker.Item label="8 - 13" value="8 - 13" />
+              <Picker.Item label="13 - 15" value="13 - 15" />
+              <Picker.Item label="15 - 18" value="15 - 18" />
+              <Picker.Item label="18 - 21" value="18 - 21" />
+              <Picker.Item label="21 - 24" value="21 - 24" />
+              <Picker.Item label="24 - 27" value="24 - 27" />
+            </Picker>
+            {Platform.OS == 'android' && (
+              <TextComponent
+                text={
+                  onBoardData?.ageRange
+                    ? onBoardData?.ageRange
+                    : 'Select your age'
+                }
+                styles={styles.pickerText(onBoardData?.ageRange)}
+              />
+            )}
+          </View>
+        </View>
+      );
+    },
+    5: ({genderData: {handleGenderPress, selectedGender}}) => {
+      return (
+        <View>
+          <TextComponent
+            text={
+              'Complete your profile to establish your personal dietary needs.'
+            }
+            styles={styles.tagline}
+          />
+          <TextComponent text={'Gender'} styles={styles.title} />
+          <View style={styles.content}>
+            {step5.map((item, index) => (
+              <Pressable
+                style={styles.gender(
+                  Boolean(onBoardData?.gender == item.title),
+                )}
+                key={item?.id}
+                onPress={() => onSelectValue('gender', item.title)}>
+                <Image
+                  source={item?.image}
+                  style={styles.catImage(
+                    Boolean(onBoardData?.gender == item.title),
+                  )}
+                />
+                <TextComponent
+                  text={item?.title}
+                  styles={styles.genderTitle(
+                    Boolean(onBoardData?.gender == item.title),
+                  )}
+                />
+              </Pressable>
+            ))}
+          </View>
+        </View>
+      );
+    },
+    6: () => {
+      return (
+        <View>
+          <TextComponent
+            text={
+              'Complete your profile to establish your personal dietary needs.'
+            }
+            styles={styles.lastTagline}
+          />
+          <TextComponent
+            text={'Where did you hear about us?'}
+            styles={styles.titleLastStep}
+          />
+          <FlatList
+            data={socialData} // Use the same data for the dots
+            renderItem={({item, index}) => {
+              return (
+                <SocialBtn
+                  icon={item?.image}
+                  text={item?.title}
+                  noBorder={index == 5 ? styles.hideBorder : null}
+                  onSelectedVal={res => onSelectValue('hearFrom', res)}
+                  selectedVal={onBoardData?.hearFrom}
+                />
+              );
+            }}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.dotList}
+          />
+        </View>
+      );
+    },
+  };
+
   const renderStepContent = () => {
-    // const [selectedCategory, setSelectedCategory] = useState(null);
-
-    // const handleCategoryPress = itemId => {
-    //   setSelectedCategory(itemId);
-    // };
-    // --------step 1 ends-----------
-    const [selectedButtons, setSelectedButtons] = useState([]);
-
-    const handlePress = itemId => {
-      let newSelectedButtons;
-      if (selectedButtons.includes(itemId)) {
-        newSelectedButtons = selectedButtons.filter(name => name !== itemId);
-      } else {
-        newSelectedButtons = [...selectedButtons, itemId];
-      }
-      setSelectedButtons(newSelectedButtons);
-    };
-
-    // -------- step 2 and 3 -------
-    // const {selectedItems, handlePress} = MultiSelectButton();
-    // const [selectedItems, setSelectedItems] = useState([]);
-
     // --------step 4 -----------
     const [selectedAge, setSelectedAge] = useState();
     // --------- step 5 ------------
@@ -108,173 +261,16 @@ const StepScreen = ({navigation}) => {
     const handleGenderPress = itemId => {
       setSelectedGender(itemId);
     };
-
-    const renderItem = useCallback(({item, index}) => {
-      console.log(index);
-      return (
-        <SocialBtn
-          icon={item?.image}
-          text={item?.title}
-          noBorder={index == 5 ? styles.hideBorder : null}
-        />
-      );
+    return renderSteps[step]({
+      genderData: {
+        handleGenderPress,
+        selectedGender,
+      },
+      ageData: {
+        setSelectedAge,
+        selectedAge,
+      },
     });
-
-    switch (step) {
-      case 1:
-        return (
-          <View>
-            <TextComponent
-              text={
-                'Complete your profile to establish your personal dietary needs.'
-              }
-              styles={styles.tagline}
-            />
-            <GoalsAndPurpose title={'Purpose'} data={step1} />
-          </View>
-        );
-      case 2:
-        return (
-          <View>
-            <TextComponent
-              text={
-                'Complete your profile to establish your personal dietary needs.'
-              }
-              styles={styles.tagline}
-            />
-            <DietaryRestrictions
-              onpress={() => navigation.navigate('Restrictions')}
-            />
-          </View>
-        );
-      case 3:
-        return (
-          <View>
-            <TextComponent
-              text={
-                'Complete your profile to establish your personal dietary needs.'
-              }
-              styles={styles.tagline}
-            />
-            <Allergies onpress={() => navigation.navigate('AllergiesList')} />
-          </View>
-        );
-      case 4:
-        return (
-          <View>
-            <TextComponent
-              text={
-                'Complete your profile to establish your personal dietary needs.'
-              }
-              styles={styles.tagline}
-            />
-            <TextComponent text={'Age Range'} styles={styles.titleStep4} />
-            <View style={styles.agePicker}>
-              <Picker
-                style={{
-                  width: wp('90'),
-                  height: hp('6.2'),
-                  alignItems: 'center',
-                  alignSelf: 'center',
-                  verticalAlign: 'middle',
-                  justifyContent: 'center',
-                  // fontSize: hp('1'),
-                  color: 'transparent',
-                }}
-                itemStyle={{
-                  fontSize: 40,
-                }}
-                selectedValue={selectedAge}
-                onValueChange={(itemValue, itemIndex) =>
-                  setSelectedAge(itemValue)
-                }>
-                <Picker.Item label="Select your age" value="" />
-                <Picker.Item label="8 - 13" value="8 - 13" />
-                <Picker.Item label="13 - 15" value="13 - 15" />
-                <Picker.Item label="15 - 18" value="15 - 18" />
-                <Picker.Item label="18 - 21" value="18 - 21" />
-                <Picker.Item label="21 - 24" value="21 - 24" />
-                <Picker.Item label="24 - 27" value="24 - 27" />
-              </Picker>
-
-              <TextComponent
-                text={selectedAge ? selectedAge : 'Select your age'}
-                styles={styles.pickerText(selectedAge)}
-              />
-            </View>
-          </View>
-        );
-      case 5:
-        return (
-          <View>
-            <TextComponent
-              text={
-                'Complete your profile to establish your personal dietary needs.'
-              }
-              styles={styles.tagline}
-            />
-            <TextComponent text={'Gender'} styles={styles.title} />
-            <View style={styles.content}>
-              {step5.map((item, index) => (
-                <Pressable
-                  style={styles.gender(Boolean(selectedGender == item.id))}
-                  key={item?.id}
-                  onPress={() => handleGenderPress(item.id)}>
-                  <Image
-                    source={item?.image}
-                    style={styles.catImage(Boolean(selectedGender == item.id))}
-                  />
-                  <TextComponent
-                    text={item?.title}
-                    styles={styles.genderTitle(
-                      Boolean(selectedGender == item.id),
-                    )}
-                  />
-                </Pressable>
-              ))}
-            </View>
-          </View>
-        );
-      case 6:
-        return (
-          <View>
-            <TextComponent
-              text={
-                'Complete your profile to establish your personal dietary needs.'
-              }
-              styles={styles.lastTagline}
-            />
-            <TextComponent
-              text={'Where did you hear about us?'}
-              styles={styles.titleLastStep}
-            />
-            {/* <Pressable onPress={toggleCheck} style={styles.socialMain}>
-              <Image source={facebook} style={styles.socialIcon} />
-              <View style={styles.socialInner}>
-                <TextComponent text={'Facebook'} styles={styles.socialText} />
-                <Image
-                  source={isChecked ? check : uncheck}
-                  style={styles.socialCheck}
-                />
-              </View>
-            </Pressable> */}
-            {/* <SocialBtn icon={facebook} />
-            <SocialBtn icon={instagram} />
-            <SocialBtn icon={twitter} />
-            <SocialBtn icon={linkedin} />
-            <SocialBtn icon={thread} />
-            <SocialBtn icon={other} /> */}
-            <FlatList
-              data={socialData} // Use the same data for the dots
-              renderItem={renderItem}
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.dotList}
-            />
-          </View>
-        );
-      default:
-        return null;
-    }
   };
 
   const renderStepCircles = () => {
@@ -302,18 +298,25 @@ const StepScreen = ({navigation}) => {
       {!isKeyboardVisible && (
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            style={[styles.button, styles.previousButton]}
+            disabled={Boolean(step == 1)}
+            style={[styles.button, styles.previousButton(Boolean(step == 1))]}
             onPress={handlePreviousStep}>
-            <Text style={styles.buttonText}>Previous</Text>
+            <Text
+              style={{
+                ...styles.buttonText,
+                display: Boolean(step == 1) ? 'none' : 'flex',
+              }}>
+              Previous
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={[styles.button, styles.nextButton]}
-            onPress={handleNextStep}>
+            onPress={() => handleNextStep[step]()}>
             <Text style={styles.buttonText}>
-              {step === 6 ? 'Submit' : 'Next'}
+              {step == 6 ? 'Submit' : 'Next'}
             </Text>
-            {step === 6 ? null : (
+            {step == 6 ? null : (
               <Image source={arrowRight} style={styles.arrRight} />
             )}
           </TouchableOpacity>

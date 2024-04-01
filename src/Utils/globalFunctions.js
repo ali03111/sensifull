@@ -3,4 +3,13 @@ const getSingleCharacter = text => {
   return letter;
 };
 
-export {getSingleCharacter};
+const removeKeyAndReturnArry = selectedValue => {
+  const combinedArray = Object.values(selectedValue).flat();
+  return combinedArray;
+};
+
+const getIdsFromArry = (arry, key) => {
+  return arry.map(res => res[key]);
+};
+
+export {getSingleCharacter, removeKeyAndReturnArry, getIdsFromArry};

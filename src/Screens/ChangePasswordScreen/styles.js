@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     color: Colors.primaryColor,
   },
   lockstyle: {
-    flex: 0.5,
+    flex: 0.3,
   },
   inputMain: {
     backgroundColor: '#fcf8e9',

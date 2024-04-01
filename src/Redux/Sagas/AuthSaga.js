@@ -36,10 +36,6 @@ const loginSaga = function* ({payload: {datas, type}}) {
   console.log('asd');
   try {
     const getLoginData = loginObject[type];
-    console.log(
-      'resultDataresultDataresultDataresultDataresultDataresultData',
-      yield call(getLoginData, datas),
-    );
     const resultData = yield call(getLoginData, datas);
     const {socialData, ok} = {socialData: resultData, ok: true};
     if (ok) {

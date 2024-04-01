@@ -105,3 +105,4 @@ export {default as arrRightGray} from './Icons/arrRightGray.png';
 export {default as addCirlce} from './Icons/add-circle.png';
 export {default as chevLeft} from './Icons/chev-left.png';
 export {default as chevRight} from './Icons/chev-right.png';
+export {default as editPicBtn} from './Icons/editPicBtn.png';

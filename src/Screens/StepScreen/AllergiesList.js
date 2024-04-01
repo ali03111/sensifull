@@ -16,12 +16,20 @@ import Collapsible from 'react-native-collapsible';
 import {AllergiesData, IngredientsData} from '../../Utils/localDB';
 import {Colors} from '../../Theme/Variables';
 
-export default function AllergiesList({navigation}) {
-  const [selectedAllergies, setSelectedAllergies] = useState([]);
+export default function AllergiesList({navigation, route}) {
+  const {allergiesList, onSelectValue, selectedValue} = route?.params;
+
+  const [selectedAllergies, setSelectedAllergies] = useState(selectedValue);
 
   const toggleAllergy = allergy => {
-    if (selectedAllergies.includes(allergy)) {
-      setSelectedAllergies(selectedAllergies.filter(item => item !== allergy));
+    console.log('selectedAllergies:', selectedAllergies);
+
+    const foundAllergy = selectedAllergies.find(res => res?.id === allergy?.id);
+
+    if (foundAllergy) {
+      setSelectedAllergies(
+        selectedAllergies.filter(item => item?.id !== allergy?.id),
+      );
     } else {
       setSelectedAllergies([...selectedAllergies, allergy]);
     }
@@ -29,12 +37,19 @@ export default function AllergiesList({navigation}) {
 
   return (
     <ImageBackground source={stepBg} style={styles.container}>
-      <ScrollView>
+      <View>
         <View style={styles.headerMain}>
           <Touchable onPress={() => navigation.goBack()}>
             <Image source={arrowBack} style={styles.arrBack} />
           </Touchable>
-          <TextComponent text={'Save'} styles={styles.saveText} />
+          <TextComponent
+            text={'Save'}
+            styles={styles.saveText}
+            onPress={() => {
+              navigation.goBack();
+              onSelectValue(selectedAllergies);
+            }}
+          />
         </View>
         <View style={styles.searchMain}>
           <Image source={search} style={styles.inputImage} />
@@ -43,29 +58,32 @@ export default function AllergiesList({navigation}) {
             placeholder={'Search Allergies'}
           />
         </View>
-        {AllergiesData.map((item, index) => (
-          <View key={index} style={styles.btnsMain}>
-            {item.content.map((allergy, idx) => (
-              <TouchableOpacity
-                key={idx}
-                onPress={() => toggleAllergy(allergy)}
-                style={{
-                  backgroundColor: selectedAllergies.includes(allergy)
-                    ? Colors.themeGreen
-                    : 'rgba(255, 255, 255, 0.3)',
-                  ...styles.allergiesBtns,
-                }}>
-                <Text
-                  style={{
-                    color: selectedAllergies.includes(allergy)
-                      ? 'white'
-                      : 'black',
-                  }}>
-                  {allergy}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+      </View>
+      <ScrollView
+        contentContainerStyle={styles.btnsMain}
+        showsVerticalScrollIndicator={false}>
+        {allergiesList.map((item, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => toggleAllergy(item)}
+            style={{
+              backgroundColor: selectedAllergies?.filter(
+                res => res?.id == item?.id,
+              )[0]?.id
+                ? Colors.themeGreen
+                : 'rgba(255, 255, 255, 0.3)',
+              ...styles.allergiesBtns,
+            }}>
+            <Text
+              style={{
+                color: selectedAllergies?.filter(res => res?.id == item?.id)[0]
+                  ?.id
+                  ? 'white'
+                  : 'black',
+              }}>
+              {item?.title}
+            </Text>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </ImageBackground>

@@ -6,8 +6,13 @@ import {TextComponent} from '../../Components/TextComponent';
 import DietaryRestrictions from '../../Components/DietaryRestrictions';
 import {Touchable} from '../../Components/Touchable';
 import {SettingHeader} from '../../Components/SettingHeader';
+import useSettingDietaryScreen from './useSettingDietaryScreen';
+import {removeKeyAndReturnArry} from '../../Utils/globalFunctions';
 
 const SettingDietaryScreen = ({navigation}) => {
+  const {allData, apiSelectVal, onSave, selectedVal, setSelectedVal} =
+    useSettingDietaryScreen(navigation);
+
   return (
     <ImageBackground source={stepBg} style={styles.container}>
       <SettingHeader
@@ -15,7 +20,20 @@ const SettingDietaryScreen = ({navigation}) => {
         extraStyle={styles.headerStyle}
       />
       <DietaryRestrictions
-        onpress={() => navigation.navigate('Restrictions')}
+        onpress={() =>
+          navigation.navigate('Restrictions', {
+            restrictions: allData?.restrictions,
+            onSelectValue: res => {
+              setSelectedVal(removeKeyAndReturnArry(res));
+              setTimeout(() => {
+                onSave();
+              }, 900);
+            },
+            selectedValue: apiSelectVal,
+          })
+        }
+        arryViewStyle={{alignSelf: 'center'}}
+        selectedValue={selectedVal ?? apiSelectVal}
       />
     </ImageBackground>
   );

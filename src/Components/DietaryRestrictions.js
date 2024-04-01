@@ -1,4 +1,11 @@
-import {Image, Pressable, StyleSheet, View} from 'react-native';
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import {TextComponent} from './TextComponent';
 import {hp, wp} from '../Config/responsive';
@@ -8,7 +15,12 @@ import {arrRightPurple, info, ingred} from '../Assets';
 import useStepScreen from '../Screens/StepScreen/useStepScreen';
 import {InfoModal} from '../Screens/StepScreen/InfoModal';
 
-export default function DietaryRestrictions({title, data, onpress}) {
+export default function DietaryRestrictions({
+  title,
+  selectedValue,
+  onpress,
+  arryViewStyle,
+}) {
   const [modal1Visible, setModal1Visible] = useState(false);
 
   return (
@@ -32,6 +44,24 @@ export default function DietaryRestrictions({title, data, onpress}) {
           />
           <Image source={arrRightPurple} style={styles.arrowImage} />
         </Touchable>
+      </View>
+
+      <View style={{...styles.btnsMain, ...arryViewStyle}}>
+        {selectedValue?.map((item, index) => (
+          <View
+            key={index}
+            style={{
+              backgroundColor: Colors.themeGreen,
+              ...styles.allergiesBtns,
+            }}>
+            <Text
+              style={{
+                color: 'white',
+              }}>
+              {item?.title}
+            </Text>
+          </View>
+        ))}
       </View>
       <InfoModal
         isVisible={modal1Visible}
@@ -100,5 +130,22 @@ const styles = StyleSheet.create({
     width: wp('5'),
     resizeMode: 'contain',
     marginRight: wp('1'),
+  },
+  btnsMain: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: wp('92'),
+  },
+  allergiesBtns: {
+    height: hp('4'),
+    borderRadius: 20,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    borderWidth: 0.5,
+    borderColor: Colors.themeGreen,
+    paddingHorizontal: wp('3'),
+    marginHorizontal: wp('1'),
+    marginVertical: hp('.5'),
   },
 });

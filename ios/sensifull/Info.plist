@@ -82,5 +82,7 @@
 	<string>95216d298b45ac33d8cdb9f5a62b96b8</string>
 	<key>FacebookDisplayName</key>
 	<string>Sensciful</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To add profile picture , you need to allow access to your photo gallery</string>
 </dict>
 </plist>

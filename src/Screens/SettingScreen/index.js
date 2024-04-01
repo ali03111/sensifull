@@ -10,6 +10,7 @@ import {
 import React, {memo, useCallback, useState} from 'react';
 import {
   arrLeft,
+  goalGreen,
   logOut,
   logoutGreen,
   passGreen,
@@ -29,6 +30,7 @@ import {SettingModal} from './SettingModal';
 import {keyExtractor} from '../../Utils';
 import {hp} from '../../Config/responsive';
 import useSettingScreen from './useSettingScreen';
+import {imageUrl} from '../../Utils/Urls';
 
 const SettingScreen = ({navigation}) => {
   const {
@@ -41,8 +43,6 @@ const SettingScreen = ({navigation}) => {
     userData,
   } = useSettingScreen(navigation);
 
-  const [modal1Visible, setModal1Visible] = useState(false);
-  const [modal2Visible, setModal2Visible] = useState(false);
   const renderItem = useCallback(({item, index, data}) => {
     return (
       <Touchable
@@ -71,17 +71,47 @@ const SettingScreen = ({navigation}) => {
         <BlurImage
           blurhash={'LKK1wP_3yYIU4.jsWrt7_NRjMdt7'}
           // radius={75}
-          // isURI={true}
+          isURI={true}
           styles={styles.ProfileImage}
           blurStyle={styles.blurMain}
-          uri={profile}
+          uri={imageUrl(userData?.profile_image)}
         />
-        <TextComponent text={'John Doe'} styles={styles.name} />
-        <TextComponent text={'john@sensifull.com'} styles={styles.email} />
+        <TextComponent
+          text={userData?.first_name + ' ' + userData?.last_name}
+          styles={styles.name}
+        />
+        <TextComponent text={userData?.email} styles={styles.email} />
         <ScrollView
           showsVerticalScrollIndicator={false}
           scrollEnabled
           contentContainerStyle={{paddingBottom: hp('70')}}>
+          <View style={styles.mainBtn}>
+            <FlatList
+              data={[
+                {
+                  icon: goalGreen,
+                  name: 'Edit Profile',
+                  onpress: (navigate, route) => navigate(route),
+                  screenName: 'EditProfileScreen',
+                },
+              ]}
+              scrollEnabled={false}
+              keyExtractor={keyExtractor}
+              renderItem={props =>
+                renderItem({
+                  ...props,
+                  data: [
+                    {
+                      icon: goalGreen,
+                      name: 'Edit Profile',
+                      onpress: (navigate, route) => navigate(route),
+                      screenName: 'EditProfileScreen',
+                    },
+                  ],
+                })
+              }
+            />
+          </View>
           <View style={styles.mainBtn}>
             <FlatList
               data={settingData}
