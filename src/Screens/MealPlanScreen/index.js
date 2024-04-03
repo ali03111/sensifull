@@ -115,8 +115,8 @@ const MealPlanScreen = ({navigation}) => {
     return (
       <Touchable
         style={[
-          styles.dateBtn,
           item == activeButton ? styles.activeDateBtn : null,
+          styles.dateBtn,
         ]}
         onPress={() => handleButtonClick(item)}>
         <View style={{...(item == activeButton && styles.activeDateNumber)}}>
