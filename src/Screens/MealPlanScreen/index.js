@@ -34,9 +34,17 @@ import {SwipeListView} from 'react-native-swipe-list-view';
 import {dateData} from '../../Utils/localDB';
 import {hp, wp} from '../../Config/responsive';
 import {FilterModal} from './FilterModal';
+import {getDateMonthYear} from '../../Utils/globalFunctions';
 
 const MealPlanScreen = ({navigation}) => {
-  const {toggleModal, modalVisible} = useMealPlanScreen(navigation);
+  const {
+    toggleModal,
+    modalVisible,
+    planDate,
+    activeButton,
+    handleButtonClick,
+    bottomData,
+  } = useMealPlanScreen(navigation);
 
   const [listData, setListData] = useState(
     Array(5)
@@ -75,23 +83,22 @@ const MealPlanScreen = ({navigation}) => {
     console.log('This row opened', rowKey);
   };
 
-  const renderItem = data => (
-    <TouchableHighlight style={styles.rowFront}>
-      <View style={styles.swipeMain}>
-        <Image source={swipe1} style={styles.swipeImg} />
-        <View style={styles.swipeInner}>
-          <TextComponent
-            text={'Italian cuisine pasta'}
-            styles={styles.swipeTitle}
-          />
-          <TextComponent
-            text={'Breakfast, 2 Servings'}
-            styles={styles.swipeText}
-          />
+  const renderItem = ({item}) => {
+    return (
+      <TouchableHighlight style={styles.rowFront}>
+        <View style={styles.swipeMain}>
+          <Image source={swipe1} style={styles.swipeImg} />
+          <View style={styles.swipeInner}>
+            <TextComponent text={item?.name} styles={styles.swipeTitle} />
+            <TextComponent
+              text={`Breakfast, ${item?.pivot?.serving} Servings`}
+              styles={styles.swipeText}
+            />
+          </View>
         </View>
-      </View>
-    </TouchableHighlight>
-  );
+      </TouchableHighlight>
+    );
+  };
 
   const renderHiddenItem = (data, rowMap) => (
     <View style={styles.rowBack}>
@@ -104,32 +111,27 @@ const MealPlanScreen = ({navigation}) => {
     </View>
   );
 
-  const [activeButton, setActiveButton] = useState(0);
-
-  const handleButtonClick = index => {
-    setActiveButton(index);
-  };
-
   const renderDate = useCallback(({item, index}) => {
     return (
       <Touchable
         style={[
           styles.dateBtn,
-          index === activeButton ? styles.activeDateBtn : null,
+          item == activeButton ? styles.activeDateBtn : null,
         ]}
-        onPress={() => handleButtonClick(index)}>
+        onPress={() => handleButtonClick(item)}>
+        <View style={{...(item == activeButton && styles.activeDateNumber)}}>
+          <TextComponent
+            text={getDateMonthYear(item)?.day}
+            styles={{
+              ...styles.dateNumber,
+            }}
+          />
+        </View>
         <TextComponent
-          text={item?.date}
-          styles={{
-            ...styles.dateNumber,
-            ...(index === activeButton && styles.activeDateNumber),
-          }}
-        />
-        <TextComponent
-          text={item?.day}
+          text={getDateMonthYear(item)?.monthName}
           styles={{
             ...styles.dateDay,
-            ...(index === activeButton && styles.activeDateDay),
+            ...(item == activeButton && styles.activeDateDay),
           }}
         />
       </Touchable>
@@ -139,9 +141,7 @@ const MealPlanScreen = ({navigation}) => {
   return (
     <>
       <ImageBackground source={stepBg} style={styles.container}>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.scroll}>
+        <View showsVerticalScrollIndicator={false} style={styles.scroll}>
           <HeaderWithFilterAndBack
             goBack={() => navigation.goBack()}
             Text={'Meals Plan'}
@@ -154,40 +154,55 @@ const MealPlanScreen = ({navigation}) => {
             btnTitle={'Create Plan'}
             onpress={() => navigation.navigate('CreateMealPlanScreen')}
           /> */}
-          <View style={styles.datList}>
-            <FlatList
-              data={dateData} // Use the same data for the dots
-              renderItem={renderDate}
-              showsHorizontalScrollIndicator={false}
-              horizontal={true}
-              style={{
-                paddingHorizontal: wp('0'),
-                marginTop: hp('2'),
-              }}
-            />
-          </View>
-          <View style={styles.dateMain}>
-            <TextComponent text={'Sunday, 25 Feb'} styles={styles.date} />
-            <Touchable
-              onPress={() => navigation.navigate('CreateMealPlanScreen')}>
-              <Image source={addCirlce} style={styles.circleStyle} />
-            </Touchable>
-          </View>
-          <SwipeListView
-            showsVerticalScrollIndicator={false}
-            style={styles.listMain}
-            useSectionList
-            sections={listData}
-            renderItem={renderItem}
-            renderHiddenItem={renderHiddenItem}
-            leftOpenValue={75}
-            rightOpenValue={-75}
-            previewRowKey={'0'}
-            // previewOpenValue={-40}
-            previewOpenDelay={3000}
-            onRowDidOpen={onRowDidOpen}
-          />
-        </ScrollView>
+          {planDate?.length > 0 ? (
+            <>
+              <View style={styles.datList}>
+                <FlatList
+                  data={planDate} // Use the same data for the dots
+                  renderItem={renderDate}
+                  showsHorizontalScrollIndicator={false}
+                  horizontal={true}
+                  style={{
+                    paddingHorizontal: wp('0'),
+                    marginTop: hp('2'),
+                  }}
+                />
+              </View>
+              <View style={styles.dateMain}>
+                <TextComponent text={'Sunday, 25 Feb'} styles={styles.date} />
+                <Touchable
+                  onPress={() => navigation.navigate('CreateMealPlanScreen')}>
+                  <Image source={addCirlce} style={styles.circleStyle} />
+                </Touchable>
+              </View>
+              <SwipeListView
+                showsVerticalScrollIndicator={false}
+                style={styles.listMain}
+                useFlatList
+                data={bottomData?.plan_meals}
+                sections={bottomData}
+                renderItem={renderItem}
+                renderHiddenItem={renderHiddenItem}
+                leftOpenValue={75}
+                rightOpenValue={-75}
+                previewRowKey={'0'}
+                // previewOpenValue={-40}
+                previewOpenDelay={3000}
+                onRowDidOpen={onRowDidOpen}
+              />
+            </>
+          ) : (
+            <View
+              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              <ThemeButton
+                title={'Create Plan'}
+                onPress={() => navigation.navigate('CreateMealPlanScreen')}
+                style={{width: wp('90'), alignSelf: 'center'}}
+              />
+            </View>
+          )}
+        </View>
+
         <FilterModal ToggleFunction={toggleModal} isVisible={modalVisible} />
       </ImageBackground>
     </>

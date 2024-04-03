@@ -6,7 +6,6 @@ import {Image, StyleSheet} from 'react-native';
 import {chevLeft, chevRight} from '../Assets';
 
 const UseCalendar = ({onSelectVal, selectedVal}) => {
-  const [selected, setSelected] = useState('');
   const today = new Date(); // Get current date
   const minDate = today.toISOString().split('T')[0]; // Convert to ISO format
 
@@ -26,10 +25,10 @@ const UseCalendar = ({onSelectVal, selectedVal}) => {
         )
       }
       onDayPress={day => {
-        setSelected(day.dateString);
+        onSelectVal(day.dateString);
       }}
       markedDates={{
-        [selected]: {
+        [selectedVal]: {
           selected: true,
           disableTouchEvent: true,
         },

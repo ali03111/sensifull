@@ -7,6 +7,7 @@ import createSagaMiddleware from 'redux-saga';
 import mySaga from '../Sagas/index';
 import {createStore, applyMiddleware, combineReducers} from 'redux';
 import AlertReucer from './AlertReucer';
+import MealPlanReducer from './MealPlanReducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -27,6 +28,7 @@ const reducers = {
   Auth: persistReducer(AuthPersistConfig, AuthReducer),
   isloading: loadingReducer,
   isAlert: AlertReucer,
+  MealPlanData: MealPlanReducer,
 };
 
 export const store = createStore(

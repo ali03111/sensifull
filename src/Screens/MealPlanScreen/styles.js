@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import {hp, wp} from '../../Config/responsive';
 import {Colors} from '../../Theme/Variables';
 
@@ -135,14 +135,14 @@ export const styles = StyleSheet.create({
   dateBtn: {
     paddingHorizontal: wp('1'),
     alignItems: 'center',
-    marginHorizontal: wp('1'),
+    marginHorizontal: wp('2'),
     paddingVertical: hp('.5'),
   },
   dateNumber: {
-    fontSize: hp('3'),
-    fontWeight: 600,
-    borderRadius: 50,
-    paddingHorizontal: wp('1.9'),
+    fontSize: hp('2.5'),
+    fontWeight: 500,
+    // borderRadius: 50,
+    // paddingHorizontal: wp('1.9'),
     paddingVertical: hp('.6'),
   },
   dateDay: {
@@ -156,10 +156,19 @@ export const styles = StyleSheet.create({
   },
   activeDateNumber: {
     backgroundColor: 'white',
-    borderRadius: 50,
-    paddingHorizontal: wp('1.9'),
-    paddingVertical: hp('.6'),
+    borderRadius: Math.round(
+      Dimensions.get('window').width + Dimensions.get('window').height,
+    ),
+    width: Dimensions.get('window').width * 0.09,
+    height: Dimensions.get('window').width * 0.09,
+    // paddingHorizontal: wp('1.9'),
+    // paddingVertical: hp('.6'),
     color: Colors.primaryColor,
+    // textAlign: 'center',
+    // textAlignVertical: 'center',
+    overflow: 'hidden',
+    alignItems: 'center',
+    // borderRadius: 30,
   },
   activeDateDay: {
     color: 'white',

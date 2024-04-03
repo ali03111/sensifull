@@ -105,9 +105,11 @@ const fetchGetWithToken = async url => {
     });
     if (!response.ok) {
       // const data = await response.json();
-      console.log('datadatadatadatadatadatadatadata', response);
       store.dispatch({type: types.LogoutType});
-      throw new Error('Network response was not ok.');
+      console.log(
+        'kladbkjlsdbvjkbsdkjbksjdbvkbdjkvbsdkjvjksdbvkljsd',
+        response,
+      );
     }
 
     // console.log(data, 'alskdjfklajsdfkljadlsfjaklsdjfl2kds444ajf2lkdjs');
@@ -116,6 +118,7 @@ const fetchGetWithToken = async url => {
     return data; // Return the fetched data
   } catch (error) {
     console.error('Error fetching data:', error);
+    store.dispatch({type: types.LogoutType});
     throw error; // Rethrow the error to handle it at the caller's level if needed
   }
   // store.dispatch({type: types.LogoutType});

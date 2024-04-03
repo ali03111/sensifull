@@ -8,8 +8,62 @@ const removeKeyAndReturnArry = selectedValue => {
   return combinedArray;
 };
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 const getIdsFromArry = (arry, key) => {
   return arry.map(res => res[key]);
 };
 
-export {getSingleCharacter, removeKeyAndReturnArry, getIdsFromArry};
+function transformArray(arr, date) {
+  const transformedArray = {
+    date,
+    plans: arr.map(item => ({
+      mealid: item.category.meals.id,
+      serving: parseInt(item.category.serving), // Assuming serving is a string and needs to be parsed as an integer
+    })),
+  };
+  return transformedArray;
+}
+
+function getDateMonthYear(dateString) {
+  const dateParts = dateString.split('-'); // Splitting the date string by '-'
+  const year = dateParts[0];
+  const monthNumber = parseInt(dateParts[1], 10); // Parsing month number to integer
+  const day = dateParts[2];
+
+  // Array of English month names
+  const monthNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+
+  // Getting English month name using the month number
+  const monthName = monthNames[monthNumber - 1];
+
+  return {
+    day,
+    monthName,
+    year,
+  };
+}
+
+export {
+  getSingleCharacter,
+  removeKeyAndReturnArry,
+  getIdsFromArry,
+  capitalizeFirstLetter,
+  transformArray,
+  getDateMonthYear,
+};

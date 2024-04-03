@@ -10,4 +10,7 @@ export const types = {
   RegisterUser: 'RegisterUser',
   UpdateAuth: 'UpdateAuth',
   UpdateProfile: 'UpdateProfile',
+  addPlan: 'AddPlan',
+  ClearPlan: 'ClearPlan',
+  UpdatePlan: 'UpdatePlan',
 };

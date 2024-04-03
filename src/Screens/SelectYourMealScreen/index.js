@@ -12,45 +12,70 @@ import {Header} from './Header';
 import {keyExtractor} from '../../Utils';
 import {hp} from '../../Config/responsive';
 import {ServingModal} from './ServingModal';
+import BlurImage from '../../Components/BlurImage';
+import {AniFlatOneByOne} from '../../AnimatedComp/AniFlatOneByOne';
 
-const SelectYourMealScreen = ({navigation}) => {
-  const {} = useSelectYourMealScreen(navigation);
-  const [modal1Visible, setModal1Visible] = useState(false);
+const SelectYourMealScreen = ({navigation, route}) => {
+  const {
+    mealsData,
+    mealPlan,
+    modal1Visible,
+    setModal1Visible,
+    onSelectValue,
+    onSaveData,
+  } = useSelectYourMealScreen(navigation, route);
 
-  const renderTodayPopular = useCallback(({item, index}) => {
-    return (
-      <Touchable style={styles.mealItem} onPress={() => setModal1Visible(true)}>
-        <Image source={item?.image} style={styles.mealImage} />
-        <TextComponent
-          numberOfLines={2}
-          text={item?.title}
-          styles={styles.mealTitle}
-        />
-      </Touchable>
-    );
-  });
+  const RenderTodayPopular = useCallback(
+    ({item, index}) => {
+      return (
+        <Touchable
+          style={styles.mealItem}
+          onPress={() => {
+            onSelectValue('mealObj', item);
+            setModal1Visible(true);
+          }}>
+          <BlurImage
+            uri={item?.image}
+            isURI={true}
+            source={item?.image}
+            styles={styles.mealImage}
+          />
+          <TextComponent
+            numberOfLines={2}
+            text={item?.name}
+            styles={styles.mealTitle}
+          />
+        </Touchable>
+      );
+    },
+    [mealsData],
+  );
 
   return (
     <ImageBackground source={stepBg} style={styles.container}>
       <Header goBack={() => navigation.goBack()} Text={'Select Meal Plan'} />
       <View style={styles.popularTop}>
-        <FlatList
-          data={recommendedData}
-          renderItem={renderTodayPopular}
-          showsVerticalScrollIndicator={false}
-          numColumns={2}
-          keyExtractor={keyExtractor}
-          scrollEnabled
-          contentContainerStyle={{
-            alignItems: 'center',
+        <AniFlatOneByOne
+          data={mealsData?.meals}
+          flatViewStyle={{
             paddingBottom: hp('50'),
+            alignSelf: 'center',
           }}
+          flatListProps={{
+            numColumns: 2,
+          }}
+          InnerCompnonet={(item, index) => (
+            <RenderTodayPopular item={item} index={index} />
+          )}
         />
         <ServingModal
           isVisible={modal1Visible}
           onClose={() => setModal1Visible(false)}
           title="How many servings ?"
           content="Choose the number of servings."
+          onSelectVal={val => onSelectValue('serving', val)}
+          selectedValue={mealPlan?.serving}
+          onConfirm={onSaveData}
         />
       </View>
     </ImageBackground>

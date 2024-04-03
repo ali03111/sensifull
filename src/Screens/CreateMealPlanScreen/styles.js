@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   scroll: {
-    flex: 1,
+    paddingBottom: hp('10'),
   },
   noDataImage: {
     width: wp('35'),
@@ -100,5 +100,10 @@ export const styles = StyleSheet.create({
     shadowRadius: 5.46,
 
     elevation: 9,
+  },
+  btnStyle: {
+    alignSelf: 'center',
+    width: wp('90'),
+    marginTop: hp('2'),
   },
 });

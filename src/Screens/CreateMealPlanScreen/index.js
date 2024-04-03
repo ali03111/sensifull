@@ -22,23 +22,29 @@ import {Calendar, LocaleConfig} from 'react-native-calendars';
 import {Colors} from '../../Theme/Variables';
 import UseCalendar from '../../Components/Calendar';
 import {Header} from './Header';
+import ThemeButton from '../../Components/ThemeButton';
+import {hp, wp} from '../../Config/responsive';
+import {errorMessage} from '../../Config/NotificationMessage';
 
 const CreateMealPlanScreen = ({navigation}) => {
-  const [collapsed, setCollapsed] = useState(true);
+  const {
+    catData,
+    reduxMealPlans,
+    dynamicRoute,
+    getDataFromScreen,
+    handleButtonPress,
+    selectedButton,
+    collapsed,
+    toggleCollapsed,
+    createPlan,
+    selectedDate,
+    setSelectedDate,
+  } = useCreateMealPlanScreen(navigation);
 
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
-
-  const [selectedButton, setSelectedButton] = useState(null);
-
-  const handleButtonPress = buttonIndex => {
-    setSelectedButton(buttonIndex);
-  };
-
-  const [selected, setSelected] = useState('');
-
-  const {} = useCreateMealPlanScreen(navigation);
+  console.log(
+    'reduxMealPlansreduxMealPlansreduxMealPlansreduxMealPlansreduxMealPlansreduxMealPlans',
+    reduxMealPlans,
+  );
 
   return (
     <>
@@ -51,9 +57,25 @@ const CreateMealPlanScreen = ({navigation}) => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scroll}>
           <View style={styles.calenderMain}>
-            <UseCalendar />
+            <UseCalendar
+              onSelectVal={d => setSelectedDate(d)}
+              selectedVal={selectedDate}
+            />
           </View>
-          <SelectedMealPlans />
+          {reduxMealPlans?.length > 0 &&
+            reduxMealPlans?.map(res => (
+              <SelectedMealPlans
+                category={res?.category?.name}
+                mealsPlan={res?.category?.meals}
+                serving={res?.category?.serving}
+                onPress={() =>
+                  dynamicRoute('SelectYourMealScreen', {
+                    catData: res?.category,
+                    getDataFromScreen: getDataFromScreen,
+                  })
+                }
+              />
+            ))}
           <View style={styles.mainBtn}>
             <View style={styles.mainBtnInner}>
               <TouchableOpacity
@@ -65,31 +87,41 @@ const CreateMealPlanScreen = ({navigation}) => {
               <Collapsible collapsed={collapsed}>
                 {/* Your collapsible content goes here */}
                 <View style={styles.selectableBtnStyle}>
-                  <SelectableBtn
-                    title="Breakfast"
-                    selected={selectedButton === 1}
-                    onPress={() => handleButtonPress(1)}
-                  />
-                  <SelectableBtn
-                    title="Lunch"
-                    selected={selectedButton === 2}
-                    onPress={() => handleButtonPress(2)}
-                  />
-                  <SelectableBtn
-                    title="Dinner"
-                    selected={selectedButton === 3}
-                    onPress={() => handleButtonPress(3)}
-                  />
+                  {catData?.map(res => {
+                    return (
+                      <SelectableBtn
+                        title={res?.name}
+                        selected={selectedButton == res?.id}
+                        onPress={() => handleButtonPress(res?.id)}
+                      />
+                    );
+                  })}
                 </View>
               </Collapsible>
             </View>
             <Touchable
               style={styles.TouchableMain}
-              onPress={() => navigation.navigate('SelectYourMealScreen')}>
+              onPress={() => {
+                if (selectedButton != null) {
+                  dynamicRoute('SelectYourMealScreen', {
+                    catData: catData.filter(
+                      res => res?.id == selectedButton,
+                    )[0],
+                    getDataFromScreen: getDataFromScreen,
+                  });
+                } else errorMessage('Please select plan first');
+              }}>
               <TextComponent text={'Select Meal'} styles={styles.btnText} />
               <Image source={arrRightGray} style={styles.arrRight} />
             </Touchable>
           </View>
+          {reduxMealPlans?.length > 0 && (
+            <ThemeButton
+              title={'Save'}
+              onPress={createPlan}
+              style={styles.btnStyle}
+            />
+          )}
         </ScrollView>
       </ImageBackground>
     </>

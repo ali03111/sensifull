@@ -3,6 +3,9 @@ import {hp, wp} from '../../Config/responsive';
 import {Colors} from '../../Theme/Variables';
 
 export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   mealItem: {
     width: wp('44.5'),
     // alignItems: 'center',
@@ -20,6 +23,7 @@ export const styles = StyleSheet.create({
     resizeMode: 'contain',
     alignSelf: 'flex-end',
     overflow: 'hidden',
+    borderBottomLeftRadius: 40,
   },
   mealTitle: {
     fontSize: hp('2.2'),
@@ -111,5 +115,19 @@ export const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center',
     marginTop: hp('5'),
+  },
+  pickerStyle: {
+    width: wp('90'),
+    height: hp('6.2'),
+    alignItems: 'center',
+    alignSelf: 'center',
+    verticalAlign: 'middle',
+    justifyContent: 'center',
+    // fontSize: hp('1'),
+    color: 'transparent',
+  },
+  pickerStyleIOS: {
+    width: wp('80'),
+    alignSelf: 'center',
   },
 });

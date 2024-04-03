@@ -7,53 +7,48 @@ import {SelectableBtn} from './SelectableBtn';
 import {Touchable} from './Touchable';
 import {Colors} from '../Theme/Variables';
 import {hp, wp} from '../Config/responsive';
+import {capitalizeFirstLetter} from '../Utils/globalFunctions';
 
-export const SelectedMealPlans = () => {
+export const SelectedMealPlans = ({category, mealsPlan, serving, onPress}) => {
+  console.log(
+    'categorycategorycategorycategorycategorycategorycategorycategory',
+    category,
+  );
+
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
 
-  const [selectedButton, setSelectedButton] = useState(null);
-
-  const handleButtonPress = buttonIndex => {
-    setSelectedButton(buttonIndex);
-  };
   return (
     <View style={styles.mainBtn}>
       <View style={styles.mainBtnInner}>
         <TouchableOpacity onPress={toggleCollapsed} style={styles.toggleBtn}>
-          <TextComponent text={'Breakfast'} styles={styles.btnText} />
+          <TextComponent
+            text={category}
+            // text={capitalizeFirstLetter(category)}
+            styles={styles.btnText}
+          />
           <Image source={arrDown} style={styles.arrStyle} />
         </TouchableOpacity>
         <Collapsible collapsed={collapsed}>
           {/* Your collapsible content goes here */}
           <View style={styles.selectableBtnStyle}>
-            <SelectableBtn
-              title="Breakfast"
-              selected={selectedButton === 1}
-              onPress={() => handleButtonPress(1)}
-            />
-            <SelectableBtn
-              title="Lunch"
-              selected={selectedButton === 2}
-              onPress={() => handleButtonPress(2)}
-            />
-            <SelectableBtn
-              title="Dinner"
-              selected={selectedButton === 3}
-              onPress={() => handleButtonPress(3)}
-            />
+            <SelectableBtn title={category} />
+            {/* <SelectableBtn title={capitalizeFirstLetter(category)} /> */}
           </View>
         </Collapsible>
       </View>
       <View style={styles.TouchableMain}>
         <View style={styles.servingsMain}>
-          <TextComponent text={'Select Meal, '} styles={styles.btnText} />
-          <TextComponent text={'3 Servings'} styles={styles.servings} />
+          <TextComponent text={mealsPlan?.name} styles={styles.btnText} />
+          <TextComponent
+            text={`${serving} Servings`}
+            styles={styles.servings}
+          />
         </View>
-        <Touchable>
+        <Touchable onPress={onPress}>
           <Image source={addCirlce} style={styles.arrRight} />
         </Touchable>
       </View>
