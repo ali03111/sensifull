@@ -115,6 +115,8 @@ function MainNavigator() {
             <Stack.Screen
               name="EditProfileScreen"
               component={Screens.EditProfileScreen}
+            />
+            <Stack.Screen
               name="ShoppingListScreen"
               component={Screens.ShoppingListScreen}
             />

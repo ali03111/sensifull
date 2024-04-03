@@ -195,7 +195,7 @@ export const styles = StyleSheet.create({
     // paddingBottom: hp('1'),
   },
   popularMain: {
-    resizeMode: 'contain',
+    // resizeMode: 'contain',
     marginHorizontal: wp('2'),
     paddingHorizontal: wp('4'),
     paddingVertical: hp('2'),
@@ -203,6 +203,7 @@ export const styles = StyleSheet.create({
     overflow: 'hidden',
     marginVertical: hp('2'),
     width: wp('85'),
+    height: hp('20'),
   },
   popularTitle: {
     fontSize: hp('2.5'),
@@ -304,5 +305,18 @@ export const styles = StyleSheet.create({
   RightPurpleIcon: {
     width: wp('5'),
     resizeMode: 'contain',
+  },
+  popularMainView: {
+    borderRadius: 20,
+    overflow: 'hidden',
+  },
+  popularMainInner: {
+    marginHorizontal: wp('2'),
+    paddingHorizontal: wp('4'),
+    paddingVertical: hp('2'),
+    marginTop: hp('2'),
+    top: 0,
+    zIndex: 1,
+    position: 'absolute',
   },
 });

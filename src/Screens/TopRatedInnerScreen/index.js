@@ -8,8 +8,11 @@ import {HeaderWithFilterAndBack} from '../../Components/HeaderWithFilterAndBack'
 import {TextComponent} from '../../Components/TextComponent';
 import {MyTabs} from './MyTabs';
 
-const TopRatedInnerScreen = ({navigation}) => {
-  const {} = useTopRatedInnerScreen(navigation);
+const TopRatedInnerScreen = ({navigation, route}) => {
+  const {} = useTopRatedInnerScreen(route);
+
+  const data = route.params;
+  // console.log('asdasd', data);
 
   return (
     <>

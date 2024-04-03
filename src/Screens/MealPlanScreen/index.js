@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Text,
   TouchableHighlight,
+  Pressable,
 } from 'react-native';
 import {
   addCirlce,
@@ -85,7 +86,9 @@ const MealPlanScreen = ({navigation}) => {
 
   const renderItem = ({item}) => {
     return (
-      <TouchableHighlight style={styles.rowFront}>
+      <Pressable
+        style={styles.rowFront}
+        onPress={() => navigation.navigate('TopRatedInnerScreen', item)}>
         <View style={styles.swipeMain}>
           <Image source={swipe1} style={styles.swipeImg} />
           <View style={styles.swipeInner}>
@@ -96,7 +99,7 @@ const MealPlanScreen = ({navigation}) => {
             />
           </View>
         </View>
-      </TouchableHighlight>
+      </Pressable>
     );
   };
 

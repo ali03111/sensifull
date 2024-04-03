@@ -42,10 +42,17 @@ import {FilterModal} from './FilterModal';
 import HomeBtn from './HomeBtn1';
 import HomeBtn1 from './HomeBtn1';
 import HomeBtn2 from './HomeBtn2';
+import BlurImage from '../../Components/BlurImage';
 
 const HomeScreen = ({navigation}) => {
-  const {toggleModal, modalVisible, setModalVisible} =
+  const {toggleModal, modalVisible, setModalVisible, allData} =
     useHomeScreen(navigation);
+
+  // console.log('aa', JSON.stringify(allData));
+
+  // const homeData = JSON.stringify(allData);
+
+  console.log('aaasd', allData?.recommended);
 
   const renderItem = useCallback(({item, index}) => {
     console.log(index);
@@ -59,21 +66,34 @@ const HomeScreen = ({navigation}) => {
 
   const renderTodayPopular = useCallback(({item, index}) => {
     return (
-      <ImageBackground source={item?.image} style={styles.popularMain}>
-        <TextComponent text={item?.title} styles={styles.popularTitle} />
-        <Touchable style={styles.popularBtn}>
-          <TextComponent text={'View Recipe'} styles={styles.popularBtnText} />
-        </Touchable>
-      </ImageBackground>
+      <View style={styles.popularMainView}>
+        <BlurImage isURI={true} uri={item?.image} styles={styles.popularMain}>
+          <View style={styles.popularMainInner}>
+            <TextComponent text={item?.name} styles={styles.popularTitle} />
+            <Touchable style={styles.popularBtn}>
+              <TextComponent
+                text={'View Recipe'}
+                styles={styles.popularBtnText}
+              />
+            </Touchable>
+          </View>
+        </BlurImage>
+      </View>
     );
   });
 
   const renderRecomMeal = useCallback(({item, index}) => {
+    console.log('items', item?.image.replace('http://localhost/', ''));
     return (
       <View style={styles.recomMain}>
         <Touchable style={styles.recom}>
-          <Image source={item?.image} style={styles.recomImage} />
-          <TextComponent text={item?.title} styles={styles.recomTitle} />
+          {/* <Image source={uri()} style={styles.recomImage} /> */}
+          <BlurImage
+            isURI={true}
+            uri={item?.image}
+            styles={styles.recomImage}
+          />
+          <TextComponent text={item?.name} styles={styles.recomTitle} />
         </Touchable>
       </View>
     );
@@ -160,7 +180,7 @@ const HomeScreen = ({navigation}) => {
           </View>
           <View style={styles.popularTop}>
             <FlatList
-              data={popularData} // Use the same data for the dots
+              data={allData?.popular} // Use the same data for the dots
               renderItem={renderTodayPopular}
               showsHorizontalScrollIndicator={false}
               horizontal={true}
@@ -183,7 +203,7 @@ const HomeScreen = ({navigation}) => {
           </View>
           <View style={styles.recomMain}>
             <FlatList
-              data={recomData} // Use the same data for the dots
+              data={allData?.recommended}
               renderItem={renderRecomMeal}
               showsHorizontalScrollIndicator={false}
               horizontal={true}
