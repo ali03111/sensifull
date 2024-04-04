@@ -11,11 +11,10 @@ import {styles} from './styles';
 import {allergyDot, allergyRed, tabsBg} from '../../Assets';
 import {TextComponent} from '../../Components/TextComponent';
 import {ingredData} from '../../Utils/localDB';
-import useTopRatedInnerScreen from './useTopRatedInnerScreen';
 import {AllergiesModal} from './AllergiesModal';
 
-export default function Ingredients() {
-  const {toggleModal, modalVisible} = useTopRatedInnerScreen();
+export default function Ingredients({toggleModal, modalVisible}) {
+  console.log('ksdbvlkbsdlkvbsldbvlsdbkvbsdlkvbsdklbvklsd', modalVisible);
 
   const renderItems = useCallback(({item}) => {
     return (

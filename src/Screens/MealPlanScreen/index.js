@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Text,
   TouchableHighlight,
+  Pressable,
 } from 'react-native';
 import {
   addCirlce,
@@ -35,6 +36,7 @@ import {dateData} from '../../Utils/localDB';
 import {hp, wp} from '../../Config/responsive';
 import {FilterModal} from './FilterModal';
 import {getDateMonthYear} from '../../Utils/globalFunctions';
+import BlurImage from '../../Components/BlurImage';
 
 const MealPlanScreen = ({navigation}) => {
   const {
@@ -44,6 +46,7 @@ const MealPlanScreen = ({navigation}) => {
     activeButton,
     handleButtonClick,
     bottomData,
+    onRefresh,
   } = useMealPlanScreen(navigation);
 
   const [listData, setListData] = useState(
@@ -85,9 +88,11 @@ const MealPlanScreen = ({navigation}) => {
 
   const renderItem = ({item}) => {
     return (
-      <TouchableHighlight style={styles.rowFront}>
+      <Pressable
+        style={styles.rowFront}
+        onPress={() => navigation.navigate('TopRatedInnerScreen', item)}>
         <View style={styles.swipeMain}>
-          <Image source={swipe1} style={styles.swipeImg} />
+          <BlurImage isURI={true} uri={item?.image} styles={styles.swipeImg} />
           <View style={styles.swipeInner}>
             <TextComponent text={item?.name} styles={styles.swipeTitle} />
             <TextComponent
@@ -96,7 +101,7 @@ const MealPlanScreen = ({navigation}) => {
             />
           </View>
         </View>
-      </TouchableHighlight>
+      </Pressable>
     );
   };
 
@@ -148,12 +153,6 @@ const MealPlanScreen = ({navigation}) => {
             filterIcon={filter1}
             onpress={toggleModal}
           />
-          {/* <DataNotFound
-            title={'No Plans Yet!'}
-            subTitle={'Create Meal plans.'}
-            btnTitle={'Create Plan'}
-            onpress={() => navigation.navigate('CreateMealPlanScreen')}
-          /> */}
           {planDate?.length > 0 ? (
             <>
               <View style={styles.datList}>
@@ -189,17 +188,17 @@ const MealPlanScreen = ({navigation}) => {
                 // previewOpenValue={-40}
                 previewOpenDelay={3000}
                 onRowDidOpen={onRowDidOpen}
+                onRefresh={onRefresh}
+                refreshing={false}
               />
             </>
           ) : (
-            <View
-              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-              <ThemeButton
-                title={'Create Plan'}
-                onPress={() => navigation.navigate('CreateMealPlanScreen')}
-                style={{width: wp('90'), alignSelf: 'center'}}
-              />
-            </View>
+            <DataNotFound
+              btnTitle={'Create Plan'}
+              title={'No Plans Yet!'}
+              subTitle={'Create Meat plans'}
+              onpress={() => navigation.navigate('CreateMealPlanScreen')}
+            />
           )}
         </View>
 

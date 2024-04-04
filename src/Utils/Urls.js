@@ -41,3 +41,4 @@ export const getMealsDataUrl = '/getAllRecommendedMeals/';
 export const createPlanUrl = '/create-plan/';
 export const getDatePlanUrl = '/get-plan-dates';
 export const getMealPlanUrl = '/get-plan-meals';
+export const getMealDetailUrl = '/get-meal-detail/';

@@ -5,9 +5,22 @@ import {hp, wp} from '../Config/responsive';
 import {Image, StyleSheet} from 'react-native';
 import {chevLeft, chevRight} from '../Assets';
 
-const UseCalendar = ({onSelectVal, selectedVal}) => {
+const UseCalendar = ({onSelectVal, selectedVal, markedDates}) => {
   const today = new Date(); // Get current date
   const minDate = today.toISOString().split('T')[0]; // Convert to ISO format
+
+  let markedDay = {};
+
+  markedDates.map(item => {
+    markedDay[item] = {
+      selected: true,
+      marked: true,
+      selectedColor: Colors.lightPurpleColor,
+      disabled: true,
+      inactive: true,
+      disableTouchEvent: true,
+    };
+  });
 
   return (
     <Calendar
@@ -32,6 +45,7 @@ const UseCalendar = ({onSelectVal, selectedVal}) => {
           selected: true,
           disableTouchEvent: true,
         },
+        ...markedDay,
       }}
       style={{
         height: 'auto',

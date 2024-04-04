@@ -63,7 +63,6 @@ function MainNavigator() {
               name="SelectYourMealScreen"
               component={Screens.SelectYourMealScreen}
             />
-
             {/* <Stack.Screen
             name="SettingDietaryScreen"
             component={Screens.SettingDietaryScreen}
@@ -115,6 +114,8 @@ function MainNavigator() {
             <Stack.Screen
               name="EditProfileScreen"
               component={Screens.EditProfileScreen}
+            />
+            <Stack.Screen
               name="ShoppingListScreen"
               component={Screens.ShoppingListScreen}
             />

@@ -1,6 +1,6 @@
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useState} from 'react';
-import {createPlanUrl, getCategoryUrl} from '../../Utils/Urls';
+import {createPlanUrl, getCategoryUrl, getDatePlanUrl} from '../../Utils/Urls';
 import API from '../../Utils/helperFunc';
 import useReduxStore from '../../Hooks/UseReduxStore';
 import {types} from '../../Redux/types';
@@ -21,6 +21,20 @@ const useCreateMealPlanScreen = ({navigate, goBack}) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const [selectedDate, setSelectedDate] = useState(null);
+
+  const [bookDates, setBookDates] = useState([]);
+
+  useQuery({
+    queryKey: ['getDatePlan'],
+    queryFn: async () => {
+      const {data, ok} = await API.get(getDatePlanUrl);
+      if (ok) {
+        setBookDates(data);
+      }
+    },
+  });
+  // const queryKeys = queryCache.getAll().map(cache => cache.queryKey); // QueryKey[]
+  // console.log('sdbvklbsdlkvblksdbvklsdbvlkbsd', queryKeys);
 
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
@@ -93,6 +107,7 @@ const useCreateMealPlanScreen = ({navigate, goBack}) => {
     collapsed,
     selectedDate,
     setSelectedDate,
+    bookDates,
     createPlan: () => {
       if (selectedDate != null) {
         // transformArray(mealPlans,selectedDate)

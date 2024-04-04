@@ -39,6 +39,7 @@ const CreateMealPlanScreen = ({navigation}) => {
     createPlan,
     selectedDate,
     setSelectedDate,
+    bookDates,
   } = useCreateMealPlanScreen(navigation);
 
   console.log(
@@ -60,6 +61,7 @@ const CreateMealPlanScreen = ({navigation}) => {
             <UseCalendar
               onSelectVal={d => setSelectedDate(d)}
               selectedVal={selectedDate}
+              markedDates={bookDates ?? []}
             />
           </View>
           {reduxMealPlans?.length > 0 &&
