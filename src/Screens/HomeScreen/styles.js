@@ -196,12 +196,12 @@ export const styles = StyleSheet.create({
   },
   popularMain: {
     // resizeMode: 'contain',
-    marginHorizontal: wp('2'),
+    // marginHorizontal: wp('2'),
     paddingHorizontal: wp('4'),
     paddingVertical: hp('2'),
     borderRadius: 20,
     overflow: 'hidden',
-    marginVertical: hp('2'),
+    // marginVertical: hp('2'),
     width: wp('85'),
     height: hp('20'),
   },
@@ -309,6 +309,8 @@ export const styles = StyleSheet.create({
   popularMainView: {
     borderRadius: 20,
     overflow: 'hidden',
+    marginHorizontal: wp('2'),
+    marginVertical: hp('2'),
   },
   popularMainInner: {
     marginHorizontal: wp('2'),
