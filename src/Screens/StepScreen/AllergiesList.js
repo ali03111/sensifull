@@ -56,6 +56,7 @@ export default function AllergiesList({navigation, route}) {
           <TextInput
             style={styles.inputStyle}
             placeholder={'Search Allergies'}
+            placeholderTextColor={Colors.textGrayColor}
           />
         </View>
       </View>

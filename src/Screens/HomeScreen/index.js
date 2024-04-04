@@ -129,7 +129,7 @@ const HomeScreen = ({navigation}) => {
           <TextInput
             style={styles.inputStyle}
             placeholderTextColor="white"
-            placeholder={'Search Allergies'}
+            placeholder={'Search Meals'}
           />
           <Touchable style={styles.filterMain} onPress={toggleModal}>
             <Image source={filter1} style={styles.filterImage} />

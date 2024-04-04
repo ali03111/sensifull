@@ -191,7 +191,7 @@ const StepScreen = ({navigation}) => {
             }
             styles={styles.tagline}
           />
-          <TextComponent text={'Gender'} styles={styles.title} />
+          <TextComponent text={'Gender'} styles={styles.titleStep4} />
           <View style={styles.content}>
             {step5.map((item, index) => (
               <Pressable
