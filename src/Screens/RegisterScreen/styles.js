@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
   },
   bgStyle: {
     height: Dimensions.get('window').height,
-    paddingBottom: hp('2.5'),
+    paddingBottom: hp('0'),
     paddingTop: Platform.OS == 'ios' ? hp('3') : 0,
   },
   buttonStyle: {
@@ -94,6 +94,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2,
     elevation: 5,
+    marginBottom: hp('2'),
   },
   socialImage: {
     width: wp('7'),

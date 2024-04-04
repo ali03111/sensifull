@@ -106,7 +106,7 @@ const RegisterScreen = ({navigation}) => {
                 reset,
                 control,
                 getValues,
-                placeholder: 'Password*',
+                placeholder: 'Password',
                 isImage: passwordIcon,
                 defaultValue: '',
                 isSecure: true,
@@ -122,7 +122,7 @@ const RegisterScreen = ({navigation}) => {
                 reset,
                 control,
                 getValues,
-                placeholder: 'Confirm Password*',
+                placeholder: 'Confirm Password',
                 isImage: passwordIcon,
                 defaultValue: '',
                 isSecure: true,
@@ -131,7 +131,7 @@ const RegisterScreen = ({navigation}) => {
               }}
             />
             <ThemeButton
-              title={'Register'}
+              title={'Sign Up'}
               onPress={handleSubmit(signUpButton)}
               style={styles.buttonStyle}
             />

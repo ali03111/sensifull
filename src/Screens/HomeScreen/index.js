@@ -88,11 +88,13 @@ const HomeScreen = ({navigation}) => {
       <View style={styles.recomMain}>
         <Touchable style={styles.recom}>
           {/* <Image source={uri()} style={styles.recomImage} /> */}
-          <BlurImage
-            isURI={true}
-            uri={item?.image}
-            styles={styles.recomImage}
-          />
+          <View style={styles.imageView}>
+            <BlurImage
+              isURI={true}
+              uri={item?.image}
+              styles={styles.recomImage}
+            />
+          </View>
           <TextComponent text={item?.name} styles={styles.recomTitle} />
         </Touchable>
       </View>
@@ -129,7 +131,7 @@ const HomeScreen = ({navigation}) => {
           <TextInput
             style={styles.inputStyle}
             placeholderTextColor="white"
-            placeholder={'Search Allergies'}
+            placeholder={'Search Meals'}
           />
           <Touchable style={styles.filterMain} onPress={toggleModal}>
             <Image source={filter1} style={styles.filterImage} />
@@ -163,8 +165,9 @@ const HomeScreen = ({navigation}) => {
               renderItem={renderItem}
               showsHorizontalScrollIndicator={false}
               horizontal={true}
-              style={{
+              contentContainerStyle={{
                 paddingLeft: wp('2'),
+                paddingRight: wp('2'),
               }}
             />
           </View>
@@ -184,8 +187,9 @@ const HomeScreen = ({navigation}) => {
               renderItem={renderTodayPopular}
               showsHorizontalScrollIndicator={false}
               horizontal={true}
-              style={{
+              contentContainerStyle={{
                 paddingLeft: wp('2'),
+                paddingRight: wp('2'),
               }}
             />
           </View>
@@ -207,8 +211,9 @@ const HomeScreen = ({navigation}) => {
               renderItem={renderRecomMeal}
               showsHorizontalScrollIndicator={false}
               horizontal={true}
-              style={{
+              contentContainerStyle={{
                 paddingLeft: wp('2'),
+                paddingRight: wp('2'),
               }}
             />
           </View>

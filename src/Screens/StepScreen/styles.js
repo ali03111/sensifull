@@ -115,6 +115,7 @@ export const styles = StyleSheet.create({
   },
   inputStyle: {
     width: wp('73'),
+    color: 'black',
   },
   inputImage: {
     width: wp('6'),

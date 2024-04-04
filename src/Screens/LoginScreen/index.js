@@ -100,7 +100,7 @@ const LoginScreen = ({navigation}) => {
         </View>
         <View style={styles.barMain}>
           <View style={styles.barLine}></View>
-          <TextComponent text={'Or Sign Up with'} styles={styles.barText} />
+          <TextComponent text={'Or Log In with'} styles={styles.barText} />
           <View style={styles.barLine}></View>
         </View>
         <View style={styles.social}>

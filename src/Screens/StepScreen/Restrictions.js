@@ -14,6 +14,7 @@ import {TextComponent} from '../../Components/TextComponent';
 import Collapsible from 'react-native-collapsible';
 import {IngredientsData} from '../../Utils/localDB';
 import {hp} from '../../Config/responsive';
+import {Colors} from '../../Theme/Variables';
 
 export default function Restrictions({navigation, route}) {
   const {restrictions, onSelectValue, selectedValue} = route?.params;
@@ -101,6 +102,7 @@ export default function Restrictions({navigation, route}) {
           <TextInput
             style={styles.inputStyle}
             placeholder={'Search Ingredients'}
+            placeholderTextColor={Colors.textGrayColor}
           />
         </View>
         <ScrollView
