@@ -55,10 +55,6 @@ const HomeScreen = ({navigation}) => {
     onRefresh,
   } = useHomeScreen(navigation);
 
-  // console.log('aa', JSON.stringify(allData));
-
-  // const homeData = JSON.stringify(allData);
-
   console.log('aaasd', allData?.recommended);
 
   const renderItem = useCallback(({item, index}) => {

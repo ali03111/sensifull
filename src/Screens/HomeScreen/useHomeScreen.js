@@ -25,7 +25,7 @@ const useHomeScreen = () => {
   const onRefresh = useCallback(() => {
     setRefresh(true);
     queryClient.fetchQuery({
-      queryKey: ['homeDataCous'],
+      queryKey: ['HomeData'],
       staleTime: 1000,
     });
     setRefresh(false);
