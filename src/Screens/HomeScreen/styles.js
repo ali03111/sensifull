@@ -200,7 +200,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: wp('4'),
     paddingVertical: hp('2'),
     borderRadius: 20,
-    overflow: 'hidden',
     // marginVertical: hp('2'),
     width: wp('85'),
     height: hp('20'),
@@ -234,7 +233,9 @@ export const styles = StyleSheet.create({
   recomImage: {
     resizeMode: 'contain',
     width: wp('27'),
-    height: hp('13.5'),
+    height: hp('13.3'),
+    borderRadius: 10,
+    top: hp('-0.4'),
   },
   recomTitle: {
     textAlign: 'center',
@@ -308,9 +309,10 @@ export const styles = StyleSheet.create({
   },
   popularMainView: {
     borderRadius: 20,
-    overflow: 'hidden',
     marginHorizontal: wp('2'),
     marginVertical: hp('2'),
+    width: wp('85'),
+    height: hp('20'),
   },
   popularMainInner: {
     marginHorizontal: wp('2'),
@@ -320,5 +322,11 @@ export const styles = StyleSheet.create({
     top: 0,
     zIndex: 1,
     position: 'absolute',
+  },
+  imageView: {
+    borderRadius: 20,
+    overflow: 'hidden',
+    width: wp('27'),
+    height: hp('12.5'),
   },
 });
