@@ -8,6 +8,7 @@ import {
   ImageBackground,
   FlatList,
   Button,
+  RefreshControl,
 } from 'react-native';
 // import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {TextComponent} from '../../Components/TextComponent';
@@ -45,8 +46,14 @@ import HomeBtn2 from './HomeBtn2';
 import BlurImage from '../../Components/BlurImage';
 
 const HomeScreen = ({navigation}) => {
-  const {toggleModal, modalVisible, setModalVisible, allData} =
-    useHomeScreen(navigation);
+  const {
+    toggleModal,
+    modalVisible,
+    setModalVisible,
+    allData,
+    refresh,
+    onRefresh,
+  } = useHomeScreen(navigation);
 
   // console.log('aa', JSON.stringify(allData));
 
@@ -139,7 +146,11 @@ const HomeScreen = ({navigation}) => {
         </View>
       </View>
       <ImageBackground source={stepBg} style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
+          }>
           <View style={styles.homeMain}>
             <View style={styles.ingredArea}>
               <HomeBtn1 text1={'Ingredient'} text2={'Restrictions'} />
