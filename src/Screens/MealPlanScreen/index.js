@@ -47,6 +47,7 @@ const MealPlanScreen = ({navigation}) => {
     handleButtonClick,
     bottomData,
     onRefresh,
+    onDeleteMeal,
   } = useMealPlanScreen(navigation);
 
   const [listData, setListData] = useState(
@@ -105,12 +106,14 @@ const MealPlanScreen = ({navigation}) => {
     );
   };
 
-  const renderHiddenItem = (data, rowMap) => (
+  const renderHiddenItem = ({item}) => (
     <View style={styles.rowBack}>
       <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnLeft]}>
         <Image source={editWhite} style={styles.trashIcon} />
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]}>
+      <TouchableOpacity
+        style={[styles.backRightBtn, styles.backRightBtnRight]}
+        onPress={() => onDeleteMeal({date: activeButton, meal_id: item?.id})}>
         <Image source={trashWhite} style={styles.trashIcon} />
       </TouchableOpacity>
     </View>

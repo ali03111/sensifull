@@ -42,3 +42,5 @@ export const createPlanUrl = '/create-plan/';
 export const getDatePlanUrl = '/get-plan-dates';
 export const getMealPlanUrl = '/get-plan-meals';
 export const getMealDetailUrl = '/get-meal-detail/';
+export const homeData = 'home-data';
+export const deleteMealUrl = 'delete-meal';

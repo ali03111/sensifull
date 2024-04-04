@@ -8,13 +8,16 @@ import {HeaderWithFilterAndBack} from '../../Components/HeaderWithFilterAndBack'
 import {TextComponent} from '../../Components/TextComponent';
 import {MyTabs} from './MyTabs';
 import BlurImage from '../../Components/BlurImage';
-import {capitalizeFirstLetter} from '../../Utils/globalFunctions';
+import {
+  capitalizeFirstLetter,
+  filterKeyFromArry,
+  getIdsFromArry,
+  matchTwoArrays,
+} from '../../Utils/globalFunctions';
 
 const TopRatedInnerScreen = ({navigation, route}) => {
-  const {toggleModal, modalVisible, allData} = useTopRatedInnerScreen(
-    navigation,
-    route,
-  );
+  const {toggleModal, modalVisible, allData, paramsData} =
+    useTopRatedInnerScreen(navigation, route);
 
   console.log('jklsdbvklsdblvksbdklvbsklvsdklv', JSON.stringify(allData));
   return (
@@ -36,7 +39,12 @@ const TopRatedInnerScreen = ({navigation, route}) => {
             isURI={true}
             blurStyle={styles.mealImage}>
             <TextComponent
-              text={'3 Alergic Ingredients'}
+              text={`${
+                filterKeyFromArry(
+                  matchTwoArrays(allData?.ingredients, allData?.user_allergies),
+                  'match',
+                )?.length
+              } Alergic Ingredients`}
               styles={styles.imageBtn}
             />
           </BlurImage>
@@ -47,7 +55,9 @@ const TopRatedInnerScreen = ({navigation, route}) => {
               styles={styles.title}
             />
             <TextComponent
-              text={capitalizeFirstLetter(allData?.category?.name)}
+              text={capitalizeFirstLetter(
+                allData?.category?.name ?? paramsData?.category?.name,
+              )}
               styles={styles.category}
             />
           </View>
@@ -56,7 +66,16 @@ const TopRatedInnerScreen = ({navigation, route}) => {
             styles={styles.description}
           />
         </View>
-        <MyTabs toggleModal={toggleModal} modalVisible={modalVisible} />
+        <MyTabs
+          toggleModal={toggleModal}
+          modalVisible={modalVisible}
+          ingredients={matchTwoArrays(
+            allData?.ingredients,
+            allData?.user_allergies,
+          )}
+          nutritions={allData?.nutritions}
+          directions={allData?.directions}
+        />
         {/* </ScrollView> */}
       </ImageBackground>
     </>

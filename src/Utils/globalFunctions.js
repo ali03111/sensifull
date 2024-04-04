@@ -15,6 +15,9 @@ function capitalizeFirstLetter(string) {
 const getIdsFromArry = (arry, key) => {
   return arry.map(res => res[key]);
 };
+const filterKeyFromArry = (arry, key) => {
+  return arry.filter(res => res[key]);
+};
 
 function transformArray(arr, date) {
   const transformedArray = {
@@ -26,6 +29,22 @@ function transformArray(arr, date) {
   };
   return transformedArray;
 }
+
+const matchTwoArrays = (matchFrom, matchTheArry) => {
+  let matchFromArry = [...matchFrom];
+  // Create a Set of nutrition IDs for faster lookup
+  let nutritionIds = new Set(matchTheArry.map(matchTheArry => matchTheArry.id));
+
+  // Match nutritions with ingredients
+  matchFromArry.forEach(matchFrom => {
+    if (nutritionIds.has(matchFrom.id)) {
+      matchFrom.match = true;
+    } else {
+      matchFrom.match = false;
+    }
+  });
+  return matchFromArry;
+};
 
 function getDateMonthYear(dateString) {
   const dateParts = dateString.split('-'); // Splitting the date string by '-'
@@ -66,4 +85,6 @@ export {
   capitalizeFirstLetter,
   transformArray,
   getDateMonthYear,
+  matchTwoArrays,
+  filterKeyFromArry,
 };

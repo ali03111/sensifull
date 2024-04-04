@@ -25,7 +25,7 @@ const useCreateMealPlanScreen = ({navigate, goBack}) => {
   const [bookDates, setBookDates] = useState([]);
 
   useQuery({
-    queryKey: ['getDatePlan'],
+    queryKey: ['getDate'],
     queryFn: async () => {
       const {data, ok} = await API.get(getDatePlanUrl);
       if (ok) {

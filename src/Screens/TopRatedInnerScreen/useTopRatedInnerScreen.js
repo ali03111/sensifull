@@ -14,10 +14,14 @@ const useTopRatedInnerScreen = ({navigate}, {params}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
     setModalVisible(!modalVisible);
-    console.log('firstasd');
   };
 
-  return {toggleModal, modalVisible, allData: data?.data?.data};
+  return {
+    toggleModal,
+    modalVisible,
+    allData: data?.data?.data,
+    paramsData: params,
+  };
 };
 
 export default useTopRatedInnerScreen;
