@@ -10,7 +10,13 @@ import {View} from 'react-native';
 
 const Tab = createMaterialTopTabNavigator();
 
-export const MyTabs = () => {
+export const MyTabs = ({
+  toggleModal,
+  modalVisible,
+  ingredients,
+  nutritions,
+  directions,
+}) => {
   return (
     <View style={styles.tabMain}>
       <Tab.Navigator
@@ -28,9 +34,21 @@ export const MyTabs = () => {
             shadowColor: 'transparent',
           },
         }}>
-        <Tab.Screen name="Ingredients" component={Ingredients} />
-        <Tab.Screen name="Nutrition" component={Nutrition} />
-        <Tab.Screen name="Directions" component={Directions} />
+        <Tab.Screen name="Ingredients">
+          {() => (
+            <Ingredients
+              toggleModal={toggleModal}
+              modalVisible={modalVisible}
+              ingredients={ingredients}
+            />
+          )}
+        </Tab.Screen>
+        <Tab.Screen name="Nutrition">
+          {() => <Nutrition nutritions={nutritions} />}
+        </Tab.Screen>
+        <Tab.Screen name="Directions">
+          {() => <Directions directions={directions} />}
+        </Tab.Screen>
       </Tab.Navigator>
     </View>
   );

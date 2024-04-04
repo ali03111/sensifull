@@ -3,6 +3,7 @@ const {width, height} = Dimensions.get('window');
 
 const Colors = {
   primaryColor: '#703383',
+  lightPurpleColor: '#E0B5EE',
   themeYellow: '#FFE100',
   secondaryColor: '#FDED75',
   themeGreen: '#95BB5B',
@@ -18,6 +19,7 @@ const Colors = {
   red: 'rgba(235, 4, 0, 1)',
   lightRed: 'rgba(235, 4, 0, 0.1)',
   transparent: 'transparent',
+  grayFadedBtn: 'rgba(255, 255, 255, 0.2)',
 };
 
 /** FontSize **/

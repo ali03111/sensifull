@@ -63,7 +63,6 @@ function MainNavigator() {
               name="SelectYourMealScreen"
               component={Screens.SelectYourMealScreen}
             />
-
             {/* <Stack.Screen
             name="SettingDietaryScreen"
             component={Screens.SettingDietaryScreen}

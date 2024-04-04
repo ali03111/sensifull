@@ -1,25 +1,27 @@
-import {useState} from 'react';
-import {getMealDetailUrl} from '../../Utils/Urls';
 import {useQuery} from '@tanstack/react-query';
+import {useState} from 'react';
 import API from '../../Utils/helperFunc';
+import {getMealDetailUrl} from '../../Utils/Urls';
 
-const useTopRatedInnerScreen = params => {
-  console.log('firstasdvv', getMealDetailUrl + params?.params?.id);
+const useTopRatedInnerScreen = ({navigate}, {params}) => {
+  const {data, error} = useQuery({
+    queryKey: ['mealDetail'],
+    queryFn: () => API.get(getMealDetailUrl + params?.id),
+  });
+
+  console.log('lsdbvklsbdlkvbsldkbvlsdbvksd', data?.data);
 
   const [modalVisible, setModalVisible] = useState(false);
-
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
 
-  const {data, error} = useQuery({
-    queryKey: ['mealDetail'],
-    queryFn: () => API.get(getMealDetailUrl + params?.params?.id),
-  });
-
-  console.log('asdasdarta', data?.data);
-
-  return {toggleModal, modalVisible, setModalVisible};
+  return {
+    toggleModal,
+    modalVisible,
+    allData: data?.data?.data,
+    paramsData: params,
+  };
 };
 
 export default useTopRatedInnerScreen;

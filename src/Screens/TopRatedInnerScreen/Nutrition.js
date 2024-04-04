@@ -5,12 +5,12 @@ import {styles} from './styles';
 import {TextComponent} from '../../Components/TextComponent';
 import {NutritionData} from '../../Utils/localDB';
 
-export default function Nutrition() {
+export default function Nutrition({nutritions}) {
   const renderItems = useCallback(({item}) => {
     return (
       <View style={styles.dataMain}>
-        <TextComponent text={item?.itemName} styles={styles.NameStyle} />
-        <TextComponent text={item?.itemGrams} styles={styles.gramsStyle} />
+        <TextComponent text={item?.name} styles={styles.NameStyle} />
+        <TextComponent text={item?.quantity} styles={styles.gramsStyle} />
       </View>
     );
   });
@@ -18,7 +18,7 @@ export default function Nutrition() {
   return (
     <ImageBackground source={tabsBg} style={styles.nutritionTabs}>
       <FlatList
-        data={NutritionData}
+        data={nutritions}
         renderItem={renderItems}
         showsHorizontalScrollIndicator={false}
         ItemSeparatorComponent={() => (

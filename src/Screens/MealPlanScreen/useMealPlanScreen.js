@@ -1,12 +1,15 @@
-import {useMutation, useQuery} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useState} from 'react';
-import {getDatePlanUrl, getMealPlanUrl} from '../../Utils/Urls';
+import {deleteMealUrl, getDatePlanUrl, getMealPlanUrl} from '../../Utils/Urls';
 import API from '../../Utils/helperFunc';
 
 const useMealPlanScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const [bottomData, setBottomData] = useState([]);
+
+  // Get QueryClient from the context
+  const queryClient = useQueryClient();
 
   const handleButtonClick = index => {
     setActiveButton(index);
@@ -19,13 +22,50 @@ const useMealPlanScreen = () => {
       const allProps = await API.get(getDatePlanUrl);
       if (allProps?.ok) {
         console.log('skldjbvkljsdbvbsdvbsdjbvskdjbvds', allProps?.data);
-        setActiveButton(allProps?.data[0]);
-        mutate({date: allProps?.data[0]});
+        setActiveButton(activeButton ?? allProps?.data[0]);
+        mutate({date: activeButton ?? allProps?.data[0]});
       }
       return allProps;
     },
   });
+  // const d = useQuery({
+  //   queryKey: ['deleteMeal'],
+  //   queryFn: async () => {
+  //     const allProps = await API.delete(deleteMealUrl);
+  //     if (allProps?.ok) {
+  //       queryClient.invalidateQueries({queryKey: ['getDatePlan']});
+  //       console.log('skldjbvkljsdbvbsdvbsdjbvskdjbvds', allProps?.data);
+  //       // setActiveButton(activeButton ?? allProps?.data[0]);
+  //       // mutate({date: activeButton ?? allProps?.data[0]});
+  //     }
+  //     return allProps;
+  //   },
+  // });
 
+  const {mutateAsync} = useMutation({
+    mutationFn: body => {
+      return API.delete(deleteMealUrl, body);
+    },
+    onSuccess: ({ok, data}) => {
+      console.log(
+        'dbhvjklsdbjkvbdsjkbvkdsbvsbdjkvbsdkjbvsdbkvsdbvsdjk',
+        JSON.stringify(data),
+      );
+      if (ok) {
+        if (data?.is_date) {
+          setActiveButton(null);
+          setTimeout(() => {
+            onRefresh();
+          }, 100);
+        } else {
+          queryClient.invalidateQueries({queryKey: ['getDatePlan']});
+        }
+        // setBottomData(data);
+        // successMessage('Your profile sucessfully updated!');
+        // // dispatch({type: types.UpdateProfile, payload: data.data});
+      } else errorMessage(data?.message);
+    },
+  });
   const {mutate} = useMutation({
     mutationFn: body => {
       console.log('sdlkbvlksbvlbsdlkvds', activeButton);
@@ -44,6 +84,13 @@ const useMealPlanScreen = () => {
     },
   });
 
+  const onRefresh = () => {
+    queryClient.fetchQuery({
+      queryKey: ['getDatePlan'],
+      staleTime: 1000,
+    });
+  };
+
   // if (!isLoading) mutate();
   const [activeButton, setActiveButton] = useState(null);
 
@@ -60,6 +107,8 @@ const useMealPlanScreen = () => {
     handleButtonClick,
     activeButton,
     bottomData,
+    onRefresh,
+    onDeleteMeal: ({date, meal_id}) => mutateAsync({date, meal_id}),
   };
 };
 

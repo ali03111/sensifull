@@ -11,36 +11,30 @@ import {styles} from './styles';
 import {allergyDot, allergyRed, tabsBg} from '../../Assets';
 import {TextComponent} from '../../Components/TextComponent';
 import {ingredData} from '../../Utils/localDB';
-import useTopRatedInnerScreen from './useTopRatedInnerScreen';
 import {AllergiesModal} from './AllergiesModal';
 
-export default function Ingredients() {
-  const {toggleModal, modalVisible} = useTopRatedInnerScreen();
+export default function Ingredients({toggleModal, modalVisible, ingredients}) {
+  console.log('ksdbvlkbsdlkvbsldbvlsdbkvbsdlkvbsdklbvklsd', modalVisible);
 
   const renderItems = useCallback(({item}) => {
     return (
       <View
         style={
-          item?.allergies == 'true'
-            ? styles.ingredMainRed
-            : styles.ingredMainGreen
+          item?.match == true ? styles.ingredMainRed : styles.ingredMainGreen
         }>
         <View style={styles.allergiesInner}>
           <Image
-            source={item?.allergies == 'true' ? allergyRed : allergyDot}
+            source={item?.match == true ? allergyRed : allergyDot}
             style={
-              item?.allergies == 'true'
+              item?.match == true
                 ? styles.allergiesIcon
                 : styles.allergiesIconGreen
             }
           />
-          <TextComponent
-            text={item?.allergiesName}
-            styles={styles.ingredTextStyle}
-          />
+          <TextComponent text={item?.title} styles={styles.ingredTextStyle} />
         </View>
         <View>
-          {item?.allergies == 'true' && (
+          {item?.match == true && (
             <TextComponent
               text={'View Alternate'}
               styles={styles.popUpTitle}
@@ -54,7 +48,7 @@ export default function Ingredients() {
   return (
     <ImageBackground source={tabsBg} style={styles.bgTabs}>
       <FlatList
-        data={ingredData}
+        data={ingredients}
         renderItem={renderItems}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
