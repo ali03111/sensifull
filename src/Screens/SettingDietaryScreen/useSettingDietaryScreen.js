@@ -17,8 +17,6 @@ export default function useSettingDietaryScreen() {
     queryFn: () => API.get(getRestrictionUrl),
   });
 
-  console.log('ksjdbvkjsdbvkjlbdskjvbsdkvbsdbvls,dbvds', data?.data);
-
   const {mutate} = useMutation({
     mutationFn: body => {
       return API.post(saveRestrictionUrl, {

@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-const useTodayPopularScreen = () => {
+const useTopRatedMealScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
@@ -11,4 +11,4 @@ const useTodayPopularScreen = () => {
   return {toggleModal, modalVisible, setModalVisible};
 };
 
-export default useTodayPopularScreen;
+export default useTopRatedMealScreen;

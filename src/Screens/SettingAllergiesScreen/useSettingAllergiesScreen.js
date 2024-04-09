@@ -22,8 +22,6 @@ export default function useSettingAllergiesScreen() {
     queryFn: () => API.get(getIngredientsUrl),
   });
 
-  console.log('ksjdbvkjsdbvkjlbdskjvbsdkvbsdbvls,dbvds', data?.data);
-
   const {mutate} = useMutation({
     mutationFn: body => {
       return API.post(saveIngredientsUrl, {

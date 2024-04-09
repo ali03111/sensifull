@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {hp, wp} from '../../Config/responsive';
 import {Colors} from '../../Theme/Variables';
 
@@ -22,13 +22,14 @@ export const styles = StyleSheet.create({
     height: hp('3'),
   },
   popularMain: {
-    resizeMode: 'contain',
-    marginHorizontal: wp('4'),
+    // resizeMode: 'contain',
+    // marginHorizontal: wp('4'),
     paddingHorizontal: wp('4'),
     paddingVertical: hp('2'),
     borderRadius: 20,
-    overflow: 'hidden',
     marginVertical: hp('1.5'),
+    height: hp('20'),
+    width: wp('90'),
   },
   popularTitle: {
     fontSize: hp('2.5'),
@@ -61,5 +62,16 @@ export const styles = StyleSheet.create({
   },
   popularTop: {
     paddingVertical: hp('2'),
+  },
+  innerView: {
+    position: 'absolute',
+    left: wp('4'),
+    bottom: hp('1.5'),
+    zIndex: 1,
+  },
+  flatStyle: {
+    paddingBottom: Platform.OS == 'ios' ? hp('25') : hp('20'),
+    flexGrow: 1,
+    alignSelf: 'center',
   },
 });

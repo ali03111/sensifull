@@ -14,10 +14,15 @@ import {
   getIdsFromArry,
   matchTwoArrays,
 } from '../../Utils/globalFunctions';
+import {hp, wp} from '../../Config/responsive';
 
 const TopRatedInnerScreen = ({navigation, route}) => {
-  const {toggleModal, modalVisible, allData, paramsData} =
+  const {toggleModal, modalVisible, allData, paramsData, isFav} =
     useTopRatedInnerScreen(navigation, route);
+
+  const isCategory = Boolean(
+    allData?.category?.name || paramsData?.category?.name != '',
+  );
 
   console.log('jklsdbvklsdblvksbdklvbsklvsdklv', JSON.stringify(allData));
   return (
@@ -26,7 +31,7 @@ const TopRatedInnerScreen = ({navigation, route}) => {
         {/* <ScrollView showsVerticalScrollIndicator={false}> */}
         <HeaderWithFilterAndBack
           goBack={() => navigation.goBack()}
-          Text={'Top Rated Meals'}
+          Text={'Meals Details'}
           filterIcon={fav}
           mainStyle={styles.headerBg}
           textStyle={styles.styleColor}
@@ -37,11 +42,14 @@ const TopRatedInnerScreen = ({navigation, route}) => {
           <BlurImage
             uri={allData?.image}
             isURI={true}
-            blurStyle={styles.mealImage}>
+            styles={styles.mealImage}>
             <TextComponent
               text={`${
                 filterKeyFromArry(
-                  matchTwoArrays(allData?.ingredients, allData?.user_allergies),
+                  matchTwoArrays(
+                    allData?.ingredients ?? [],
+                    allData?.user_allergies ?? [],
+                  ),
                   'match',
                 )?.length
               } Alergic Ingredients`}
@@ -54,12 +62,14 @@ const TopRatedInnerScreen = ({navigation, route}) => {
               text={allData?.name}
               styles={styles.title}
             />
-            <TextComponent
-              text={capitalizeFirstLetter(
-                allData?.category?.name ?? paramsData?.category?.name,
-              )}
-              styles={styles.category}
-            />
+            {isCategory && (
+              <TextComponent
+                text={capitalizeFirstLetter(
+                  allData?.category?.name ?? paramsData?.category?.name,
+                )}
+                styles={styles.category}
+              />
+            )}
           </View>
           <TextComponent
             text={allData?.description}
@@ -70,8 +80,8 @@ const TopRatedInnerScreen = ({navigation, route}) => {
           toggleModal={toggleModal}
           modalVisible={modalVisible}
           ingredients={matchTwoArrays(
-            allData?.ingredients,
-            allData?.user_allergies,
+            allData?.ingredients ?? [],
+            allData?.user_allergies ?? [],
           )}
           nutritions={allData?.nutritions}
           directions={allData?.directions}

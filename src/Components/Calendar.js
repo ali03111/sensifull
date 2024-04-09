@@ -7,7 +7,7 @@ import {chevLeft, chevRight} from '../Assets';
 
 const UseCalendar = ({onSelectVal, selectedVal, markedDates}) => {
   const today = new Date(); // Get current date
-  const minDate = today.toISOString().split('T')[0]; // Convert to ISO format
+  const minDate = today.toUTCString(); // Convert to ISO format
 
   let markedDay = {};
 

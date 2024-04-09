@@ -2,27 +2,23 @@ import React from 'react';
 import {Text, Image, StyleSheet} from 'react-native';
 import {Colors, FontFamily} from '../Theme/Variables';
 import {Touchable} from './Touchable';
+import {share} from '@/Assets/Images';
 import {hp, wp} from '../Config/responsive';
+import {TextComponent} from './TextComponent';
 
-const ThemeButton = ({
-  title,
-  onPress,
-  image,
-  style,
-  textStyle,
-  btnStyle,
-  BgColor,
-  TextColor,
-  disabled,
-}) => {
+const ThemeButton = ({title, onPress, image, style, textStyle, imageStyle}) => {
   return (
+    // <ShadowButton>
     <Touchable
       Opacity={0.7}
       onPress={onPress}
-      disabled={disabled}
-      style={[styles.button, {justifyContent: 'center', ...style, ...BgColor}]}>
-      <Text style={[styles.text, {...textStyle, ...TextColor}]}>{title}</Text>
+      style={[styles.button, {...style}]}>
+      <TextComponent text={title} styles={{...styles.text, ...textStyle}} />
+      {image && (
+        <Image source={image} style={{...styles.image, ...imageStyle}} />
+      )}
     </Touchable>
+    // </ShadowButton>
   );
 };
 
@@ -30,22 +26,27 @@ export default ThemeButton;
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: Colors.themeGreen,
     height: hp('6.5'),
     width: '100%',
     borderRadius: 10,
+    // marginVertical: 20,
     alignItems: 'center',
     flexDirection: 'row',
+    // paddingHorizontal: '22.5%',
     justifyContent: 'center',
+    backgroundColor: Colors.themeGreen,
+  },
+  image: {
+    width: 20,
+    height: 20,
+    // marginBottom: 5,
+    resizeMode: 'contain',
   },
   text: {
-    fontSize: hp('2'),
+    // fontSize: heightPercentageToDP('2'),
     color: Colors.white,
     textAlign: 'center',
-    // marginLeft: wp('3'),
-    fontWeight: 400,
-  },
-  linearGradient: {
-    borderRadius: 10,
+    // marginRight: wp('3'),
+    // fontFamily: FontFamily.regular,
   },
 });

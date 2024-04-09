@@ -44,3 +44,7 @@ export const getMealPlanUrl = '/get-plan-meals';
 export const getMealDetailUrl = '/get-meal-detail/';
 export const homeData = 'home-data';
 export const deleteMealUrl = 'delete-meal';
+export const addFvMealUrl = 'favorite';
+export const getFvMealUrl = 'user-favorites';
+export const getPopularUrl = 'popular-list';
+export const getRecommdedUrl = 'recommended-list';

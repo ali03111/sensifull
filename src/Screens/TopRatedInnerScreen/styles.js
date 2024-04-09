@@ -25,8 +25,8 @@ export const styles = StyleSheet.create({
     resizeMode: 'contain',
     borderRadius: 20,
     height: hp('24'),
-    overflow: 'hidden',
     marginBottom: hp('2'),
+    backgroundColor: 'gray',
     shadowColor: 'rgba(0, 0, 0, 1)',
     shadowOffset: {
       width: 0,
@@ -55,6 +55,9 @@ export const styles = StyleSheet.create({
     marginVertical: hp('1'),
     fontSize: hp('1.8'),
     overflow: 'hidden',
+    position: 'absolute',
+    right: wp('1'),
+    zIndex: 1,
   },
   titleMain: {
     flexDirection: 'row',

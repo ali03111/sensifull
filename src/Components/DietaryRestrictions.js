@@ -23,6 +23,8 @@ export default function DietaryRestrictions({
 }) {
   const [modal1Visible, setModal1Visible] = useState(false);
 
+  console.log('sndklvnslknvlsdnvnsdvnksdvdnv', modal1Visible);
+
   return (
     <View>
       <View style={styles.infoStyle}>
@@ -30,7 +32,9 @@ export default function DietaryRestrictions({
           text={'Dietary Restrictions'}
           styles={styles.titleStepTwo}
         />
-        <Touchable onPress={() => setModal1Visible(true)}>
+        <Touchable
+          style={{backgroundColor: 'blue', width: wp('5')}}
+          onPress={() => setModal1Visible(true)}>
           <Image source={info} style={styles.infoImg} />
         </Touchable>
       </View>

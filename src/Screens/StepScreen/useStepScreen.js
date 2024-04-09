@@ -46,25 +46,25 @@ const useStepScreen = ({navigate, goBack}) => {
 
   const nextStep = {
     1: () => {
-      if (purpose == null) Alert.alert('Please select purpose');
+      if (purpose == null) Alert.alert('Warning', 'Please select purpose');
       else handleNextStep();
     },
     2: () => {
       if (restrictions.length == 0)
-        Alert.alert('Please select at least one allergie');
+        Alert.alert('Warning', 'Please select at least one ingredients');
       else handleNextStep();
     },
     3: () => {
       if (allergies.length == 0)
-        Alert.alert('Please select at least one restrictions');
+        Alert.alert('Warning', 'Please select at least one allergy');
       else handleNextStep();
     },
     4: () => {
-      if (ageRange == null) Alert.alert('Please select age');
+      if (ageRange == null) Alert.alert('Warning', 'Please select age');
       else handleNextStep();
     },
     5: () => {
-      if (gender == null) Alert.alert('Please select gender');
+      if (gender == null) Alert.alert('Warning', 'Please select gender');
       else handleNextStep();
     },
     6: () =>

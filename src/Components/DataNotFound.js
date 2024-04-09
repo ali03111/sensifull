@@ -6,23 +6,42 @@ import {hp, wp} from '../Config/responsive';
 import {Colors} from '../Theme/Variables';
 import {noData} from '../Assets';
 
-export const DataNotFound = ({title, subTitle, onpress, btnTitle}) => {
+export const DataNotFound = ({
+  title,
+  subTitle,
+  onpress,
+  btnTitle,
+  btnStyles,
+  mainViewStyles,
+}) => {
   return (
-    <View style={styles.mealInner}>
+    <View style={{...styles.mealInner, ...mainViewStyles}}>
       <Image source={noData} style={styles.noDataImage} />
-      <TextComponent text={title} styles={styles.noDataTitle} />
-      <TextComponent text={subTitle} styles={styles.noDataSubTitle} />
-      <ThemeButton title={btnTitle} style={styles.saveBtn} onPress={onpress} />
+      <TextComponent
+        text={title ?? 'Data not found'}
+        styles={styles.noDataTitle}
+      />
+      <TextComponent
+        text={subTitle ?? 'No data, please try again later'}
+        styles={styles.noDataSubTitle}
+      />
+      <ThemeButton
+        title={btnTitle ?? 'Refresh'}
+        onPress={onpress}
+        textStyle={{textAlign: 'center'}}
+        style={btnStyles}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   mealInner: {
-    marginTop: hp('-10'),
+    // marginTop: hp('-10'),
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: wp('4'),
+    alignItems: 'center',
   },
   noDataImage: {
     width: wp('35'),

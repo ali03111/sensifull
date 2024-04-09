@@ -15,6 +15,7 @@ import {TextComponent} from '../../Components/TextComponent';
 import ThemeButton from '../../Components/ThemeButton';
 import {Picker} from '@react-native-picker/picker';
 import {hp, wp} from '../../Config/responsive';
+import {Colors} from '../../Theme/Variables';
 
 export const ServingModal = ({
   isVisible,
@@ -59,6 +60,7 @@ export const ServingModal = ({
                 fontSize: hp('2'),
               }}
               selectedValue={selectedValue}
+              dropdownIconColor={Colors.grayFadedBtn}
               onValueChange={(itemValue, itemIndex) => onSelectVal(itemValue)}>
               <Picker.Item label="Meal per serving" value={null} />
               <Picker.Item label="1" value="1" />

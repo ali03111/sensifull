@@ -3,6 +3,9 @@ import {hp, wp} from '../../Config/responsive';
 import {Colors} from '../../Theme/Variables';
 
 export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   mealItem: {
     width: wp('44.5'),
     // alignItems: 'center',
@@ -14,11 +17,13 @@ export const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   mealImage: {
-    width: wp('30'),
-    height: hp('15'),
+    width: wp('28'),
+    height: hp('14'),
     zIndex: 9,
     resizeMode: 'contain',
     alignSelf: 'flex-end',
+    // overflow: 'hidden',
+    borderBottomLeftRadius: 40,
   },
   mealTitle: {
     fontSize: hp('2.2'),
@@ -31,5 +36,10 @@ export const styles = StyleSheet.create({
   },
   popularTop: {
     marginVertical: hp('1.5'),
+  },
+  upComingFlatlistView: {
+    paddingBottom: hp('15'),
+    flexGrow: 1,
+    alignSelf: 'center',
   },
 });

@@ -45,7 +45,7 @@ import HomeBtn2 from './HomeBtn2';
 import BlurImage from '../../Components/BlurImage';
 
 const HomeScreen = ({navigation}) => {
-  const {toggleModal, modalVisible, setModalVisible, allData} =
+  const {toggleModal, modalVisible, setModalVisible, allData, dynamicNav} =
     useHomeScreen(navigation);
 
   // console.log('aa', JSON.stringify(allData));
@@ -70,7 +70,9 @@ const HomeScreen = ({navigation}) => {
         <BlurImage isURI={true} uri={item?.image} styles={styles.popularMain}>
           <View style={styles.popularMainInner}>
             <TextComponent text={item?.name} styles={styles.popularTitle} />
-            <Touchable style={styles.popularBtn}>
+            <Touchable
+              style={styles.popularBtn}
+              onPress={() => dynamicNav('TopRatedInnerScreen', item)}>
               <TextComponent
                 text={'View Recipe'}
                 styles={styles.popularBtnText}
@@ -86,7 +88,9 @@ const HomeScreen = ({navigation}) => {
     console.log('items', item?.image.replace('http://localhost/', ''));
     return (
       <View style={styles.recomMain}>
-        <Touchable style={styles.recom}>
+        <Touchable
+          style={styles.recom}
+          onPress={() => dynamicNav('TopRatedInnerScreen', item)}>
           {/* <Image source={uri()} style={styles.recomImage} /> */}
           <View style={styles.imageView}>
             <BlurImage
@@ -146,7 +150,7 @@ const HomeScreen = ({navigation}) => {
               <HomeBtn2
                 text1={'Shopping'}
                 text2={'list'}
-                onpress={() => navigation.navigate('ShoppingListScreen')}
+                onpress={() => dynamicNav('ShoppingListScreen')}
               />
             </View>
           </View>
@@ -156,7 +160,7 @@ const HomeScreen = ({navigation}) => {
             <TextComponent
               text={'View All'}
               styles={styles.viewAll}
-              onPress={() => navigation.navigate('TopRatedMealScreen')}
+              onPress={() => dynamicNav('TopRatedMealScreen')}
             />
           </View>
           <View>
@@ -178,7 +182,7 @@ const HomeScreen = ({navigation}) => {
             <TextComponent
               text={'View All'}
               styles={styles.viewAll}
-              onPress={() => navigation.navigate('TodayPopularScreen')}
+              onPress={() => dynamicNav('TodayPopularScreen')}
             />
           </View>
           <View style={styles.popularTop}>
@@ -202,7 +206,7 @@ const HomeScreen = ({navigation}) => {
             <TextComponent
               text={'View All'}
               styles={styles.viewAll}
-              onPress={() => navigation.navigate('RecommendedMealScreen')}
+              onPress={() => dynamicNav('RecommendedMealScreen')}
             />
           </View>
           <View style={styles.recomMain}>
@@ -228,7 +232,7 @@ const HomeScreen = ({navigation}) => {
                 styles={styles.mealPlanPara}
               />
               <TextComponent
-                onPress={() => navigation.navigate('MealPlanScreen')}
+                onPress={() => dynamicNav('MealPlanScreen')}
                 text={'Create Plan'}
                 styles={styles.mealPlanBtnText}
               />

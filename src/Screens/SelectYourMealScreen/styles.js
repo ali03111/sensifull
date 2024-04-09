@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     zIndex: 9,
     resizeMode: 'contain',
     alignSelf: 'flex-end',
-    overflow: 'hidden',
+    // overflow: 'hidden',
     borderBottomLeftRadius: 40,
   },
   mealTitle: {

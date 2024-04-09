@@ -14,6 +14,7 @@ import {hp, wp} from '../Config/responsive';
 import {Colors} from '../Theme/Variables';
 import React, {useEffect, useRef, useState} from 'react';
 import * as Animatable from 'react-native-animatable';
+import {keyExtractor} from '../Utils';
 
 const url =
   'https://images.pexels.com/photos/19321447/pexels-photo-19321447/free-photo-of-needle-branch-with-christmas-ornament.jpeg';
@@ -35,7 +36,7 @@ export const AniFlatOneByOne = ({
     return (
       <Animatable.View
         animation={'fadeIn'}
-        delay={Number(index.toString() + '00')}>
+        delay={Number(index.toString() + '0')}>
         {InnerCompnonet(item, index)}
       </Animatable.View>
     );
@@ -44,7 +45,7 @@ export const AniFlatOneByOne = ({
   return (
     <FlatList
       {...{
-        data: data,
+        data: data ?? [],
         renderItem: renderItem,
         contentContainerStyle: {...flatViewStyle},
         scrollEnabled: true,
@@ -52,6 +53,7 @@ export const AniFlatOneByOne = ({
         showsHorizontalScrollIndicator: false,
         onRefresh,
         refreshing: false,
+        keyExtractor,
         ...flatListProps,
       }}
     />

@@ -20,7 +20,9 @@ export default function Allergies({
     <View>
       <View style={styles.infoStyle}>
         <TextComponent text={'Allergies'} styles={styles.titleStepTwo} />
-        <Touchable onPress={() => setModal2Visible(true)}>
+        <Touchable
+          style={{backgroundColor: 'blue', width: wp('5')}}
+          onPress={() => setModal2Visible(true)}>
           <Image source={info} style={styles.infoImg} />
         </Touchable>
       </View>

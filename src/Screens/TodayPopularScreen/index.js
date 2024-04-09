@@ -1,5 +1,12 @@
 import React, {memo, useCallback} from 'react';
-import {View, ScrollView, ImageBackground, FlatList, Image} from 'react-native';
+import {
+  View,
+  ScrollView,
+  ImageBackground,
+  FlatList,
+  Image,
+  Platform,
+} from 'react-native';
 
 import {TextComponent} from '../../Components/TextComponent';
 import {Touchable} from '../../Components/Touchable';
@@ -9,18 +16,35 @@ import {popularData} from '../../Utils/localDB';
 import useTodayPopularScreen from './useTodayPopularScreen';
 import {goBack, keyExtractor} from '../../Utils';
 import {HeaderWithFilterAndBack} from '../../Components/HeaderWithFilterAndBack';
+import {AniFlatOneByOne} from '../../AnimatedComp/AniFlatOneByOne';
+import BlurImage from '../../Components/BlurImage';
+import {hp, wp} from '../../Config/responsive';
+import {DataNotFound} from '../../Components/DataNotFound';
 
 const TodayPopularScreen = ({navigation}) => {
-  const {} = useTodayPopularScreen(navigation);
+  const {allData, onRefresh} = useTodayPopularScreen(navigation);
 
-  const renderTodayPopular = useCallback(({item, index}) => {
+  console.log('allDataallDataallDataallDataallDataallDataallData', allData);
+
+  const RenderTodayPopular = useCallback(({item, index}) => {
     return (
-      <ImageBackground source={item?.image} style={styles.popularMain}>
-        <TextComponent text={item?.title} styles={styles.popularTitle} />
-        <Touchable style={styles.popularBtn}>
-          <TextComponent text={'View Recipe'} styles={styles.popularBtnText} />
-        </Touchable>
-      </ImageBackground>
+      <BlurImage
+        uri={item?.image}
+        isURI={true}
+        styles={styles.popularMain}
+        radius={20}>
+        <View style={styles.innerView}>
+          <TextComponent text={item?.title} styles={styles.popularTitle} />
+          <Touchable
+            style={styles.popularBtn}
+            onPress={() => navigation.navigate('TopRatedInnerScreen', item)}>
+            <TextComponent
+              text={'View Recipe'}
+              styles={styles.popularBtnText}
+            />
+          </Touchable>
+        </View>
+      </BlurImage>
     );
   });
 
@@ -28,28 +52,26 @@ const TodayPopularScreen = ({navigation}) => {
     <>
       <ImageBackground source={stepBg} style={styles.container}>
         <View showsVerticalScrollIndicator={false}>
-          {/* <View style={styles.topRatedMain}>
-            <Touchable onPress={() => navigation.goBack()}>
-              <Image source={arrowBack} style={styles.arrBack} />
-            </Touchable>
-            <TextComponent text={'Today’s Popular'} styles={styles.viewAll} />
-            <Touchable>
-              <Image source={filter1} style={styles.arrBack} />
-            </Touchable>
-          </View> */}
           <HeaderWithFilterAndBack
             goBack={() => navigation.goBack()}
             Text={'Today’s Popular'}
             filterIcon={filter1}
           />
-          <View style={styles.popularTop}>
-            <FlatList
-              data={popularData}
-              renderItem={renderTodayPopular}
-              showsHorizontalScrollIndicator={false}
-              extraData={keyExtractor}
-            />
-          </View>
+          <AniFlatOneByOne
+            data={allData?.popular_list}
+            onRefresh={onRefresh}
+            flatViewStyle={styles.flatStyle}
+            flatListProps={{
+              ListEmptyComponent: (
+                <DataNotFound
+                  onpress={onRefresh}
+                  btnStyles={{width: wp('60')}}
+                  mainViewStyles={{marginTop: hp('20')}}
+                />
+              ),
+            }}
+            InnerCompnonet={(item, index) => <RenderTodayPopular item={item} />}
+          />
         </View>
       </ImageBackground>
     </>

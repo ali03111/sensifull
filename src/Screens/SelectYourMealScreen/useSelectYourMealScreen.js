@@ -2,6 +2,7 @@ import {useQuery} from '@tanstack/react-query';
 import {useState} from 'react';
 import API from '../../Utils/helperFunc';
 import {getMealsDataUrl} from '../../Utils/Urls';
+import {errorMessage} from '../../Config/NotificationMessage';
 
 const useRecommendedMealScreen = ({naviagte, goBack}, {params}) => {
   const {catData, getDataFromScreen} = params;
@@ -18,16 +19,18 @@ const useRecommendedMealScreen = ({naviagte, goBack}, {params}) => {
   const [modal1Visible, setModal1Visible] = useState(false);
 
   const onSaveData = () => {
-    setModal1Visible(false);
-    let finalObj = {
-      category: {
-        ...catData,
-        meals: mealObj,
-        serving,
-      },
-    };
-    goBack();
-    getDataFromScreen(finalObj);
+    if (serving != null) {
+      setModal1Visible(false);
+      let finalObj = {
+        category: {
+          ...catData,
+          meals: mealObj,
+          serving,
+        },
+      };
+      goBack();
+      getDataFromScreen(finalObj);
+    } else errorMessage('Please select serving first');
   };
 
   const {data, error} = useQuery({

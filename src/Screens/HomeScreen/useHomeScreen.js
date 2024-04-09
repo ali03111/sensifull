@@ -3,7 +3,7 @@ import {useState} from 'react';
 import API from '../../Utils/helperFunc';
 import {homeData} from '../../Utils/Urls';
 
-const useHomeScreen = () => {
+const useHomeScreen = ({navigate}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
@@ -11,12 +11,20 @@ const useHomeScreen = () => {
     console.log('firstasd');
   };
 
+  const dynamicNav = (route, item) => navigate(route, item);
+
   const {data, error} = useQuery({
     queryKey: ['HomeData'],
     queryFn: () => API.get(homeData),
   });
 
-  return {toggleModal, modalVisible, setModalVisible, allData: data?.data};
+  return {
+    toggleModal,
+    modalVisible,
+    setModalVisible,
+    allData: data?.data,
+    dynamicNav,
+  };
 };
 
 export default useHomeScreen;

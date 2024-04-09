@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fcf8e9',
     borderWidth: 0,
     paddingHorizontal: wp('4'),
-    paddingVertical: hp('1'),
+    // paddingVertical: hp('1'),
     marginVertical: hp('1.5'),
     borderRadius: 15,
     shadowColor: 'rgba(0, 0, 0, 1)',

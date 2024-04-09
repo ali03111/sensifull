@@ -34,12 +34,7 @@ const SelectYourMealScreen = ({navigation, route}) => {
             onSelectValue('mealObj', item);
             setModal1Visible(true);
           }}>
-          <BlurImage
-            uri={item?.image}
-            isURI={true}
-            source={item?.image}
-            styles={styles.mealImage}
-          />
+          <BlurImage uri={item?.image} isURI={true} styles={styles.mealImage} />
           <TextComponent
             numberOfLines={2}
             text={item?.name}

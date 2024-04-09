@@ -53,9 +53,9 @@ const App = () => {
 
   return (
     <>
+      {isVisible === true ? Splash_Screen : <MainNavigator />}
       {(isloading || isFetching >= 1) && <Overlay />}
 
-      {isVisible === true ? Splash_Screen : <MainNavigator />}
       {/* <StackNavigatior />; */}
     </>
   );
