@@ -22,22 +22,18 @@ import {shoppingListData} from '../../Utils/localDB';
 import useShoppingListScreen from './useShoppingListScreen';
 import {HeaderWithFilterAndBack} from '../../Components/HeaderWithFilterAndBack';
 import ThemeButton from '../../Components/ThemeButton';
+import {getDateMonthYear} from '../../Utils/globalFunctions';
 
-const ShoppingListScreen = ({navigation}) => {
-  const {} = useShoppingListScreen(navigation);
-
-  const [checkedItems, setCheckedItems] = useState([]);
-
-  const toggleCheck = itemName => {
-    if (checkedItems.includes(itemName)) {
-      setCheckedItems(checkedItems.filter(item => item !== itemName));
-    } else {
-      setCheckedItems([...checkedItems, itemName]);
-    }
-  };
-  const clearSelection = () => {
-    setCheckedItems([]);
-  };
+const ShoppingListScreen = ({navigation, route}) => {
+  const {
+    date,
+    onFilter,
+    onSelectValue,
+    shoppingData,
+    clearSelection,
+    toggleCheck,
+    checkedItems,
+  } = useShoppingListScreen(navigation, route);
 
   const renderItem = useCallback(({item, index}) => {
     console.log(index);
@@ -65,7 +61,7 @@ const ShoppingListScreen = ({navigation}) => {
   return (
     <>
       <ImageBackground source={stepBg} style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <View showsVerticalScrollIndicator={false}>
           <HeaderWithFilterAndBack
             goBack={() => navigation.goBack()}
             Text={'Shopping list'}
@@ -74,21 +70,28 @@ const ShoppingListScreen = ({navigation}) => {
           <View style={styles.popularTop}>
             <View style={styles.searchedTitle}>
               <TextComponent text={'Showing results from '} />
-              <TextComponent text={'24 feb to 29 feb'} styles={styles.date} />
+              <TextComponent
+                text={`${getDateMonthYear(date.startDate).day} ${
+                  getDateMonthYear(date.startDate).monthName
+                } to ${getDateMonthYear(date.endDate).day} ${
+                  getDateMonthYear(date.endDate).monthName
+                }`}
+                styles={styles.date}
+              />
             </View>
             <View style={styles.catTitle}>
               <TextComponent text={'Ingredients '} styles={styles.date} />
               <TextComponent text={'Quantity'} styles={styles.date} />
             </View>
             <FlatList
-              data={shoppingListData} // Use the same data for the dots
+              data={shoppingData} // Use the same data for the dots
               renderItem={renderItem}
               showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.dotList}
             />
           </View>
-        </ScrollView>
+        </View>
 
         <ThemeButton
           title={'Clear Selected'}

@@ -37,7 +37,11 @@ const TodayPopularScreen = ({navigation}) => {
           <TextComponent text={item?.title} styles={styles.popularTitle} />
           <Touchable
             style={styles.popularBtn}
-            onPress={() => navigation.navigate('TopRatedInnerScreen', item)}>
+            onPress={() =>
+              navigation.navigate('TopRatedInnerScreen', {
+                mealData: item,
+              })
+            }>
             <TextComponent
               text={'View Recipe'}
               styles={styles.popularBtnText}

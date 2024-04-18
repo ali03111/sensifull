@@ -63,7 +63,7 @@ export default function AllergiesList({navigation, route}) {
       <ScrollView
         contentContainerStyle={styles.btnsMain}
         showsVerticalScrollIndicator={false}>
-        {allergiesList.map((item, index) => (
+        {allergiesList?.map((item, index) => (
           <TouchableOpacity
             key={index}
             onPress={() => toggleAllergy(item)}

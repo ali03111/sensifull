@@ -6,12 +6,21 @@ import {share} from '@/Assets/Images';
 import {hp, wp} from '../Config/responsive';
 import {TextComponent} from './TextComponent';
 
-const ThemeButton = ({title, onPress, image, style, textStyle, imageStyle}) => {
+const ThemeButton = ({
+  title,
+  onPress,
+  image,
+  style,
+  textStyle,
+  imageStyle,
+  isDisable,
+}) => {
   return (
     // <ShadowButton>
     <Touchable
       Opacity={0.7}
       onPress={onPress}
+      disabled={isDisable}
       style={[styles.button, {...style}]}>
       <TextComponent text={title} styles={{...styles.text, ...textStyle}} />
       {image && (

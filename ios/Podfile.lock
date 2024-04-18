@@ -1095,6 +1095,8 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
+  - react-native-date-picker (5.0.1):
+    - React-Core
   - react-native-image-picker (7.1.2):
     - glog
     - RCT-Folly (= 2022.05.16.00)
@@ -1365,6 +1367,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - react-native-blurhash (from `../node_modules/react-native-blurhash`)
+  - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -1491,6 +1494,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   react-native-blurhash:
     :path: "../node_modules/react-native-blurhash"
+  react-native-date-picker:
+    :path: "../node_modules/react-native-date-picker"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
   react-native-pager-view:
@@ -1613,6 +1618,7 @@ SPEC CHECKSUMS:
   React-logger: 0a57b68dd2aec7ff738195f081f0520724b35dab
   React-Mapbuffer: 114be72666d7e3e317c1a36fb566cd3ad712fcc8
   react-native-blurhash: 198fc66718fc268a8147c1dfd3be4d5a8ee91c24
+  react-native-date-picker: 4f0b6ae21e2b8783ada44a13f489555a980fb8a9
   react-native-image-picker: fefff630cfa3ee6a809f6ac6569981f4a34e0050
   react-native-pager-view: 33c56e3b547d2f29d224255d82e796942e0918b8
   react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b

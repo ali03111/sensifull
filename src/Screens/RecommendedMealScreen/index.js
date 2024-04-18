@@ -20,7 +20,11 @@ const RecommendedMealScreen = ({navigation}) => {
     return (
       <Touchable
         style={styles.mealItem}
-        onPress={() => navigation.navigate('TopRatedInnerScreen', item)}>
+        onPress={() =>
+          navigation.navigate('TopRatedInnerScreen', {
+            mealData: item,
+          })
+        }>
         <BlurImage uri={item?.image} isURI={true} styles={styles.mealImage} />
         <TextComponent
           numberOfLines={2}

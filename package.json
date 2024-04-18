@@ -49,6 +49,7 @@
     "react-native-blurhash": "^2.0.2",
     "react-native-calendars": "^1.1304.1",
     "react-native-collapsible": "^1.6.1",
+    "react-native-date-picker": "^5.0.1",
     "react-native-device-info": "^10.11.0",
     "react-native-fast-image": "^8.6.3",
     "react-native-flash-message": "^0.4.2",

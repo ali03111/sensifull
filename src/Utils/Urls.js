@@ -48,3 +48,5 @@ export const addFvMealUrl = 'favorite';
 export const getFvMealUrl = 'user-favorites';
 export const getPopularUrl = 'popular-list';
 export const getRecommdedUrl = 'recommended-list';
+export const getAlterIntUrl = 'getAlternateIngredients';
+export const getShoppingListUrl = 'getShoppingListOfUser';

@@ -91,7 +91,11 @@ const MealPlanScreen = ({navigation}) => {
     return (
       <Pressable
         style={styles.rowFront}
-        onPress={() => navigation.navigate('TopRatedInnerScreen', item)}>
+        onPress={() =>
+          navigation.navigate('TopRatedInnerScreen', {
+            mealData: {...item, planId: item?.pivot?.plan_id},
+          })
+        }>
         <View style={styles.swipeMain}>
           <BlurImage isURI={true} uri={item?.image} styles={styles.swipeImg} />
           <View style={styles.swipeInner}>
@@ -154,7 +158,9 @@ const MealPlanScreen = ({navigation}) => {
             goBack={() => navigation.goBack()}
             Text={'Meals Plan'}
             filterIcon={filter1}
-            onpress={toggleModal}
+            onpress={() =>
+              navigation.navigate('ShoppingListScreen', activeButton)
+            }
           />
           {planDate?.length > 0 ? (
             <>

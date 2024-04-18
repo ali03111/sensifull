@@ -1,5 +1,5 @@
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {createPlanUrl, getCategoryUrl, getDatePlanUrl} from '../../Utils/Urls';
 import API from '../../Utils/helperFunc';
 import useReduxStore from '../../Hooks/UseReduxStore';
@@ -51,8 +51,18 @@ const useCreateMealPlanScreen = ({navigate, goBack}) => {
     queryFn: () => API.get(getCategoryUrl),
   });
 
+  useEffect(() => {
+    return dispatch({
+      type: types.ClearPlan,
+    });
+  }, []);
+
   const {mutate} = useMutation({
     mutationFn: body => {
+      console.log(
+        'bodybodybodybodybodybodybodybodybodybodybodybody',
+        JSON.stringify(body),
+      );
       return API.post(createPlanUrl, body);
     },
     onSuccess: ({ok, data}) => {
@@ -110,6 +120,10 @@ const useCreateMealPlanScreen = ({navigate, goBack}) => {
     bookDates,
     createPlan: () => {
       if (selectedDate != null) {
+        console.log(
+          'mealPlansmealPlansmealPlansmealPlansmealPlansmealPlans',
+          JSON.stringify(mealPlans),
+        );
         // transformArray(mealPlans,selectedDate)
         mutate(transformArray(mealPlans, selectedDate));
       } else errorMessage('Please select date first');

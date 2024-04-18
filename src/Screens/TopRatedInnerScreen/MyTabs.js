@@ -16,6 +16,10 @@ export const MyTabs = ({
   ingredients,
   nutritions,
   directions,
+  ingAlt,
+  getAlterInt,
+  onSelectAlter,
+  disable,
 }) => {
   return (
     <View style={styles.tabMain}>
@@ -40,6 +44,10 @@ export const MyTabs = ({
               toggleModal={toggleModal}
               modalVisible={modalVisible}
               ingredients={ingredients}
+              ingAlt={ingAlt}
+              getAlterInt={getAlterInt}
+              disable={disable}
+              onSelectAlter={onSelectAlter}
             />
           )}
         </Tab.Screen>

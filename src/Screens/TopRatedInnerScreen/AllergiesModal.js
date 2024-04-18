@@ -16,7 +16,15 @@ import {AlternateIngred, filterCat1} from '../../Utils/localDB';
 import {MultiSelectButton} from '../../Components/MultiSelectButton';
 import {Colors} from '../../Theme/Variables';
 
-export const AllergiesModal = ({ToggleFunction, isVisible}) => {
+export const AllergiesModal = ({
+  ToggleFunction,
+  isVisible,
+  ingAlt,
+  selectedAlter,
+  onSelectVal,
+  objId,
+  disable,
+}) => {
   return (
     <View>
       <Modal
@@ -39,7 +47,13 @@ export const AllergiesModal = ({ToggleFunction, isVisible}) => {
               styles={styles.modalTitle}
             />
             <View style={styles.btnStepMain}>
-              <MultiSelectButton items={AlternateIngred} />
+              <MultiSelectButton
+                items={ingAlt}
+                selectedAlter={selectedAlter}
+                onSelectVal={onSelectVal}
+                objId={objId}
+                isDisable={disable}
+              />
             </View>
           </View>
         </View>

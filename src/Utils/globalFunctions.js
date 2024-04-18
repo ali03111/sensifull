@@ -25,6 +25,7 @@ function transformArray(arr, date) {
     plans: arr.map(item => ({
       mealid: item.category.meals.id,
       serving: parseInt(item.category.serving), // Assuming serving is a string and needs to be parsed as an integer
+      ingredients: item.category.meals.ingredients,
     })),
   };
   return transformedArray;
@@ -45,6 +46,21 @@ const matchTwoArrays = (matchFrom, matchTheArry) => {
   });
   return matchFromArry;
 };
+
+function currentDateformat() {
+  // Parse the input date string
+  const dateObj = new Date();
+
+  // Extract year, month, and day components
+  const year = dateObj.getFullYear();
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+  const day = String(dateObj.getDate() + 1).padStart(2, '0');
+
+  // Format the date in the desired format
+  const formattedDate = `${year}-${month}-${day}`;
+
+  return formattedDate;
+}
 
 function getDateMonthYear(dateString) {
   const dateParts = dateString.split('-'); // Splitting the date string by '-'
@@ -78,6 +94,31 @@ function getDateMonthYear(dateString) {
   };
 }
 
+// Function to add "alternate" key to each object
+function createKeyInArryObj(data, key, Value) {
+  data.forEach(obj => {
+    obj[key] = Value;
+  });
+  return data;
+}
+
+// Function to update alternates by ID
+function updateKeyById(data, id, newAlternates) {
+  let newArry = [...data];
+  let obj = newArry.find(obj => obj.id === id);
+  if (obj) {
+    obj.alternates = newAlternates;
+    return newArry;
+  } else {
+    return newArry;
+  }
+}
+
+// Function to get object by ID
+function getObjectById(id, data) {
+  return data.find(obj => obj.id === id);
+}
+
 export {
   getSingleCharacter,
   removeKeyAndReturnArry,
@@ -87,4 +128,8 @@ export {
   getDateMonthYear,
   matchTwoArrays,
   filterKeyFromArry,
+  createKeyInArryObj,
+  getObjectById,
+  updateKeyById,
+  currentDateformat,
 };

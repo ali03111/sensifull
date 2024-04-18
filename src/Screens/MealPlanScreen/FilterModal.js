@@ -17,10 +17,28 @@ import ThemeButton from '../../Components/ThemeButton';
 import {MultiSelectButton} from '../../Components/MultiSelectButton';
 import {Touchable} from '../../Components/Touchable';
 import {Colors} from '../../Theme/Variables';
+import DatePicker from 'react-native-date-picker';
 
 export const FilterModal = ({ToggleFunction, isVisible}) => {
   //   const [modalVisible, setModalVisible] = useState(false);
   //   const {selectedItems, handlePress} = MultiSelectButton();
+
+  const DateTImePickerView = ({open, date, onSelecteDate, onClose}) => {
+    return (
+      <DatePicker
+        modal
+        open={open}
+        date={date}
+        onConfirm={date => {
+          onClose(false);
+          onSelecteDate(date);
+        }}
+        onCancel={() => {
+          onClose(false);
+        }}
+      />
+    );
+  };
 
   return (
     <View>
@@ -29,7 +47,6 @@ export const FilterModal = ({ToggleFunction, isVisible}) => {
         transparent={true}
         visible={isVisible}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
           ToggleFunction(!isVisible);
         }}>
         <View style={styles.centeredView}>
@@ -39,6 +56,16 @@ export const FilterModal = ({ToggleFunction, isVisible}) => {
                 <Image source={closeIcon} style={styles.closeIcon} />
               </Pressable>
             </View>
+            <View
+              style={{
+                width: wp('15'),
+                backgroundColor: Colors.primaryColor,
+                height: hp('0.5'),
+                alignSelf: 'center',
+                marginTop: hp(-'2'),
+                borderRadius: 10,
+              }}
+            />
             <TextComponent text={'Filter'} styles={styles.modalTitle} />
             <TextComponent text={'By Meals'} styles={styles.catName} />
             <View style={styles.btnStepMain}>
@@ -48,6 +75,32 @@ export const FilterModal = ({ToggleFunction, isVisible}) => {
               text={'By Dietery Prefrences'}
               styles={styles.catName}
             /> */}
+            <TextComponent text={'By Dates'} styles={styles.catName} />
+            <View style={styles.dateMainView}>
+              <ThemeButton
+                title={'24 feb 2024'}
+                style={styles.dateView}
+                textStyle={{
+                  color: 'black',
+                  fontSize: hp('1.6'),
+                }}
+              />
+              <TextComponent text={'to'} />
+              <ThemeButton
+                title={'24 feb 2024'}
+                style={styles.dateView}
+                textStyle={{
+                  color: 'black',
+                  fontSize: hp('1.6'),
+                }}
+              />
+            </View>
+            <ThemeButton
+              title={'Filter'}
+              style={{
+                marginBottom: hp('5'),
+              }}
+            />
           </View>
         </View>
       </Modal>
@@ -152,5 +205,21 @@ const styles = StyleSheet.create({
   disabledBtns: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+  },
+  dateView: {
+    width: wp('40'),
+    height: hp('4.3'),
+    borderRadius: 20,
+    backgroundColor: 'transparent',
+    borderColor: Colors.themeGreen,
+    borderWidth: 1,
+  },
+  dateMainView: {
+    flexDirection: 'row',
+    width: wp('90'),
+    alignSelf: 'center',
+    marginBottom: hp('4'),
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });

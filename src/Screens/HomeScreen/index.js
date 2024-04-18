@@ -8,6 +8,7 @@ import {
   ImageBackground,
   FlatList,
   Button,
+  RefreshControl,
 } from 'react-native';
 // import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {TextComponent} from '../../Components/TextComponent';
@@ -45,8 +46,15 @@ import HomeBtn2 from './HomeBtn2';
 import BlurImage from '../../Components/BlurImage';
 
 const HomeScreen = ({navigation}) => {
-  const {toggleModal, modalVisible, setModalVisible, allData, dynamicNav} =
-    useHomeScreen(navigation);
+  const {
+    toggleModal,
+    modalVisible,
+    setModalVisible,
+    allData,
+    dynamicNav,
+    onRefresh,
+    refresh,
+  } = useHomeScreen(navigation);
 
   // console.log('aa', JSON.stringify(allData));
 
@@ -72,7 +80,11 @@ const HomeScreen = ({navigation}) => {
             <TextComponent text={item?.name} styles={styles.popularTitle} />
             <Touchable
               style={styles.popularBtn}
-              onPress={() => dynamicNav('TopRatedInnerScreen', item)}>
+              onPress={() =>
+                dynamicNav('TopRatedInnerScreen', {
+                  mealData: item,
+                })
+              }>
               <TextComponent
                 text={'View Recipe'}
                 styles={styles.popularBtnText}
@@ -90,7 +102,11 @@ const HomeScreen = ({navigation}) => {
       <View style={styles.recomMain}>
         <Touchable
           style={styles.recom}
-          onPress={() => dynamicNav('TopRatedInnerScreen', item)}>
+          onPress={() =>
+            dynamicNav('TopRatedInnerScreen', {
+              mealData: item,
+            })
+          }>
           {/* <Image source={uri()} style={styles.recomImage} /> */}
           <View style={styles.imageView}>
             <BlurImage
@@ -143,7 +159,11 @@ const HomeScreen = ({navigation}) => {
         </View>
       </View>
       <ImageBackground source={stepBg} style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
+          }>
           <View style={styles.homeMain}>
             <View style={styles.ingredArea}>
               <HomeBtn1 text1={'Ingredient'} text2={'Restrictions'} />

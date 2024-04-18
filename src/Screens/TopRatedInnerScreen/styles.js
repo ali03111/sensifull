@@ -178,4 +178,11 @@ export const styles = StyleSheet.create({
     paddingHorizontal: wp('4'),
     paddingTop: hp('3'),
   },
+  saveBtn: {
+    width: wp('30'),
+    height: hp('3.5'),
+    marginLeft: wp('3'),
+    marginRight: wp('2'),
+    marginTop: hp('1'),
+  },
 });

@@ -5876,6 +5876,11 @@ react-native-collapsible@^1.6.1:
   resolved "https://registry.yarnpkg.com/react-native-collapsible/-/react-native-collapsible-1.6.1.tgz#27e289831a6955aebde98abff2424a7710f36f02"
   integrity sha512-orF4BeiXd2hZW7fu9YcqIJXzN6TJcFcddY807D3MAOVktLuW9oQ+RIkrTJ5DR3v9ZOFfREkOjEmS79qeUTvkBQ==
 
+react-native-date-picker@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-5.0.1.tgz#a42aab4037b068263569348fd68b5f86635beb9a"
+  integrity sha512-0AzGE94jugCPGQM3YOgH3lF85QDOiN1/5KAY30rgQB3c6UI1pQNoU9txyxj9UdcRdcAxc1BSy30OEekL0+3ZQw==
+
 react-native-device-info@^10.11.0:
   version "10.12.0"
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-10.12.0.tgz#be4e71cbcc9a05e8643b1a419a4450d4cef9bbcc"

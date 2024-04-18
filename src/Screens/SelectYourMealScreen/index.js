@@ -32,7 +32,15 @@ const SelectYourMealScreen = ({navigation, route}) => {
           style={styles.mealItem}
           onPress={() => {
             onSelectValue('mealObj', item);
-            setModal1Visible(true);
+            navigation.navigate('TopRatedInnerScreen', {
+              mealData: {...item, isEdit: true},
+              onServingSelect: ({meal, serving}) => {
+                onSelectValue('meals', meal);
+                onSelectValue('serving', serving);
+                onSaveData({meal, serving});
+              },
+            });
+            // setModal1Visible(true);
           }}>
           <BlurImage uri={item?.image} isURI={true} styles={styles.mealImage} />
           <TextComponent

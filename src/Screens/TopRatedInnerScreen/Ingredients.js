@@ -6,15 +6,26 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import {styles} from './styles';
 import {allergyDot, allergyRed, tabsBg} from '../../Assets';
 import {TextComponent} from '../../Components/TextComponent';
 import {ingredData} from '../../Utils/localDB';
 import {AllergiesModal} from './AllergiesModal';
+import {getObjectById} from '../../Utils/globalFunctions';
 
-export default function Ingredients({toggleModal, modalVisible, ingredients}) {
+export default function Ingredients({
+  toggleModal,
+  modalVisible,
+  ingredients,
+  ingAlt,
+  getAlterInt,
+  onSelectAlter,
+  disable,
+}) {
   console.log('ksdbvlkbsdlkvbsldbvlsdbkvbsdlkvbsdklbvklsd', modalVisible);
+
+  const [id, setId] = useState(0);
 
   const renderItems = useCallback(({item}) => {
     return (
@@ -38,7 +49,10 @@ export default function Ingredients({toggleModal, modalVisible, ingredients}) {
             <TextComponent
               text={'View Alternate'}
               styles={styles.popUpTitle}
-              onPress={toggleModal}
+              onPress={() => {
+                setId(item?.id);
+                getAlterInt(item.id);
+              }}
             />
           )}
         </View>
@@ -53,7 +67,15 @@ export default function Ingredients({toggleModal, modalVisible, ingredients}) {
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
       />
-      <AllergiesModal ToggleFunction={toggleModal} isVisible={modalVisible} />
+      <AllergiesModal
+        ToggleFunction={toggleModal}
+        isVisible={modalVisible}
+        ingAlt={ingAlt}
+        selectedAlter={getObjectById(id, ingredients ?? [])}
+        onSelectVal={onSelectAlter}
+        objId={id}
+        disable={disable}
+      />
     </ImageBackground>
   );
 }

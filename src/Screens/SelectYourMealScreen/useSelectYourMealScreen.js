@@ -18,17 +18,21 @@ const useRecommendedMealScreen = ({naviagte, goBack}, {params}) => {
 
   const [modal1Visible, setModal1Visible] = useState(false);
 
-  const onSaveData = () => {
+  const onSaveData = ({meal, serving}) => {
     if (serving != null) {
       setModal1Visible(false);
       let finalObj = {
         category: {
           ...catData,
-          meals: mealObj,
+          meals: meal,
           serving,
         },
       };
       goBack();
+      console.log(
+        'finalObjfinalObjfinalObjfinalObjfinalObjfinalObjfinalObjfinalObj',
+        JSON.stringify(finalObj),
+      );
       getDataFromScreen(finalObj);
     } else errorMessage('Please select serving first');
   };

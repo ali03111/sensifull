@@ -4,43 +4,49 @@ import {StyleSheet} from 'react-native';
 import {hp, wp} from '../Config/responsive';
 import {Colors} from '../Theme/Variables';
 
-export const MultiSelectButton = ({items}) => {
-  const [selectedItems, setSelectedItems] = useState([]);
+export const MultiSelectButton = ({
+  items,
+  isDisable,
+  selectedAlter,
+  onSelectVal,
+  objId,
+}) => {
+  const [dummy, setDummy] = useState(0);
 
-  const handlePress = itemId => {
-    setSelectedItems(prevSelectedItems => {
-      if (prevSelectedItems.includes(itemId)) {
-        return prevSelectedItems.filter(selectedId => selectedId !== itemId);
-      } else {
-        return [...prevSelectedItems, itemId];
-      }
-    });
-  };
+  const handlePress = allergy => {};
 
   return (
     <>
       {items.map((item, index) => (
         <ThemeButton
           key={index}
-          onPress={() => handlePress(item.id)}
-          title={item.name}
-          style={styles.btnMain}
-          textStyle={styles.btnText}
-          TextColor={{
-            color: selectedItems.includes(item.id) ? 'white' : '#525252',
+          onPress={() => {
+            onSelectVal(objId, item.id);
+            // setDummy(pre => pre + 1);
           }}
-          BgColor={{
-            backgroundColor: selectedItems.includes(item.id)
-              ? '#95BB5B'
-              : 'transparent',
-          }}
+          title={item?.name ?? item?.title}
+          style={styles.btnMain(
+            // Boolean(
+            //   selectedAlter?.alternates?.filter(res => res?.id == item?.id)[0]
+            //     ?.id,
+            // ),
+            Boolean(selectedAlter?.alternates == item.id),
+          )}
+          textStyle={styles.btnText(
+            // Boolean(
+            //   selectedAlter?.alternates?.filter(res => res?.id == item?.id)[0]
+            //     ?.id,
+            // ),
+            Boolean(selectedAlter?.alternates == item.id),
+          )}
+          isDisable={isDisable}
         />
       ))}
     </>
   );
 };
 export const styles = StyleSheet.create({
-  btnMain: {
+  btnMain: isSelected => ({
     borderRadius: 30,
     borderWidth: 1,
     borderColor: Colors.themeGreen,
@@ -49,9 +55,10 @@ export const styles = StyleSheet.create({
     paddingHorizontal: wp('4.7'),
     marginRight: wp('2'),
     marginBottom: hp('1'),
-  },
-  btnText: {
-    color: '#525252',
+    backgroundColor: isSelected ? Colors.themeGreen : 'transparent',
+  }),
+  btnText: isSelected => ({
+    color: isSelected ? 'white' : '#525252',
     fontSize: hp('1.8'),
-  },
+  }),
 });
