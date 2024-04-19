@@ -12,6 +12,11 @@ const useShoppingListScreen = ({navigate}, {params}) => {
   console.log('currentDatecurrentDatecurrentDatecurrentDatecurrentDate');
 
   const [checkedItems, setCheckedItems] = useState([]);
+  const [filterModal, setFilterModal] = useState(false);
+
+  const toggleModal = () => {
+    setFilterModal(!filterModal);
+  };
 
   const toggleCheck = itemName => {
     if (checkedItems.includes(itemName)) {
@@ -40,11 +45,23 @@ const useShoppingListScreen = ({navigate}, {params}) => {
   };
 
   const {mutate} = useMutation({
-    mutationFn: () => {
-      return API.post(getShoppingListUrl, {
-        from_date: startDate ?? activeDate,
-        to_date: endDate,
-      });
+    mutationFn: body => {
+      if (body?.startDate) {
+        onSelectValue('startDate', body?.startDate);
+        onSelectValue('endDate', body?.endDate);
+      }
+      return API.post(
+        getShoppingListUrl,
+        body?.startDate
+          ? {
+              from_date: body?.startDate,
+              to_date: body?.endDate,
+            }
+          : {
+              from_date: startDate ?? activeDate,
+              to_date: endDate,
+            },
+      );
     },
     onSuccess: ({ok, data}) => {
       console.log(
@@ -63,14 +80,16 @@ const useShoppingListScreen = ({navigate}, {params}) => {
 
   return {
     shoppingData,
-    onFilter: () => {
-      mutate();
+    onFilter: ({startDate, endDate}) => {
+      mutate({startDate, endDate});
     },
     onSelectValue,
     date,
     toggleCheck,
     clearSelection,
     checkedItems,
+    toggleModal,
+    filterModal,
   };
 };
 

@@ -25,12 +25,14 @@ export const DataNotFound = ({
         text={subTitle ?? 'No data, please try again later'}
         styles={styles.noDataSubTitle}
       />
-      <ThemeButton
-        title={btnTitle ?? 'Refresh'}
-        onPress={onpress}
-        textStyle={{textAlign: 'center'}}
-        style={btnStyles}
-      />
+      {onpress && (
+        <ThemeButton
+          title={btnTitle ?? 'Refresh'}
+          onPress={onpress}
+          textStyle={{textAlign: 'center'}}
+          style={btnStyles}
+        />
+      )}
     </View>
   );
 };

@@ -158,9 +158,11 @@ const MealPlanScreen = ({navigation}) => {
             goBack={() => navigation.goBack()}
             Text={'Meals Plan'}
             filterIcon={filter1}
-            onpress={() =>
-              navigation.navigate('ShoppingListScreen', activeButton)
-            }
+            onpress={() => {
+              if (planDate?.length > 0) {
+                navigation.navigate('ShoppingListScreen', activeButton);
+              }
+            }}
           />
           {planDate?.length > 0 ? (
             <>

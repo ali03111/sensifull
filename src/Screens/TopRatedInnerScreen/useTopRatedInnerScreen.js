@@ -2,7 +2,7 @@ import {useMutation, useQuery} from '@tanstack/react-query';
 import {useEffect, useRef, useState} from 'react';
 import API from '../../Utils/helperFunc';
 import {addFvMealUrl, getAlterIntUrl, getMealDetailUrl} from '../../Utils/Urls';
-import {successMessage} from '../../Config/NotificationMessage';
+import {errorMessage, successMessage} from '../../Config/NotificationMessage';
 import {
   createKeyInArryObj,
   getObjectById,
@@ -11,32 +11,38 @@ import {
 } from '../../Utils/globalFunctions';
 import useReduxStore from '../../Hooks/UseReduxStore';
 
-const useTopRatedInnerScreen = ({navigate, addListener}, {params}) => {
+const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
   const {getState, dispatch} = useReduxStore();
   const {isloading} = getState('isloading');
+
+  const [allData, setAllData] = useState();
 
   const {data, error, isSuccess, status, isLoading, isPending} = useQuery({
     queryKey: ['mealDetail'],
     gcTime: 'Infinity',
-    queryFn: () =>
-      API.get(
+    queryFn: async () => {
+      const {ok, data} = await API.get(
         getMealDetailUrl +
           params?.mealData?.id +
           '/' +
           params?.mealData?.planId,
-      ),
-    onSuccess: data => {
-      if (data) {
-        const ingredients = data?.data?.data?.ingredients ?? [];
-        const allergies = data?.data?.data?.user_allergies ?? [];
+      );
+      if (ok) {
+        setAllData(data?.data);
+        const ingredients = data?.data?.ingredients ?? [];
+        const allergies = data?.data?.user_allergies ?? [];
         const ingredientObj = createKeyInArryObj(
           matchTwoArrays(ingredients, allergies),
           'alternates',
           null,
         );
+        setIngredientState(ingredientObj);
         ingredientRef.current = ingredientObj;
-        // setDummy(prev => prev++);
+      } else {
+        errorMessage('Please check your internet connection');
+        goBack();
       }
+      return data;
     },
   });
 
@@ -62,49 +68,6 @@ const useTopRatedInnerScreen = ({navigate, addListener}, {params}) => {
   const ingredientRef = useRef(null);
 
   const [ingredientState, setIngredientState] = useState(ingredientRef.current);
-
-  useEffect(() => {
-    if (status == 'success' && dummy == 0) {
-      console.log(
-        'lisdgviksdvobdskljvbsdklvbsdklvblksdbvlksdbvlbdskvbkdslvbsdlkvbsdvklsd',
-        dummy,
-        status,
-      );
-      onSelectValue('serving', null);
-      setIngredientState(
-        createKeyInArryObj(
-          matchTwoArrays(
-            data?.data?.data?.ingredients ?? [],
-            data?.data?.data?.user_allergies ?? [],
-          ),
-          'alternates',
-          null,
-        ),
-      );
-      ingredientRef.current = createKeyInArryObj(
-        matchTwoArrays(
-          data?.data?.data?.ingredients ?? [],
-          data?.data?.data?.user_allergies ?? [],
-        ),
-        'alternates',
-        null,
-      );
-      setDummy(1);
-      console.log(
-        'iosbdvobsobvsdbvosdovbsidobviosdbviobsdiovbisdvbsodivbisdvs',
-        isSuccess,
-      );
-    }
-  }, [
-    // isLoading,
-    isloading,
-    // isPending,
-    // status,
-    data?.data?.data?.id,
-    isSuccess,
-    // params?.mealData?.planId,
-    // params?.mealData?.isEdit,
-  ]);
 
   const [ingAlt, setIngAlt] = useState([]);
 
@@ -159,7 +122,7 @@ const useTopRatedInnerScreen = ({navigate, addListener}, {params}) => {
   return {
     toggleModal,
     modalVisible,
-    allData: data?.data?.data,
+    allData,
     paramsData: params?.mealData,
     isFav: fav,
     ingAlt,

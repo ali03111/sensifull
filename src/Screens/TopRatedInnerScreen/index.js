@@ -135,7 +135,17 @@ const TopRatedInnerScreen = ({navigation, route}) => {
         <MyTabs
           toggleModal={toggleModal}
           modalVisible={modalVisible}
-          ingredients={ingredient}
+          ingredients={
+            ingredient ??
+            createKeyInArryObj(
+              matchTwoArrays(
+                allData?.ingredients ?? [],
+                allData?.user_allergies ?? [],
+              ),
+              'alternates',
+              null,
+            )
+          }
           nutritions={allData?.nutritions}
           directions={allData?.directions}
           ingAlt={ingAlt}

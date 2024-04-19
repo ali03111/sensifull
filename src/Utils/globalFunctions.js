@@ -47,9 +47,9 @@ const matchTwoArrays = (matchFrom, matchTheArry) => {
   return matchFromArry;
 };
 
-function currentDateformat() {
+function currentDateformat(selectedDate) {
   // Parse the input date string
-  const dateObj = new Date();
+  const dateObj = selectedDate ?? new Date();
 
   // Extract year, month, and day components
   const year = dateObj.getFullYear();
