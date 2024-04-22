@@ -15,6 +15,7 @@ import Collapsible from 'react-native-collapsible';
 import {IngredientsData} from '../../Utils/localDB';
 import {hp} from '../../Config/responsive';
 import {Colors} from '../../Theme/Variables';
+import {DataNotFound} from '../../Components/DataNotFound';
 
 export default function Restrictions({navigation, route}) {
   const {restrictions, onSelectValue, selectedValue} = route?.params;
@@ -125,27 +126,31 @@ export default function Restrictions({navigation, route}) {
                   <Collapsible
                     collapsed={isCollapsed[sectionIndex]}
                     style={styles.collapseMain}>
-                    {item?.ingredients_active?.map((res, itemIndex) => (
-                      <Touchable
-                        key={itemIndex}
-                        onPress={() =>
-                          toggleItemSelection(sectionIndex, itemIndex)
-                        }
-                        style={[
-                          styles.item,
-                          isItemSelected(sectionIndex, itemIndex) &&
-                            styles.selectedItem,
-                        ]}>
-                        <Text
+                    {item?.ingredients_active.length > 0 ? (
+                      item?.ingredients_active?.map((res, itemIndex) => (
+                        <Touchable
+                          key={itemIndex}
+                          onPress={() =>
+                            toggleItemSelection(sectionIndex, itemIndex)
+                          }
                           style={[
-                            styles.itemText,
+                            styles.item,
                             isItemSelected(sectionIndex, itemIndex) &&
-                              styles.activeItemText,
+                              styles.selectedItem,
                           ]}>
-                          {res?.title}
-                        </Text>
-                      </Touchable>
-                    ))}
+                          <Text
+                            style={[
+                              styles.itemText,
+                              isItemSelected(sectionIndex, itemIndex) &&
+                                styles.activeItemText,
+                            ]}>
+                            {res?.title}
+                          </Text>
+                        </Touchable>
+                      ))
+                    ) : (
+                      <DataNotFound subTitle={''} />
+                    )}
                   </Collapsible>
                 )}
               </View>

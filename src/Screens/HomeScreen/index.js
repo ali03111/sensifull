@@ -97,7 +97,6 @@ const HomeScreen = ({navigation}) => {
   });
 
   const renderRecomMeal = useCallback(({item, index}) => {
-    console.log('items', item?.image.replace('http://localhost/', ''));
     return (
       <View style={styles.recomMain}>
         <Touchable

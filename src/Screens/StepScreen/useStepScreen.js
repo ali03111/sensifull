@@ -51,7 +51,7 @@ const useStepScreen = ({navigate, goBack}) => {
     },
     2: () => {
       if (restrictions.length == 0)
-        Alert.alert('Warning', 'Please select at least one ingredients');
+        Alert.alert('Warning', 'Please select at least one ingredient');
       else handleNextStep();
     },
     3: () => {

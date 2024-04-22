@@ -13,6 +13,7 @@ import {TextComponent} from '../../Components/TextComponent';
 import {ingredData} from '../../Utils/localDB';
 import {AllergiesModal} from './AllergiesModal';
 import {getObjectById} from '../../Utils/globalFunctions';
+import {hp, wp} from '../../Config/responsive';
 
 export default function Ingredients({
   toggleModal,
@@ -23,40 +24,53 @@ export default function Ingredients({
   onSelectAlter,
   disable,
 }) {
-  console.log('ksdbvlkbsdlkvbsldbvlsdbkvbsdlkvbsdklbvklsd', modalVisible);
-
   const [id, setId] = useState(0);
 
   const renderItems = useCallback(({item}) => {
+    console.log(
+      'item?.alternates?.titleitem?.alternates?.titleitem?.alternates?.title',
+      item?.alternates,
+    );
+
     return (
-      <View
-        style={
-          item?.match == true ? styles.ingredMainRed : styles.ingredMainGreen
-        }>
-        <View style={styles.allergiesInner}>
-          <Image
-            source={item?.match == true ? allergyRed : allergyDot}
-            style={
-              item?.match == true
-                ? styles.allergiesIcon
-                : styles.allergiesIconGreen
-            }
-          />
-          <TextComponent text={item?.title} styles={styles.ingredTextStyle} />
-        </View>
-        <View>
-          {item?.match == true && (
-            <TextComponent
-              text={'View Alternate'}
-              styles={styles.popUpTitle}
-              onPress={() => {
-                setId(item?.id);
-                getAlterInt(item.id);
-              }}
+      <>
+        <View
+          style={
+            item?.match == true ? styles.ingredMainRed : styles.ingredMainGreen
+          }>
+          <View style={styles.allergiesInner}>
+            <Image
+              source={item?.match == true ? allergyRed : allergyDot}
+              style={
+                item?.match == true
+                  ? styles.allergiesIcon
+                  : styles.allergiesIconGreen
+              }
             />
-          )}
+            <TextComponent text={item?.title} styles={styles.ingredTextStyle} />
+          </View>
+          <View>
+            {item?.match == true && (
+              <TextComponent
+                text={'View Alternate'}
+                styles={styles.popUpTitle}
+                onPress={() => {
+                  setId(item?.id);
+                  getAlterInt(item.id);
+                }}
+              />
+            )}
+          </View>
         </View>
-      </View>
+        {item?.alternates != null && (
+          <View style={{marginLeft: wp('10')}}>
+            <TextComponent
+              text={`* ${item?.alternates?.title}`}
+              styles={{fontSize: hp('1.8')}}
+            />
+          </View>
+        )}
+      </>
     );
   });
   return (

@@ -98,7 +98,7 @@ const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
 
   const onSelectVal = (id, alternate) => {
     const alternateObj = getObjectById(id, ingredientRef.current)?.alternates;
-    const foundAllergy = Boolean(alternateObj == alternate);
+    const foundAllergy = Boolean(alternateObj?.id == alternate?.id);
     // const foundAllergy = alternateArry?.find(res => res?.id === alternate?.id);
 
     if (foundAllergy) {

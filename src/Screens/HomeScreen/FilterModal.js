@@ -30,7 +30,6 @@ export const FilterModal = ({ToggleFunction, isVisible}) => {
         transparent={true}
         visible={isVisible}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
           ToggleFunction(!isVisible);
         }}>
         <View style={styles.centeredView}>

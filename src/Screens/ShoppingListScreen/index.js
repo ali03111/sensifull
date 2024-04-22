@@ -75,17 +75,19 @@ const ShoppingListScreen = ({navigation, route}) => {
             onpress={toggleModal}
           />
           <View style={styles.popularTop}>
-            <View style={styles.searchedTitle}>
-              <TextComponent text={'Showing results from '} />
-              <TextComponent
-                text={`${getDateMonthYear(date.startDate).day} ${
-                  getDateMonthYear(date.startDate).monthName
-                } to ${getDateMonthYear(date.endDate).day} ${
-                  getDateMonthYear(date.endDate).monthName
-                }`}
-                styles={styles.date}
-              />
-            </View>
+            {date.startDate != null && (
+              <View style={styles.searchedTitle}>
+                <TextComponent text={'Showing results from '} />
+                <TextComponent
+                  text={`${getDateMonthYear(date.startDate).day} ${
+                    getDateMonthYear(date.startDate).monthName
+                  } to ${getDateMonthYear(date.endDate).day} ${
+                    getDateMonthYear(date.endDate).monthName
+                  }`}
+                  styles={styles.date}
+                />
+              </View>
+            )}
             <View style={styles.catTitle}>
               <TextComponent text={'Ingredients '} styles={styles.date} />
               <TextComponent text={'Quantity'} styles={styles.date} />

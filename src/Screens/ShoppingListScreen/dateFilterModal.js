@@ -121,9 +121,10 @@ export const DateFilterModal = ({
               />
             </View>
             <DateTimePickerView
-              open={(startModal && startDate) || (endModal && endModal)}
+              open={(startModal && startModal) || (endModal && endModal)}
               date={
-                (startModal && new Date(startDate)) ||
+                (startModal &&
+                  (startDate ? new Date(startDate) : new Date())) ||
                 (endModal && new Date(endDate))
               }
             />
