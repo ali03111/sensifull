@@ -48,6 +48,8 @@ const MealPlanScreen = ({navigation}) => {
     bottomData,
     onRefresh,
     onDeleteMeal,
+    getDataFromScreen,
+    setUpdatedPlan,
   } = useMealPlanScreen(navigation);
 
   const [listData, setListData] = useState(
@@ -112,7 +114,25 @@ const MealPlanScreen = ({navigation}) => {
 
   const renderHiddenItem = ({item}) => (
     <View style={styles.rowBack}>
-      <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnLeft]}>
+      <TouchableOpacity
+        style={[styles.backRightBtn, styles.backRightBtnLeft]}
+        onPress={() => {
+          setUpdatedPlan({
+            planId: item?.pivot?.plan_id,
+            currentMealId: item?.pivot?.meal_id,
+          });
+          setTimeout(() => {
+            navigation.navigate('SelectYourMealScreen', {
+              catData: item?.category,
+              getDataFromScreen: data =>
+                getDataFromScreen(
+                  data,
+                  item?.pivot?.plan_id,
+                  item?.pivot?.meal_id,
+                ),
+            });
+          }, 100);
+        }}>
         <Image source={editWhite} style={styles.trashIcon} />
       </TouchableOpacity>
       <TouchableOpacity

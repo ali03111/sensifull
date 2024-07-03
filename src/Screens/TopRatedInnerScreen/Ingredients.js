@@ -27,11 +27,6 @@ export default function Ingredients({
   const [id, setId] = useState(0);
 
   const renderItems = useCallback(({item}) => {
-    console.log(
-      'item?.alternates?.titleitem?.alternates?.titleitem?.alternates?.title',
-      item?.alternates,
-    );
-
     return (
       <>
         <View

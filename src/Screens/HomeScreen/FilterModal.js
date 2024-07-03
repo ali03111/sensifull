@@ -8,6 +8,7 @@ import {
   View,
   Image,
   Button,
+  ScrollView,
 } from 'react-native';
 import useHomeScreen from './useHomeScreen';
 import {closeIcon, star} from '../../Assets';
@@ -18,10 +19,28 @@ import ThemeButton from '../../Components/ThemeButton';
 import {MultiSelectButton} from '../../Components/MultiSelectButton';
 import {Touchable} from '../../Components/Touchable';
 import {Colors} from '../../Theme/Variables';
+import {useQuery} from '@tanstack/react-query';
+import API from '../../Utils/helperFunc';
+import {HomeFilterDataUrl} from '../../Utils/Urls';
 
-export const FilterModal = ({ToggleFunction, isVisible}) => {
+export const FilterModal = ({
+  ToggleFunction,
+  isVisible,
+  filterData,
+  onFilter,
+}) => {
   //   const [modalVisible, setModalVisible] = useState(false);
   //   const {selectedItems, handlePress} = MultiSelectButton();
+
+  const [filterState, setFilterState] = useState({
+    category: [],
+    ingredient: [],
+  });
+
+  const {category, ingredient} = filterState;
+
+  const updateState = data => setFilterState(prev => ({...prev, ...data}));
+  // console.log('lksdbvklsdbklsdbklsdbklsd', data?.data);
 
   return (
     <View>
@@ -40,51 +59,83 @@ export const FilterModal = ({ToggleFunction, isVisible}) => {
               </Pressable>
             </View>
             <TextComponent text={'Filter Search'} styles={styles.modalTitle} />
-            <TextComponent text={'By Category'} styles={styles.catName} />
-            <View style={styles.btnStepMain}>
-              <MultiSelectButton items={filterCat1} />
-            </View>
-            <TextComponent
-              text={'By Dietery Prefrences'}
-              styles={styles.catName}
-            />
-            <View style={styles.btnStepMain}>
-              <MultiSelectButton items={filterCat2} />
-            </View>
-            <TextComponent text={'By Ingredients'} styles={styles.catName} />
-            <View style={styles.premiumMain}>
-              <Touchable style={styles.premiumBtn}>
-                <Image source={star} style={styles.starImage} />
-                <TextComponent
-                  text={'GO PREMIUM'}
-                  styles={styles.premiumText}
+            <ScrollView
+              contentContainerStyle={{flexGrow: 1}}
+              showsVerticalScrollIndicator={false}>
+              <TextComponent text={'By Category'} styles={styles.catName} />
+              <View style={styles.btnStepMain}>
+                <MultiSelectButton
+                  items={filterData?.categories}
+                  onSelectVal={(objId, val) =>
+                    updateState({[objId]: [...category, val]})
+                  }
+                  selectedAlter={category}
+                  objId={'category'}
+                  isMultipule={true}
                 />
-              </Touchable>
+              </View>
               <TextComponent
-                text={'to unlock ingredients'}
-                styles={styles.ingredText}
+                text={'By Dietery Prefrences'}
+                styles={styles.catName}
               />
-            </View>
-            <View style={styles.disabledBtns}>
+              <View style={styles.btnStepMain}>
+                <MultiSelectButton
+                  items={filterData?.ingredients}
+                  onSelectVal={(objId, val) =>
+                    updateState({[objId]: [...ingredient, val]})
+                  }
+                  selectedAlter={ingredient}
+                  objId={'ingredient'}
+                  isMultipule={true}
+                />
+              </View>
               <ThemeButton
-                disabled={true}
-                title={'Oregano leaves'}
-                style={styles.btnMain}
-                textStyle={styles.btnText}
+                title={'Filter'}
+                onPress={() => {
+                  onFilter(category, ingredient);
+                  setTimeout(() => {
+                    setFilterState({
+                      category: [],
+                      ingredient: [],
+                    });
+                  }, 3000);
+                }}
               />
-              <ThemeButton
-                disabled={true}
-                title={'Egg, whisked'}
-                style={styles.btnMain}
-                textStyle={styles.btnText}
-              />
-              <ThemeButton
-                disabled={true}
-                title={'Parsley, chopped'}
-                style={styles.btnMain}
-                textStyle={styles.btnText}
-              />
-            </View>
+              {/* <TextComponent text={'By Ingredients'} styles={styles.catName} />
+              <View style={styles.premiumMain}>
+                <Touchable style={styles.premiumBtn}>
+                  <Image source={star} style={styles.starImage} />
+                  <TextComponent
+                    text={'GO PREMIUM'}
+                    styles={styles.premiumText}
+                  />
+                </Touchable>
+                <TextComponent
+                  text={'to unlock ingredients'}
+                  styles={styles.ingredText}
+                />
+              </View>
+              <View style={styles.disabledBtns}>
+                <ThemeButton
+                  disabled={true}
+                  title={'Oregano leaves'}
+                  style={styles.btnMain}
+                  textStyle={styles.btnText}
+                />
+                <ThemeButton
+                  disabled={true}
+                  title={'Egg, whisked'}
+                  style={styles.btnMain}
+                  textStyle={styles.btnText}
+                />
+                <ThemeButton
+                  disabled={true}
+                  title={'Parsley, chopped'}
+                  style={styles.btnMain}
+                  textStyle={styles.btnText}
+                />
+              </View> */}
+            </ScrollView>
           </View>
         </View>
       </Modal>
@@ -115,6 +166,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 10,
+    minHeight: hp('50'),
+    maxHeight: hp('90'),
   },
   CloseBtn: {
     flexDirection: 'row',
@@ -130,6 +183,7 @@ const styles = StyleSheet.create({
     fontSize: hp('2.7'),
     fontWeight: '600',
     alignSelf: 'center',
+    marginBottom: hp('2'),
   },
   catName: {
     fontSize: hp('2'),

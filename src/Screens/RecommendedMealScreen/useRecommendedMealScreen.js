@@ -3,7 +3,9 @@ import {useCallback, useState} from 'react';
 import API from '../../Utils/helperFunc';
 import {getRecommdedUrl} from '../../Utils/Urls';
 
-const useRecommendedMealScreen = () => {
+const useRecommendedMealScreen = ({navigate}, {params}) => {
+  const routeData = params;
+
   const {data} = useQuery({
     queryKey: ['allRecommded'],
     queryFn: () => API.get(getRecommdedUrl),
@@ -19,7 +21,12 @@ const useRecommendedMealScreen = () => {
     });
   }, []);
 
-  return {onRefresh, allData: data?.data};
+  return {
+    onRefresh,
+    allData: data?.data,
+    title: routeData?.title,
+    itemList: routeData?.list,
+  };
 };
 
 export default useRecommendedMealScreen;

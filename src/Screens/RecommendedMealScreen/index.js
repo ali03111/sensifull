@@ -13,8 +13,11 @@ import {AniFlatOneByOne} from '../../AnimatedComp/AniFlatOneByOne';
 import BlurImage from '../../Components/BlurImage';
 import {DataNotFound} from '../../Components/DataNotFound';
 
-const RecommendedMealScreen = ({navigation}) => {
-  const {allData, onRefresh} = useRecommendedMealScreen(navigation);
+const RecommendedMealScreen = ({navigation, route}) => {
+  const {allData, onRefresh, title, itemList} = useRecommendedMealScreen(
+    navigation,
+    route,
+  );
 
   const RenderTodayPopular = useCallback(({item, index}) => {
     return (
@@ -42,11 +45,10 @@ const RecommendedMealScreen = ({navigation}) => {
       <ImageBackground source={stepBg} style={styles.container}>
         <HeaderWithFilterAndBack
           goBack={() => navigation.goBack()}
-          Text={'Recommended Meals'}
-          filterIcon={filter1}
+          Text={title ?? 'Recommended Meals'}
         />
         <AniFlatOneByOne
-          data={allData?.recommended_list}
+          data={itemList ?? allData?.recommended_list}
           flatViewStyle={styles.upComingFlatlistView}
           onRefresh={onRefresh}
           flatListProps={{

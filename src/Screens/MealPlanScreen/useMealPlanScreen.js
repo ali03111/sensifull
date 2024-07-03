@@ -1,12 +1,19 @@
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useState} from 'react';
-import {deleteMealUrl, getDatePlanUrl, getMealPlanUrl} from '../../Utils/Urls';
+import {
+  deleteMealUrl,
+  getDatePlanUrl,
+  getMealPlanUrl,
+  updatePlanUrl,
+} from '../../Utils/Urls';
 import API from '../../Utils/helperFunc';
 
 const useMealPlanScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const [bottomData, setBottomData] = useState([]);
+
+  const [updatedPlan, setUpdatedPlan] = useState({});
 
   // Get QueryClient from the context
   const queryClient = useQueryClient();
@@ -28,29 +35,11 @@ const useMealPlanScreen = () => {
       return allProps;
     },
   });
-  // const d = useQuery({
-  //   queryKey: ['deleteMeal'],
-  //   queryFn: async () => {
-  //     const allProps = await API.delete(deleteMealUrl);
-  //     if (allProps?.ok) {
-  //       queryClient.invalidateQueries({queryKey: ['getDatePlan']});
-  //       console.log('skldjbvkljsdbvbsdvbsdjbvskdjbvds', allProps?.data);
-  //       // setActiveButton(activeButton ?? allProps?.data[0]);
-  //       // mutate({date: activeButton ?? allProps?.data[0]});
-  //     }
-  //     return allProps;
-  //   },
-  // });
-
   const {mutateAsync} = useMutation({
     mutationFn: body => {
       return API.delete(deleteMealUrl, body);
     },
     onSuccess: ({ok, data}) => {
-      console.log(
-        'dbhvjklsdbjkvbdsjkbvkdsbvsbdjkvbsdkjbvsdbkvsdbvsdjk',
-        JSON.stringify(data),
-      );
       if (ok) {
         if (data?.is_date) {
           setActiveButton(null);
@@ -68,16 +57,24 @@ const useMealPlanScreen = () => {
   });
   const {mutate} = useMutation({
     mutationFn: body => {
-      console.log('sdlkbvlksbvlbsdlkvds', activeButton);
       return API.post(getMealPlanUrl, body);
     },
     onSuccess: ({ok, data}) => {
-      console.log(
-        'dbhvjklsdbjkvbdsjkbvkdsbvsbdjkvbsdkjbvsdbkvsdbvsdjk',
-        JSON.stringify(data),
-      );
       if (ok) {
         setBottomData(data);
+        // successMessage('Your profile sucessfully updated!');
+        // // dispatch({type: types.UpdateProfile, payload: data.data});
+      } else errorMessage(data?.message);
+    },
+  });
+
+  const updatedMealFun = useMutation({
+    mutationFn: body => {
+      return API.post(updatePlanUrl, body);
+    },
+    onSuccess: ({ok, data}) => {
+      if (ok) {
+        queryClient.invalidateQueries({queryKey: ['getDatePlan']});
         // successMessage('Your profile sucessfully updated!');
         // // dispatch({type: types.UpdateProfile, payload: data.data});
       } else errorMessage(data?.message);
@@ -88,6 +85,16 @@ const useMealPlanScreen = () => {
     queryClient.fetchQuery({
       queryKey: ['getDatePlan'],
       staleTime: 1000,
+    });
+  };
+  const getDataFromScreen = (planData, plan_id, mealId) => {
+    console.log(updatedPlan, 'ghgjhg');
+    updatedMealFun.mutate({
+      planId: plan_id,
+      newMealId: planData?.category?.meals?.id,
+      serving: planData?.category?.serving,
+      ingredients: planData?.category?.meals?.ingredients,
+      currentMealId: mealId,
     });
   };
 
@@ -109,6 +116,8 @@ const useMealPlanScreen = () => {
     bottomData,
     onRefresh,
     onDeleteMeal: ({date, meal_id}) => mutateAsync({date, meal_id}),
+    getDataFromScreen,
+    setUpdatedPlan,
   };
 };
 

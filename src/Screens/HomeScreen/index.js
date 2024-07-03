@@ -54,6 +54,8 @@ const HomeScreen = ({navigation}) => {
     dynamicNav,
     onRefresh,
     refresh,
+    onFilter,
+    filterData,
   } = useHomeScreen(navigation);
 
   // console.log('aa', JSON.stringify(allData));
@@ -165,7 +167,11 @@ const HomeScreen = ({navigation}) => {
           }>
           <View style={styles.homeMain}>
             <View style={styles.ingredArea}>
-              <HomeBtn1 text1={'Ingredient'} text2={'Restrictions'} />
+              <HomeBtn1
+                text1={'Ingredient'}
+                text2={'Restrictions'}
+                onpress={() => dynamicNav('SettingDietaryScreen')}
+              />
               <HomeBtn2
                 text1={'Shopping'}
                 text2={'list'}
@@ -261,7 +267,12 @@ const HomeScreen = ({navigation}) => {
         </ScrollView>
       </ImageBackground>
 
-      <FilterModal ToggleFunction={toggleModal} isVisible={modalVisible} />
+      <FilterModal
+        ToggleFunction={toggleModal}
+        isVisible={modalVisible}
+        filterData={filterData}
+        onFilter={onFilter}
+      />
     </>
   );
 };

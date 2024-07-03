@@ -10,6 +10,7 @@ export const MultiSelectButton = ({
   selectedAlter,
   onSelectVal,
   objId,
+  isMultipule,
 }) => {
   const [dummy, setDummy] = useState(0);
 
@@ -17,7 +18,7 @@ export const MultiSelectButton = ({
 
   return (
     <>
-      {items.map((item, index) => (
+      {items?.map((item, index) => (
         <ThemeButton
           key={index}
           onPress={() => {
@@ -26,18 +27,20 @@ export const MultiSelectButton = ({
           }}
           title={item?.name ?? item?.title}
           style={styles.btnMain(
-            // Boolean(
-            //   selectedAlter?.alternates?.filter(res => res?.id == item?.id)[0]
-            //     ?.id,
-            // ),
-            Boolean(selectedAlter?.alternates?.id == item.id),
+            isMultipule
+              ? Boolean(selectedAlter?.find(res => res?.id == item.id))
+              : Boolean(
+                  (selectedAlter?.alternates?.id ?? selectedAlter?.id) ==
+                    item.id,
+                ),
           )}
           textStyle={styles.btnText(
-            // Boolean(
-            //   selectedAlter?.alternates?.filter(res => res?.id == item?.id)[0]
-            //     ?.id,
-            // ),
-            Boolean(selectedAlter?.alternates?.id == item.id),
+            isMultipule
+              ? Boolean(selectedAlter?.find(res => res?.id == item.id))
+              : Boolean(
+                  (selectedAlter?.alternates?.id ?? selectedAlter?.id) ==
+                    item.id,
+                ),
           )}
           isDisable={isDisable}
         />

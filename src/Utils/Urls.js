@@ -50,3 +50,6 @@ export const getPopularUrl = 'popular-list';
 export const getRecommdedUrl = 'recommended-list';
 export const getAlterIntUrl = 'getAlternateIngredients';
 export const getShoppingListUrl = 'getShoppingListOfUser';
+export const updatePlanUrl = '/update-plan';
+export const HomeFilterDataUrl = '/data-for-filter';
+export const FilterMealUrl = '/filter-meal';

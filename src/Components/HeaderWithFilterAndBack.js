@@ -28,7 +28,9 @@ export const HeaderWithFilterAndBack = ({
       )}
       <TextComponent text={Text} styles={{...styles.viewAll, ...textStyle}} />
       <Touchable onPress={onpress}>
-        <Image source={filterIcon} style={{...styles.arrBack, ...favStyle}} />
+        {filterIcon && (
+          <Image source={filterIcon} style={{...styles.arrBack, ...favStyle}} />
+        )}
       </Touchable>
     </View>
   );

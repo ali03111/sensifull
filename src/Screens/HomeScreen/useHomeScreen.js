@@ -1,7 +1,9 @@
-import {useQuery, useQueryClient} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useCallback, useState} from 'react';
 import API from '../../Utils/helperFunc';
-import {homeData} from '../../Utils/Urls';
+import {FilterMealUrl, HomeFilterDataUrl, homeData} from '../../Utils/Urls';
+import {errorMessage} from '../../Config/NotificationMessage';
+import {getIdsFromArry} from '../../Utils/globalFunctions';
 
 const useHomeScreen = ({navigate}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -11,6 +13,35 @@ const useHomeScreen = ({navigate}) => {
   const toggleModal = () => {
     setModalVisible(!modalVisible);
     console.log('firstasd');
+  };
+
+  const filterData = useQuery({
+    queryKey: ['filterData'],
+    queryFn: () => API.get(HomeFilterDataUrl),
+  });
+
+  const {mutate} = useMutation({
+    mutationFn: newTodo => {
+      return API.post(FilterMealUrl, newTodo);
+    },
+    onSuccess: ({ok, data}) => {
+      if (ok) {
+        console.log('kjsdbvklsdbvlksdbvklsdbvlkbsdlkvsd', data);
+        dynamicNav('RecommendedMealScreen', {
+          title: 'Filter Data',
+          list: data,
+        });
+      }
+    },
+    onError: ({message}) => errorMessage(message),
+  });
+
+  const onFilter = (cat, int) => {
+    toggleModal();
+    mutate({
+      category_id: getIdsFromArry(cat, 'id'),
+      ingredient_id: getIdsFromArry(int, 'id'),
+    });
   };
 
   // Get QueryClient from the context
@@ -40,6 +71,8 @@ const useHomeScreen = ({navigate}) => {
     dynamicNav,
     onRefresh,
     refresh,
+    filterData: filterData?.data?.data,
+    onFilter,
   };
 };
 
