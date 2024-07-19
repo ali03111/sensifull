@@ -175,7 +175,6 @@ const MealPlanScreen = ({navigation}) => {
       <ImageBackground source={stepBg} style={styles.container}>
         <View showsVerticalScrollIndicator={false} style={styles.scroll}>
           <HeaderWithFilterAndBack
-            goBack={() => navigation.goBack()}
             Text={'Meals Plan'}
             filterIcon={filter1}
             onpress={() => {

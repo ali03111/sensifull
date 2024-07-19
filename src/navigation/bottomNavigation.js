@@ -93,9 +93,9 @@ function MybottomTabs() {
         component={Screens.HomeScreen}
       />
       <Tab.Screen
-        name="TaskScreen"
+        name="MealPlanScreen"
         options={tabarComponent(tasklist1, tasklist)}
-        component={Screens.HomeScreen}
+        component={Screens.MealPlanScreen}
       />
       <Tab.Screen
         name="SettingScreen"

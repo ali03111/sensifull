@@ -18,15 +18,24 @@ export const HeaderWithFilterAndBack = ({
 }) => {
   return (
     <View style={{...styles.topRatedMain, ...mainStyle}}>
-      {goBack && (
-        <Touchable onPress={goBack}>
-          <Image
-            source={arrowBack}
-            style={{...styles.arrBack, ...backIconStyle}}
-          />
-        </Touchable>
-      )}
-      <TextComponent text={Text} styles={{...styles.viewAll, ...textStyle}} />
+      <Touchable onPress={goBack} disabled={!goBack}>
+        <Image
+          source={arrowBack}
+          style={{
+            ...styles.arrBack,
+            display: goBack ? 'flex' : 'none',
+            ...backIconStyle,
+          }}
+        />
+      </Touchable>
+      <TextComponent
+        text={Text}
+        styles={{
+          ...styles.viewAll,
+          marginLeft: goBack ? 0 : wp('6'),
+          ...textStyle,
+        }}
+      />
       <Touchable onPress={onpress}>
         {filterIcon && (
           <Image source={filterIcon} style={{...styles.arrBack, ...favStyle}} />
