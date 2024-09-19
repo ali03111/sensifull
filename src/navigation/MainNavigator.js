@@ -119,6 +119,10 @@ function MainNavigator() {
               name="ShoppingListScreen"
               component={Screens.ShoppingListScreen}
             />
+            <Stack.Screen
+              name="IngredientsInfoScreen"
+              component={Screens.IngredientsInfoScreen}
+            />
           </>
         )}
       </Stack.Navigator>

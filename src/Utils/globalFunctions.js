@@ -1,3 +1,6 @@
+import {loadingFalse, loadingTrue} from '../Redux/Action/isloadingAction';
+import {store} from '../Redux/Reducer';
+
 const getSingleCharacter = text => {
   let letter = text?.charAt(0).toUpperCase();
   return letter;
@@ -119,6 +122,35 @@ function getObjectById(id, data) {
   return data.find(obj => obj.id === id);
 }
 
+const getDataByBarCode = async barCode => {
+  console.log('third');
+  store.dispatch(loadingTrue());
+  const URL = `https://api.barcodelookup.com/v3/products?barcode=${barCode}&formatted=y&key=qwzviah3h756sc6hgpnusgzx64h6td`;
+
+  // Replace "YOUR_API_KEY" with your actual Google Maps Geocoding API key
+
+  const res = await fetch(URL);
+  const response = await res.json();
+  if (response?.products?.length > 0) {
+    store.dispatch(loadingFalse());
+    return {ok: true, data: response?.products};
+  } else {
+    store.dispatch(loadingFalse());
+    return {ok: false, data: []};
+  }
+};
+
+function extractTimeFromString(str) {
+  const timeRegex = /(\d{1,2}:\d{2}\s*[AP]M)/i; // Regular expression to match time in format "hh:mm AM/PM"
+  const match = str.match(timeRegex);
+
+  if (match) {
+    return match[1]; // Extracting the matched time
+  } else {
+    return '';
+  }
+}
+
 export {
   getSingleCharacter,
   removeKeyAndReturnArry,
@@ -132,4 +164,5 @@ export {
   getObjectById,
   updateKeyById,
   currentDateformat,
+  getDataByBarCode,
 };

@@ -6,6 +6,7 @@ import useReduxStore from './src/Hooks/UseReduxStore';
 import {useIsFetching} from '@tanstack/react-query';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import Overlay from './src/Components/Overlay';
+import ScanbotBarcodeSDK from 'react-native-scanbot-barcode-scanner-sdk';
 
 const App = () => {
   const {getState, dispatch} = useReduxStore();
@@ -43,6 +44,29 @@ const App = () => {
     setTimeout(function () {
       Hide_Splash_Screen();
     }, time());
+  }, []);
+
+  useEffect(async () => {
+    const LICENSE_KEY =
+      'L0bY0oxxX9d4PLmz5I/VQV2XNq7T6U' +
+      'Q+wOWHPoIBEm8aeiHEuhTVOqrCM5lT' +
+      'q+/xm4QvdOMYIuGkjY7kPjXTJllZQk' +
+      'MLGHck3NhxxtkZytXeF2JPuwoxlMtt' +
+      'tLHY2OKabjuNvXnmGpdaNW0PYhfhiN' +
+      '8CM577vQwp+BBBLPz7DSy4oUUSRiHU' +
+      'g83tkRRIThr6umeHwl2vWOLFrxHBl0' +
+      '72DffwzOJXRq+m0PSyj2d9uI+FgrFb' +
+      'UC5CRodCoX3UEQ1ZgC7F3GPiL9ljZn' +
+      '0kRpj3kS+rFoGIALEIpRS2+fFODFGA' +
+      '1sDvAnn6o2T98KljnMt62XSjZUzd5y' +
+      'DG7N7REpaBbw==\nU2NhbmJvdFNESw' +
+      'pjb20uY29kbWVudC5zZW5zaWZ1bGwK' +
+      'MTcyNzMwODc5OQo4Mzg4NjA3CjE5\n';
+
+    const result = await ScanbotBarcodeSDK.initializeSdk({
+      licenseKey: LICENSE_KEY,
+    });
+    console.log('klsdbvklsbdklvbsdklvbklsdbvsd', result);
   }, []);
 
   let Splash_Screen = (

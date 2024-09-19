@@ -78,7 +78,7 @@ function MybottomTabs() {
       <Tab.Screen
         name="QRScreen"
         options={tabarComponent(barcode1, barcode)}
-        component={Screens.HomeScreen}
+        component={Screens.CodeScannerScreen}
       />
       <Tab.Screen
         name="Notification"
