@@ -1,4 +1,4 @@
-import {useMutation, useQuery} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useEffect, useRef, useState} from 'react';
 import API from '../../Utils/helperFunc';
 import {addFvMealUrl, getAlterIntUrl, getMealDetailUrl} from '../../Utils/Urls';
@@ -13,7 +13,9 @@ import useReduxStore from '../../Hooks/UseReduxStore';
 
 const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
   const {getState, dispatch} = useReduxStore();
-  const {isloading} = getState('isloading');
+
+  // Get QueryClient from the context
+  const queryClient = useQueryClient();
 
   const [allData, setAllData] = useState();
 
@@ -27,8 +29,15 @@ const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
           '/' +
           params?.mealData?.planId,
       );
+
+      console.log(
+        'ksjdbvjksdbkjvbsdjkvbjksdbvksdbvjksdbkjvbsdjkvbdjksbvkdsb,',
+        data?.data,
+      );
+
       if (ok) {
         setAllData(data?.data);
+        setFav(data?.data?.is_favorite);
         const ingredients = data?.data?.ingredients ?? [];
         const allergies = data?.data?.user_allergies ?? [];
         const ingredientObj = createKeyInArryObj(
@@ -61,7 +70,7 @@ const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
 
   const [modal1Visible, setModal1Visible] = useState(false);
 
-  const [fav, setFav] = useState(data?.data?.is_favorite);
+  const [fav, setFav] = useState(false);
 
   const [dummy, setDummy] = useState(0);
 
@@ -79,11 +88,11 @@ const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
       if (ok) {
         setFav(data?.is_favorite);
         successMessage(data?.message);
-        // successMessage('Your profile sucessfully updated!');
-        // // dispatch({type: types.UpdateProfile, payload: data.data});
+        // queryClient.invalidateQueries({queryKey: ['mealDetail']});
       } else errorMessage(data?.message);
     },
   });
+
   const {mutateAsync} = useMutation({
     mutationFn: id => {
       return API.post(getAlterIntUrl, {ingredient_id: id});
@@ -136,6 +145,10 @@ const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
     onSelectVal,
     paramsFun: params?.onServingSelect,
     setDummy,
+    onFav: () =>
+      mutate({
+        meal_id: params?.mealData?.id,
+      }),
   };
 };
 

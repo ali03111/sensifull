@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import {ScrollView, ImageBackground, View} from 'react-native';
 
-import {fav, stepBg, topRated} from '../../Assets';
+import {fav, heartFill, rightArrow, stepBg, topRated} from '../../Assets';
 import {styles} from './styles';
 import useTopRatedInnerScreen from './useTopRatedInnerScreen';
 import {HeaderWithFilterAndBack} from '../../Components/HeaderWithFilterAndBack';
@@ -19,6 +19,8 @@ import {hp, wp} from '../../Config/responsive';
 import {ServingModal} from '../SelectYourMealScreen/ServingModal';
 import ThemeButton from '../../Components/ThemeButton';
 import {errorMessage} from '../../Config/NotificationMessage';
+import {Colors} from '../../Theme/Variables';
+import {Text} from 'react-native-animatable';
 
 const TopRatedInnerScreen = ({navigation, route}) => {
   const {
@@ -38,6 +40,7 @@ const TopRatedInnerScreen = ({navigation, route}) => {
     ingredient,
     paramsFun,
     setDummy,
+    onFav,
   } = useTopRatedInnerScreen(navigation, route);
 
   const isCategory = Boolean(
@@ -54,11 +57,12 @@ const TopRatedInnerScreen = ({navigation, route}) => {
             navigation.goBack();
           }}
           Text={'Meals Details'}
-          filterIcon={fav}
+          filterIcon={isFav ? heartFill : fav}
           mainStyle={styles.headerBg}
           textStyle={styles.styleColor}
           backIconStyle={styles.backStyle}
           favStyle={styles.backStyle}
+          onpress={onFav}
         />
         <View style={styles.mealmain}>
           <BlurImage
@@ -100,38 +104,34 @@ const TopRatedInnerScreen = ({navigation, route}) => {
         </View>
         {paramsData?.isEdit && (
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <ThemeButton
-              title={'Select Serving'}
-              onPress={() => setModal1Visible(true)}
-              style={{
-                width: wp('30'),
-                height: hp('3.5'),
-                marginLeft: wp('3'),
-                marginRight: wp('2'),
-              }}
-              textStyle={{fontSize: hp('1.5')}}
-            />
-            {serving != null && serving != 'null' && (
-              <TextComponent text={serving} />
-            )}
+            <View>
+              <ThemeButton
+                title={
+                  Boolean(serving != null && serving != 'null')
+                    ? allData?.name
+                    : 'How many servings ?'
+                }
+                childComp={
+                  Boolean(serving != null && serving != 'null') && (
+                    <TextComponent
+                      text={`, ${serving} Servings`}
+                      styles={{
+                        ...styles.btnText,
+                        color: 'black',
+                        fontWeight: '400',
+                      }}
+                    />
+                  )
+                }
+                onPress={() => setModal1Visible(true)}
+                style={styles.servingButton}
+                image={rightArrow}
+                textStyle={styles.btnText}
+              />
+            </View>
           </View>
         )}
-        {paramsData?.isEdit && (
-          <ThemeButton
-            title={'Save'}
-            onPress={() => {
-              if (serving != null) {
-                navigation.goBack();
-                paramsFun({
-                  meal: {...paramsData, ingredients: ingredient},
-                  serving,
-                });
-              } else errorMessage('Please select serving first');
-            }}
-            style={styles.saveBtn}
-            textStyle={{fontSize: hp('1.5')}}
-          />
-        )}
+
         <MyTabs
           toggleModal={toggleModal}
           modalVisible={modalVisible}
@@ -153,6 +153,22 @@ const TopRatedInnerScreen = ({navigation, route}) => {
           onSelectAlter={onSelectVal}
           disable={Boolean(!paramsData?.isEdit)}
         />
+        {paramsData?.isEdit && (
+          <ThemeButton
+            title={'Save'}
+            onPress={() => {
+              if (serving != null) {
+                navigation.goBack();
+                paramsFun({
+                  meal: {...paramsData, ingredients: ingredient},
+                  serving,
+                });
+              } else errorMessage('Please select serving first');
+            }}
+            style={styles.saveBtn}
+            textStyle={{fontSize: hp('1.5')}}
+          />
+        )}
         <ServingModal
           isVisible={modal1Visible}
           onClose={() => setModal1Visible(false)}

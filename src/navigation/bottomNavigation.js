@@ -15,6 +15,7 @@ import {
   tasklist,
   setting,
   home2,
+  activeBar,
 } from '../Assets';
 import useReduxStore from '../Hooks/UseReduxStore';
 import {fetchGetWithToken} from '../Utils/helperFunc';
@@ -24,6 +25,13 @@ const tabarComponent = (activeImage, unActiveImage, ImageStyle) => {
   return {
     tabBarIcon: ({focused}) => (
       <View style={styles.tabarView(focused)}>
+        {focused && (
+          <Image
+            resizeMode="contain"
+            source={activeBar}
+            style={styles.barStyle}
+          />
+        )}
         <Image
           style={{...styles.imgstyle, ...ImageStyle}}
           source={focused ? activeImage : unActiveImage}
@@ -132,5 +140,11 @@ const styles = StyleSheet.create({
     height: hp('8.5'),
     resizeMode: 'contain',
     top: Platform.OS == 'ios' ? hp('1.5') : 0,
+  },
+  barStyle: {
+    width: wp('10'),
+    position: 'absolute',
+    // right: wp('-1'),
+    bottom: Platform.OS == 'ios' ? hp('6.4') : hp('7.8'),
   },
 });

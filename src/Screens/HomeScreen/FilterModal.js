@@ -89,18 +89,7 @@ export const FilterModal = ({
                   isMultipule={true}
                 />
               </View>
-              <ThemeButton
-                title={'Filter'}
-                onPress={() => {
-                  onFilter(category, ingredient);
-                  setTimeout(() => {
-                    setFilterState({
-                      category: [],
-                      ingredient: [],
-                    });
-                  }, 3000);
-                }}
-              />
+
               {/* <TextComponent text={'By Ingredients'} styles={styles.catName} />
               <View style={styles.premiumMain}>
                 <Touchable style={styles.premiumBtn}>
@@ -136,6 +125,19 @@ export const FilterModal = ({
                 />
               </View> */}
             </ScrollView>
+            <ThemeButton
+              title={'Filter'}
+              style={{marginTop: hp('2')}}
+              onPress={() => {
+                onFilter(category, ingredient);
+                setTimeout(() => {
+                  setFilterState({
+                    category: [],
+                    ingredient: [],
+                  });
+                }, 3000);
+              }}
+            />
           </View>
         </View>
       </Modal>

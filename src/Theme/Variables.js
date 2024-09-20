@@ -20,6 +20,7 @@ const Colors = {
   lightRed: 'rgba(235, 4, 0, 0.1)',
   transparent: 'transparent',
   grayFadedBtn: 'rgba(255, 255, 255, 0.2)',
+  lightYellow: '#FFF4A3',
 };
 
 /** FontSize **/

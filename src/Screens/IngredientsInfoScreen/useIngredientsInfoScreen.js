@@ -16,8 +16,10 @@ import useReduxStore from '../../Hooks/UseReduxStore';
 // import {useCameraDevice, useCameraPermission} from 'react-native-vision-camera';
 
 const useIngredientsInfoScreen = ({navigate}, {params}) => {
-  const {dispatch} = useReduxStore();
-
-  return {hasPermission: true, device: true};
+  return {
+    exactMatch: params?.exact_matches,
+    ingredient: params?.ingredient,
+    likeMatches: params?.like_matches,
+  };
 };
 export default useIngredientsInfoScreen;

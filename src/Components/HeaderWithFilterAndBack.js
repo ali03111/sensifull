@@ -32,7 +32,7 @@ export const HeaderWithFilterAndBack = ({
         text={Text}
         styles={{
           ...styles.viewAll,
-          marginLeft: goBack ? 0 : wp('6'),
+          // marginLeft: goBack ? 0 : wp('6'),
           ...textStyle,
         }}
       />
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: Colors.primaryColor,
-    paddingBottom: Platform.OS == 'ios' ? hp('2') : hp('1.5'),
+    paddingBottom: Platform.OS == 'ios' ? hp('2') : hp('3'),
     paddingTop: Platform.OS == 'ios' ? hp('7') : hp('3'),
   },
   arrBack: {

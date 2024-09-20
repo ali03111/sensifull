@@ -153,6 +153,7 @@ const HomeScreen = ({navigation}) => {
             style={styles.inputStyle}
             placeholderTextColor="white"
             placeholder={'Search Meals'}
+            editable={false}
           />
           <Touchable style={styles.filterMain} onPress={toggleModal}>
             <Image source={filter1} style={styles.filterImage} />

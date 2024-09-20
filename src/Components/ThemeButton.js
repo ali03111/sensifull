@@ -14,6 +14,7 @@ const ThemeButton = ({
   textStyle,
   imageStyle,
   isDisable,
+  childComp,
 }) => {
   return (
     // <ShadowButton>
@@ -22,7 +23,12 @@ const ThemeButton = ({
       onPress={onPress}
       disabled={isDisable}
       style={[styles.button, {...style}]}>
-      <TextComponent text={title} styles={{...styles.text, ...textStyle}} />
+      <TextComponent
+        text={title}
+        styles={{...styles.text, ...textStyle}}
+        childComp={childComp}
+      />
+      {/* {childComp && childComp} */}
       {image && (
         <Image source={image} style={{...styles.image, ...imageStyle}} />
       )}

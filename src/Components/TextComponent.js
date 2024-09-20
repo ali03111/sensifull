@@ -9,6 +9,7 @@ export const TextComponent = ({
   onPress,
   numberOfLines,
   isWhite,
+  childComp,
 }) => {
   return (
     <Text
@@ -20,6 +21,7 @@ export const TextComponent = ({
         ...styles,
       }}>
       {text}
+      {childComp && childComp}
     </Text>
   );
 };

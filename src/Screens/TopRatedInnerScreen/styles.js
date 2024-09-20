@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {hp, wp} from '../../Config/responsive';
 import {Colors} from '../../Theme/Variables';
 
@@ -179,10 +179,26 @@ export const styles = StyleSheet.create({
     paddingTop: hp('3'),
   },
   saveBtn: {
-    width: wp('30'),
-    height: hp('3.5'),
+    width: wp('94'),
+    height: hp('7'),
     marginLeft: wp('3'),
     marginRight: wp('2'),
     marginTop: hp('1'),
+    marginBottom: Platform.OS == 'ios' ? hp('4') : hp('2'),
+    alignSelf: 'center',
+  },
+  servingButton: {
+    backgroundColor: Colors.lightYellow,
+    width: wp('93'),
+    height: hp('6'),
+    marginLeft: wp('3'),
+    marginRight: wp('2'),
+    justifyContent: 'space-between',
+    paddingHorizontal: wp('2.5'),
+  },
+  btnText: {
+    fontSize: hp('1.8'),
+    color: Colors.primaryColor,
+    fontWeight: 'bold',
   },
 });

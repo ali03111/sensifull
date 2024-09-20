@@ -114,3 +114,6 @@ export {default as chevRight} from './Icons/chev-right.png';
 export {default as editPicBtn} from './Icons/editPicBtn.png';
 export {default as tickcirclepurple} from './Icons/tick-circle-purple.png';
 export {default as tickuncirclepurple} from './Icons/tick-uncircle-purple.png';
+export {default as rightArrow} from './Icons/rightArrow.png';
+export {default as heartFill} from './Icons/heartFill.png';
+export {default as activeBar} from './Icons/activeBar.png';
