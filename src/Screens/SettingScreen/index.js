@@ -74,7 +74,7 @@ const SettingScreen = ({navigation}) => {
           isURI={true}
           styles={styles.ProfileImage}
           blurStyle={styles.blurMain}
-          uri={imageUrl(userData?.profile_image)}
+          uri={userData?.profile_image}
         />
         <TextComponent
           text={userData?.first_name + ' ' + userData?.last_name}

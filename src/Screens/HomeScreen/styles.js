@@ -83,6 +83,7 @@ export const styles = StyleSheet.create({
     width: wp('67'),
     color: '#fff',
     height: hp('5'),
+    justifyContent: 'center',
   },
   inputImage: {
     width: wp('5'),

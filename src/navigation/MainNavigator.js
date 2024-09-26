@@ -123,6 +123,14 @@ function MainNavigator() {
               name="IngredientsInfoScreen"
               component={Screens.IngredientsInfoScreen}
             />
+            <Stack.Screen
+              name="SearchBoxScreen"
+              component={Screens.SearchBoxScreen}
+            />
+            <Stack.Screen
+              name="SearchScreen"
+              component={Screens.SearchScreen}
+            />
           </>
         )}
       </Stack.Navigator>

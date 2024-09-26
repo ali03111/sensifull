@@ -54,3 +54,4 @@ export const updatePlanUrl = '/update-plan';
 export const HomeFilterDataUrl = '/data-for-filter';
 export const FilterMealUrl = '/filter-meal';
 export const checkAllergicIngUrl = '/checkAllergicIngredient';
+export const searchMealUrl = '/search-meal/';

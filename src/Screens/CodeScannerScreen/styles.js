@@ -17,4 +17,20 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   btn: {width: wp('90'), alignSelf: 'center'},
+  cameraView: {
+    // backgroundColor: Colors.lightBorder,
+    width: wp('100'),
+    height: hp('100'),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  barView: {
+    width: wp('90'),
+    height: hp('12'),
+    marginTop: hp('-20'),
+    borderRadius: 10,
+    borderColor: Colors.primaryColor,
+    borderWidth: 1,
+    backgroundColor: Colors.lightBorder,
+  },
 });

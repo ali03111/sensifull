@@ -62,7 +62,7 @@ const EditProfileScreen = ({navigation}) => {
           />
           <View style={styles.whiteCircle}>
             <CircleImage
-              image={profileData?.uri ?? imageUrl(userData?.profile_image)}
+              image={profileData?.uri ?? userData?.profile_image}
               styles={styles.profileView}
               uri={true}
             />

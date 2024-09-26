@@ -70,8 +70,6 @@ const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
 
   const [modal1Visible, setModal1Visible] = useState(false);
 
-  const [fav, setFav] = useState(false);
-
   const [dummy, setDummy] = useState(0);
 
   const ingredientRef = useRef(null);
@@ -79,6 +77,8 @@ const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
   const [ingredientState, setIngredientState] = useState(ingredientRef.current);
 
   const [ingAlt, setIngAlt] = useState([]);
+
+  const [fav, setFav] = useState(false);
 
   const {mutate} = useMutation({
     mutationFn: body => {
@@ -88,6 +88,7 @@ const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
       if (ok) {
         setFav(data?.is_favorite);
         successMessage(data?.message);
+        queryClient.invalidateQueries({queryKey: ['favData']});
         // queryClient.invalidateQueries({queryKey: ['mealDetail']});
       } else errorMessage(data?.message);
     },

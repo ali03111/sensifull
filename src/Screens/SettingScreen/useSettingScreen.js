@@ -17,6 +17,11 @@ const useSettingScreen = ({navigate}) => {
     deleteAlert: false,
   });
 
+  console.log(
+    'profile_imageprofile_imageprofile_imageprofile_image',
+    userData?.profile_image,
+  );
+
   const {mutate} = useMutation({
     mutationFn: () => API.delete(deleteAccUrl),
     onSuccess: async ({ok, data}) => {

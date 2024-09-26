@@ -10,31 +10,42 @@ import useTopRatedFavScreen from './useTopRatedFavScreen';
 import {goBack} from '../../Utils';
 import {HeaderWithFilterAndBack} from '../../Components/HeaderWithFilterAndBack';
 import {hp} from '../../Config/responsive';
+import {DataNotFound} from '../../Components/DataNotFound';
 
 const TopRatedFavScreen = ({navigation}) => {
-  const {} = useTopRatedFavScreen(navigation);
+  const {listData, toggleModal, onRefresh} = useTopRatedFavScreen(navigation);
 
   const renderTodayPopular = useCallback(({item, index}) => {
     return (
-      <ImageBackground source={item?.image} style={styles.popularMain}>
-        <ImageBackground source={favShadow} style={styles.shadow}>
-          <View style={styles.titleMain}>
-            <View>
-              <TextComponent
-                numberOfLines={2}
-                text={item?.title}
-                styles={styles.popularTitle}
-              />
-              <TextComponent text={'Breakfast'} styles={styles.catTitle} />
+      <Touchable
+        onPress={() =>
+          navigation.navigate('TopRatedInnerScreen', {
+            mealData: item,
+          })
+        }>
+        <ImageBackground source={{uri: item?.image}} style={styles.popularMain}>
+          <ImageBackground source={favShadow} style={styles.shadow}>
+            <View style={styles.titleMain}>
+              <View>
+                <TextComponent
+                  numberOfLines={2}
+                  text={item?.name}
+                  styles={styles.popularTitle}
+                />
+                <TextComponent
+                  text={item?.category_active?.name}
+                  styles={styles.catTitle}
+                />
+              </View>
+              <Touchable
+                style={styles.popularBtn}
+                onPress={() => toggleModal(item)}>
+                <Image source={favFilled} style={styles.filledIcon} />
+              </Touchable>
             </View>
-            <Touchable
-              style={styles.popularBtn}
-              onPress={() => navigation.navigate('TopRatedInnerScreen')}>
-              <Image source={favFilled} style={styles.filledIcon} />
-            </Touchable>
-          </View>
+          </ImageBackground>
         </ImageBackground>
-      </ImageBackground>
+      </Touchable>
     );
   });
 
@@ -46,14 +57,20 @@ const TopRatedFavScreen = ({navigation}) => {
           Text={'Favorites'}
         />
 
-        <View style={styles.popularTop}>
-          <FlatList
-            data={topRatedData}
-            renderItem={renderTodayPopular}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{paddingBottom: hp('13')}}
-          />
-        </View>
+        <FlatList
+          data={listData}
+          renderItem={renderTodayPopular}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{paddingBottom: hp('13'), marginTop: hp('2')}}
+          refreshing={false}
+          onRefresh={onRefresh}
+          ListEmptyComponent={
+            <DataNotFound
+              mainViewStyles={{marginTop: hp('17')}}
+              onpress={onRefresh}
+            />
+          }
+        />
       </ImageBackground>
     </>
   );

@@ -1095,6 +1095,14 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
+  - react-native-camera (4.2.1):
+    - React-Core
+    - react-native-camera/RCT (= 4.2.1)
+    - react-native-camera/RN (= 4.2.1)
+  - react-native-camera/RCT (4.2.1):
+    - React-Core
+  - react-native-camera/RN (4.2.1):
+    - React-Core
   - react-native-date-picker (5.0.1):
     - React-Core
   - react-native-image-picker (7.1.2):
@@ -1299,6 +1307,8 @@ PODS:
   - RNGoogleSignin (11.0.0):
     - GoogleSignIn (~> 7.0)
     - React-Core
+  - RNPermissions (4.1.5):
+    - React-Core
   - RNScanbotBarcodeSDK (5.1.1):
     - glog
     - RCT-Folly (= 2022.05.16.00)
@@ -1379,6 +1389,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - react-native-blurhash (from `../node_modules/react-native-blurhash`)
+  - react-native-camera (from `../node_modules/react-native-camera`)
   - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
@@ -1411,6 +1422,7 @@ DEPENDENCIES:
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNScanbotBarcodeSDK (from `../node_modules/react-native-scanbot-barcode-scanner-sdk`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -1510,6 +1522,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   react-native-blurhash:
     :path: "../node_modules/react-native-blurhash"
+  react-native-camera:
+    :path: "../node_modules/react-native-camera"
   react-native-date-picker:
     :path: "../node_modules/react-native-date-picker"
   react-native-image-picker:
@@ -1574,6 +1588,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/auth"
   RNGoogleSignin:
     :path: "../node_modules/@react-native-google-signin/google-signin"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNScanbotBarcodeSDK:
     :path: "../node_modules/react-native-scanbot-barcode-scanner-sdk"
   RNScreens:
@@ -1638,6 +1654,7 @@ SPEC CHECKSUMS:
   React-logger: 0a57b68dd2aec7ff738195f081f0520724b35dab
   React-Mapbuffer: 63913773ed7f96b814a2521e13e6d010282096ad
   react-native-blurhash: 78fa6f2af784c4ecfc0c670da90393d5a292e708
+  react-native-camera: 3eae183c1d111103963f3dd913b65d01aef8110f
   react-native-date-picker: 4f0b6ae21e2b8783ada44a13f489555a980fb8a9
   react-native-image-picker: 994a97b28e7f2c2197e21801569bb19f6e494e38
   react-native-pager-view: d81ab2060b9caf57ca8c3a0d57467ff407cdb825
@@ -1671,6 +1688,7 @@ SPEC CHECKSUMS:
   RNFBApp: 5810d39f89d38272f29d9908cb19ef641922c081
   RNFBAuth: 22be3e62ac7efaeff8edddd4de93d288382ecdc7
   RNGoogleSignin: fc408799f1990a12497a32f64280c0fe353ffcc1
+  RNPermissions: 5a2dafe37c8e0a3fa1d6e0783a1490b1b7fd92d6
   RNScanbotBarcodeSDK: e2a198d43b062ce2078010ae6e73e82f4332f1f1
   RNScreens: b582cb834dc4133307562e930e8fa914b8c04ef2
   ScanbotBarcodeScannerSDK: b846b1584559e50cc360595b8b84f1dafbb639be
@@ -1680,6 +1698,6 @@ SPEC CHECKSUMS:
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 1b901a6d6eeba4e8a2e8f308f708691cdb5db312
 
-PODFILE CHECKSUM: 0634375c3701b56a29da7812697ea67496717531
+PODFILE CHECKSUM: 6590ae9666dbe4aee65e80d2cb2f16d4a864d2af
 
 COCOAPODS: 1.12.1

@@ -1,5 +1,7 @@
+import {check, PERMISSIONS, request, RESULTS} from 'react-native-permissions';
 import {loadingFalse, loadingTrue} from '../Redux/Action/isloadingAction';
 import {store} from '../Redux/Reducer';
+import {Alert, PermissionsAndroid, Platform} from 'react-native';
 
 const getSingleCharacter = text => {
   let letter = text?.charAt(0).toUpperCase();
@@ -151,6 +153,51 @@ function extractTimeFromString(str) {
   }
 }
 
+// Function to check location permission
+const checkCamerPermission = async () => {
+  if (Platform.OS === 'ios') {
+    const permissionStatus = await check(PERMISSIONS.IOS.CAMERA);
+    return permissionStatus === RESULTS.GRANTED;
+  } else {
+    const granted = await PermissionsAndroid.check(
+      PermissionsAndroid.PERMISSIONS.CAMERA,
+    );
+    return granted;
+  }
+};
+
+// Function to request location permission
+const requestCameraPermission = async () => {
+  if (Platform.OS === 'ios') {
+    const permissionStatus = await request(PERMISSIONS.IOS.CAMERA);
+    return permissionStatus === RESULTS.GRANTED;
+  } else {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.CAMERA,
+    );
+    return granted === PermissionsAndroid.RESULTS.GRANTED;
+  }
+};
+
+const AfterCameraPer = async () => {
+  const hasPermission = await checkCamerPermission();
+  if (hasPermission) {
+    return {ok: true};
+  } else {
+    const permissionGranted = await requestCameraPermission();
+    if (permissionGranted) {
+      return {ok: true};
+    } else {
+      Alert.alert(
+        'Permission Denied',
+        'Camera permission is required to use this feature',
+        [{text: 'OK'}],
+      );
+      return {ok: false};
+    }
+  }
+};
+
 export {
   getSingleCharacter,
   removeKeyAndReturnArry,
@@ -165,4 +212,5 @@ export {
   updateKeyById,
   currentDateformat,
   getDataByBarCode,
+  AfterCameraPer,
 };

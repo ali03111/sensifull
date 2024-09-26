@@ -147,18 +147,25 @@ const HomeScreen = ({navigation}) => {
             <Image source={notify} style={styles.notifyImage} />
           </Touchable>
         </View>
-        <View style={styles.inputMain}>
+        <Touchable
+          onPress={() => dynamicNav('SearchBoxScreen')}
+          style={styles.inputMain}>
           <Image source={search} style={styles.inputImage} />
-          <TextInput
+          <View
             style={styles.inputStyle}
             placeholderTextColor="white"
             placeholder={'Search Meals'}
-            editable={false}
-          />
+            editable={false}>
+            <TextComponent
+              text={'Search Meals'}
+              isWhite={true}
+              styles={{fontSize: hp('1.5')}}
+            />
+          </View>
           <Touchable style={styles.filterMain} onPress={toggleModal}>
             <Image source={filter1} style={styles.filterImage} />
           </Touchable>
-        </View>
+        </Touchable>
       </View>
       <ImageBackground source={stepBg} style={styles.container}>
         <ScrollView
