@@ -1,14 +1,25 @@
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
-import {useCallback, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import API from '../../Utils/helperFunc';
-import {FilterMealUrl, HomeFilterDataUrl, homeData} from '../../Utils/Urls';
-import {errorMessage} from '../../Config/NotificationMessage';
+import {
+  FilterMealUrl,
+  HomeFilterDataUrl,
+  SendMailUrl,
+  homeData,
+} from '../../Utils/Urls';
+import {errorMessage, successMessage} from '../../Config/NotificationMessage';
 import {getIdsFromArry} from '../../Utils/globalFunctions';
+import useReduxStore from '../../Hooks/UseReduxStore';
+import {Alert} from 'react-native';
 
-const useHomeScreen = ({navigate}) => {
+const useHomeScreen = ({navigate, addListener}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const [refresh, setRefresh] = useState(false);
+
+  const {getState} = useReduxStore();
+
+  const {userData} = getState('Auth');
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
@@ -35,12 +46,24 @@ const useHomeScreen = ({navigate}) => {
     },
     onError: ({message}) => errorMessage(message),
   });
+  const {mutateAsync} = useMutation({
+    mutationFn: newTodo => {
+      return API.post(SendMailUrl, {});
+    },
+    onSuccess: ({ok, data}) => {
+      console.log(':sldbvsdjkbvjksdbvobsdlkvbsd', data);
+      if (ok) {
+        Alert.alert('Please check your mail for subscription plans.');
+      }
+    },
+    onError: ({message}) => errorMessage(message),
+  });
 
   const onFilter = (cat, int) => {
     toggleModal();
     mutate({
       category_id: getIdsFromArry(cat, 'id'),
-      ingredient_id: getIdsFromArry(int, 'id'),
+      allergy_ingredients: getIdsFromArry(int, 'id'),
     });
   };
 
@@ -60,7 +83,18 @@ const useHomeScreen = ({navigate}) => {
       queryKey: ['HomeData'],
       staleTime: 1000,
     });
+    queryClient.fetchQuery({
+      queryKey: ['filterData'],
+      staleTime: 1000,
+    });
     setRefresh(false);
+  }, []);
+
+  useEffect(() => {
+    const event = addListener('focus', () => {
+      onRefresh();
+    });
+    return event;
   }, []);
 
   return {
@@ -73,6 +107,8 @@ const useHomeScreen = ({navigate}) => {
     refresh,
     filterData: filterData?.data?.data,
     onFilter,
+    userData,
+    hitMail: mutateAsync,
   };
 };
 

@@ -41,6 +41,7 @@ const SettingScreen = ({navigation}) => {
     logoutAlert,
     isloading,
     userData,
+    hitMail,
   } = useSettingScreen(navigation);
 
   const renderItem = useCallback(({item, index, data}) => {
@@ -81,6 +82,12 @@ const SettingScreen = ({navigation}) => {
           styles={styles.name}
         />
         <TextComponent text={userData?.email} styles={styles.email} />
+        <TextComponent
+          text={userData?.subscription?.plan ?? 'Want to subscribe?'}
+          styles={styles.trailText}
+          onPress={hitMail}
+          isDisable={Boolean(userData?.subscription?.plan)}
+        />
         <ScrollView
           showsVerticalScrollIndicator={false}
           scrollEnabled

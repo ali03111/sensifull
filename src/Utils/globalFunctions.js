@@ -198,6 +198,21 @@ const AfterCameraPer = async () => {
   }
 };
 
+function removeDuplicates(array) {
+  // Create a Set to track unique IDs
+  const seen = new Set();
+
+  // Filter the array to include only unique IDs
+  return array.filter(item => {
+    if (seen.has(item.id)) {
+      return false; // This ID is a duplicate
+    } else {
+      seen.add(item.id);
+      return true; // This ID is unique
+    }
+  });
+}
+
 export {
   getSingleCharacter,
   removeKeyAndReturnArry,
@@ -213,4 +228,5 @@ export {
   currentDateformat,
   getDataByBarCode,
   AfterCameraPer,
+  removeDuplicates,
 };

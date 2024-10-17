@@ -1,4 +1,5 @@
 import {
+  Alert,
   FlatList,
   Image,
   ImageBackground,
@@ -23,6 +24,7 @@ export default function Ingredients({
   getAlterInt,
   onSelectAlter,
   disable,
+  userData,
 }) {
   const [id, setId] = useState(0);
 
@@ -50,8 +52,14 @@ export default function Ingredients({
                 text={'View Alternate'}
                 styles={styles.popUpTitle}
                 onPress={() => {
-                  setId(item?.id);
-                  getAlterInt(item.id);
+                  if (userData?.subscription != null) {
+                    setId(item?.id);
+                    getAlterInt(item.id);
+                  } else {
+                    Alert.alert(
+                      'To view alternates. You need to subscribe first.',
+                    );
+                  }
                 }}
               />
             )}

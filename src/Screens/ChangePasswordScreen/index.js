@@ -10,14 +10,25 @@ import useChangePasswordScreen from './useChangePasswordScreen';
 import KeyBoardWrapper from '../../Components/KeyBoardWrapper';
 
 const ChangePasswordScreen = ({navigation}) => {
-  const {handleSubmit, errors, reset, control, getValues} =
-    useChangePasswordScreen(navigation);
+  const {
+    handleSubmit,
+    errors,
+    reset,
+    control,
+    getValues,
+    goBack,
+    changePassword,
+  } = useChangePasswordScreen(navigation);
   return (
     <KeyBoardWrapper
       styles={styles.logInMain}
       showsVerticalScrollIndicator={false}>
       <ImageBackground source={stepBg} style={styles.container}>
-        <SettingHeader save={true} goBack={() => navigation.goBack()} />
+        <SettingHeader
+          save={true}
+          goBack={() => navigation.goBack()}
+          onpress={handleSubmit(changePassword)}
+        />
         <TextComponent text={'Change Password ?'} styles={styles.title} />
         <TextComponent
           text={'We will get back to your account'}
@@ -77,7 +88,11 @@ const ChangePasswordScreen = ({navigation}) => {
               viewStyle: styles.inputMain,
             }}
           />
-          <ThemeButton title={'Save'} style={styles.saveBtn} />
+          <ThemeButton
+            title={'Save'}
+            style={styles.saveBtn}
+            onPress={handleSubmit(changePassword)}
+          />
         </View>
       </ImageBackground>
     </KeyBoardWrapper>

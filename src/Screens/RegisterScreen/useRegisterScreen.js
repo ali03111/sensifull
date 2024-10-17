@@ -37,6 +37,11 @@ const useRegister = ({navigate, goBack}) => {
       loginUser({type: 'email', datas: {name, last, email, number, password}}),
     );
   };
+
+  const socialLoginFun = type => {
+    dispatch(loginUser({type, datas: {}}));
+  };
+
   const loginNav = () => navigate('LoginScreen');
 
   const [policy, setPolicy] = useState(true);
@@ -61,6 +66,7 @@ const useRegister = ({navigate, goBack}) => {
     signUpButton,
     PolicyValue,
     policy,
+    socialLoginFun,
   };
 };
 

@@ -23,3 +23,8 @@ export const updateAuth = payload => ({
   type: types.UpdateAuth,
   payload,
 });
+
+export const forgotPasswordAction = payload => ({
+  type: types.forgotPasswordType,
+  payload,
+});

@@ -11,7 +11,7 @@ import {TextComponent} from './TextComponent';
 import {hp, wp} from '../Config/responsive';
 import {Colors} from '../Theme/Variables';
 import {Touchable} from './Touchable';
-import {arrRightPurple, info, ingred} from '../Assets';
+import {arrRightPurple, closeIcon, info, ingred} from '../Assets';
 import useStepScreen from '../Screens/StepScreen/useStepScreen';
 import {InfoModal} from '../Screens/StepScreen/InfoModal';
 
@@ -20,6 +20,7 @@ export default function DietaryRestrictions({
   selectedValue,
   onpress,
   arryViewStyle,
+  removeSelectedVal,
 }) {
   const [modal1Visible, setModal1Visible] = useState(false);
 
@@ -52,8 +53,9 @@ export default function DietaryRestrictions({
 
       <View style={{...styles.btnsMain, ...arryViewStyle}}>
         {selectedValue?.map((item, index) => (
-          <View
+          <Touchable
             key={index}
+            onPress={() => removeSelectedVal(item)}
             style={{
               backgroundColor: Colors.themeGreen,
               ...styles.allergiesBtns,
@@ -64,7 +66,13 @@ export default function DietaryRestrictions({
               }}>
               {item?.title}
             </Text>
-          </View>
+            <Image
+              source={closeIcon}
+              resizeMode="contain"
+              tintColor={'white'}
+              style={{width: wp('5')}}
+            />
+          </Touchable>
         ))}
       </View>
       <InfoModal
@@ -148,7 +156,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 0.5,
     borderColor: Colors.themeGreen,
-    paddingHorizontal: wp('3'),
+    paddingLeft: wp('3'),
+    paddingRight: wp('2'),
     marginHorizontal: wp('1'),
     marginVertical: hp('.5'),
   },

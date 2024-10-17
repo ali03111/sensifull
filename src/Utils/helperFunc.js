@@ -3,7 +3,7 @@ import {baseURL, fcmToken, getAllUser, notifyUserUrl} from './Urls';
 import {store} from '../Redux/Reducer';
 import {loadingFalse, loadingTrue} from '../Redux/Action/isloadingAction';
 import {Platform} from 'react-native';
-import {logOutUser} from '../Redux/Action/AuthAction';
+import {logOutUser, updateAuth} from '../Redux/Action/AuthAction';
 import {types} from '../Redux/types';
 
 const API = create({
@@ -114,7 +114,14 @@ const fetchGetWithToken = async url => {
 
     // console.log(data, 'alskdjfklajsdfkljadlsfjaklsdjfl2kds444ajf2lkdjs');
     const data = await response.json();
-
+    console.log(
+      'sldbvkljsbdkvbsdkjvbsdbvkjsdbkvbsdkbvsdjvbklsdjbvksldbjvlkjsd',
+      data,
+    );
+    store.dispatch({
+      type: types.UpdateProfile,
+      payload: data,
+    });
     return data; // Return the fetched data
   } catch (error) {
     console.error('Error fetching data:', error);

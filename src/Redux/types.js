@@ -13,4 +13,5 @@ export const types = {
   addPlan: 'AddPlan',
   ClearPlan: 'ClearPlan',
   UpdatePlan: 'UpdatePlan',
+  forgotPasswordType: 'forgotPasswordType',
 };

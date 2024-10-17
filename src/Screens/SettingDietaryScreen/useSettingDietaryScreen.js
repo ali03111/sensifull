@@ -10,11 +10,15 @@ import {
 } from '../../Utils/globalFunctions';
 
 export default function useSettingDietaryScreen() {
-  const [selectedVal, setSelectedVal] = useState(null);
+  const [selectedVal, setSelectedVal] = useState([]);
 
   const {data} = useQuery({
     queryKey: ['getRestrictions'],
-    queryFn: () => API.get(getRestrictionUrl),
+    queryFn: async () => {
+      const {ok, data} = await API.get(getRestrictionUrl);
+      if (ok) setSelectedVal(data?.user_restrictions);
+      return data;
+    },
   });
 
   const {mutate} = useMutation({
@@ -32,10 +36,10 @@ export default function useSettingDietaryScreen() {
   });
 
   return {
-    allData: data?.data,
+    allData: data,
     selectedVal,
     setSelectedVal,
-    apiSelectVal: data?.data?.user_restrictions,
+    apiSelectVal: selectedVal,
     onSave: () => mutate(),
   };
 }

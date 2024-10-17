@@ -95,6 +95,7 @@ const LoginScreen = ({navigation}) => {
             <TextComponent
               text={'Forgot Password?'}
               styles={styles.forgetText}
+              onPress={() => navigation.navigate('ForgotPasswordScreen')}
             />
           </View>
         </View>
@@ -115,8 +116,7 @@ const LoginScreen = ({navigation}) => {
           </Touchable>
           <Touchable
             style={styles.socialIcons}
-            // onPress={() => socialLoginFun('Google')}
-          >
+            onPress={() => socialLoginFun('appleID')}>
             <Image
               source={apple}
               style={styles.socialImage}

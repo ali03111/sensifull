@@ -40,7 +40,7 @@ export const FilterModal = ({
   const {category, ingredient} = filterState;
 
   const updateState = data => setFilterState(prev => ({...prev, ...data}));
-  // console.log('lksdbvklsdbklsdbklsdbklsd', data?.data);
+  console.log('lksdbvklsdbklsdbklsdbklsd', filterData);
 
   return (
     <View>
@@ -74,13 +74,10 @@ export const FilterModal = ({
                   isMultipule={true}
                 />
               </View>
-              <TextComponent
-                text={'By Dietery Prefrences'}
-                styles={styles.catName}
-              />
+              <TextComponent text={'By Allergies'} styles={styles.catName} />
               <View style={styles.btnStepMain}>
                 <MultiSelectButton
-                  items={filterData?.ingredients}
+                  items={filterData?.user_allergies}
                   onSelectVal={(objId, val) =>
                     updateState({[objId]: [...ingredient, val]})
                   }

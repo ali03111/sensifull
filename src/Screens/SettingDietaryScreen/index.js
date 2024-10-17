@@ -7,7 +7,10 @@ import DietaryRestrictions from '../../Components/DietaryRestrictions';
 import {Touchable} from '../../Components/Touchable';
 import {SettingHeader} from '../../Components/SettingHeader';
 import useSettingDietaryScreen from './useSettingDietaryScreen';
-import {removeKeyAndReturnArry} from '../../Utils/globalFunctions';
+import {
+  removeDuplicates,
+  removeKeyAndReturnArry,
+} from '../../Utils/globalFunctions';
 
 const SettingDietaryScreen = ({navigation}) => {
   const {allData, apiSelectVal, onSave, selectedVal, setSelectedVal} =
@@ -18,13 +21,20 @@ const SettingDietaryScreen = ({navigation}) => {
       <SettingHeader
         goBack={() => navigation.goBack()}
         extraStyle={styles.headerStyle}
+        save={true}
+        onpress={onSave}
       />
       <DietaryRestrictions
         onpress={() =>
           navigation.navigate('Restrictions', {
             restrictions: allData?.restrictions,
             onSelectValue: res => {
-              setSelectedVal(removeKeyAndReturnArry(res));
+              setSelectedVal(
+                removeDuplicates([
+                  ...selectedVal,
+                  ...removeKeyAndReturnArry(res),
+                ]),
+              );
               setTimeout(() => {
                 onSave();
               }, 900);
@@ -33,7 +43,16 @@ const SettingDietaryScreen = ({navigation}) => {
           })
         }
         arryViewStyle={{alignSelf: 'center'}}
-        selectedValue={selectedVal ?? apiSelectVal}
+        removeSelectedVal={res => {
+          const afterFilter = selectedVal?.filter(item => item?.id != res?.id);
+          console.log(
+            'afterFilterafterFilterafterFilterafterFilterafterFilterafterFilter',
+            afterFilter,
+            res,
+          );
+          setSelectedVal(removeDuplicates(afterFilter));
+        }}
+        selectedValue={selectedVal.length > 0 ? selectedVal : apiSelectVal}
       />
     </ImageBackground>
   );

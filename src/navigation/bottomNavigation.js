@@ -16,6 +16,8 @@ import {
   setting,
   home2,
   activeBar,
+  heartFill,
+  fav,
 } from '../Assets';
 import useReduxStore from '../Hooks/UseReduxStore';
 import {fetchGetWithToken} from '../Utils/helperFunc';
@@ -88,7 +90,7 @@ function MybottomTabs() {
         options={tabarComponent(barcode1, barcode)}
         component={Screens.CodeScannerScreen}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Notification"
         options={tabarComponent(
           recipe,
@@ -99,11 +101,16 @@ function MybottomTabs() {
           }),
         )}
         component={Screens.HomeScreen}
-      />
+      /> */}
       <Tab.Screen
         name="MealPlanScreen"
         options={tabarComponent(tasklist1, tasklist)}
         component={Screens.MealPlanScreen}
+      />
+      <Tab.Screen
+        name="TopRatedFavScreen"
+        options={tabarComponent(heartFill, fav)}
+        component={Screens.TopRatedFavScreen}
       />
       <Tab.Screen
         name="SettingScreen"

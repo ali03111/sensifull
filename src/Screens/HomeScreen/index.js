@@ -56,6 +56,8 @@ const HomeScreen = ({navigation}) => {
     refresh,
     onFilter,
     filterData,
+    userData,
+    hitMail,
   } = useHomeScreen(navigation);
 
   // console.log('aa', JSON.stringify(allData));
@@ -125,16 +127,18 @@ const HomeScreen = ({navigation}) => {
   return (
     <>
       <View style={styles.Header}>
-        <View style={styles.topBar}>
-          <TextComponent
-            text={'Unlock everything now!'}
-            styles={styles.unlockHeading}
-          />
-          <Touchable style={styles.premiumBtn}>
-            <Image source={star} style={styles.starImage} />
-            <TextComponent text={'GO PREMIUM'} styles={styles.premiumText} />
-          </Touchable>
-        </View>
+        {userData?.subscription == null && (
+          <View style={styles.topBar}>
+            <TextComponent
+              text={'Unlock everything now!'}
+              styles={styles.unlockHeading}
+            />
+            <Touchable style={styles.premiumBtn} onPress={hitMail}>
+              <Image source={star} style={styles.starImage} />
+              <TextComponent text={'GO PREMIUM'} styles={styles.premiumText} />
+            </Touchable>
+          </View>
+        )}
         <View style={styles.notifyMain}>
           <View style={styles.notifyinner}>
             <TextComponent text={'What do you'} styles={styles.notifyText} />

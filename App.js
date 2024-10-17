@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, ImageBackground, LogBox} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  LogBox,
+  Platform,
+} from 'react-native';
 import MainNavigator from './src/navigation/MainNavigator';
 import {logoScreen} from './src/Assets';
 import useReduxStore from './src/Hooks/UseReduxStore';
@@ -22,12 +29,17 @@ const App = () => {
     return 3000;
   };
 
+  // 233006533644-2mj93r05n7iu0turqh3ber27otobdkbp.apps.googleusercontent.com
+
   useEffect(async () => {
     GoogleSignin.configure({
+      iosClientId:
+        '233006533644-1rlau06q6k3eirehfa83tp4r7mcvj61f.apps.googleusercontent.com',
       webClientId:
-        '233006533644-2mj93r05n7iu0turqh3ber27otobdkbp.apps.googleusercontent.com',
+        Platform.OS == 'ios'
+          ? '233006533644-1rlau06q6k3eirehfa83tp4r7mcvj61f.apps.googleusercontent.com'
+          : '233006533644-2mj93r05n7iu0turqh3ber27otobdkbp.apps.googleusercontent.com',
     });
-
     (async () => {
       LogBox.ignoreLogs([
         'VirtualizedLists should never be nested',

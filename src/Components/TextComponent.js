@@ -10,11 +10,13 @@ export const TextComponent = ({
   numberOfLines,
   isWhite,
   childComp,
+  isDisable,
 }) => {
   return (
     <Text
       onPress={onPress}
       numberOfLines={numberOfLines}
+      disabled={isDisable}
       style={{
         color: isWhite ? Colors.white : Colors.black,
         fontSize: hp('2'),

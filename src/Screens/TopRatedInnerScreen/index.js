@@ -41,6 +41,7 @@ const TopRatedInnerScreen = ({navigation, route}) => {
     paramsFun,
     setDummy,
     onFav,
+    userData,
   } = useTopRatedInnerScreen(navigation, route);
 
   const isCategory = Boolean(
@@ -146,6 +147,7 @@ const TopRatedInnerScreen = ({navigation, route}) => {
               null,
             )
           }
+          userData={userData}
           nutritions={allData?.nutritions}
           directions={allData?.directions}
           ingAlt={ingAlt}

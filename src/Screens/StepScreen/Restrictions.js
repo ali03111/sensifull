@@ -99,12 +99,12 @@ export default function Restrictions({navigation, route}) {
           />
         </View>
         <View style={styles.searchMain}>
-          <Image source={search} style={styles.inputImage} />
+          {/* <Image source={search} style={styles.inputImage} />
           <TextInput
             style={styles.inputStyle}
             placeholder={'Search Ingredients'}
             placeholderTextColor={Colors.textGrayColor}
-          />
+          /> */}
         </View>
         <ScrollView
           showsVerticalScrollIndicator={false}

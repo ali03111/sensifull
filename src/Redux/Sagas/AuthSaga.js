@@ -5,6 +5,7 @@ import {
   emailLogin,
   emailSignUp,
   faceBookLogin,
+  forgotPasswordServices,
   googleLogin,
 } from '../../Utils/SocialLogin';
 import {updateAuth} from '../Action/AuthAction';
@@ -19,7 +20,8 @@ import {
   updateProfileServices,
 } from '../../Services/AuthServices';
 import DeviceInfo from 'react-native-device-info';
-import {errorMessage} from '../../Config/NotificationMessage';
+import {errorMessage, successMessage} from '../../Config/NotificationMessage';
+import NavigationService from '../../Services/NavigationService';
 
 const loginObject = {
   Google: () => googleLogin(),
@@ -62,7 +64,9 @@ const loginSaga = function* ({payload: {datas, type}}) {
       }
     }
   } catch (error) {
-    errorMessage(error.message.split(' ').slice(1).join(' ') ?? error);
+    errorMessage(
+      error.message.split(' ').slice(1).join(' ') ?? error?.message ?? error,
+    );
     console.log('err', error);
   } finally {
     yield put(loadingFalse());
@@ -104,7 +108,9 @@ function* registerSaga({payload: {datas}}) {
     errorMessage(
       errorValidation
         ? 'Credentials are wrong'
-        : error.message.split(' ').slice(1).join(' ') ?? error,
+        : error.message.split(' ').slice(1).join(' ') ??
+            error?.message ??
+            error,
     );
     console.log('err', newError.toString());
   } finally {
@@ -159,10 +165,26 @@ function* fcmTokenSaga(action) {
   yield call(fcmRegService, action.payload);
 }
 
+/* This function is used to reset the user password. */
+function* forgotUserSaga(action) {
+  try {
+    yield put(loadingTrue());
+    yield call(forgotPasswordServices, action.payload);
+    successMessage('Password Reset Request has been sent to your mail');
+    NavigationService.navigate('LoginScreen');
+  } catch (error) {
+    errorMessage(error.message.split(' ').slice(1).join(' '));
+  } finally {
+    delay(1000);
+    yield put(loadingFalse());
+  }
+}
+
 function* authSaga() {
   yield takeLatest(types.LoginType, loginSaga);
   yield takeLatest(types.LogoutFirebaseType, logOutSaga);
   yield takeLatest(types.RegisterUser, registerSaga);
+  yield takeLatest(types.forgotPasswordType, forgotUserSaga);
   // yield takeLatest(types.UpdateUser, updateProfileSaga);
   // yield takeLatest(types.fcmRegType, fcmTokenSaga);
 }

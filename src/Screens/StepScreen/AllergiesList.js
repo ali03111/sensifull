@@ -52,12 +52,12 @@ export default function AllergiesList({navigation, route}) {
           />
         </View>
         <View style={styles.searchMain}>
-          <Image source={search} style={styles.inputImage} />
+          {/* <Image source={search} style={styles.inputImage} />
           <TextInput
             style={styles.inputStyle}
             placeholder={'Search Allergies'}
             placeholderTextColor={Colors.textGrayColor}
-          />
+          /> */}
         </View>
       </View>
       <ScrollView

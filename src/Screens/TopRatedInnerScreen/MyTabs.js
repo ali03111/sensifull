@@ -20,6 +20,7 @@ export const MyTabs = ({
   getAlterInt,
   onSelectAlter,
   disable,
+  userData,
 }) => {
   return (
     <View style={styles.tabMain}>
@@ -48,6 +49,7 @@ export const MyTabs = ({
               getAlterInt={getAlterInt}
               disable={disable}
               onSelectAlter={onSelectAlter}
+              userData={userData}
             />
           )}
         </Tab.Screen>

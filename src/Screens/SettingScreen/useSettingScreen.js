@@ -3,9 +3,10 @@ import useReduxStore from '../../Hooks/UseReduxStore';
 import {logOutAuth, logOutUser} from '../../Redux/Action/AuthAction';
 import {useMutation} from '@tanstack/react-query';
 import API from '../../Utils/helperFunc';
-import {deleteAccUrl} from '../../Utils/Urls';
+import {deleteAccUrl, SendMailUrl} from '../../Utils/Urls';
 import {errorMessage, successMessage} from '../../Config/NotificationMessage';
 import {logoutService} from '../../Services/AuthServices';
+import {Alert} from 'react-native';
 
 const useSettingScreen = ({navigate}) => {
   const {dispatch, getState} = useReduxStore();
@@ -32,6 +33,18 @@ const useSettingScreen = ({navigate}) => {
       } else errorMessage(data?.message);
     },
     onError: e => errorMessage(e),
+  });
+
+  const {mutateAsync} = useMutation({
+    mutationFn: newTodo => {
+      return API.post(SendMailUrl, {});
+    },
+    onSuccess: ({ok, data}) => {
+      if (ok) {
+        Alert.alert('Please check your mail for subscription plans.');
+      }
+    },
+    onError: ({message}) => errorMessage(message),
   });
 
   const {deleteAlert, logoutAlert} = alertState;
@@ -64,6 +77,7 @@ const useSettingScreen = ({navigate}) => {
     dynamicRoute,
     isloading,
     userData,
+    hitMail: mutateAsync,
   };
 };
 export default useSettingScreen;

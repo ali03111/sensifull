@@ -14,6 +14,8 @@ import useReduxStore from '../../Hooks/UseReduxStore';
 const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
   const {getState, dispatch} = useReduxStore();
 
+  const {userData} = getState('Auth');
+
   // Get QueryClient from the context
   const queryClient = useQueryClient();
 
@@ -146,6 +148,7 @@ const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
     onSelectVal,
     paramsFun: params?.onServingSelect,
     setDummy,
+    userData,
     onFav: () =>
       mutate({
         meal_id: params?.mealData?.id,

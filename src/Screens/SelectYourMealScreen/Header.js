@@ -32,7 +32,7 @@ export const Header = ({
         </Touchable>
       </View>
 
-      <View style={styles.inputMain}>
+      {/* <View style={styles.inputMain}>
         <Image source={search} style={styles.inputImage} />
         <TextInput
           style={styles.inputStyle}
@@ -42,7 +42,7 @@ export const Header = ({
         <Touchable style={styles.filterMain} onPress={toggleModal}>
           <Image source={filter1} style={styles.filterImage} />
         </Touchable>
-      </View>
+      </View> */}
     </View>
   );
 };

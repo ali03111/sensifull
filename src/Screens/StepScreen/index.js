@@ -23,6 +23,7 @@ import DietaryRestrictions from '../../Components/DietaryRestrictions';
 import Allergies from '../../Components/Allergies';
 import {
   getIdsFromArry,
+  removeDuplicates,
   removeKeyAndReturnArry,
 } from '../../Utils/globalFunctions';
 
@@ -104,11 +105,27 @@ const StepScreen = ({navigation}) => {
             onpress={() =>
               dynamicRoute('Restrictions', {
                 restrictions: onbardData?.ingredients_for_restrictions,
-                onSelectValue: res =>
-                  onSelectValue('restrictions', removeKeyAndReturnArry(res)),
+                onSelectValue: res => {
+                  onSelectValue(
+                    'restrictions',
+                    removeDuplicates([
+                      ...onBoardData?.restrictions,
+                      ...removeKeyAndReturnArry(res),
+                    ]),
+                  );
+                },
                 selectedValue: onBoardData?.restrictions,
               })
             }
+            removeSelectedVal={res => {
+              const afterFilter = onBoardData?.restrictions?.filter(
+                item => item?.id != res?.id,
+              );
+              onSelectValue(
+                'restrictions',
+                removeKeyAndReturnArry(afterFilter),
+              );
+            }}
             selectedValue={onBoardData?.restrictions}
           />
         </View>

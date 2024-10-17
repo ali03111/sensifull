@@ -52,10 +52,7 @@ const TopRatedFavScreen = ({navigation}) => {
   return (
     <>
       <ImageBackground source={stepBg} style={styles.container}>
-        <HeaderWithFilterAndBack
-          goBack={() => navigation.goBack()}
-          Text={'Favorites'}
-        />
+        <HeaderWithFilterAndBack Text={'Favorites'} />
 
         <FlatList
           data={listData}

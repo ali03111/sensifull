@@ -31,6 +31,7 @@ const RegisterScreen = ({navigation}) => {
     loginNav,
     signUpButton,
     PolicyValue,
+    socialLoginFun,
     policy,
   } = useRegister(navigation);
   return (
@@ -142,14 +143,18 @@ const RegisterScreen = ({navigation}) => {
             <View style={styles.barLine}></View>
           </View>
           <View style={styles.social}>
-            <Touchable style={styles.socialIcons}>
+            <Touchable
+              style={styles.socialIcons}
+              onPress={() => socialLoginFun('Google')}>
               <Image
                 source={google}
                 style={styles.socialImage}
                 resizeMode="contain"
               />
             </Touchable>
-            <Touchable style={styles.socialIcons}>
+            <Touchable
+              style={styles.socialIcons}
+              onPress={() => socialLoginFun('appleId')}>
               <Image
                 source={apple}
                 style={styles.socialImage}

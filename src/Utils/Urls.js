@@ -56,3 +56,4 @@ export const FilterMealUrl = '/filter-meal';
 export const checkAllergicIngUrl = '/checkAllergicIngredient';
 export const searchMealUrl = '/search-meal/';
 export const getSearchHistoryUrl = '/get-history';
+export const SendMailUrl = '/send-mail';
