@@ -175,7 +175,7 @@ const MealPlanScreen = ({navigation}) => {
       <ImageBackground source={stepBg} style={styles.container}>
         <View showsVerticalScrollIndicator={false} style={styles.scroll}>
           <HeaderWithFilterAndBack
-            Text={'Meals Plan'}
+            Text={'Meal Plan'}
             filterIcon={filter1}
             onpress={() => {
               if (planDate?.length > 0) {
@@ -198,7 +198,14 @@ const MealPlanScreen = ({navigation}) => {
                 />
               </View>
               <View style={styles.dateMain}>
-                <TextComponent text={'Sunday, 25 Feb'} styles={styles.date} />
+                {/* {activeButton?.title && ( */}
+                <TextComponent
+                  text={`${getDateMonthYear(activeButton)?.dayName}, ${
+                    getDateMonthYear(activeButton)?.day
+                  } ${getDateMonthYear(activeButton)?.monthName}`}
+                  styles={styles.date}
+                />
+                {/* )} */}
                 <Touchable
                   onPress={() => navigation.navigate('CreateMealPlanScreen')}>
                   <Image source={addCirlce} style={styles.circleStyle} />

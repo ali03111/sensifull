@@ -262,6 +262,7 @@ export const styles = StyleSheet.create({
     fontSize: hp('2.5'),
     color: '#202020',
     fontWeight: '600',
+    textAlign: 'center',
   },
   mealPlanPara: {
     fontSize: hp('1.6'),

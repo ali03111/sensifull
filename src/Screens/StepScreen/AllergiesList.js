@@ -35,6 +35,29 @@ export default function AllergiesList({navigation, route}) {
     }
   };
 
+  const [filterData, setFilterData] = useState([]);
+  const [text, setText] = useState('');
+
+  function searchFun(e) {
+    var text = e;
+    if (text) {
+      // Inserted text is not blank
+      // Filter the masterDataSource and update FilteredDataSource
+      const newData = allergiesList.filter(function (item) {
+        // Applying filter for the inserted text in search bar
+        const itemData = (item.title || '').toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      console.log('newDatanewDatanewDatanewData', newData);
+      setFilterData(newData);
+      setText(text);
+    } else {
+      setFilterData(allergiesList);
+      setText(text);
+    }
+  }
+
   return (
     <ImageBackground source={stepBg} style={styles.container}>
       <View>
@@ -51,19 +74,29 @@ export default function AllergiesList({navigation, route}) {
             }}
           />
         </View>
-        <View style={styles.searchMain}>
-          {/* <Image source={search} style={styles.inputImage} />
+        <View
+          style={{
+            ...styles.searchMain,
+            borderWidth: 1,
+            borderColor: '#525252',
+          }}>
+          <Image source={search} style={styles.inputImage} />
           <TextInput
             style={styles.inputStyle}
             placeholder={'Search Allergies'}
             placeholderTextColor={Colors.textGrayColor}
-          /> */}
+            value={text}
+            onChangeText={e => searchFun(e)}
+          />
         </View>
       </View>
       <ScrollView
         contentContainerStyle={styles.btnsMain}
         showsVerticalScrollIndicator={false}>
-        {allergiesList?.map((item, index) => (
+        {(filterData.length >= 0 && text != ''
+          ? filterData
+          : allergiesList
+        )?.map((item, index) => (
           <TouchableOpacity
             key={index}
             onPress={() => toggleAllergy(item)}

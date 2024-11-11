@@ -44,7 +44,7 @@ export const SelectedMealPlans = ({category, mealsPlan, serving, onPress}) => {
         <View style={styles.servingsMain}>
           <TextComponent text={mealsPlan?.name} styles={styles.btnText} />
           <TextComponent
-            text={`${serving} Servings`}
+            text={`, ${serving} Servings`}
             styles={styles.servings}
           />
         </View>

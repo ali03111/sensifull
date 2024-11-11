@@ -4,7 +4,7 @@ import {Colors} from '../../Theme/Variables';
 
 export const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    flex: 1,
   },
   header: {
     backgroundColor: Colors.primaryColor,

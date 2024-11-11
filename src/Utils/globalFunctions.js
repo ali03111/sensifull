@@ -73,6 +73,9 @@ function getDateMonthYear(dateString) {
   const monthNumber = parseInt(dateParts[1], 10); // Parsing month number to integer
   const day = dateParts[2];
 
+  // Create a Date object from the provided date
+  const date = new Date(year, monthNumber - 1, day); // Month is 0-indexed in JavaScript Date
+
   // Array of English month names
   const monthNames = [
     'Jan',
@@ -89,13 +92,28 @@ function getDateMonthYear(dateString) {
     'Dec',
   ];
 
+  // Array of English day names
+  const dayNames = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+
   // Getting English month name using the month number
   const monthName = monthNames[monthNumber - 1];
 
+  // Getting the day name using the Date object
+  const dayName = dayNames[date.getDay()];
+
   return {
-    day,
-    monthName,
-    year,
+    dayName, // Day of the week (e.g., Monday)
+    day, // Day of the month (e.g., 01)
+    monthName, // Month name (e.g., Jan)
+    year, // Year (e.g., 2024)
   };
 }
 

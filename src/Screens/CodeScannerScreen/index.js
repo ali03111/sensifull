@@ -50,7 +50,7 @@ const CodeScannerScreen = ({navigation}) => {
                   styles={styles.heading}
                 />
                 <TextComponent
-                  text={'Tap the button below, to scan barcode'}
+                  text={'Tap the button below to scan barcode'}
                   styles={{fontSize: hp('2')}}
                 />
               </View>
@@ -74,7 +74,7 @@ const CodeScannerScreen = ({navigation}) => {
           </View>
 
           <ThemeButton
-            title={'Tap to scan'}
+            title={'Scan'}
             onPress={onSingleBarcodeScan}
             style={styles.btn}
           />

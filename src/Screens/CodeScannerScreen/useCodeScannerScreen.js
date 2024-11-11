@@ -16,7 +16,7 @@ import useReduxStore from '../../Hooks/UseReduxStore';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {RNCamera} from 'react-native-camera';
 
-// import {useCameraDevice, useCameraPermission} from 'react-native-vision-camera';
+// import {useCameraDevice, useCameraPermission} from 'react-native-vision-camera';=
 
 const useCodeScannerScreen = ({navigate, addListener}) => {
   const {dispatch} = useReduxStore();
@@ -28,7 +28,7 @@ const useCodeScannerScreen = ({navigate, addListener}) => {
     onSuccess: ({ok, data}) => {
       if (ok) {
         navigate('IngredientsInfoScreen', data);
-      }
+      } else errorMessage(data?.message);
     },
     onError: ({message}) => errorMessage(message),
   });

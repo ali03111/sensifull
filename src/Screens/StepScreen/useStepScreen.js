@@ -46,7 +46,7 @@ const useStepScreen = ({navigate, goBack}) => {
 
   const nextStep = {
     1: () => {
-      if (purpose == null) Alert.alert('Warning', 'Please select purpose');
+      if (purpose == null) Alert.alert('Warning', 'Please select goals');
       else handleNextStep();
     },
     2: () => {

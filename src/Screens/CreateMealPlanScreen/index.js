@@ -25,6 +25,7 @@ import {Header} from './Header';
 import ThemeButton from '../../Components/ThemeButton';
 import {hp, wp} from '../../Config/responsive';
 import {errorMessage} from '../../Config/NotificationMessage';
+import {capitalizeFirstLetter} from '../../Utils/globalFunctions';
 
 const CreateMealPlanScreen = ({navigation}) => {
   const {
@@ -52,7 +53,7 @@ const CreateMealPlanScreen = ({navigation}) => {
       <ImageBackground source={stepBg} style={styles.container}>
         <HeaderWithFilterAndBack
           goBack={() => navigation.goBack()}
-          Text={'Create your Meal'}
+          Text={'Create Your Meal'}
         />
         <ScrollView
           showsVerticalScrollIndicator={false}
@@ -67,7 +68,7 @@ const CreateMealPlanScreen = ({navigation}) => {
           {reduxMealPlans?.length > 0 &&
             reduxMealPlans?.map(res => (
               <SelectedMealPlans
-                category={res?.category?.name}
+                category={capitalizeFirstLetter(res?.category?.name)}
                 mealsPlan={res?.category?.meals}
                 serving={res?.category?.serving}
                 onPress={() =>
@@ -92,7 +93,7 @@ const CreateMealPlanScreen = ({navigation}) => {
                   {catData?.map(res => {
                     return (
                       <SelectableBtn
-                        title={res?.name}
+                        title={capitalizeFirstLetter(res?.name)}
                         selected={selectedButton == res?.id}
                         onPress={() => handleButtonPress(res?.id)}
                       />

@@ -9,6 +9,7 @@ import {
   FlatList,
   Keyboard,
   Platform,
+  TextInput,
 } from 'react-native';
 import useStepScreen from './useStepScreen';
 import {arrowRight, stepBg} from '../../Assets';
@@ -85,7 +86,7 @@ const StepScreen = ({navigation}) => {
           />
           <GoalsAndPurpose
             onSelectValue={val => onSelectValue('purpose', val)}
-            title={'Purpose'}
+            title={'Goals'}
             selectedValue={onBoardData?.purpose}
             data={onbardData?.purposes ?? []}
           />
@@ -163,6 +164,17 @@ const StepScreen = ({navigation}) => {
             styles={styles.tagline}
           />
           <TextComponent text={'Age Range'} styles={styles.titleStep4} />
+          {/* <View
+            style={{
+              width: wp('90'),
+              height: hp('6'),
+              borderColor: '#525252',
+              borderWidth: 0.5,
+              borderRadius: 10,
+            }}>
+            <TextInput style={{flex: 1}} />
+          </View> */}
+
           <View style={styles.agePicker}>
             <Picker
               style={

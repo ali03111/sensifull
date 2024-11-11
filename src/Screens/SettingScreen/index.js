@@ -91,7 +91,7 @@ const SettingScreen = ({navigation}) => {
         <ScrollView
           showsVerticalScrollIndicator={false}
           scrollEnabled
-          contentContainerStyle={{paddingBottom: hp('70')}}>
+          contentContainerStyle={{paddingBottom: hp('40'), flexGrow: 1}}>
           <View style={styles.mainBtn}>
             <FlatList
               data={[

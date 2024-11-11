@@ -197,16 +197,6 @@ export const socialData = [
     title: 'Twitter',
   },
   {
-    id: 4,
-    image: linkedin,
-    title: 'Linkedin',
-  },
-  {
-    id: 5,
-    image: thread,
-    title: 'Thread',
-  },
-  {
     id: 6,
     image: other,
     title: 'Other',

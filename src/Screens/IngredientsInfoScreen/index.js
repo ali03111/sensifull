@@ -66,7 +66,7 @@ const IngredientsInfoScreen = ({navigation, route}) => {
   return (
     <ImageBackground source={stepBg} style={styles.container}>
       <HeaderWithFilterAndBack
-        Text={'Ingredients Info'}
+        Text={'Product Information'}
         goBack={() => navigation.goBack()}
       />
       <ScrollView

@@ -261,11 +261,11 @@ const HomeScreen = ({navigation}) => {
           <View>
             <ImageBackground source={mealPlan} style={styles.MealPlan}>
               <TextComponent
-                text={'Create Meal Plan'}
+                text={'Design your personalized \n meal plan here'}
                 styles={styles.MealPlanTitle}
               />
               <TextComponent
-                text={'Create your Meal Plan once here...'}
+                text={'Create Your Meal Plan once here...'}
                 styles={styles.mealPlanPara}
               />
               <TextComponent
