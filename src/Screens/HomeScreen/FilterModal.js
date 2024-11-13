@@ -66,21 +66,41 @@ export const FilterModal = ({
               <View style={styles.btnStepMain}>
                 <MultiSelectButton
                   items={filterData?.categories}
-                  onSelectVal={(objId, val) =>
-                    updateState({[objId]: [...category, val]})
-                  }
+                  onSelectVal={(objId, val) => {
+                    const foundPurpose = category.find(res => res.id == val.id);
+
+                    if (foundPurpose) {
+                      const createNewArry = [...category].filter(
+                        item => item.id != val.id,
+                      );
+                      updateState({[objId]: createNewArry});
+                    } else {
+                      updateState({[objId]: [...category, val]});
+                    }
+                  }}
                   selectedAlter={category}
                   objId={'category'}
                   isMultipule={true}
                 />
               </View>
-              <TextComponent text={'By Allergies'} styles={styles.catName} />
+              <TextComponent text={'By Ingredient'} styles={styles.catName} />
               <View style={styles.btnStepMain}>
                 <MultiSelectButton
-                  items={filterData?.user_allergies}
-                  onSelectVal={(objId, val) =>
-                    updateState({[objId]: [...ingredient, val]})
-                  }
+                  items={filterData?.user_dietary_restrictions}
+                  onSelectVal={(objId, val) => {
+                    const foundPurpose = ingredient.find(
+                      res => res.id == val.id,
+                    );
+
+                    if (foundPurpose) {
+                      const createNewArry = [...ingredient].filter(
+                        item => item.id != val.id,
+                      );
+                      updateState({[objId]: createNewArry});
+                    } else {
+                      updateState({[objId]: [...ingredient, val]});
+                    }
+                  }}
                   selectedAlter={ingredient}
                   objId={'ingredient'}
                   isMultipule={true}

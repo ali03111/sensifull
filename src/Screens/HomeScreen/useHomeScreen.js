@@ -23,7 +23,6 @@ const useHomeScreen = ({navigate, addListener}) => {
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
-    console.log('firstasd');
   };
 
   const filterData = useQuery({
@@ -37,7 +36,6 @@ const useHomeScreen = ({navigate, addListener}) => {
     },
     onSuccess: ({ok, data}) => {
       if (ok) {
-        console.log('kjsdbvklsdbvlksdbvklsdbvlkbsdlkvsd', data);
         dynamicNav('RecommendedMealScreen', {
           title: 'Filter Data',
           list: data,
@@ -51,7 +49,6 @@ const useHomeScreen = ({navigate, addListener}) => {
       return API.post(SendMailUrl, {});
     },
     onSuccess: ({ok, data}) => {
-      console.log(':sldbvsdjkbvjksdbvobsdlkvbsd', data);
       if (ok) {
         Alert.alert('Please check your mail for subscription plans.');
       }
@@ -63,7 +60,7 @@ const useHomeScreen = ({navigate, addListener}) => {
     toggleModal();
     mutate({
       category_id: getIdsFromArry(cat, 'id'),
-      allergy_ingredients: getIdsFromArry(int, 'id'),
+      dietary_restrictions: getIdsFromArry(int, 'id'),
     });
   };
 

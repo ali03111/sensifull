@@ -5,16 +5,24 @@ import {getPurposeUrl, savePurposeUrl} from '../../Utils/Urls';
 import {errorMessage, successMessage} from '../../Config/NotificationMessage';
 
 const useSettingGoalsScreen = () => {
-  const [selectedVal, setSelectedVal] = useState(null);
+  const [selectedVal, setSelectedVal] = useState([]);
+  const [allData, setAllData] = useState([]);
 
-  const {data} = useQuery({
+  useQuery({
     queryKey: ['getPurpose'],
-    queryFn: () => API.get(getPurposeUrl),
+    queryFn: async () => {
+      const {ok, data} = await API.get(getPurposeUrl);
+      if (ok) {
+        setSelectedVal(data?.user_purpose?.map(res => res?.id));
+        setAllData(data);
+      } else errorMessage('Error geting data');
+      return data;
+    },
   });
 
   const {mutate} = useMutation({
     mutationFn: body => {
-      return API.post(savePurposeUrl, {id: selectedVal});
+      return API.post(savePurposeUrl, {ids: selectedVal});
     },
     onSuccess: ({ok, data}) => {
       console.log('dbhvjklsdbjkvbdsjkbvkdsbvsbdjkvbsdkjbvsdbkvsdbvsdjk', data);
@@ -25,11 +33,14 @@ const useSettingGoalsScreen = () => {
   });
 
   return {
-    allData: data?.data,
+    allData,
     selectedVal,
     setSelectedVal,
-    apiSelectVal: data?.data?.user_purpose?.id,
-    onSave: mutate,
+    onSave: () => {
+      if (selectedVal.length <= 2)
+        errorMessage('Please select al teast 3 purposes');
+      else mutate();
+    },
   };
 };
 

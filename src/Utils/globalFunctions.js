@@ -28,7 +28,7 @@ function transformArray(arr, date) {
   const transformedArray = {
     date,
     plans: arr.map(item => ({
-      mealid: item.category.meals.id,
+      mealid: item?.category?.meals?.id,
       serving: parseInt(item.category.serving), // Assuming serving is a string and needs to be parsed as an integer
       ingredients: item.category.meals.ingredients,
     })),
@@ -151,13 +151,15 @@ const getDataByBarCode = async barCode => {
 
   const res = await fetch(URL);
   const response = await res.json();
-  if (response?.products?.length > 0) {
-    store.dispatch(loadingFalse());
-    return {ok: true, data: response?.products};
-  } else {
-    store.dispatch(loadingFalse());
-    return {ok: false, data: []};
-  }
+  if (response.ok) {
+    if (response?.products?.length > 0) {
+      store.dispatch(loadingFalse());
+      return {ok: true, data: response?.products};
+    } else {
+      store.dispatch(loadingFalse());
+      return {ok: false, data: []};
+    }
+  } else store.dispatch(loadingFalse());
 };
 
 function extractTimeFromString(str) {

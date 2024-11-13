@@ -8,8 +8,9 @@ import useSettingGoalsScreen from './useSettingGoalsScreen';
 import {hp} from '../../Config/responsive';
 
 const SettingGoalsScreen = ({navigation}) => {
-  const {allData, selectedVal, apiSelectVal, setSelectedVal, onSave} =
+  const {allData, selectedVal, setSelectedVal, onSave} =
     useSettingGoalsScreen(navigation);
+
   return (
     <ImageBackground source={stepBg} style={styles.container}>
       <View style={styles.goalsMain}>
@@ -27,8 +28,21 @@ const SettingGoalsScreen = ({navigation}) => {
             flatListStyle={{
               paddingBottom: Platform.OS == 'ios' ? hp('60') : hp('50'),
             }}
-            onSelectValue={setSelectedVal}
-            selectedValue={selectedVal ?? apiSelectVal}
+            onSelectValue={val => {
+              const foundPurpose = selectedVal.find(res => res == val);
+
+              if (foundPurpose) {
+                const createNewArry = [...selectedVal].filter(
+                  item => item != val,
+                );
+                setSelectedVal(createNewArry);
+              } else {
+                setSelectedVal([...selectedVal, val]);
+
+                // setSelectedAllergies([...selectedAllergies, allergy]);
+              }
+            }}
+            selectedValue={[...selectedVal]}
             data={allData?.purposes}
           />
         </View>

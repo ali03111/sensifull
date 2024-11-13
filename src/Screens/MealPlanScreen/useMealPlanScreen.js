@@ -7,6 +7,7 @@ import {
   updatePlanUrl,
 } from '../../Utils/Urls';
 import API from '../../Utils/helperFunc';
+import useReduxStore from '../../Hooks/UseReduxStore';
 
 const useMealPlanScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -14,6 +15,8 @@ const useMealPlanScreen = () => {
   const [bottomData, setBottomData] = useState([]);
 
   const [updatedPlan, setUpdatedPlan] = useState({});
+
+  const {dispatch} = useReduxStore();
 
   // Get QueryClient from the context
   const queryClient = useQueryClient();
@@ -118,6 +121,7 @@ const useMealPlanScreen = () => {
     onDeleteMeal: ({date, meal_id}) => mutateAsync({date, meal_id}),
     getDataFromScreen,
     setUpdatedPlan,
+    dispatch,
   };
 };
 

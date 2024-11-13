@@ -34,17 +34,23 @@ export default function GoalsAndPurpose({
         renderItem={({item, index}) => {
           return (
             <Pressable
-              style={styles.categories(Boolean(selectedValue == item.id))}
+              style={styles.categories(
+                Boolean(selectedValue.find(res => res == item.id)),
+              )}
               key={item?.id}
               onPress={() => onSelectValue(item.id)}>
               <BlurImage
                 isURI={true}
                 uri={item?.image}
-                styles={styles.purposeImage(Boolean(selectedValue == item.id))}
+                styles={styles.purposeImage(
+                  Boolean(selectedValue.find(res => res == item.id)),
+                )}
               />
               <TextComponent
                 text={item?.title}
-                styles={styles.catTitle(Boolean(selectedValue == item.id))}
+                styles={styles.catTitle(
+                  Boolean(selectedValue.find(res => res == item.id)),
+                )}
               />
             </Pressable>
           );

@@ -1,6 +1,11 @@
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useEffect, useState} from 'react';
-import {createPlanUrl, getCategoryUrl, getDatePlanUrl} from '../../Utils/Urls';
+import {
+  createPlanUrl,
+  getCategoryUrl,
+  getDatePlanUrl,
+  updatePlanUrl,
+} from '../../Utils/Urls';
 import API from '../../Utils/helperFunc';
 import useReduxStore from '../../Hooks/UseReduxStore';
 import {types} from '../../Redux/types';
@@ -14,6 +19,8 @@ const useCreateMealPlanScreen = ({navigate, goBack}) => {
 
   const {mealPlans} = getState('MealPlanData');
 
+  console.log('mealPlansmealPlansmealPlansmealPlansmealPlans', mealPlans);
+
   const queryClient = useQueryClient();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -22,15 +29,21 @@ const useCreateMealPlanScreen = ({navigate, goBack}) => {
 
   const [selectedDate, setSelectedDate] = useState(null);
 
+  const [planId, setPlanId] = useState({
+    planId: null,
+    mealId: null,
+    prevDate: null,
+  });
+
   const [bookDates, setBookDates] = useState([]);
 
   useQuery({
     queryKey: ['getDate'],
     queryFn: async () => {
       const {data, ok} = await API.get(getDatePlanUrl);
-      if (ok) {
-        setBookDates(data);
-      }
+      // if (ok) {
+      //   setBookDates(data);
+      // }
     },
   });
   // const queryKeys = queryCache.getAll().map(cache => cache.queryKey); // QueryKey[]
@@ -44,6 +57,10 @@ const useCreateMealPlanScreen = ({navigate, goBack}) => {
 
   const handleButtonPress = buttonIndex => {
     setSelectedButton(buttonIndex);
+    dynamicRoute('SelectYourMealScreen', {
+      catData: data?.data.filter(res => res?.id == buttonIndex?.id)[0],
+      getDataFromScreen,
+    });
   };
 
   const {data, error} = useQuery({
@@ -52,9 +69,16 @@ const useCreateMealPlanScreen = ({navigate, goBack}) => {
   });
 
   useEffect(() => {
-    return dispatch({
-      type: types.ClearPlan,
+    setSelectedDate(mealPlans[0]?.activeButton);
+    setPlanId({
+      planId: mealPlans[0]?.pivot?.plan_id,
+      mealId: mealPlans[0]?.pivot?.meal_id,
+      prevDate: mealPlans[0]?.activeButton,
     });
+    return () =>
+      dispatch({
+        type: types.ClearPlan,
+      });
   }, []);
 
   const {mutate} = useMutation({
@@ -103,6 +127,24 @@ const useCreateMealPlanScreen = ({navigate, goBack}) => {
     console.log('firstasd');
   };
 
+  const updatedMealFun = useMutation({
+    mutationFn: body => {
+      return API.post(updatePlanUrl, body);
+    },
+    onSuccess: ({ok, data}) => {
+      console.log('lsjkbklbsdklbskldblsdbklsdblksbdklbsd', data);
+      if (ok) {
+        dispatch({
+          type: types.ClearPlan,
+        });
+        goBack();
+        queryClient.invalidateQueries({queryKey: ['getDatePlan']});
+        // successMessage('Your profile sucessfully updated!');
+        // // dispatch({type: types.UpdateProfile, payload: data.data});
+      } else errorMessage(data?.message);
+    },
+  });
+
   return {
     toggleModal,
     modalVisible,
@@ -121,11 +163,21 @@ const useCreateMealPlanScreen = ({navigate, goBack}) => {
     createPlan: () => {
       if (selectedDate != null) {
         console.log(
-          'mealPlansmealPlansmealPlansmealPlansmealPlansmealPlans',
-          JSON.stringify(mealPlans),
+          'mealPlansmealPlansmealPlansmealsdfsdPlansmealPlansmealPlans',
+          planId?.prevDate,
         );
         // transformArray(mealPlans,selectedDate)
-        mutate(transformArray(mealPlans, selectedDate));
+        if (planId?.prevDate != null) {
+          updatedMealFun.mutateAsync({
+            planId: planId?.planId,
+            newMealId: mealPlans[0]?.category?.meals?.id,
+            serving:
+              mealPlans[0]?.category?.serving ?? mealPlans[0]?.pivot?.serving,
+            ingredients: mealPlans[0]?.category?.meals?.ingredients ?? [],
+            currentMealId: planId?.mealId,
+            date: mealPlans[0]?.activeButton ?? selectedDate,
+          });
+        } else mutate(transformArray(mealPlans, selectedDate));
       } else errorMessage('Please select date first');
     },
   };

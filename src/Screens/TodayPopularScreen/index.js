@@ -10,7 +10,7 @@ import {
 
 import {TextComponent} from '../../Components/TextComponent';
 import {Touchable} from '../../Components/Touchable';
-import {arrowBack, filter1, stepBg} from '../../Assets';
+import {arrowBack, filter1, overlay, stepBg} from '../../Assets';
 import {styles} from './styles';
 import {popularData} from '../../Utils/localDB';
 import useTodayPopularScreen from './useTodayPopularScreen';
@@ -33,21 +33,35 @@ const TodayPopularScreen = ({navigation}) => {
         isURI={true}
         styles={styles.popularMain}
         radius={20}>
-        <View style={styles.innerView}>
-          <TextComponent text={item?.title} styles={styles.popularTitle} />
-          <Touchable
-            style={styles.popularBtn}
-            onPress={() =>
-              navigation.navigate('TopRatedInnerScreen', {
-                mealData: item,
-              })
-            }>
+        <ImageBackground
+          source={overlay}
+          style={{
+            width: wp('90'),
+            height: hp('20'),
+            position: 'absolute',
+            overflow: 'hidden',
+            top: hp('1.5'),
+            borderRadius: 20,
+          }}>
+          <View style={styles.innerView}>
             <TextComponent
-              text={'View Recipe'}
-              styles={styles.popularBtnText}
+              text={item?.title ?? item?.name}
+              styles={styles.popularTitle}
             />
-          </Touchable>
-        </View>
+            <Touchable
+              style={styles.popularBtn}
+              onPress={() =>
+                navigation.navigate('TopRatedInnerScreen', {
+                  mealData: item,
+                })
+              }>
+              <TextComponent
+                text={'View Recipe'}
+                styles={styles.popularBtnText}
+              />
+            </Touchable>
+          </View>
+        </ImageBackground>
       </BlurImage>
     );
   });

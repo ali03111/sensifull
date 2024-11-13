@@ -27,6 +27,7 @@ import {
   removeDuplicates,
   removeKeyAndReturnArry,
 } from '../../Utils/globalFunctions';
+import KeyBoardWrapper from '../../Components/KeyBoardWrapper';
 
 const StepScreen = ({navigation}) => {
   const {
@@ -85,7 +86,23 @@ const StepScreen = ({navigation}) => {
             styles={styles.tagline}
           />
           <GoalsAndPurpose
-            onSelectValue={val => onSelectValue('purpose', val)}
+            onSelectValue={val => {
+              const foundPurpose = onBoardData?.purpose.find(
+                res => res === val,
+              );
+
+              if (foundPurpose) {
+                const createNewArry = [...onBoardData?.purpose].filter(
+                  item => item != val,
+                );
+                onSelectValue('purpose', createNewArry);
+              } else {
+                onSelectValue('purpose', [...onBoardData?.purpose, val]);
+
+                // setSelectedAllergies([...selectedAllergies, allergy]);
+              }
+              // onSelectValue('purpose', val)
+            }}
             title={'Goals'}
             selectedValue={onBoardData?.purpose}
             data={onbardData?.purposes ?? []}
@@ -276,6 +293,17 @@ const StepScreen = ({navigation}) => {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.dotList}
           />
+          {onBoardData?.hearFrom.includes('Other') && (
+            <View style={styles.inputView}>
+              <TextInput
+                style={{flex: 1, color: 'black'}}
+                placeholder="type..."
+                placeholderTextColor={'gray'}
+                value={onBoardData.otherInput}
+                onChangeText={e => onSelectValue('otherInput', e)}
+              />
+            </View>
+          )}
         </View>
       );
     },
@@ -323,7 +351,9 @@ const StepScreen = ({navigation}) => {
   return (
     <ImageBackground source={stepBg} style={styles.container}>
       <View style={styles.stepCirclesContainer}>{renderStepCircles()}</View>
-      <View style={styles.mainContent}>{renderStepContent()}</View>
+      <KeyBoardWrapper>
+        <View style={styles.mainContent}>{renderStepContent()}</View>
+      </KeyBoardWrapper>
       {!isKeyboardVisible && (
         <View style={styles.buttonContainer}>
           <TouchableOpacity

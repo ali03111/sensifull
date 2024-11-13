@@ -9,7 +9,14 @@ import {Colors} from '../Theme/Variables';
 import {hp, wp} from '../Config/responsive';
 import {capitalizeFirstLetter} from '../Utils/globalFunctions';
 
-export const SelectedMealPlans = ({category, mealsPlan, serving, onPress}) => {
+export const SelectedMealPlans = ({
+  category,
+  mealsPlan,
+  serving,
+  onPress,
+  allCatergory,
+  handleButtonPress,
+}) => {
   console.log(
     'categorycategorycategorycategorycategorycategorycategorycategory',
     category,
@@ -24,18 +31,41 @@ export const SelectedMealPlans = ({category, mealsPlan, serving, onPress}) => {
   return (
     <View style={styles.mainBtn}>
       <View style={styles.mainBtnInner}>
-        <TouchableOpacity onPress={toggleCollapsed} style={styles.toggleBtn}>
+        {/* {allCatergory?.map(res => {
+          return (
+            <SelectableBtn
+              title={capitalizeFirstLetter(res?.name)}
+              selected={category == res?.id}
+              // onPress={() => handleButtonPress(res?.id)}
+            />
+          );
+        })} */}
+        <TouchableOpacity style={styles.toggleBtn}>
           <TextComponent
-            text={category}
+            text={capitalizeFirstLetter(category?.name)}
             // text={capitalizeFirstLetter(category)}
             styles={styles.btnText}
           />
-          <Image source={arrDown} style={styles.arrStyle} />
+          {/* <Image source={arrDown} style={styles.arrStyle} /> */}
         </TouchableOpacity>
-        <Collapsible collapsed={collapsed}>
+        <Collapsible collapsed={false}>
           {/* Your collapsible content goes here */}
           <View style={styles.selectableBtnStyle}>
-            <SelectableBtn title={category} />
+            {/* <SelectableBtn title={category} /> */}
+            {allCatergory?.map(res => {
+              console.log(
+                'categorycategorycategorycategory',
+                category,
+                res?.name,
+              );
+              return (
+                <SelectableBtn
+                  title={capitalizeFirstLetter(res?.name)}
+                  selected={category.id == res?.id}
+                  onPress={() => handleButtonPress(res)}
+                />
+              );
+            })}
             {/* <SelectableBtn title={capitalizeFirstLetter(category)} /> */}
           </View>
         </Collapsible>
@@ -48,9 +78,9 @@ export const SelectedMealPlans = ({category, mealsPlan, serving, onPress}) => {
             styles={styles.servings}
           />
         </View>
-        <Touchable onPress={onPress}>
+        {/* <Touchable onPress={onPress}>
           <Image source={addCirlce} style={styles.arrRight} />
-        </Touchable>
+        </Touchable> */}
       </View>
     </View>
   );

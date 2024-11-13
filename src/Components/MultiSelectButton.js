@@ -3,6 +3,7 @@ import ThemeButton from './ThemeButton';
 import {StyleSheet} from 'react-native';
 import {hp, wp} from '../Config/responsive';
 import {Colors} from '../Theme/Variables';
+import {capitalizeFirstLetter} from '../Utils/globalFunctions';
 
 export const MultiSelectButton = ({
   items,
@@ -25,7 +26,7 @@ export const MultiSelectButton = ({
             onSelectVal(objId, item);
             // setDummy(pre => pre + 1);
           }}
-          title={item?.name ?? item?.title}
+          title={capitalizeFirstLetter(item?.name ?? item?.title)}
           style={styles.btnMain(
             isMultipule
               ? Boolean(selectedAlter?.find(res => res?.id == item.id))

@@ -156,7 +156,7 @@ const RegisterScreen = ({navigation}) => {
             </Touchable>
             <Touchable
               style={styles.socialIcons}
-              onPress={() => socialLoginFun('appleId')}>
+              onPress={() => socialLoginFun('appleID')}>
               <Image
                 source={apple}
                 style={styles.socialImage}

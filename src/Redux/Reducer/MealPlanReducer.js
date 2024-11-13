@@ -23,7 +23,7 @@ const actionMap = {
     }
 
     return {
-      mealPlans: filterData,
+      mealPlans: [act?.payload],
     };
   },
   [types.ClearPlan]: () => initial_state,

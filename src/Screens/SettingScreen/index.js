@@ -149,7 +149,7 @@ const SettingScreen = ({navigation}) => {
             />
             <IconBtn
               icon={trash}
-              btnText={'Deactivate Account'}
+              btnText={'Delete Account'}
               extraStyle={styles.lastItem}
               onpress={() => toggleAlert('deleteAlert')}
             />

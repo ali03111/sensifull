@@ -28,6 +28,7 @@ export {default as swipe3} from './Images/swipe3.png';
 export {default as swipe4} from './Images/swipe4.png';
 export {default as trashWhite} from './Images/trashWhite.png';
 export {default as editWhite} from './Images/editWhite.png';
+export {default as overlay} from './Images/overlay.png';
 
 //  Icons
 

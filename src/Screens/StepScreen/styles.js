@@ -378,4 +378,13 @@ export const styles = StyleSheet.create({
   content: {
     marginBottom: hp('2'),
   },
+  inputView: {
+    width: wp('95'),
+    height: hp('7'),
+    borderRadius: 10,
+    borderWidth: 0.5,
+    borderColor: 'black',
+    alignSelf: 'center',
+    paddingHorizontal: wp('2'),
+  },
 });

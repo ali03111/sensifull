@@ -24,6 +24,7 @@ import {
   meal1,
   mealPlan,
   notify,
+  overlay,
   popular,
   recomMeal1,
   redArrow,
@@ -80,21 +81,23 @@ const HomeScreen = ({navigation}) => {
     return (
       <View style={styles.popularMainView}>
         <BlurImage isURI={true} uri={item?.image} styles={styles.popularMain}>
-          <View style={styles.popularMainInner}>
-            <TextComponent text={item?.name} styles={styles.popularTitle} />
-            <Touchable
-              style={styles.popularBtn}
-              onPress={() =>
-                dynamicNav('TopRatedInnerScreen', {
-                  mealData: item,
-                })
-              }>
-              <TextComponent
-                text={'View Recipe'}
-                styles={styles.popularBtnText}
-              />
-            </Touchable>
-          </View>
+          <ImageBackground source={overlay} style={styles.overlayStyle}>
+            <View style={styles.popularMainInner}>
+              <TextComponent text={item?.name} styles={styles.popularTitle} />
+              <Touchable
+                style={styles.popularBtn}
+                onPress={() =>
+                  dynamicNav('TopRatedInnerScreen', {
+                    mealData: item,
+                  })
+                }>
+                <TextComponent
+                  text={'View Recipe'}
+                  styles={styles.popularBtnText}
+                />
+              </Touchable>
+            </View>
+          </ImageBackground>
         </BlurImage>
       </View>
     );

@@ -19,12 +19,13 @@ const useStepScreen = ({navigate, goBack}) => {
   });
 
   const [onBoardData, setOnboardData] = useState({
-    purpose: null,
+    purpose: [],
     allergies: [],
     restrictions: [],
     ageRange: null,
     gender: null,
     hearFrom: [],
+    otherInput: null,
   });
 
   const {mutate} = useMutation({
@@ -46,7 +47,9 @@ const useStepScreen = ({navigate, goBack}) => {
 
   const nextStep = {
     1: () => {
-      if (purpose == null) Alert.alert('Warning', 'Please select goals');
+      console.log('lksdbvlkbsdlkvbksldbvlsbdvbklsdbvklbsdvksd', purpose);
+      if (purpose.length <= 2)
+        Alert.alert('Warning', 'Please select at least 3 goals');
       else handleNextStep();
     },
     2: () => {
@@ -70,14 +73,24 @@ const useStepScreen = ({navigate, goBack}) => {
     6: () =>
       mutate({
         ...onBoardData,
-        hearFrom: JSON.stringify(onBoardData?.hearFrom),
+        hearFrom: JSON.stringify([
+          ...onBoardData?.hearFrom,
+          onBoardData.hearFrom.includes('Other') && onBoardData.otherInput,
+        ]),
         allergies: getIdsFromArry(onBoardData?.allergies, 'id'),
         restrictions: getIdsFromArry(onBoardData?.restrictions, 'id'),
       }),
   };
 
-  const {ageRange, allergies, gender, hearFrom, purpose, restrictions} =
-    onBoardData;
+  const {
+    ageRange,
+    allergies,
+    gender,
+    hearFrom,
+    purpose,
+    restrictions,
+    otherInput,
+  } = onBoardData;
 
   const updateState = data => setOnboardData(prev => ({...prev, ...data}));
 

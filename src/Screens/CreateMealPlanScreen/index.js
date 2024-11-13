@@ -65,12 +65,17 @@ const CreateMealPlanScreen = ({navigation}) => {
               markedDates={bookDates ?? []}
             />
           </View>
-          {reduxMealPlans?.length > 0 &&
+          {reduxMealPlans?.length > 0 ? (
             reduxMealPlans?.map(res => (
               <SelectedMealPlans
-                category={capitalizeFirstLetter(res?.category?.name)}
-                mealsPlan={res?.category?.meals}
-                serving={res?.category?.serving}
+                category={selectedButton ?? res?.category}
+                mealsPlan={res?.pivot ? res : res?.category?.meals}
+                serving={res?.pivot?.serving ?? res?.category?.serving}
+                handleButtonPress={e => {
+                  console.log('kjsbdvkjsbdklvbsdklbvlds', e);
+                  handleButtonPress(e);
+                }}
+                allCatergory={catData}
                 onPress={() =>
                   dynamicRoute('SelectYourMealScreen', {
                     catData: res?.category,
@@ -78,46 +83,49 @@ const CreateMealPlanScreen = ({navigation}) => {
                   })
                 }
               />
-            ))}
-          <View style={styles.mainBtn}>
-            <View style={styles.mainBtnInner}>
-              <TouchableOpacity
-                onPress={toggleCollapsed}
-                style={styles.toggleBtn}>
-                <TextComponent text={'Choose Plan'} styles={styles.btnText} />
-                <Image source={arrDown} style={styles.arrStyle} />
-              </TouchableOpacity>
-              <Collapsible collapsed={collapsed}>
-                {/* Your collapsible content goes here */}
-                <View style={styles.selectableBtnStyle}>
-                  {catData?.map(res => {
-                    return (
-                      <SelectableBtn
-                        title={capitalizeFirstLetter(res?.name)}
-                        selected={selectedButton == res?.id}
-                        onPress={() => handleButtonPress(res?.id)}
-                      />
-                    );
-                  })}
-                </View>
-              </Collapsible>
+            ))
+          ) : (
+            <View style={styles.mainBtn}>
+              <View style={styles.mainBtnInner}>
+                <TouchableOpacity
+                  onPress={toggleCollapsed}
+                  disabled={true}
+                  style={styles.toggleBtn}>
+                  <TextComponent text={'Choose Plan'} styles={styles.btnText} />
+                  {/* <Image source={arrDown} style={styles.arrStyle} /> */}
+                </TouchableOpacity>
+                <Collapsible collapsed={false}>
+                  {/* Your collapsible content goes here */}
+                  <View style={styles.selectableBtnStyle}>
+                    {catData?.map(res => {
+                      return (
+                        <SelectableBtn
+                          title={capitalizeFirstLetter(res?.name)}
+                          selected={selectedButton?.id == res?.id}
+                          onPress={() => handleButtonPress(res)}
+                        />
+                      );
+                    })}
+                  </View>
+                </Collapsible>
+              </View>
+              {/* <Touchable
+                style={styles.TouchableMain}
+                onPress={() => {
+                  if (selectedButton?.id != null) {
+                    dynamicRoute('SelectYourMealScreen', {
+                      catData: catData.filter(
+                        res => res?.id == selectedButton?.id,
+                      )[0],
+                      getDataFromScreen: getDataFromScreen,
+                    });
+                  } else errorMessage('Please select plan first');
+                }}>
+                <TextComponent text={'Select Meal'} styles={styles.btnText} />
+                <Image source={arrRightGray} style={styles.arrRight} />
+              </Touchable> */}
             </View>
-            <Touchable
-              style={styles.TouchableMain}
-              onPress={() => {
-                if (selectedButton != null) {
-                  dynamicRoute('SelectYourMealScreen', {
-                    catData: catData.filter(
-                      res => res?.id == selectedButton,
-                    )[0],
-                    getDataFromScreen: getDataFromScreen,
-                  });
-                } else errorMessage('Please select plan first');
-              }}>
-              <TextComponent text={'Select Meal'} styles={styles.btnText} />
-              <Image source={arrRightGray} style={styles.arrRight} />
-            </Touchable>
-          </View>
+          )}
           {reduxMealPlans?.length > 0 && (
             <ThemeButton
               title={'Save'}

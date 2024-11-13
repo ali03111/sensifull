@@ -7,7 +7,7 @@ const passwordSchema = {
     .required('Please enter your password.')
     .max(25, 'Password must be less than 25 characters.')
     .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&.])[A-Za-z\d@$!%*#?&.]{8,}$/,
       'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
     ),
   confirm_password: yup
@@ -78,7 +78,7 @@ const signUpschema = yup.object().shape({
   //   .required('Please Enter your password')
   //   .max(25, 'Password must be less than 25 characters')
   //   .matches(
-  //     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+  //     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&.])[A-Za-z\d@$!%*#?&.]{8,}$/,
   //     'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
   //   ),
   ...passwordSchema,
@@ -104,7 +104,7 @@ const logInUpschema = yup.object().shape({
   // .min(6, 'Password must be greater then 6 digit.')
   // .max(16, 'Password must be less then 16 digit.')
   // .matches(
-  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&.])[A-Za-z\d@$!%*#?&.]{8,}$/,
   //   'Your password does not match.',
   // ),
 });
@@ -128,7 +128,7 @@ const resetPasswordScheme = yup.object().shape({
     .required('Please enter your password.')
     .max(25, 'Password must be less than 25 characters.')
     .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&.])[A-Za-z\d@$!%*#?&.]{8,}$/,
       'Please enter valid password.',
     ),
 
@@ -137,8 +137,8 @@ const resetPasswordScheme = yup.object().shape({
     .required('Please enter your new password.')
     .max(25, 'Password must be less than 25 characters')
     .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-      'Your password does not match.',
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&.])[A-Za-z\d@$!%*#?&.]{8,}$/,
+      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character.',
     ),
   confirm_password: yup
     .string()

@@ -37,6 +37,7 @@ import {hp, wp} from '../../Config/responsive';
 import {FilterModal} from './FilterModal';
 import {getDateMonthYear} from '../../Utils/globalFunctions';
 import BlurImage from '../../Components/BlurImage';
+import {types} from '../../Redux/types';
 
 const MealPlanScreen = ({navigation}) => {
   const {
@@ -46,6 +47,7 @@ const MealPlanScreen = ({navigation}) => {
     activeButton,
     handleButtonClick,
     bottomData,
+    dispatch,
     onRefresh,
     onDeleteMeal,
     getDataFromScreen,
@@ -122,7 +124,11 @@ const MealPlanScreen = ({navigation}) => {
             currentMealId: item?.pivot?.meal_id,
           });
           setTimeout(() => {
-            navigation.navigate('SelectYourMealScreen', {
+            dispatch({
+              type: types.addPlan,
+              payload: {...item, activeButton},
+            });
+            navigation.navigate('CreateMealPlanScreen', {
               catData: item?.category,
               getDataFromScreen: data =>
                 getDataFromScreen(
@@ -200,9 +206,11 @@ const MealPlanScreen = ({navigation}) => {
               <View style={styles.dateMain}>
                 {/* {activeButton?.title && ( */}
                 <TextComponent
-                  text={`${getDateMonthYear(activeButton)?.dayName}, ${
-                    getDateMonthYear(activeButton)?.day
-                  } ${getDateMonthYear(activeButton)?.monthName}`}
+                  text={`${
+                    getDateMonthYear(activeButton ?? '2024-11-11')?.dayName
+                  }, ${getDateMonthYear(activeButton ?? '2024-11-11')?.day} ${
+                    getDateMonthYear(activeButton ?? '2024-11-11')?.monthName
+                  }`}
                   styles={styles.date}
                 />
                 {/* )} */}

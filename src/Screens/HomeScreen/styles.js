@@ -205,6 +205,13 @@ export const styles = StyleSheet.create({
     width: wp('85'),
     height: hp('20'),
   },
+  overlayStyle: {
+    position: 'absolute',
+    zIndex: 1,
+    width: wp('85'),
+    height: hp('18'),
+    overflow: 'hidden',
+  },
   popularTitle: {
     fontSize: hp('2.5'),
     color: Colors.black,
@@ -212,7 +219,7 @@ export const styles = StyleSheet.create({
     width: wp('50'),
   },
   popularBtn: {
-    borderWidth: 0.5,
+    borderWidth: 1,
     width: wp('27'),
     textAlign: 'center',
     paddingVertical: hp('1'),
@@ -223,6 +230,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: hp('1.8'),
     color: Colors.black,
+    fontWeight: 'bold',
   },
   recomMain: {
     marginTop: hp('1'),
@@ -322,8 +330,8 @@ export const styles = StyleSheet.create({
     paddingVertical: hp('2'),
     marginTop: hp('2'),
     top: 0,
-    zIndex: 1,
-    position: 'absolute',
+    // zIndex: -1,
+    // position: 'absolute',
   },
   imageView: {
     borderRadius: 20,

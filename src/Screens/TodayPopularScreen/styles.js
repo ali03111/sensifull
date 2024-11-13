@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
     marginVertical: hp('1.5'),
     height: hp('20'),
     width: wp('90'),
+    overflow: 'hidden',
   },
   popularTitle: {
     fontSize: hp('2.5'),
@@ -38,7 +39,7 @@ export const styles = StyleSheet.create({
     width: wp('50'),
   },
   popularBtn: {
-    borderWidth: 0.5,
+    borderWidth: 1,
     width: wp('27'),
     textAlign: 'center',
     paddingVertical: hp('1'),
@@ -49,6 +50,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: hp('1.8'),
     color: Colors.black,
+    fontWeight: 'bold',
   },
   topRated: {
     fontSize: hp('2.5'),

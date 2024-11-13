@@ -80,7 +80,14 @@ const TopRatedInnerScreen = ({navigation, route}) => {
                   'match',
                 )?.length
               } Alergic Ingredients`}
-              styles={styles.imageBtn}
+              styles={{
+                ...styles.imageBtn,
+                position: 'absolute',
+                marginHorizontal: wp('2'),
+                marginVertical: hp('1'),
+                right: wp('1'),
+                zIndex: 1,
+              }}
             />
           </BlurImage>
           <View style={styles.titleMain}>
@@ -102,6 +109,19 @@ const TopRatedInnerScreen = ({navigation, route}) => {
             text={allData?.description}
             styles={styles.description}
           />
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginTop: hp('2'),
+            }}>
+            <TextComponent
+              text={'3.8 ( 54 ratings )'}
+              styles={{fontSize: hp('1.5')}}
+            />
+            <TextComponent text={`Rate Recipe`} styles={styles.imageBtn} />
+          </View>
         </View>
         {paramsData?.isEdit && (
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -156,20 +176,37 @@ const TopRatedInnerScreen = ({navigation, route}) => {
           disable={Boolean(!paramsData?.isEdit)}
         />
         {paramsData?.isEdit && (
-          <ThemeButton
-            title={'Save'}
-            onPress={() => {
-              if (serving != null) {
+          <View style={styles.btnView}>
+            <ThemeButton
+              title={'Cancel'}
+              onPress={() => {
+                // if (serving != null) {
                 navigation.goBack();
-                paramsFun({
-                  meal: {...paramsData, ingredients: ingredient},
-                  serving,
-                });
-              } else errorMessage('Please select serving first');
-            }}
-            style={styles.saveBtn}
-            textStyle={{fontSize: hp('1.5')}}
-          />
+                navigation.goBack();
+                //   paramsFun({
+                //     meal: {...paramsData, ingredients: ingredient},
+                //     serving,
+                //   });
+                // } else errorMessage('Please select serving first');
+              }}
+              style={{...styles.saveBtn, backgroundColor: Colors.gray}}
+              textStyle={{fontSize: hp('1.5')}}
+            />
+            <ThemeButton
+              title={'Save'}
+              onPress={() => {
+                if (serving != null) {
+                  navigation.goBack();
+                  paramsFun({
+                    meal: {...paramsData, ingredients: ingredient},
+                    serving,
+                  });
+                } else errorMessage('Please select serving first');
+              }}
+              style={styles.saveBtn}
+              textStyle={{fontSize: hp('1.5')}}
+            />
+          </View>
         )}
         <ServingModal
           isVisible={modal1Visible}
