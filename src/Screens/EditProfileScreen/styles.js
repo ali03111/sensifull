@@ -182,4 +182,34 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  agePicker: {
+    borderWidth: 1,
+    borderColor: '#525252',
+    borderRadius: 30,
+    // alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+  pickerText: pickerText => ({
+    color: pickerText ? 'black' : '#525252',
+    paddingHorizontal: wp('5'),
+    paddingVertical: hp('.5'),
+    position: 'absolute',
+    width: wp('40'),
+    fontSize: hp('1.8'),
+    opacity: 0.9,
+  }),
+  pickerStyle: {
+    width: wp('90'),
+    height: hp('6.2'),
+    alignItems: 'center',
+    alignSelf: 'center',
+    verticalAlign: 'middle',
+    justifyContent: 'center',
+    color: 'transparent',
+  },
+  pickerStyleIOS: {
+    width: wp('80'),
+    alignSelf: 'center',
+  },
 });

@@ -17,13 +17,24 @@ const useEditProfileScreen = ({navigate, goBack}) => {
   const {dispatch, getState} = useReduxStore();
   const {userData} = getState('Auth');
 
+  console.log('userDatauserDatauserDatauserDatauserData', userData);
+
   const [profileData, setProfileData] = useState(null);
+
+  const [selectedGender, setSelectedGender] = useState(null);
+
+  const [ageRange, setAgeRange] = useState(null);
 
   const {mutate} = useMutation({
     mutationFn: data => {
       return formDataFunc(
         editProfileUrl,
-        {...data, profileData},
+        {
+          ...data,
+          age: ageRange ?? userData?.age,
+          gender: selectedGender?.title ?? userData?.gender,
+          profileData,
+        },
         'profile_image',
       );
     },
@@ -76,6 +87,10 @@ const useEditProfileScreen = ({navigate, goBack}) => {
     profileData,
     uploadFromGalary,
     editFunc: mutate,
+    ageRange,
+    setAgeRange,
+    selectedGender,
+    setSelectedGender,
   };
 };
 

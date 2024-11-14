@@ -36,10 +36,10 @@ export const HeaderWithFilterAndBack = ({
           ...textStyle,
         }}
       />
-      <Touchable onPress={onpress}>
-        {filterIcon && (
+      <Touchable onPress={onpress} disabled={true}>
+        {/* {filterIcon && (
           <Image source={filterIcon} style={{...styles.arrBack, ...favStyle}} />
-        )}
+        )} */}
       </Touchable>
     </View>
   );

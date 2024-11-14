@@ -13,6 +13,11 @@ export const MultiSelectButton = ({
   objId,
   isMultipule,
 }) => {
+  console.log(
+    'selectedAlterselectedAlterselectedAlterselectedAlter',
+    selectedAlter,
+  );
+
   const [dummy, setDummy] = useState(0);
 
   const handlePress = allergy => {};

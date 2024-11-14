@@ -9,24 +9,30 @@ import {popularData, topRatedData} from '../../Utils/localDB';
 import useTopRatedMealScreen from './useTopRatedMealScreen';
 import {goBack, keyExtractor} from '../../Utils';
 import {HeaderWithFilterAndBack} from '../../Components/HeaderWithFilterAndBack';
-import {hp} from '../../Config/responsive';
+import {hp, wp} from '../../Config/responsive';
+import {AniFlatOneByOne} from '../../AnimatedComp/AniFlatOneByOne';
+import {DataNotFound} from '../../Components/DataNotFound';
 
 const TopRatedMealScreen = ({navigation}) => {
-  const {} = useTopRatedMealScreen(navigation);
+  const {allData, onRefresh, toggleModal} = useTopRatedMealScreen(navigation);
 
-  const renderTodayPopular = useCallback(({item, index}) => {
+  const RenderTodayPopular = useCallback(({item, index}) => {
     return (
-      <ImageBackground source={item?.image} style={styles.popularMain}>
+      <ImageBackground source={{uri: item?.image}} style={styles.popularMain}>
         <ImageBackground source={favShadow} style={styles.shadow}>
           <View style={styles.titleMain}>
             <TextComponent
               numberOfLines={2}
-              text={item?.title}
+              text={item?.name}
               styles={styles.popularTitle}
             />
             <Touchable
               style={styles.popularBtn}
-              onPress={() => navigation.navigate('TopRatedInnerScreen')}>
+              onPress={() =>
+                navigation.navigate('TopRatedInnerScreen', {
+                  mealData: item,
+                })
+              }>
               <TextComponent
                 text={'View Recipe'}
                 styles={styles.popularBtnText}
@@ -41,24 +47,25 @@ const TopRatedMealScreen = ({navigation}) => {
   return (
     <>
       <ImageBackground source={stepBg} style={styles.container}>
-        <HeaderWithFilterAndBack
-          goBack={() => navigation.goBack()}
-          Text={'Top Rated Meals'}
-          filterIcon={filter1}
-        />
-        <TextComponent
-          text={'Showing 35 results of Break Fast!'}
-          styles={styles.searchText}
-        />
-        <View style={styles.popularTop}>
-          <FlatList
-            data={topRatedData}
-            renderItem={renderTodayPopular}
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={keyExtractor}
-            contentContainerStyle={{
-              paddingBottom: hp('20'),
+        <View showsVerticalScrollIndicator={false}>
+          <HeaderWithFilterAndBack
+            goBack={() => navigation.goBack()}
+            Text={'Today’s Popular'}
+          />
+          <AniFlatOneByOne
+            data={allData}
+            onRefresh={onRefresh}
+            flatViewStyle={styles.flatStyle}
+            flatListProps={{
+              ListEmptyComponent: (
+                <DataNotFound
+                  onpress={onRefresh}
+                  btnStyles={{width: wp('60')}}
+                  mainViewStyles={{marginTop: hp('20')}}
+                />
+              ),
             }}
+            InnerCompnonet={(item, index) => <RenderTodayPopular item={item} />}
           />
         </View>
       </ImageBackground>

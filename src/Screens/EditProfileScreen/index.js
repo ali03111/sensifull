@@ -1,5 +1,12 @@
 import React, {memo} from 'react';
-import {View, Text, Image, ScrollView, ImageBackground} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  ImageBackground,
+  Platform,
+} from 'react-native';
 import {TextComponent} from '../../Components/TextComponent';
 import {styles} from './styles';
 import ThemeButton from '../../Components/ThemeButton';
@@ -28,6 +35,9 @@ import useEditProfileScreen from './useEditProfileScreen';
 import {hp} from '../../Config/responsive';
 import {CircleImage} from '../../Components/CircleImage';
 import {imageUrl} from '../../Utils/Urls';
+import {MultiSelectButton} from '../../Components/MultiSelectButton';
+import {step5} from '../../Utils/localDB';
+import {Picker} from '@react-native-picker/picker';
 
 const EditProfileScreen = ({navigation}) => {
   const {
@@ -48,7 +58,12 @@ const EditProfileScreen = ({navigation}) => {
     rememberValue,
     remember,
     socialLoginFun,
+    selectedGender,
+    setSelectedGender,
+    ageRange,
+    setAgeRange,
   } = useEditProfileScreen(navigation);
+
   return (
     <KeyBoardWrapper
       styles={styles.logInMain}
@@ -116,6 +131,46 @@ const EditProfileScreen = ({navigation}) => {
               defaultValue: userData?.last_name,
             }}
           />
+          <View style={{flexDirection: 'row', marginTop: hp('2')}}>
+            <MultiSelectButton
+              items={step5}
+              selectedAlter={
+                selectedGender ??
+                step5.filter(res => res?.title == userData?.gender)[0]
+              }
+              objId={'gender'}
+              onSelectVal={(id, e) => setSelectedGender(e)}
+            />
+          </View>
+          <View style={styles.agePicker}>
+            <Picker
+              style={
+                Platform.OS == 'ios'
+                  ? styles.pickerStyleIO0S
+                  : styles.pickerStyle
+              }
+              itemStyle={{
+                fontSize: hp('2'),
+              }}
+              selectedValue={ageRange ?? userData?.age}
+              onValueChange={(itemValue, itemIndex) => setAgeRange(itemValue)}>
+              <Picker.Item label="Select your age" value={null} />
+              <Picker.Item label="8 - 13" value="8 - 13" />
+              <Picker.Item label="13 - 15" value="13 - 15" />
+              <Picker.Item label="15 - 18" value="15 - 18" />
+              <Picker.Item label="18 - 21" value="18 - 21" />
+              <Picker.Item label="21 - 24" value="21 - 24" />
+              <Picker.Item label="24 - 27" value="24 - 27" />
+            </Picker>
+            {Platform.OS == 'android' && (
+              <TextComponent
+                text={
+                  userData?.age ? ageRange ?? userData?.age : 'Select your age'
+                }
+                styles={styles.pickerText(ageRange ?? userData?.age)}
+              />
+            )}
+          </View>
           <ThemeButton
             onPress={handleSubmit(editFunc)}
             title={'Save'}

@@ -57,3 +57,5 @@ export const checkAllergicIngUrl = '/checkAllergicIngredient';
 export const searchMealUrl = '/search-meal/';
 export const getSearchHistoryUrl = '/get-history';
 export const SendMailUrl = '/send-mail';
+export const RateMealUrl = '/rate';
+export const allRatedUrl = '/top-ratings';

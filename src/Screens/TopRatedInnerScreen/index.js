@@ -21,6 +21,7 @@ import ThemeButton from '../../Components/ThemeButton';
 import {errorMessage} from '../../Config/NotificationMessage';
 import {Colors} from '../../Theme/Variables';
 import {Text} from 'react-native-animatable';
+import {RateModal} from '../SelectYourMealScreen/rateModal';
 
 const TopRatedInnerScreen = ({navigation, route}) => {
   const {
@@ -42,6 +43,8 @@ const TopRatedInnerScreen = ({navigation, route}) => {
     setDummy,
     onFav,
     userData,
+    ratingModal,
+    toggleRatingModal,
   } = useTopRatedInnerScreen(navigation, route);
 
   const isCategory = Boolean(
@@ -117,10 +120,17 @@ const TopRatedInnerScreen = ({navigation, route}) => {
               marginTop: hp('2'),
             }}>
             <TextComponent
-              text={'3.8 ( 54 ratings )'}
+              text={`⭐ ${allData?.rating?.averageRate} ( ${allData?.rating?.totalPersonRate} ratings )`}
               styles={{fontSize: hp('1.5')}}
             />
-            <TextComponent text={`Rate Recipe`} styles={styles.imageBtn} />
+            {allData?.is_eligible_to_rate == true &&
+              allData?.is_review == false && (
+                <TextComponent
+                  text={`Rate Recipe`}
+                  styles={styles.imageBtn}
+                  onPress={() => toggleRatingModal()}
+                />
+              )}
           </View>
         </View>
         {paramsData?.isEdit && (
@@ -217,6 +227,16 @@ const TopRatedInnerScreen = ({navigation, route}) => {
           selectedValue={serving}
           onConfirm={() => {
             if (serving != null) setModal1Visible(false);
+            else errorMessage('Please select serving first');
+          }}
+        />
+        <RateModal
+          isVisible={ratingModal}
+          onClose={() => toggleRatingModal()}
+          title="Your opinion matter to us!"
+          content="Rate your experience."
+          onConfirm={rating => {
+            if (rating != null) toggleRatingModal(rating);
             else errorMessage('Please select serving first');
           }}
         />

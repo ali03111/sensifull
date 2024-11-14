@@ -1,7 +1,12 @@
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
-import {useEffect, useRef, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import API from '../../Utils/helperFunc';
-import {addFvMealUrl, getAlterIntUrl, getMealDetailUrl} from '../../Utils/Urls';
+import {
+  addFvMealUrl,
+  getAlterIntUrl,
+  getMealDetailUrl,
+  RateMealUrl,
+} from '../../Utils/Urls';
 import {errorMessage, successMessage} from '../../Config/NotificationMessage';
 import {
   createKeyInArryObj,
@@ -72,6 +77,24 @@ const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
 
   const [modal1Visible, setModal1Visible] = useState(false);
 
+  const [ratingModal, setRatingModal] = useState(false);
+
+  const toggleRatingModal = rating => {
+    if (rating) {
+      rateMealFun.mutateAsync({
+        rating,
+      });
+    }
+    setRatingModal(!ratingModal);
+  };
+
+  const onRefresh = useCallback(() => {
+    queryClient.fetchQuery({
+      queryKey: ['mealDetail'],
+      staleTime: 1000,
+    });
+  }, []);
+
   const [dummy, setDummy] = useState(0);
 
   const ingredientRef = useRef(null);
@@ -91,7 +114,6 @@ const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
         setFav(data?.is_favorite);
         successMessage(data?.message);
         queryClient.invalidateQueries({queryKey: ['favData']});
-        // queryClient.invalidateQueries({queryKey: ['mealDetail']});
       } else errorMessage(data?.message);
     },
   });
@@ -104,6 +126,21 @@ const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
       if (ok) {
         setIngAlt(data);
         toggleModal();
+      } else errorMessage(data?.message);
+    },
+  });
+
+  const rateMealFun = useMutation({
+    mutationFn: body => {
+      return API.post(RateMealUrl, {
+        meal_id: params?.mealData?.id,
+        rate: body.rating,
+      });
+    },
+    onSuccess: ({ok, data}) => {
+      if (ok) {
+        onRefresh();
+        successMessage('Meal rated');
       } else errorMessage(data?.message);
     },
   });
@@ -149,6 +186,8 @@ const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
     paramsFun: params?.onServingSelect,
     setDummy,
     userData,
+    toggleRatingModal,
+    ratingModal,
     onFav: () =>
       mutate({
         meal_id: params?.mealData?.id,

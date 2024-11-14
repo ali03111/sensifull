@@ -45,6 +45,7 @@ import HomeBtn from './HomeBtn1';
 import HomeBtn1 from './HomeBtn1';
 import HomeBtn2 from './HomeBtn2';
 import BlurImage from '../../Components/BlurImage';
+import {CircleImage} from '../../Components/CircleImage';
 
 const HomeScreen = ({navigation}) => {
   const {
@@ -61,7 +62,7 @@ const HomeScreen = ({navigation}) => {
     hitMail,
   } = useHomeScreen(navigation);
 
-  // console.log('aa', JSON.stringify(allData));
+  console.log('aa', JSON.stringify(allData));
 
   // const homeData = JSON.stringify(allData);
 
@@ -70,9 +71,22 @@ const HomeScreen = ({navigation}) => {
   const renderItem = useCallback(({item, index}) => {
     console.log(index);
     return (
-      <Touchable style={styles.mealItem}>
-        <Image source={item?.image} style={styles.mealImage} />
-        <TextComponent text={item?.title} styles={styles.mealTitle} />
+      <Touchable
+        style={styles.mealItem}
+        onPress={() =>
+          dynamicNav('TopRatedInnerScreen', {
+            mealData: item,
+          })
+        }>
+        <View style={{position: 'absolute', zIndex: 1, top: hp('-7')}}>
+          <CircleImage
+            image={item?.image}
+            styles={styles.mealImage}
+            uri
+            size={0.3}
+          />
+        </View>
+        <TextComponent text={item?.name} styles={styles.mealTitle} />
       </Touchable>
     );
   });
@@ -205,7 +219,7 @@ const HomeScreen = ({navigation}) => {
           </View>
           <View>
             <FlatList
-              data={mealData} // Use the same data for the dots
+              data={allData?.topRatedList} // Use the same data for the dots
               renderItem={renderItem}
               showsHorizontalScrollIndicator={false}
               horizontal={true}
