@@ -170,11 +170,11 @@ const SettingScreen = ({navigation}) => {
           content="Are you sure ?"
           FirstBtnText={
             (logoutAlert && 'No! Not this time') ||
-            (deleteAlert && 'Don’t Deactivate')
+            (deleteAlert && 'Don’t Delete')
           }
           SecondBtnText={
             (logoutAlert && 'Yes! log me out') ||
-            (deleteAlert && 'Deactivate Account')
+            (deleteAlert && 'Delete Account')
           }
           FirstBtnOnpress={() =>
             toggleAlert(
