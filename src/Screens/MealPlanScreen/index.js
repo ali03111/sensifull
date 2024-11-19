@@ -182,12 +182,12 @@ const MealPlanScreen = ({navigation}) => {
         <View showsVerticalScrollIndicator={false} style={styles.scroll}>
           <HeaderWithFilterAndBack
             Text={'Meal Plan'}
-            filterIcon={filter1}
-            onpress={() => {
-              if (planDate?.length > 0) {
-                navigation.navigate('ShoppingListScreen', activeButton);
-              }
-            }}
+            // filterIcon={filter1}
+            // onpress={() => {
+            //   if (planDate?.length > 0) {
+            //     navigation.navigate('ShoppingListScreen', activeButton);
+            //   }
+            // }}
           />
           {planDate?.length > 0 ? (
             <>

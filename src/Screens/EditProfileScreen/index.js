@@ -126,7 +126,7 @@ const EditProfileScreen = ({navigation}) => {
               reset,
               control,
               getValues,
-              placeholder: 'First Name',
+              placeholder: 'last Name',
               isImage: username,
               defaultValue: userData?.last_name,
             }}

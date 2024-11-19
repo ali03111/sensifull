@@ -25,3 +25,4 @@ export {default as IngredientsInfoScreen} from './IngredientsInfoScreen';
 export {default as SearchBoxScreen} from './SearchBoxScreen';
 export {default as SearchScreen} from './SearchScreen';
 export {default as ForgotPasswordScreen} from './ForgotPasswordScreen';
+export {default as ExploreScreen} from './ExploreScreen';

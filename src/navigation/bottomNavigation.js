@@ -23,7 +23,12 @@ import useReduxStore from '../Hooks/UseReduxStore';
 import {fetchGetWithToken} from '../Utils/helperFunc';
 import {verifyUserUrl} from '../Utils/Urls';
 globalStyles = {};
-const tabarComponent = (activeImage, unActiveImage, ImageStyle) => {
+const tabarComponent = (
+  activeImage,
+  unActiveImage,
+  ImageStyle,
+  upperBarStyle,
+) => {
   return {
     tabBarIcon: ({focused}) => (
       <View style={styles.tabarView(focused)}>
@@ -31,7 +36,7 @@ const tabarComponent = (activeImage, unActiveImage, ImageStyle) => {
           <Image
             resizeMode="contain"
             source={activeBar}
-            style={styles.barStyle}
+            style={{...styles.barStyle, ...upperBarStyle}}
           />
         )}
         <Image
@@ -90,8 +95,8 @@ function MybottomTabs() {
         options={tabarComponent(barcode1, barcode)}
         component={Screens.CodeScannerScreen}
       />
-      {/* <Tab.Screen
-        name="Notification"
+      <Tab.Screen
+        name="ExploreScreen"
         options={tabarComponent(
           recipe,
           recipe,
@@ -99,19 +104,23 @@ function MybottomTabs() {
             width: wp('12'),
             height: hp('6'),
           }),
+          (upperBarStyle = {
+            bottom: Platform.OS == 'ios' ? hp('5.2') : hp('6.6'),
+            left: Platform.OS == 'ios' ? wp('2') : wp('2.5'),
+          }),
         )}
-        component={Screens.HomeScreen}
-      /> */}
+        component={Screens.ExploreScreen}
+      />
       <Tab.Screen
         name="MealPlanScreen"
         options={tabarComponent(tasklist1, tasklist)}
         component={Screens.MealPlanScreen}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="TopRatedFavScreen"
         options={tabarComponent(heartFill, fav)}
         component={Screens.TopRatedFavScreen}
-      />
+      /> */}
       <Tab.Screen
         name="SettingScreen"
         options={tabarComponent(setting1, setting)}

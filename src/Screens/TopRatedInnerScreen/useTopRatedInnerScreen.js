@@ -114,6 +114,7 @@ const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
         setFav(data?.is_favorite);
         successMessage(data?.message);
         queryClient.invalidateQueries({queryKey: ['favData']});
+        queryClient.invalidateQueries({queryKey: ['exploreMeals']});
       } else errorMessage(data?.message);
     },
   });

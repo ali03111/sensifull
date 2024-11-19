@@ -59,3 +59,4 @@ export const getSearchHistoryUrl = '/get-history';
 export const SendMailUrl = '/send-mail';
 export const RateMealUrl = '/rate';
 export const allRatedUrl = '/top-ratings';
+export const ExplorMealsUrl = '/explore-meals';
