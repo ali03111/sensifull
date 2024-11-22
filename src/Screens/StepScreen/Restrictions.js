@@ -94,7 +94,7 @@ export default function Restrictions({navigation, route}) {
               navigation.goBack();
               onSelectValue(selectedItems);
             }}
-            text={'Save'}
+            text={'Next'}
             styles={styles.saveText}
           />
         </View>

@@ -518,17 +518,26 @@ export const profileData = [
   {
     icon: informationGreen,
     name: 'About Sensifull',
-    onpress: (navigate, route) => Linking.openURL('https://www.google.com/'),
+    onpress: (navigate, route) =>
+      Linking.openURL(
+        'https://virtualrealitycreators.com/sensifull-web/about-us',
+      ),
   },
   {
     icon: policyGreen,
     name: 'Privacy Policy',
-    onpress: (navigate, route) => Linking.openURL('https://www.google.com/'),
+    onpress: (navigate, route) =>
+      Linking.openURL(
+        'https://virtualrealitycreators.com/sensifull-web/privacy-policy',
+      ),
   },
   {
     icon: termsGreen,
     name: 'Terms and Conditions',
-    onpress: (navigate, route) => Linking.openURL('https://www.google.com/'),
+    onpress: (navigate, route) =>
+      Linking.openURL(
+        'https://virtualrealitycreators.com/sensifull-web/terms-and-conditions',
+      ),
   },
 ];
 

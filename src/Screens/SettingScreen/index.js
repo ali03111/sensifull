@@ -15,6 +15,7 @@ import {
   logoutGreen,
   passGreen,
   profile,
+  star,
   stepBg,
   trash,
   trashRed,
@@ -82,12 +83,24 @@ const SettingScreen = ({navigation}) => {
           styles={styles.name}
         />
         <TextComponent text={userData?.email} styles={styles.email} />
-        <TextComponent
-          text={userData?.subscription?.plan ?? 'Want to subscribe?'}
+        <Touchable
+          style={styles.premiumBtn}
+          onPress={hitMail}
+          disabled={Boolean(userData?.subscription?.plan)}>
+          {!userData?.subscription?.plan && (
+            <Image source={star} style={styles.starImage} />
+          )}
+          <TextComponent
+            text={userData?.subscription?.plan ?? 'GO PREMIUM'}
+            styles={styles.premiumText}
+          />
+        </Touchable>
+        {/* <TextComponent
+          text={}
           styles={styles.trailText}
           onPress={hitMail}
           isDisable={Boolean(userData?.subscription?.plan)}
-        />
+        /> */}
         <ScrollView
           showsVerticalScrollIndicator={false}
           scrollEnabled

@@ -74,7 +74,7 @@ const IngredientsInfoScreen = ({navigation, route}) => {
         showsVerticalScrollIndicator={false}>
         <FlatListView title={'Ingredients'} arry={ingredient} />
         <FlatListView title={'Alergic'} arry={exactMatch} isAlergic={true} />
-        <FlatListView title={'May be alergic'} arry={likeMatches} />
+        {/* <FlatListView title={'May be alergic'} arry={likeMatches} /> */}
         <ThemeButton
           title={'Go Back'}
           style={styles.btnStyle}

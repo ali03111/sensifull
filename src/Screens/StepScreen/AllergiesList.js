@@ -66,7 +66,7 @@ export default function AllergiesList({navigation, route}) {
             <Image source={arrowBack} style={styles.arrBack} />
           </Touchable>
           <TextComponent
-            text={'Save'}
+            text={'Next'}
             styles={styles.saveText}
             onPress={() => {
               navigation.goBack();

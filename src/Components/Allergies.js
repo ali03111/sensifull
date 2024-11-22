@@ -62,7 +62,7 @@ export default function Allergies({
         isVisible={modal2Visible}
         onClose={() => setModal2Visible(false)}
         title="Disclaimer"
-        content="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text,"
+        content="Please be aware that while our recipes can be customized to avoid common allergens, we cannot guarantee that all ingredients are free from potential cross-contamination. Always consult product labels and your healthcare provider before consuming ingredients that may pose a risk to your specific allergies"
       />
     </View>
   );
