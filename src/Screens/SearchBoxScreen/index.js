@@ -8,7 +8,14 @@ import {
   ScrollView,
 } from 'react-native';
 import React, {memo, useCallback} from 'react';
-import {fav, favFilled, favShadow, search, stepBg} from '../../Assets';
+import {
+  emptyHeart,
+  fav,
+  favFilled,
+  favShadow,
+  search,
+  stepBg,
+} from '../../Assets';
 import {styles} from './styles';
 import {HeaderWithFilterAndBack} from '../../Components/HeaderWithFilterAndBack';
 import {hp, wp} from '../../Config/responsive';
@@ -64,7 +71,7 @@ const SearchBoxScreen = ({navigation}) => {
                 style={styles.popularBtn}
                 onPress={() => toggleFav(item)}>
                 <Image
-                  source={item?.is_favorite ? favFilled : fav}
+                  source={item?.is_favorite ? favFilled : emptyHeart}
                   style={styles.filledIcon}
                 />
               </Touchable>

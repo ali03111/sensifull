@@ -119,3 +119,4 @@ export {default as rightArrow} from './Icons/rightArrow.png';
 export {default as heartFill} from './Icons/heartFill.png';
 export {default as activeBar} from './Icons/activeBar.png';
 export {default as unFavFilled} from './Icons/unFavFilled.png';
+export {default as emptyHeart} from './Icons/emptyHeart.png';

@@ -54,6 +54,11 @@ const MealPlanScreen = ({navigation}) => {
     setUpdatedPlan,
   } = useMealPlanScreen(navigation);
 
+  console.log(
+    'itemitemitemitemitemitemitemitemitemitem',
+    bottomData?.plan_meals,
+  );
+
   const [listData, setListData] = useState(
     Array(5)
       .fill('')
@@ -105,7 +110,7 @@ const MealPlanScreen = ({navigation}) => {
           <View style={styles.swipeInner}>
             <TextComponent text={item?.name} styles={styles.swipeTitle} />
             <TextComponent
-              text={`Breakfast, ${item?.pivot?.serving} Servings`}
+              text={`${item?.category?.name}, ${item?.pivot?.serving} Servings`}
               styles={styles.swipeText}
             />
           </View>
