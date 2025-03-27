@@ -54,6 +54,7 @@ export const AniFlatOneByOne = ({
         onRefresh,
         refreshing: false,
         keyExtractor,
+
         ...flatListProps,
       }}
     />

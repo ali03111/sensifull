@@ -39,7 +39,9 @@ const useTopRatedInnerScreen = ({navigate, addListener, goBack}, {params}) => {
 
       console.log(
         'ksjdbvjksdbkjvbsdjkvbjksdbvksdbvjksdbkjvbsdjkvbdjksbvkdsb,',
-        data?.data,
+        data,
+        params?.mealData?.id,
+        params?.mealData?.planId,
       );
 
       if (ok) {

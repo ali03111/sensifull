@@ -164,9 +164,9 @@ const HomeScreen = ({navigation}) => {
               styles={styles.notifyText}
             />
           </View>
-          <Touchable style={styles.notifyBtn}>
+          {/* <Touchable style={styles.notifyBtn}>
             <Image source={notify} style={styles.notifyImage} />
-          </Touchable>
+          </Touchable> */}
         </View>
         <Touchable
           onPress={() => dynamicNav('SearchBoxScreen')}

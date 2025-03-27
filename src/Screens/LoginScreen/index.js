@@ -123,7 +123,7 @@ const LoginScreen = ({navigation}) => {
               resizeMode="contain"
             />
           </Touchable>
-          <Touchable
+          {/* <Touchable
             style={styles.socialIcons}
             // onPress={() => socialLoginFun('Google')}
           >
@@ -132,7 +132,7 @@ const LoginScreen = ({navigation}) => {
               style={styles.socialImage}
               resizeMode="contain"
             />
-          </Touchable>
+          </Touchable> */}
         </View>
       </ImageBackground>
     </KeyBoardWrapper>

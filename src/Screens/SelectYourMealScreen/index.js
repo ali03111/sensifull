@@ -14,6 +14,7 @@ import {hp} from '../../Config/responsive';
 import {ServingModal} from './ServingModal';
 import BlurImage from '../../Components/BlurImage';
 import {AniFlatOneByOne} from '../../AnimatedComp/AniFlatOneByOne';
+import {DataNotFound} from '../../Components/DataNotFound';
 
 const SelectYourMealScreen = ({navigation, route}) => {
   const {
@@ -66,6 +67,15 @@ const SelectYourMealScreen = ({navigation, route}) => {
           }}
           flatListProps={{
             numColumns: 2,
+            ListEmptyComponent: (
+              <DataNotFound
+                mainViewStyles={{
+                  flex: 1,
+                  marginTop: hp('20'),
+                }}
+                subTitle={''}
+              />
+            ),
           }}
           InnerCompnonet={(item, index) => (
             <RenderTodayPopular item={item} index={index} />

@@ -163,13 +163,13 @@ const RegisterScreen = ({navigation}) => {
                 resizeMode="contain"
               />
             </Touchable>
-            <Touchable style={styles.socialIcons}>
+            {/* <Touchable style={styles.socialIcons}>
               <Image
                 source={facebook}
                 style={styles.socialImage}
                 resizeMode="contain"
               />
-            </Touchable>
+            </Touchable> */}
           </View>
         </ScrollView>
       </ImageBackground>

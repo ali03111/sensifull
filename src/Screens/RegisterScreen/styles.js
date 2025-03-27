@@ -78,7 +78,7 @@ export const styles = StyleSheet.create({
   social: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: wp('75'),
+    width: wp('55'),
     alignSelf: 'center',
     paddingBottom: hp('2'),
   },
