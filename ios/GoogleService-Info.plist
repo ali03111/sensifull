@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CLIENT_ID</key>
+	<string>233006533644-1rlau06q6k3eirehfa83tp4r7mcvj61f.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.233006533644-1rlau06q6k3eirehfa83tp4r7mcvj61f</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>233006533644-2op0sn0khja6rorjpq7gpn98t6gr88g7.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBq19a-YvyV1TgSY-8LfNvyYXLsgcjDCGs</string>
 	<key>GCM_SENDER_ID</key>
@@ -9,11 +15,11 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.codment.sensifull</string>
+	<string>com.codment.app.sensifull</string>
 	<key>PROJECT_ID</key>
 	<string>sensifull</string>
 	<key>STORAGE_BUCKET</key>
-	<string>sensifull.appspot.com</string>
+	<string>sensifull.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:233006533644:ios:fde2b4207c8920b3a4f229</string>
+	<string>1:233006533644:ios:2ed0448a931fb6f9a4f229</string>
 </dict>
 </plist>

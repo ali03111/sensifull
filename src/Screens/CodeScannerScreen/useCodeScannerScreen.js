@@ -36,6 +36,7 @@ const useCodeScannerScreen = ({navigate, addListener}) => {
   const afterScanCode = async code => {
     setCamera(false);
     const {ok, data} = await getDataByBarCode(code);
+    console.log('datadatadatadatadatadatadatadata', data);
     if (ok) mutate({ingredients: data[0]?.ingredients ?? ''});
   };
 
