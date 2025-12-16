@@ -26,6 +26,7 @@ const useCodeScannerScreen = ({navigate, addListener}) => {
       return API.post(checkAllergicIngUrl, newTodo);
     },
     onSuccess: ({ok, data}) => {
+      console.log('sjdkbkjsdbjkvbsdjkbvkjdsbvjksbdvkjsd', data);
       if (ok) {
         navigate('IngredientsInfoScreen', data);
       } else errorMessage(data?.message);
@@ -37,7 +38,9 @@ const useCodeScannerScreen = ({navigate, addListener}) => {
     setCamera(false);
     const {ok, data} = await getDataByBarCode(code);
     console.log('datadatadatadatadatadatadatadata', data);
-    if (ok) mutate({ingredients: data[0]?.ingredients ?? ''});
+    if (ok && data[0]?.ingredients != '')
+      mutate({ingredients: data[0]?.ingredients ?? ''});
+    else errorMessage('No ingredients found!');
   };
 
   const [camera, setCamera] = useState(false);

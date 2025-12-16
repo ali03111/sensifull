@@ -22,6 +22,8 @@ import {
 import DeviceInfo from 'react-native-device-info';
 import {errorMessage, successMessage} from '../../Config/NotificationMessage';
 import NavigationService from '../../Services/NavigationService';
+import appleAuth from '@invertase/react-native-apple-authentication';
+import {statusCodes} from '@react-native-google-signin/google-signin';
 
 const loginObject = {
   Google: () => googleLogin(),
@@ -64,10 +66,58 @@ const loginSaga = function* ({payload: {datas, type}}) {
       }
     }
   } catch (error) {
-    errorMessage(
-      error.message.split(' ').slice(1).join(' ') ?? error?.message ?? error,
+    const newError = error;
+    const errorValidation = Boolean(
+      newError.toString() ==
+        'Error: [auth/internal-error] An internal error has occurred, please try again.' ||
+        'Error: [auth/internal-error] The supplied auth credential is incorrect, malformed or has expired.',
     );
-    console.log('err', error);
+    // errorMessage(
+    //   errorValidation
+    //     ? 'Credential is wrong'
+    //     : error.message.split(' ').slice(1).join(' ') ??
+    //         error?.message ??
+    //         error,
+    // );
+
+    switch (error?.code || error?.message) {
+      case statusCodes.SIGN_IN_CANCELLED:
+      case '1001':
+        errorMessage('Cancelled');
+        break;
+      case statusCodes.IN_PROGRESS:
+        console.log('In progress');
+        break;
+      case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
+        errorMessage('Play services not available or outdated');
+        break;
+      case appleAuth.Error.CANCELED:
+        errorMessage('Apple Sign-In was canceled by the user.');
+        break;
+      case appleAuth.Error.NOT_HANDLED:
+        errorMessage('Apple Sign-In request could not be handled.');
+        break;
+      case appleAuth.Error.FAILED:
+        errorMessage('Apple Sign-In failed. Please try again.');
+        break;
+      case appleAuth.Error.INVALID_RESPONSE:
+        errorMessage('Invalid response received from Apple Sign-In.');
+        break;
+      default:
+        errorMessage(
+          error?.message.split(' ').slice(1).join(' ') ??
+            error ??
+            error?.message ??
+            'Something went wrong',
+        );
+        break;
+    }
+
+    // errorMessage(
+    //   error?.message.split(' ').slice(1).join(' ') ?? error ?? error?.message,
+    // );
+
+    console.log('err', newError.toString());
   } finally {
     yield put(loadingFalse());
   }

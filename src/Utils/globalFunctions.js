@@ -145,21 +145,20 @@ function getObjectById(id, data) {
 const getDataByBarCode = async barCode => {
   console.log('third');
   store.dispatch(loadingTrue());
-  const URL = `https://api.barcodelookup.com/v3/products?barcode=${barCode}&formatted=y&key=qwzviah3h756sc6hgpnusgzx64h6td`;
+  const URL = `https://api.barcodelookup.com/v3/products?barcode=${barCode}&formatted=y&key=7xcfai324gfc727mlf01debd8c28r3`;
 
   // Replace "YOUR_API_KEY" with your actual Google Maps Geocoding API key
 
   const res = await fetch(URL);
   const response = await res.json();
-  if (response.ok) {
-    if (response?.products?.length > 0) {
-      store.dispatch(loadingFalse());
-      return {ok: true, data: response?.products};
-    } else {
-      store.dispatch(loadingFalse());
-      return {ok: false, data: []};
-    }
-  } else store.dispatch(loadingFalse());
+  console.log('jksbdjkbsdjkcbjksdbcjkbdsjkcbdjksbckjsdbcjbdsbcjkds', response);
+  if (response?.products?.length > 0) {
+    store.dispatch(loadingFalse());
+    return {ok: true, data: response?.products};
+  } else {
+    store.dispatch(loadingFalse());
+    return {ok: false, data: []};
+  }
 };
 
 function extractTimeFromString(str) {
