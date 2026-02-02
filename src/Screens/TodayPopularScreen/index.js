@@ -80,7 +80,7 @@ const TodayPopularScreen = ({navigation}) => {
             onRefresh={onRefresh}
             flatViewStyle={styles.flatStyle}
             flatListProps={{
-              ListEmptyComponent: (
+              ListEmptyComponent: Array.isArray(allData?.popular_list) && (
                 <DataNotFound
                   onpress={onRefresh}
                   btnStyles={{width: wp('60')}}

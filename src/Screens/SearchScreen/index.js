@@ -54,7 +54,7 @@ const SearchScreen = ({navigation, route}) => {
         onRefresh={onRefresh}
         flatListProps={{
           numColumns: 2,
-          ListEmptyComponent: (
+          ListEmptyComponent: Array.isArray(listData) && (
             <DataNotFound
               onpress={onRefresh}
               btnStyles={{width: wp('80')}}

@@ -67,7 +67,7 @@ const SelectYourMealScreen = ({navigation, route}) => {
           }}
           flatListProps={{
             numColumns: 2,
-            ListEmptyComponent: (
+            ListEmptyComponent: Array.isArray(mealsData?.meals) && (
               <DataNotFound
                 mainViewStyles={{
                   flex: 1,

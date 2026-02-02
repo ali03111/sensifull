@@ -19,7 +19,7 @@ const useSearchScreen = ({navigate}, {params}) => {
   }, []);
 
   return {
-    listData: searchData?.data?.data ?? [],
+    listData: searchData?.data?.data,
     onRefresh,
   };
 };

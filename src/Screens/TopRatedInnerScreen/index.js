@@ -97,12 +97,12 @@ const TopRatedInnerScreen = ({navigation, route}) => {
             <TextComponent
               numberOfLines={2}
               text={allData?.name}
-              styles={styles.title}
+              styles={styles.title ?? ''}
             />
             {isCategory && (
               <TextComponent
                 text={capitalizeFirstLetter(
-                  allData?.category?.name ?? paramsData?.category?.name,
+                  allData?.category?.name ?? paramsData?.category?.name ?? '',
                 )}
                 styles={styles.category}
               />
@@ -120,7 +120,9 @@ const TopRatedInnerScreen = ({navigation, route}) => {
               marginTop: hp('2'),
             }}>
             <TextComponent
-              text={`⭐ ${allData?.rating?.averageRate} ( ${allData?.rating?.totalPersonRate} ratings )`}
+              text={`⭐ ${allData?.rating?.averageRate ?? 0} ( ${
+                allData?.rating?.totalPersonRate ?? 0
+              } ratings )`}
               styles={{fontSize: hp('1.5')}}
             />
             {allData?.is_eligible_to_rate == true &&

@@ -1,14 +1,14 @@
 const getCredentials = () => {
   if (__DEV__)
     return {
-      baseURL: 'https://virtualrealitycreators.com/sensifull-backend/api/',
-      imageURL: 'https://virtualrealitycreators.com/sensifull-backend/',
+      baseURL: 'https://mysensifull.com/sensifull-backend/api/',
+      imageURL: 'https://mysensifull.com/sensifull-backend/',
     };
   else {
     console.log = () => {};
     return {
-      baseURL: 'https://virtualrealitycreators.com/sensifull-backend/api/',
-      imageURL: 'https://virtualrealitycreators.com/sensifull-backend/',
+      baseURL: 'https://mysensifull.com/sensifull-backend/api/',
+      imageURL: 'https://mysensifull.com/sensifull-backend/',
     };
   }
 };

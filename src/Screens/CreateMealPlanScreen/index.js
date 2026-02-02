@@ -65,7 +65,7 @@ const CreateMealPlanScreen = ({navigation}) => {
               markedDates={bookDates ?? []}
             />
           </View>
-          {reduxMealPlans?.length > 0 ? (
+          {Array.isArray(reduxMealPlans) && reduxMealPlans?.length > 0 ? (
             reduxMealPlans?.map(res => (
               <SelectedMealPlans
                 category={selectedButton ?? res?.category}

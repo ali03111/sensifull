@@ -52,7 +52,10 @@ const TopRatedFavScreen = ({navigation}) => {
   return (
     <>
       <ImageBackground source={stepBg} style={styles.container}>
-        <HeaderWithFilterAndBack Text={'Favorites'} />
+        <HeaderWithFilterAndBack
+          Text={'Favorites'}
+          goBack={() => navigation.goBack()}
+        />
 
         <FlatList
           data={listData}
@@ -62,10 +65,12 @@ const TopRatedFavScreen = ({navigation}) => {
           refreshing={false}
           onRefresh={onRefresh}
           ListEmptyComponent={
-            <DataNotFound
-              mainViewStyles={{marginTop: hp('17')}}
-              onpress={onRefresh}
-            />
+            Array.isArray(listData) && (
+              <DataNotFound
+                mainViewStyles={{marginTop: hp('17')}}
+                onpress={onRefresh}
+              />
+            )
           }
         />
       </ImageBackground>

@@ -519,25 +519,19 @@ export const profileData = [
     icon: informationGreen,
     name: 'About Sensifull',
     onpress: (navigate, route) =>
-      Linking.openURL(
-        'https://virtualrealitycreators.com/sensifull-web/about-us',
-      ),
+      Linking.openURL('https://mysensifull.com/about-us'),
   },
   {
     icon: policyGreen,
     name: 'Privacy Policy',
     onpress: (navigate, route) =>
-      Linking.openURL(
-        'https://virtualrealitycreators.com/sensifull-web/privacy-policy',
-      ),
+      Linking.openURL('https://mysensifull.com/privacy-policy'),
   },
   {
     icon: termsGreen,
     name: 'Terms and Conditions',
     onpress: (navigate, route) =>
-      Linking.openURL(
-        'https://virtualrealitycreators.com/sensifull-web/terms-and-conditions',
-      ),
+      Linking.openURL('https://mysensifull.com/terms-and-conditions'),
   },
 ];
 

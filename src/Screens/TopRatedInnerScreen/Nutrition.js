@@ -9,8 +9,16 @@ export default function Nutrition({nutritions}) {
   const renderItems = useCallback(({item}) => {
     return (
       <View style={styles.dataMain}>
-        <TextComponent text={item?.name} styles={styles.NameStyle} />
-        <TextComponent text={item?.quantity} styles={styles.gramsStyle} />
+        <TextComponent
+          text={item?.name}
+          styles={styles.NameStyle}
+          numberOfLines={2}
+        />
+        <TextComponent
+          text={item?.quantity}
+          styles={styles.gramsStyle}
+          numberOfLines={2}
+        />
       </View>
     );
   });

@@ -41,7 +41,7 @@ const useEditProfileScreen = ({navigate, goBack}) => {
     onSuccess: ({ok, data}) => {
       dispatch(loadingFalse());
       console.log('osdibvklsdbvbsdlvkbsdklsdbvklsd', data);
-      if (ok) {
+      if (ok && data.user) {
         dispatch({
           type: types.UpdateProfile,
           payload: data.user,

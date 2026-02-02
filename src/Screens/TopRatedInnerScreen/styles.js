@@ -63,6 +63,7 @@ export const styles = StyleSheet.create({
     fontSize: hp('2.5'),
     color: Colors.black,
     fontWeight: 600,
+    width: wp('70'),
   },
   category: {
     fontSize: hp('1.8'),

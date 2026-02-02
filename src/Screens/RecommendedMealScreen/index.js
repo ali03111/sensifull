@@ -53,7 +53,8 @@ const RecommendedMealScreen = ({navigation, route}) => {
           onRefresh={onRefresh}
           flatListProps={{
             numColumns: 2,
-            ListEmptyComponent: (
+            ListEmptyComponent: (Array.isArray(allData?.recommended_list) ||
+              Array.isArray(allData?.recommended_list)) && (
               <DataNotFound onpress={onRefresh} btnStyles={{width: wp('80')}} />
             ),
           }}

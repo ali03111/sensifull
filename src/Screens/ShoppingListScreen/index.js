@@ -99,7 +99,7 @@ const ShoppingListScreen = ({navigation, route}) => {
               )}
               flatViewStyle={styles.dotList}
               flatListProps={{
-                ListEmptyComponent: (
+                ListEmptyComponent: Array.isArray(shoppingData) && (
                   <DataNotFound mainViewStyles={{marginTop: hp('15')}} />
                 ),
               }}
