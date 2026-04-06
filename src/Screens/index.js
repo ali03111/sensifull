@@ -26,3 +26,4 @@ export {default as SearchBoxScreen} from './SearchBoxScreen';
 export {default as SearchScreen} from './SearchScreen';
 export {default as ForgotPasswordScreen} from './ForgotPasswordScreen';
 export {default as ExploreScreen} from './ExploreScreen';
+export {default as SubscriptionScreen} from './SubscriptionScreen';

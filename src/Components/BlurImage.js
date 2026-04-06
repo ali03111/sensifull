@@ -33,7 +33,7 @@ const BlurImage = ({
       {load && (
         <Blurhash
           shouldRasterizeIOS
-          blurhash={blurhash || 'LKK1wP_3yYIU4.jsWrt7_NRjMdt7'}
+          blurhash={blurhash || 'LEHLk~WB2yk8pyoJadR*.7kCMdnj'}
           style={[styles, {zIndex: 1, position: 'absolute'}]}
         />
       )}

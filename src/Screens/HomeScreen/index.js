@@ -150,10 +150,10 @@ const HomeScreen = ({navigation}) => {
               text={'Unlock everything now!'}
               styles={styles.unlockHeading}
             />
-            <Touchable style={styles.premiumBtn} onPress={hitMail}>
+            {/* <Touchable style={styles.premiumBtn} onPress={hitMail}>
               <Image source={star} style={styles.starImage} />
               <TextComponent text={'GO PREMIUM'} styles={styles.premiumText} />
-            </Touchable>
+            </Touchable> */}
           </View>
         )}
         <View style={styles.notifyMain}>
@@ -164,9 +164,11 @@ const HomeScreen = ({navigation}) => {
               styles={styles.notifyText}
             />
           </View>
-          {/* <Touchable style={styles.notifyBtn}>
+          <Touchable
+            style={styles.notifyBtn}
+            onPress={() => dynamicNav('SubscriptionScreen')}>
             <Image source={notify} style={styles.notifyImage} />
-          </Touchable> */}
+          </Touchable>
         </View>
         <Touchable
           onPress={() => dynamicNav('SearchBoxScreen')}

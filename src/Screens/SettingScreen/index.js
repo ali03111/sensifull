@@ -83,7 +83,7 @@ const SettingScreen = ({navigation}) => {
           styles={styles.name}
         />
         <TextComponent text={userData?.email} styles={styles.email} />
-        <Touchable
+        {/* <Touchable
           style={styles.premiumBtn}
           onPress={hitMail}
           disabled={Boolean(userData?.subscription?.plan)}>
@@ -94,7 +94,7 @@ const SettingScreen = ({navigation}) => {
             text={userData?.subscription?.plan ?? 'GO PREMIUM'}
             styles={styles.premiumText}
           />
-        </Touchable>
+        </Touchable> */}
         {/* <TextComponent
           text={}
           styles={styles.trailText}

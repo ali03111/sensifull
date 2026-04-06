@@ -14,10 +14,12 @@ import {useIsFetching} from '@tanstack/react-query';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import Overlay from './src/Components/Overlay';
 import ScanbotBarcodeSDK from 'react-native-scanbot-barcode-scanner-sdk';
+import Purchases, {LOG_LEVEL} from 'react-native-purchases';
 
 const App = () => {
   const {getState, dispatch} = useReduxStore();
   const {isloading} = getState('isloading');
+  const {isLogin} = getState('Auth');
   const isFetching = useIsFetching();
   const [isVisible, setIsVisible] = useState(true);
   const Hide_Splash_Screen = () => {
@@ -57,6 +59,22 @@ const App = () => {
       Hide_Splash_Screen();
     }, time());
   }, []);
+
+  useEffect(() => {
+    if (isLogin) {
+      Purchases.setLogLevel(LOG_LEVEL.VERBOSE);
+      if (Platform.OS === 'ios') {
+        Purchases.configure({
+          apiKey: 'appl_rIoFxfCUkUmrbbEUWlvgeQmYxag',
+        });
+      } else if (Platform.OS === 'android') {
+        Purchases.configure({
+          apiKey: 'goog_GGhwNAKnmUWMKwuIFJJghrHhAZG',
+        });
+        // OR: if building for Amazon, be sure to follow the installation instructions then:
+      }
+    }
+  }, [isLogin]);
 
   useEffect(async () => {
     const LICENSE_KEY =

@@ -39,13 +39,13 @@ export default function GoalsAndPurpose({
               )}
               key={item?.id}
               onPress={() => onSelectValue(item.id)}>
-              <BlurImage
+              {/* <BlurImage
                 isURI={true}
                 uri={item?.image}
                 styles={styles.purposeImage(
                   Boolean(selectedValue.find(res => res == item.id)),
                 )}
-              />
+              /> */}
               <TextComponent
                 text={item?.title}
                 styles={styles.catTitle(
